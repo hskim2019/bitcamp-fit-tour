@@ -1,4 +1,4 @@
-# 여행후기 관리
+# UC12 - 여행후기 관리(TravelJournalEpilouge)
 회원과 관리자가 여행 후기를 등록, 변경, 삭제하는 유스케이스이다
 
 ## 주 액터(Primary Actor)

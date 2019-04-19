@@ -1,4 +1,4 @@
-# UC09 - your profile
+# UC09 - 내 프로필(your profile)
 회원이 개인정보를 조회,수정,삭제하기 위해 이용하는 유스케이스
 
 ## 주 액터(Primary Actor)

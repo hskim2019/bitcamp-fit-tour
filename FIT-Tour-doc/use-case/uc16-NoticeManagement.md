@@ -1,4 +1,4 @@
-# UC003 - 공지사항 관리(NoticeManagement)
+# UC16 - 공지사항 관리(NoticeManagement)
 
 관리자가 공지사항 등록, 변경, 삭제 하는 유스케이스이다.
 

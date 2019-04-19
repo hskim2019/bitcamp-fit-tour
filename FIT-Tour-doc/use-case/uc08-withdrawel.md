@@ -1,4 +1,4 @@
-# UC08 - Withdrawal
+# UC08 - 회원탈퇴(Withdrawal)
 회원이 더이상 시스템의 이용을 원하지 않아 회원을 탈퇴하는 유스케이스
 
 ## 주 액터(Primary Actor)

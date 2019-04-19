@@ -1,4 +1,4 @@
-# UC07 - Log Out
+# UC07 - 로그아웃(LogOut)
 회원이 로그아웃을 하기위해 사용하는 유스케이스
 
 ## 주 액터(Primary Actor)

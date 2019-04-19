@@ -1,4 +1,4 @@
-## uc001- 여행 상품 등록(travel product add)
+# UC19- 여행 상품 등록(add travel product)
 - 관리자가 여행 상품을 등록할수 있는 페이지
 
 ## 주 액터
@@ -7,7 +7,7 @@
 ## 사전 조건
 - 해외 여행 상품을 판매하는 기업이  fit tour 홈페이지에 접속해서 
 - 현지 투어 상품 배너를 클릭한후 상품등록 버튼을 클릭한다.\
-<img src="./travel-add-product-button.png" width="600" hegith="700">
+<img src="./images/travel-add-product-button.png" width="600" hegith="700">
 
 ## 종료 조건
 - 여행 상품 등록 페이지에 있는 6개의 카테고리 
@@ -17,13 +17,13 @@
 - 즉 (상품 제목/내용 입력, 국가 및 카테고리 선택, 상품 날짜 및 시간 선택, 
 - 상품 인원 및 가격 입력, 리스트 이미지 업로드)
 - 5개 항목을 접부 입력하고 상품 등록 버튼을 클릭하면 상품이 등록된다.\
-<img src="./travel-product-add-finish.png" width="600" hegith="700">
+<img src="./images/travel-product-add-finish.png" width="600" hegith="700">
 
 ## 상품 등록 기본
 -   '현지 투어 상품' 탭을 누르고 상품 등록 버튼을 누르면 여행상품 등록 페이지로 넘어간다.
 - '여행 상품 등록'페이지에서 나오는 첫 화면은 상품 등록/내용 입력, 코스 입력, 국가 및 카테고리 선택, 상품 날짜 및 시간 입력, 상품 인원 및 가격 입력, 리스트 이미지 업로드 이렇게 6개의 항목이 나열되어 있는 페이지가 나온다.
 - 선택입력 항목인 코스입력 항목을 제외한 나머지 항목을 모두 입력한후 상품 등록하기 버튼을 클릭한다.
-<img src="./travel-product-add.png" width="600" hegith="700">
+<img src="./images/travel-product-add.png" width="600" hegith="700">
 
 ## 시나리오
 1. 상품 제목/내용 입력\
@@ -31,14 +31,14 @@
     - 필수 항목을 모두 입력하지 않은 경우 다음 버튼을 클릭하면 '필수 항목을 모두    입력해 주세요'라는 메시지가 뜬다.
     - 두번째 입력 항목은 필수 가 아니므로 고객이 버튼을 클릭하면 입력할 수 있는     창이 열린다.
     - 두번째 입력 항목을 입력하지 않고 바로 세번째 입력항목으로 넘어 갈 수 있다.\
-<img src="./travle-detail-form1.png" width="600" hegith="700">
+<img src="./images/travle-detail-form1.png" width="600" hegith="700">
 
 2. 코스 입력
 2.1 코스 입력 항목을 입력 하지 않는 경우
 - 필수 입력 항목인 상품 제목/내용 입력 항목을 모두 입력 하고 코스 입력 항목은 선택 항목 이여서 입려을 안해도 된다.
 - 코스 입력 항목을 입력하지 않으면 3번 입력 항목인 국가 및 카테고리 선택 입력       항목으로 넘어간다.
-<img src="./travel-add-form2.png" width="600" hegith="700">
-<img src="./travel-add-form3.png" width="600" hegith="700">
+<img src="./images/travel-add-form2.png" width="600" hegith="700">
+<img src="./images/travel-add-form3.png" width="600" hegith="700">
 
 2.2 코스 입력 항목을 입력하는 경우\
 2.2.1 이미지, 동영상, 지도, 링크 왁 같은 항목을 사용해서 코스의 내용을 입력한다. \
@@ -48,7 +48,7 @@
 전체 코스 입력 항목 중 추가 해야하는 코스가 있으면 '코스 추가' 버튼을 눌러서 코스를 추가 할수 있다.
 2.2.4  2.1에서 입력한 코스 입력 항목중 삭제 해야하는 항목이 있다면 삭제 버튼을 눌러서 삭제 하고자 하는 코스를 삭제 할 수 있다.
 2.2.5. 코스 입력을 완료한후 '다음' 버튼을 클릭하면 3번쨰 입력 항목인 '국가 및 카테고리 선택' 입력 항목으로 넘어간다.
-<img src="./travel-add-form2.png" width="600" hegith="700">
+<img src="./images/travel-add-form2.png" width="600" hegith="700">
 
 3. 국가 및 카테고리 선택
 - 코스 입력 항목에서 국가 항목(나라 선택, 도시 선택) 항목은 필수이다.

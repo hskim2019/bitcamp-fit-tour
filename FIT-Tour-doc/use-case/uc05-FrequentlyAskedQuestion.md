@@ -1,4 +1,4 @@
-# UC05 - Frequently Asked Questions(FAQ)
+# UC05 -자주 묻는 질문(FrequentlyAskedQuestions)
 관리자는 등록, 조회, 변경, 삭제 를 할수 있고
 보조 액터는 조회 하는 유스케이스이다.
 

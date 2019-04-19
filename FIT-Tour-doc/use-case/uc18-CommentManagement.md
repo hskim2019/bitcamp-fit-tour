@@ -1,4 +1,4 @@
-# UC003 - 댓글 관리(CommentManagement)
+# UC18 - 댓글 관리(CommentManagement)
 
 관리자가 댓글(상품페이지 댓글, 여행후기 댓글)을 통합으로 조회, 검색, 삭제 하는 유스케이스이다.
 

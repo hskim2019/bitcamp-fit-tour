@@ -1,4 +1,4 @@
-# UC000 - 현지 투어 상품조회  (Local Tour Product inquiry)
+# UC14 - 현지 투어 상품조회(Local Tour Product inquiry)
 
 현지 투어 상품을 위시리스트에 추가,삭제,조회 할 수 있는 유스케이스이다.
 ## 주 액터(Primary Actor)

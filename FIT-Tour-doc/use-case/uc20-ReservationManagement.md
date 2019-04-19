@@ -1,4 +1,4 @@
-# UC003 - 예약관리(Reservation Management)
+# UC20 - 예약관리(Reservation Management)
 
 관리자가 회원의 예약을 조회, 변경 하는 유스케이스이다.
 

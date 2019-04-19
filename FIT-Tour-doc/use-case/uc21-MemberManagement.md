@@ -1,4 +1,4 @@
-# UC002 - 회원관리(Member Management)
+# UC21 - 회원관리(Member Management)
 
 관리자가 회원을 조회, 변경, 삭제를 하는 유스케이스이다.
 

@@ -11,18 +11,18 @@
     - 해당 여행 사이트에 가입이 되어있지 않은 고객은 '메인 폼' 화면에서 '여행후기' 탭을 클릭 해야 한다.
     - '여행 후기 사진 목록' 화면에서 최신순, 인기순, 리뷰만 있는 후기 순 중에서 하나의 항목을 선택하고 
     -  그 선택한 항목에 따라 '여행 후기 사진 ' 하나를 선택해야 한다.
-    <img src="./travel-lis-datet.png" width="600" hegith="700">
-    <img src="./travel-list-ingi.png" width="600" hegith="700">
-    <img src="./travel-picture-review.png" width="600" hegith="700">
+    <img src="./images/travel-lis-datet.png" width="600" hegith="700">
+    <img src="./images/travel-list-ingi.png" width="600" hegith="700">
+    <img src="./images/travel-picture-review.png" width="600" hegith="700">
 
   2. 고객(회원)
    - 해당 여행 사잉트의 계정이 있는 회원의 경우 '메인 폼' 화면에서 로그인 탭을 누른다.
    - 로그인을 한후 '여행후기' 탭을 누르면 여행 사진 후기 리스트를 볼수 있다.
   - '여행 후기 사진 목록' 화면에서 최신순, 인기순, 리뷰만 있는 후기 순 중에서 하나의 항목을     선택하고 
   -  그 선택한 항목에 따라 '여행 후기 사진 ' 하나를 선택해야 한다.
-    <img src="./travel-lis-datet.png" width="600" hegith="700">
-    <img src="./travel-list-ingi.png" width="600" hegith="700">
-    <img src="./travel-picture-review.png" width="600" hegith="700">
+    <img src="./images/travel-lis-datet.png" width="600" hegith="700">
+    <img src="./images/travel-list-ingi.png" width="600" hegith="700">
+    <img src="./images/travel-picture-review.png" width="600" hegith="700">
 
 
     
@@ -40,9 +40,9 @@
   -  그러면 해당 사진에 대한 여행 후기가 작성 되어 있는 '여행 후기 상세보기' 페이지로 넘어간다.
   -  고객은 '여행 후기 상세보기' 페이지에서 해당 사진에 대한 후기를 확인할 수 있다.
   - 자신이 남긴 여행후기에 댓글이 달려있다면 거기에 대댓글을 달수 있다.
-  <img src="./travel-lis-datet.png" width="600" hegith="700">
-<img src="./travle-detail.png" width="600" hegith="700">
-<img src="./travle-detail2.png" width="600" hegith="700">
+  <img src="./images/travel-lis-datet.png" width="600" hegith="700">
+<img src=".//images/travle-detail.png" width="600" hegith="700">
+<img src="./images/travle-detail2.png" width="600" hegith="700">
 
 ## 시나리오
 1. 인기순 버튼 클릭(회원, 비회원)
@@ -51,15 +51,15 @@
 로그인을 한후 현지 투어 상품조회 버튼을 클릭한다.
 고객이 여행후기 리스트에서 인기순, 투어리뷰 후기순 을 클릭해서 여행 후기 리스트를 조회할수 있다.
 
-![인기순](./travel-list-ingi.png)
+
 - 고객이 여행후기를 '인기순' 조회 버튼을 클릭했을 때 여행 후기 사진은 날짜는 최신이면서 스마일 마크의 개수가 많은 사진 순으로 조회 된다.\
-<img src="./travel-list-ingi.png" width="600" hegith="700">\
+<img src="./images/travel-list-ingi.png" width="600" hegith="700">\
 
 이 인기순 후기 목록에서 여행후기 하나를 조회하면 해당 사진에 대한 상세한 여행후기를 조회할수 있는 페이지로 넘어간다.
 
 2. 투어리뷰 후기 순(회원, 비회원)
 - 고객이 여행후기를 '투어리뷰 후기순' 조회 버튼을 클릭 했을 때 조회되는 여행 후기 사진 목록은 최신순 이면서 동시에 여행 후기에 대한 리뷰가 남겨져 있는 여행 후기 사진 목록이 조회 된다. \
-<img src="./travel-picture-review.png" width="600" hegith="700">\
+<img src="./images/travel-picture-review.png" width="600" hegith="700">\
 
 이 투어리뷰순 후기 목록에서 여행후기 하나를 조회하면 해당 사진에 대한 상세한 여행후기를 조회할수 있는 페이지로 넘어간다.
 

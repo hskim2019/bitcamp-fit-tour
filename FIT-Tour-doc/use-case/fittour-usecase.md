@@ -18,11 +18,13 @@
 
 ==================================================================================
 
+<img src="./diagram/usecase-01.jpg" width="400">
 
-## [회원가입](uc01-Singin.md)(비회원) 
+
+## [회원가입](uc01-SignUp.md)(비회원) 
 - 여행사이트에 회원가입을 한다.
 
-## [현지투어 상품 조회](uc02-LocalTourProductinquiry.md)(비회원)
+## [현지투어 상품 조회](uc02-LocalTourProductInquiry.md)(비회원)
 - 메인페이지에서 현지투어 상품조회 버튼을 클릭하면 각 국가별 투어 상품을 조회할 수 있다.
 
 ## [여행 후기 조회](uc03-SearchTravelJournal.md)(비회원)

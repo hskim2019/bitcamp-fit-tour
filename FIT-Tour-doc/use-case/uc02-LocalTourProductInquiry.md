@@ -1,4 +1,4 @@
-# UC000 - 현지 투어 상품조회  (Local Tour Product inquiry)
+# UC02 - 현지 투어 상품조회  (Local Tour Product inquiry)
 
 현지 투어 상품을 조건에 따라 현지 투어상품 목록을조회하고 현지투어 상품의 상세조회(상품 안내, 필수안내, 코스소개, 여행후기)를 할 수 있는 유스케이스이다.
 ## 주 액터(Primary Actor)

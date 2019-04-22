@@ -56,6 +56,16 @@
 
 ## UI 프로토타입
 
-### 
 
+###
+![현지투어 상품 목록 조회](./images/uc002-LocalTourProductInquiry01.png)
 ### 
+![현지투어 상품 상세 조회](./images/uc002-LocalTourProductInquiry02.png)
+### 
+![현지투어 상품 상세 조회-상품안내,필수안내](./images/uc002-LocalTourProductInquiry03.png)
+### 
+![현지투어 상품 상세 조회-장소,코스소개](./images/uc002-LocalTourProductInquiry04.png)
+### 
+![현지투어 상품 상세 조회-여행후기,SNS여행후기](./images/uc002-LocalTourProductInquiry05.png)
+### 
+![현지투어 상품 상세 조회-댓글](./images/uc002-LocalTourProductInquiry06.png)

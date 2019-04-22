@@ -1,4 +1,4 @@
-# UC000 - 댓글 관리  (CommentManagement)
+# UC10 - 댓글 관리  (CommentManagement)
 
 현지 투어 상품에 대한 댓글을 등록,변경,삭제 할 수 있는 유스케이스이다.
 ## 주 액터(Primary Actor)
@@ -53,6 +53,5 @@
 
 ## UI 프로토타입
 
-### 
-
-### 
+###
+![현지투어 상품 댓글](./images/uc010-CommentManagement01.png)

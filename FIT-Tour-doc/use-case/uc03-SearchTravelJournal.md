@@ -1,4 +1,4 @@
-##uc03-여행 후기 조회(search-travel-journal) \
+##uc03-여행 후기 조회(search-travel-journal) 
 고객이 '여행 후기 사진 목록'화면에서 여행 후기 사진 하나를 선택하면 '여행 후기 상세 보기' 화면으로 넘어간다.
 
 ## 주액터
@@ -11,24 +11,20 @@
     - 해당 여행 사이트에 가입이 되어있지 않은 고객은 '메인 폼' 화면에서 '여행후기' 탭을 클릭 해야 한다.
     - '여행 후기 사진 목록' 화면에서 최신순, 인기순, 리뷰만 있는 후기 순 중에서 하나의 항목을 선택하고 
     -  그 선택한 항목에 따라 '여행 후기 사진 ' 하나를 선택해야 한다.
-    <img src="./images/travel-lis-datet.png" width="600" hegith="700">
-    <img src="./images/travel-list-ingi.png" width="600" hegith="700">
-    <img src="./images/travel-picture-review.png" width="600" hegith="700">
+  <img src="./images/travel-list-ingi.png" width="600" hegith="700">
+   
 
   2. 고객(회원)
    - 해당 여행 사잉트의 계정이 있는 회원의 경우 '메인 폼' 화면에서 로그인 탭을 누른다.
    - 로그인을 한후 '여행후기' 탭을 누르면 여행 사진 후기 리스트를 볼수 있다.
   - '여행 후기 사진 목록' 화면에서 최신순, 인기순, 리뷰만 있는 후기 순 중에서 하나의 항목을     선택하고 
   -  그 선택한 항목에 따라 '여행 후기 사진 ' 하나를 선택해야 한다.
-    <img src="./images/travel-lis-datet.png" width="600" hegith="700">
     <img src="./images/travel-list-ingi.png" width="600" hegith="700">
-    <img src="./images/travel-picture-review.png" width="600" hegith="700">
+
 
 
     
  ## 종료 조건
-- 고객(회원, 비회원)이 최신순, 인기순, 여행리뷰 후기순 중에서 한개 를 선택해서 그 해당하는 여행 후기 사진을 클릭한다.\
-- 고객(비회원, 회원)이 여행 후기 사진을 클릭하게 되면 '여행 후기 상세 조회' 페이지로 이동한다.
 - 고객이 '여행 후기 상세보기' 화면에서 다른 사람이 쓴 후기를 확인하고 해당 페이지를 나가면 종료된다.
 
 
@@ -40,9 +36,8 @@
   -  그러면 해당 사진에 대한 여행 후기가 작성 되어 있는 '여행 후기 상세보기' 페이지로 넘어간다.
   -  고객은 '여행 후기 상세보기' 페이지에서 해당 사진에 대한 후기를 확인할 수 있다.
   - 자신이 남긴 여행후기에 댓글이 달려있다면 거기에 대댓글을 달수 있다.
-  <img src="./images/travel-lis-datet.png" width="600" hegith="700">
 <img src=".//images/travle-detail.png" width="600" hegith="700">
-<img src="./images/travle-detail2.png" width="600" hegith="700">
+
 
 ## 시나리오
 1. 인기순 버튼 클릭(회원, 비회원)

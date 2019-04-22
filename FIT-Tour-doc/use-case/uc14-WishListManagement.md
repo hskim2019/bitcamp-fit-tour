@@ -46,4 +46,4 @@
 ## UI 프로토타입
 
 ###
-![위시리스트](./images/uc014-WishListManagement01.png)
+![위시리스트](./images/uc14-WishListManagement01.png)

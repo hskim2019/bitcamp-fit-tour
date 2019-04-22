@@ -51,6 +51,6 @@
 ## UI 프로토타입
 
 ###
-![현지 투어 상품 예약](./images/uc015-BookLocalTourProduct01.png)
+![현지 투어 상품 예약](./images/uc15-BookLocalTourProduct01.png)
 ###
-![현지 투어 상품 예약내역](./images/uc015-BookLocalTourProduct02.png)
+![현지 투어 상품 예약내역](./images/uc15-BookLocalTourProduct02.png)

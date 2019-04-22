@@ -54,4 +54,4 @@
 ## UI 프로토타입
 
 ###
-![현지투어 상품 댓글](./images/uc010-CommentManagement01.png)
+![현지투어 상품 댓글](./images/uc10-CommentManagement01.png)

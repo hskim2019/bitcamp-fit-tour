@@ -1,0 +1,114 @@
+﻿CREATE TABLE `TourReview` (
+	`Key`	VARCHAR(255)	NOT NULL,
+	`Field`	VARCHAR(255)	NULL
+);
+
+CREATE TABLE `Date` (
+	`date_no`	VARCHAR(255)	NOT NULL,
+	`Key`	VARCHAR(255)	NOT NULL,
+	`Field`	VARCHAR(255)	NULL,
+	`Field2`	VARCHAR(255)	NULL,
+	`Field3`	VARCHAR(255)	NULL
+);
+
+CREATE TABLE `Untitled` (
+	`Key`	VARCHAR(255)	NOT NULL,
+	`date_no`	VARCHAR(255)	NOT NULL,
+	`Key2`	VARCHAR(255)	NOT NULL,
+	`Field`	VARCHAR(255)	NULL,
+	`Field2`	VARCHAR(255)	NULL,
+	`Field3`	VARCHAR(255)	NULL
+);
+
+CREATE TABLE `Untitled2` (
+	`Key`	VARCHAR(255)	NOT NULL,
+	`date_no`	VARCHAR(255)	NOT NULL,
+	`Key2`	VARCHAR(255)	NOT NULL,
+	`Field`	VARCHAR(255)	NULL,
+	`Field2`	VARCHAR(255)	NULL
+);
+
+CREATE TABLE `Untitled3` (
+	`Key`	VARCHAR(255)	NOT NULL,
+	`date_no`	VARCHAR(255)	NOT NULL,
+	`Key2`	VARCHAR(255)	NOT NULL,
+	`Field`	VARCHAR(255)	NULL,
+	`Field2`	VARCHAR(255)	NULL,
+	`Field3`	VARCHAR(255)	NULL
+);
+
+ALTER TABLE `TourReview` ADD CONSTRAINT `PK_TOURREVIEW` PRIMARY KEY (
+	`Key`
+);
+
+ALTER TABLE `Date` ADD CONSTRAINT `PK_DATE` PRIMARY KEY (
+	`date_no`,
+	`Key`
+);
+
+ALTER TABLE `Untitled` ADD CONSTRAINT `PK_UNTITLED` PRIMARY KEY (
+	`Key`,
+	`date_no`,
+	`Key2`
+);
+
+ALTER TABLE `Untitled2` ADD CONSTRAINT `PK_UNTITLED2` PRIMARY KEY (
+	`Key`,
+	`date_no`,
+	`Key2`
+);
+
+ALTER TABLE `Untitled3` ADD CONSTRAINT `PK_UNTITLED3` PRIMARY KEY (
+	`Key`,
+	`date_no`,
+	`Key2`
+);
+
+ALTER TABLE `Date` ADD CONSTRAINT `FK_TourReview_TO_Date_1` FOREIGN KEY (
+	`Key`
+)
+REFERENCES `TourReview` (
+	`Key`
+);
+
+ALTER TABLE `Untitled` ADD CONSTRAINT `FK_Date_TO_Untitled_1` FOREIGN KEY (
+	`date_no`
+)
+REFERENCES `Date` (
+	`date_no`
+);
+
+ALTER TABLE `Untitled` ADD CONSTRAINT `FK_Date_TO_Untitled_2` FOREIGN KEY (
+	`Key2`
+)
+REFERENCES `Date` (
+	`Key`
+);
+
+ALTER TABLE `Untitled2` ADD CONSTRAINT `FK_Date_TO_Untitled2_1` FOREIGN KEY (
+	`date_no`
+)
+REFERENCES `Date` (
+	`date_no`
+);
+
+ALTER TABLE `Untitled2` ADD CONSTRAINT `FK_Date_TO_Untitled2_2` FOREIGN KEY (
+	`Key2`
+)
+REFERENCES `Date` (
+	`Key`
+);
+
+ALTER TABLE `Untitled3` ADD CONSTRAINT `FK_Date_TO_Untitled3_1` FOREIGN KEY (
+	`date_no`
+)
+REFERENCES `Date` (
+	`date_no`
+);
+
+ALTER TABLE `Untitled3` ADD CONSTRAINT `FK_Date_TO_Untitled3_2` FOREIGN KEY (
+	`Key2`
+)
+REFERENCES `Date` (
+	`Key`
+);

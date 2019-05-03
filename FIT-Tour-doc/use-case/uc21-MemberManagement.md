@@ -4,7 +4,7 @@
 
 ## 주 액터(Primary Actor)
 
--관리자
+- 관리자
 
 ## 보조 액터(Secondary Actor)
 

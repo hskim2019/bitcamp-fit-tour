@@ -313,7 +313,7 @@ reservation_id    INTEGER     NOT NULL COMMENT '예약번호', -- 예약번호
 tour_id           INTEGER     NOT NULL COMMENT '상품번호', -- 상품번호
 member_id         INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
 payment_status_id INTEGER     NOT NULL COMMENT '상태번호', -- 상태번호
-tour_date         DATE        NOT NULL COMMENT '여행일', -- 여행일
+tour_date         DATETIME    NOT NULL COMMENT '여행일', -- 여행일
 number_of_people  INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
 tourist_tel       VARCHAR(30) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
 requirment        TEXT        NULL     COMMENT '요청사항', -- 요청사항
@@ -391,9 +391,9 @@ notice_id -- 공지사항 번호
 
 -- 판매불가 날짜
 CREATE TABLE unable_sell_date (
-unable_sell_date_id INTEGER NOT NULL COMMENT '불가능 번호', -- 불가능 번호
-tour_id             INTEGER NOT NULL COMMENT '상품번호', -- 상품번호
-unable_sell_date    DATE    NOT NULL COMMENT '불가능 날짜' -- 불가능 날짜
+unable_sell_date_id INTEGER  NOT NULL COMMENT '불가능 번호', -- 불가능 번호
+tour_id             INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
+unable_sell_date    DATETIME NOT NULL COMMENT '불가능 날짜' -- 불가능 날짜
 )
 COMMENT '판매불가 날짜';
 

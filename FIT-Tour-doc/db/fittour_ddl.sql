@@ -107,9 +107,6 @@ DROP TABLE IF EXISTS free_review_city RESTRICT;
 DROP TABLE IF EXISTS payment_status RESTRICT;
 
 -- 프로필사진
-DROP TABLE IF EXISTS member_profile RESTRICT;
-
--- 프로필사진
 DROP TABLE IF EXISTS member_photo RESTRICT;
 
 -- 회원
@@ -421,6 +418,9 @@ ADD CONSTRAINT PK_notice -- 공지사항 기본키
 PRIMARY KEY (
 notice_id -- 공지사항 번호
 );
+
+ALTER TABLE notice
+MODIFY COLUMN notice_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항 번호';
 
 -- 판매불가 날짜
 CREATE TABLE imposibility_date (
@@ -828,19 +828,6 @@ ALTER TABLE payment_status
 MODIFY COLUMN status_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '상태번호';
 
 -- 프로필사진
-CREATE TABLE member_profile (
-프로필 <데이터 타입 없음> NOT NULL COMMENT '새 컬럼' -- 새 컬럼
-)
-COMMENT '프로필사진';
-
--- 프로필사진
-ALTER TABLE member_profile
-ADD CONSTRAINT PK_member_profile -- 프로필사진 기본키
-PRIMARY KEY (
-프로필 -- 새 컬럼
-);
-
--- 프로필사진
 CREATE TABLE member_photo (
 photo_id   INTEGER      NOT NULL COMMENT '사진번호', -- 사진번호
 member_id  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -855,6 +842,9 @@ ADD CONSTRAINT PK_member_photo -- 프로필사진 기본키
 PRIMARY KEY (
 photo_id -- 사진번호
 );
+
+ALTER TABLE member_photo
+MODIFY COLUMN photo_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '사진번호';
 
 -- 회원
 ALTER TABLE member

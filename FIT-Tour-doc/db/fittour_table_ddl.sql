@@ -106,9 +106,6 @@ DROP TABLE IF EXISTS free_review_city RESTRICT;
 -- 결제상태
 DROP TABLE IF EXISTS payment_status RESTRICT;
 
--- 프로필사진
-DROP TABLE IF EXISTS member_photo RESTRICT;
-
 -- 회원
 CREATE TABLE member (
 member_id       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -120,10 +117,11 @@ nickname        VARCHAR(50)  NULL     COMMENT '별명', -- 별명
 birth           VARCHAR(8)   NOT NULL COMMENT '생년월일', -- 생년월일
 sms_check       BOOLEAN      NOT NULL COMMENT 'sms 수신동의', -- sms 수신동의
 email_check     BOOLEAN      NOT NULL COMMENT '이메일 수신동의', -- 이메일 수신동의
-tel             INTEGER      NOT NULL COMMENT '전화번호', -- 전화번호
-registered_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
 phone_check     BOOLEAN      NOT NULL COMMENT '휴대폰인증여부', -- 휴대폰인증여부
-rank            INTEGER      NOT NULL COMMENT '등급' -- 등급
+tel             VARCHAR(50)  NOT NULL COMMENT '전화번호', -- 전화번호
+registered_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
+rank            INTEGER      NOT NULL COMMENT '등급', -- 등급
+photo           VARCHAR(255) NOT NULL DEFAULT default.jpg COMMENT '사진' -- 사진
 )
 COMMENT '회원';
 
@@ -336,7 +334,7 @@ member_id        INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
 status_id        INTEGER     NOT NULL COMMENT '상태번호', -- 상태번호
 tour_date        DATETIME    NOT NULL COMMENT '여행일', -- 여행일
 personnel        INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
-tourist_tel      VARCHAR(30) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
+tourist_tel      VARCHAR(50) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
 requirment       TEXT        NULL     COMMENT '요청사항', -- 요청사항
 payment_id       INTEGER     NOT NULL COMMENT '결제번호', -- 결제번호
 payment_date     DATETIME    NOT NULL DEFAULT now() COMMENT '결제일', -- 결제일
@@ -827,25 +825,6 @@ status ASC -- 결제상태
 ALTER TABLE payment_status
 MODIFY COLUMN status_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '상태번호';
 
--- 프로필사진
-CREATE TABLE member_photo (
-photo_id   INTEGER      NOT NULL COMMENT '사진번호', -- 사진번호
-member_id  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-photo_name VARCHAR(255) NOT NULL COMMENT '사진명', -- 사진명
-photo_path VARCHAR(255) NOT NULL COMMENT '사진 경로' -- 사진 경로
-)
-COMMENT '프로필사진';
-
--- 프로필사진
-ALTER TABLE member_photo
-ADD CONSTRAINT PK_member_photo -- 프로필사진 기본키
-PRIMARY KEY (
-photo_id -- 사진번호
-);
-
-ALTER TABLE member_photo
-MODIFY COLUMN photo_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '사진번호';
-
 -- 회원
 ALTER TABLE member
 ADD CONSTRAINT FK_login_type_TO_member -- 로그인유형 -> 회원
@@ -1294,14 +1273,4 @@ free_review_id -- 자유후기번호
 )
 REFERENCES free_review ( -- 자유후기
 free_review_id -- 자유후기번호
-);
-
--- 프로필사진
-ALTER TABLE member_photo
-ADD CONSTRAINT FK_member_TO_member_photo -- 회원 -> 프로필사진
-FOREIGN KEY (
-member_id -- 회원번호
-)
-REFERENCES member ( -- 회원
-member_id -- 회원번호
 );

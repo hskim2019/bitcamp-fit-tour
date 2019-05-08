@@ -121,7 +121,7 @@ birth           VARCHAR(8)   NOT NULL COMMENT '생년월일', -- 생년월일
 sms_check       BOOLEAN      NOT NULL COMMENT 'sms 수신동의', -- sms 수신동의
 email_check     BOOLEAN      NOT NULL COMMENT '이메일 수신동의', -- 이메일 수신동의
 tel             INTEGER      NOT NULL COMMENT '전화번호', -- 전화번호
-registered_date DATETIME     NOT NULL COMMENT '가입일', -- 가입일
+registered_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
 phone_check     BOOLEAN      NOT NULL COMMENT '휴대폰인증여부', -- 휴대폰인증여부
 rank            INTEGER      NOT NULL COMMENT '등급' -- 등급
 )
@@ -150,7 +150,7 @@ tour_id        INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
 title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 sub_heading    VARCHAR(255) NULL     COMMENT '소제목', -- 소제목
 content        TEXT         NOT NULL COMMENT '내용', -- 내용
-created_date   DATETIME     NOT NULL COMMENT '작성일', -- 작성일
+created_date   DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
 total_hour     INTEGER      NOT NULL COMMENT '총소요시간', -- 총소요시간
 hash_tag       VARCHAR(255) NOT NULL COMMENT '상품 해시 태그', -- 상품 해시 태그
 personnel      INTEGER      NOT NULL COMMENT '인원', -- 인원
@@ -180,7 +180,7 @@ CREATE TABLE template_review_date (
 date_id     INTEGER  NOT NULL COMMENT '일정번호', -- 일정번호
 review_id   INTEGER  NOT NULL COMMENT '여행후기 번호', -- 여행후기 번호
 city_id     INTEGER  NOT NULL COMMENT '도시번호', -- 도시번호
-review_date DATETIME NOT NULL COMMENT '날짜' -- 날짜
+review_date DATETIME NOT NULL DEFAULT now() COMMENT '날짜' -- 날짜
 )
 COMMENT '일정(후기)';
 
@@ -200,7 +200,7 @@ review_id      INTEGER      NOT NULL COMMENT '여행후기 번호', -- 여행후
 member_id      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 reservation_id INTEGER      NULL     COMMENT '예약번호', -- 예약번호
 title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-created_date   DATETIME     NOT NULL COMMENT '작성일', -- 작성일
+created_date   DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
 viewcount      INTEGER      NOT NULL COMMENT '조회수' -- 조회수
 )
 COMMENT '여행후기(템플릿)';
@@ -295,7 +295,7 @@ member_id      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 reservation_id INTEGER      NULL     COMMENT '예약번호', -- 예약번호
 title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 content        TEXT         NOT NULL COMMENT '내용', -- 내용
-created_date   DATETIME     NOT NULL COMMENT '작성일' -- 작성일
+created_date   DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '자유후기';
 
@@ -339,8 +339,8 @@ personnel        INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
 tourist_tel      VARCHAR(30) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
 requirment       TEXT        NULL     COMMENT '요청사항', -- 요청사항
 payment_id       INTEGER     NOT NULL COMMENT '결제번호', -- 결제번호
-payment_date     DATETIME    NOT NULL COMMENT '결제일', -- 결제일
-reservation_date DATETIME    NOT NULL COMMENT '예약일' -- 예약일
+payment_date     DATETIME    NOT NULL DEFAULT now() COMMENT '결제일', -- 결제일
+reservation_date DATETIME    NOT NULL DEFAULT now() COMMENT '예약일' -- 예약일
 )
 COMMENT '예약';
 
@@ -366,7 +366,7 @@ inquiry_id   INTEGER  NOT NULL COMMENT '1:1 문의번호', -- 1:1 문의번호
 member_id    INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
 tour_id      INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
 content      TEXT     NOT NULL COMMENT '내용', -- 내용
-created_date DATETIME NOT NULL COMMENT '작성일' -- 작성일
+created_date DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '1:1 문의 ';
 
@@ -388,7 +388,7 @@ tour_id         INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
 ranking         INTEGER  NOT NULL COMMENT '댓글순서', -- 댓글순서
 level           INTEGER  NOT NULL COMMENT '댓글레벨', -- 댓글레벨
 content         TEXT     NOT NULL COMMENT '내용', -- 내용
-created_date    DATETIME NOT NULL COMMENT '작성일' -- 작성일
+created_date    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '상품댓글';
 
@@ -408,7 +408,7 @@ notice_id    INTEGER      NOT NULL COMMENT '공지사항 번호', -- 공지사�
 title        VARCHAR(255) NOT NULL COMMENT '공지사항 제목', -- 공지사항 제목
 content      TEXT         NOT NULL COMMENT '공지사항 내용', -- 공지사항 내용
 viewcount    INTEGER      NOT NULL COMMENT '공지사항 조회수', -- 공지사항 조회수
-created_date DATETIME     NOT NULL COMMENT '공지사항 작성일' -- 공지사항 작성일
+created_date DATETIME     NOT NULL DEFAULT now() COMMENT '공지사항 작성일' -- 공지사항 작성일
 )
 COMMENT '공지사항';
 
@@ -686,7 +686,7 @@ member_id              INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
 ranking                INTEGER  NOT NULL COMMENT '순서', -- 순서
 level                  INTEGER  NOT NULL COMMENT '댓글레벨', -- 댓글레벨
 content                TEXT     NOT NULL COMMENT '내용', -- 내용
-created_date           DATETIME NOT NULL COMMENT '작성일' -- 작성일
+created_date           DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '자유후기댓글';
 
@@ -708,7 +708,7 @@ review_id                  INTEGER  NOT NULL COMMENT '여행후기 번호', -- �
 ranking                    INTEGER  NOT NULL COMMENT '댓글순서', -- 댓글순서
 level                      INTEGER  NOT NULL COMMENT '댓글레벨', -- 댓글레벨
 content                    TEXT     NOT NULL COMMENT '내용', -- 내용
-created_date               DATETIME NOT NULL COMMENT '작성일' -- 작성일
+created_date               DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '템플릿여행후기댓글';
 

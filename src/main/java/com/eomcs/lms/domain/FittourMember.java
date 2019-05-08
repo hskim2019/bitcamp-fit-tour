@@ -14,7 +14,7 @@ public class FittourMember {
 	private boolean smsCheck;
 	private boolean emailCheck;
 	private String tel;
-	private Date registeredDate;
+	private Date registeredDate;   // 
 	private boolean phoneVerification;
 	private int rank;
 	

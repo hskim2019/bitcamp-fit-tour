@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>게시물 목록</title>
+  <title>공지사항</title>
   <jsp:include page="../commonCss.jsp"/>
 </head>
 <body>

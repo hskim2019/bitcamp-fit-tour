@@ -12,7 +12,7 @@
     var e = new Event('loaded.header');
     document.body.dispatchEvent(e);
   };
-  xhr.open('GET', '/java-web-project/html/header.html', true)
+  xhr.open('GET', '/bitcamp-fit-tour/html/header.html', true)
   xhr.send()
 })();
 
@@ -33,10 +33,10 @@ document.body.addEventListener('loaded.header', () => {
       if (xhr.readyState != 4 || xhr.status != 200)
         return;
       
-      location.href = '/java-web-project/html/index.html';
+      location.href = '/bitcamp-fit-tour/html/index.html';
       
     };
-    xhr.open('GET', '/java-web-project/app/json/auth/logout', true)
+    xhr.open('GET', '/bitcamp-fit-tour/app/json/auth/logout', true)
     xhr.send()
   });
 });
@@ -60,7 +60,7 @@ function loadLoginUser() {
         loginState.className.replace('bit-invisible', '');
       document.querySelector('#login-username').innerHTML = data.user.name;
       document.querySelector('#login-userphoto').src = 
-        "/java-web-project/upload/member/" + data.user.photo;
+        "/bitcamp-fit-tour/upload/member/" + data.user.photo;
     } else {
       notLoginState.className = 
         notLoginState.className.replace('bit-invisible', '');
@@ -68,7 +68,7 @@ function loadLoginUser() {
     
     console.log(document.querySelector('#bit-login-state').className);
   };
-  xhr.open('GET', '/java-web-project/app/json/auth/user', true)
+  xhr.open('GET', '/bitcamp-fit-tour/app/json/auth/user', true)
   xhr.send()
 }
 

@@ -1,0 +1,2 @@
+drop table member_photo;
+alter table member add phooto varchar(100) not null default 'defalut.jpg';

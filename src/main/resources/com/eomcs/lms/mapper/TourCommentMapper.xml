@@ -34,7 +34,7 @@
       tour_comment_id asc
   </select>
   
-  <select id="findByNo" resultMap="boardMap" parameterType="int">
+ <!--  <select id="findByNo" resultMap="boardMap" parameterType="int">
     <include refid="select1"/>
     where 
       board_id = #{value}
@@ -66,7 +66,7 @@
   
   <select id="countAll" resultType="int">
     select count(*) from lms_board
-  </select>
+  </select> -->
 </mapper>
 
 

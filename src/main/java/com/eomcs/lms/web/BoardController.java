@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.eomcs.lms.domain.Board;
-import com.eomcs.lms.service.TourService;
+import com.eomcs.lms.service.BoardService;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
   
-  @Autowired TourService boardService;
+  @Autowired BoardService boardService;
   
   @GetMapping("form")
   public void form() {

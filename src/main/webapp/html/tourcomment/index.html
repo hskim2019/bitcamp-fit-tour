@@ -13,43 +13,37 @@
 <header class="bit-main-header"></header>
 
 <div class="container">
-<h1>게시물 목록</h1>
-<p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p>
 
 
 <div id="bit-tourcomment"> </div>
 
-
-<nav aria-label="목록 페이지 이동">
-  <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
-  </ul>
-</nav>
 </div><!-- .container -->
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+<script id="div-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
-  <td>{{createdDate}}</td>
-  <td>{{viewCount}}</td>
-</tr>
+<div>
+ 
+<div>
+  <span>{{memberNo}} {{createdDate}}</span>
+  <span style='margin:250px;'><a href="#" class="comment-update">수정</a>
+  <a href="#" class="comment-delete">삭제</a></span>
+</div>
+<input tpye="textarea" value="{{content}}"> 
+ 
+</div>
+
 {{/each}}
+<div class>
+<textarea cols="30" rows="2" id="content" name="content"></textarea>
+ <a href="#" class="comment-add">등록</a></span>
+</div>
 </script>
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="../header.js"></script>
 <script src="index.js"></script>
 
 </body>

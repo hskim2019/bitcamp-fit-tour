@@ -6,22 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.eomcs.lms.domain.Notice;
-import com.eomcs.lms.service.NoticeService;
+import com.eomcs.lms.domain.TourComment;
+import com.eomcs.lms.service.TourCommentService;
 
 @RestController("json/TourCommentController")
 @RequestMapping("/json/tourcomment")
 public class TourCommentController {
   
-  @Autowired NoticeService noticeService;
+  @Autowired TourCommentService tourCommentService;
   
   @PostMapping("add")
-  public Object add(Notice notice) {
+  public Object add(TourComment tourComment) {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      noticeService.add(notice);
+      tourCommentService.add(tourComment);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
@@ -35,7 +34,7 @@ public class TourCommentController {
   
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (noticeService.delete(no) == 0) 
+      if (tourCommentService.delete(no) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
       
@@ -48,44 +47,26 @@ public class TourCommentController {
   
   @GetMapping("detail")
   public Object detail(int no) {
-    Notice notice = noticeService.get(no);
-    return notice;
+    TourComment tourComment = tourCommentService.get(no);
+    return tourComment;
   }
   
   @GetMapping("list")
-  public Object list(
-      @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize) {
+  public Object list() {
     
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
-    
-    int rowCount = noticeService.size();
-    int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
-      totalPage++;
-    
-    if (pageNo < 1) 
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-    
-    List<Notice> notices = noticeService.list(pageNo, pageSize);
+    List<TourComment> Comments = tourCommentService.list();
     
     HashMap<String,Object> content = new HashMap<>();
-    content.put("list", notices);
-    content.put("pageNo", pageNo);
-    content.put("pageSize", pageSize);
-    content.put("totalPage", totalPage);
+    content.put("list", Comments);
     
     return content;
   }
   
   @PostMapping("update")
-  public Object update(Notice notice) {
+  public Object update(TourComment tourComment) {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      if (noticeService.update(notice) == 0) 
+      if (tourCommentService.update(tourComment) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
       

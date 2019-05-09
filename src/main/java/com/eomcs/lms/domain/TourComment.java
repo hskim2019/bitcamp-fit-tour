@@ -1,6 +1,7 @@
 package com.eomcs.lms.domain;
 
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class TourComment {
   private int no;
@@ -9,6 +10,7 @@ public class TourComment {
   private int order;
   private int level;
   private String content;
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date createdDate;
   
   @Override

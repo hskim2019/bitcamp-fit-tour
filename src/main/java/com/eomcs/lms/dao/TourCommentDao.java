@@ -7,7 +7,7 @@ public interface TourCommentDao {
   int insert(TourComment tourComment);
   List<TourComment> findAll();
   TourComment findByNo(int no);
-  int update(TourComment board);
+  int update(TourComment tourComment);
   int delete(int no);
   int countAll();
 }

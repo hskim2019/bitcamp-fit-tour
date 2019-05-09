@@ -40,7 +40,7 @@ public class AuthFilter implements Filter {
     //String servletPath = httpReq.getServletPath(); // "/app"
     String pathInfo = httpReq.getPathInfo(); // ex) "/board/list"
     
-    if (pathInfo.endsWith("add")
+    if (pathInfo.endsWith("x")
         || pathInfo.endsWith("update")
         || pathInfo.endsWith("delete")
         || (!pathInfo.endsWith("/auth/form") && 

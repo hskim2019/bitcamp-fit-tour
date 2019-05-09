@@ -10,12 +10,9 @@
 </head>
 <body>
 
-<header class="bit-main-header"></header>
-
 <div class="container">
 
-
-<div id="bit-tourcomment"> </div>
+<div id="bit-tourcomment"></div>
 
 </div><!-- .container -->
 
@@ -23,21 +20,20 @@
 <script id="div-template" type="text/x-handlebars-template">
 {{#each list}}
 <div>
- 
 <div>
   <span>{{memberNo}} {{createdDate}}</span>
-  <span style='margin:250px;'><a href="#" class="comment-update">수정</a>
-  <a href="#" class="comment-delete">삭제</a></span>
+  <span style="margin:250px;"><a href="#" id="bit-comment-update">수정</a>
+  <a href="#" id="bit-comment-delete">삭제</a></span>
 </div>
 <input tpye="textarea" value="{{content}}"> 
- 
+</div>
+{{/each}}
+
+<div>
+<textarea cols="30" rows="2" id="bit-comment-add" name="content"></textarea>
+ <a href="#" id="bit-comment-add-button">등록</a>
 </div>
 
-{{/each}}
-<div class>
-<textarea cols="30" rows="2" id="content" name="content"></textarea>
- <a href="#" class="comment-add">등록</a></span>
-</div>
 </script>
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>

@@ -1,4 +1,5 @@
 package com.eomcs.lms.web.json;
+
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import com.eomcs.lms.service.BoardService;
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
 @RestController("json/BoardController")
 @RequestMapping("/json/board")
-public class BoardController {
+public class TourController {
   
   @Autowired BoardService boardService;
   

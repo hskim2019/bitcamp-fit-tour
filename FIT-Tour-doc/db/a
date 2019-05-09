@@ -1,2 +1,3 @@
 drop table member_photo;
 alter table member add phooto varchar(100) not null default 'defalut.jpg';
+alter table member modify tel varchar(50);

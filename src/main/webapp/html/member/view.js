@@ -29,12 +29,12 @@ document.querySelector('#add-btn').onclick = () => {
       alert('등록 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('POST', '../../app/json/notice/add', true)
+  xhr.open('POST', '../../app/json/board/add', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
-  var content = document.querySelector('#content').value;
+  var contents = document.querySelector('#contents').value;
   
-  xhr.send("content=" + encodeURIComponent(content));
+  xhr.send("contents=" + encodeURIComponent(contents));
 };
 
 document.querySelector('#delete-btn').onclick = () => {
@@ -52,8 +52,8 @@ document.querySelector('#delete-btn').onclick = () => {
       alert('삭제 실패입니다!\n' + data.message)
     }
   };
-  var notice_id = document.querySelector('#notice_id').value;
-  xhr.open('GET', '../../app/json/notice/delete?notice_id=' + notice_id, true)
+  var no = document.querySelector('#no').value;
+  xhr.open('GET', '../../app/json/board/delete?no=' + no, true)
   xhr.send();
 };
 
@@ -72,13 +72,13 @@ document.querySelector('#update-btn').onclick = () => {
       alert('변경 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('POST', '../../app/json/notice/update', true)
+  xhr.open('POST', '../../app/json/board/update', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   var no = document.querySelector('#no').value;
-  var content = document.querySelector('#content').value;
+  var contents = document.querySelector('#contents').value;
   
-  var qs = 'content=' + encodeURIComponent(content) +
+  var qs = 'contents=' + encodeURIComponent(contents) +
     '&no=' + no;
   
   xhr.send(qs);
@@ -93,11 +93,11 @@ function loadData(no) {
     var data = JSON.parse(xhr.responseText);
     console.log(data);
     document.querySelector('#no').value = data.no;
-    document.querySelector('#content').value = data.content;
+    document.querySelector('#contents').value = data.contents;
     document.querySelector('#createdDate').value = data.createdDate;
-    document.querySelector('#viewcount').value = data.viewcount;
+    document.querySelector('#viewCount').value = data.viewCount;
   };
-  xhr.open('GET', '../../app/json/notice/detail?no=' + no, true)
+  xhr.open('GET', '../../app/json/board/detail?no=' + no, true)
   xhr.send()
 }
 

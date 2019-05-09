@@ -43,12 +43,12 @@ public class NoticeServiceImpl implements NoticeService {
   }
   
   @Override
-  public Notice get(int notice_id) {
+  public Notice get(int no) {
     // 이제 조금 서비스 객체가 뭔가를 하는 구만.
     // Command 객체는 데이터를 조회한 후 조회수를 높이는 것에 대해 신경 쓸 필요가 없어졌다.
-    Notice notice = noticeDao.findByNo(notice_id);
+    Notice notice = noticeDao.findByNo(no);
     if (notice != null) {
-      noticeDao.increaseCount(notice_id);
+      noticeDao.increaseCount(no);
     }
     return notice;
   }
@@ -61,10 +61,10 @@ public class NoticeServiceImpl implements NoticeService {
   }
   
   @Override
-  public int delete(int notice_id) {
+  public int delete(int no) {
     // 이 메서드도 그냥 DAO에 명령을 전달하는 일을 한다.
     // 그래도 항상 Command 객체는 이 Service 객체를 통해서 데이터를 처리해야 한다.
-    return noticeDao.delete(notice_id);
+    return noticeDao.delete(no);
   }
   
   @Override

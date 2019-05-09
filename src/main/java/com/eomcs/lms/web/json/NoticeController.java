@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Notice;
 import com.eomcs.lms.service.NoticeService;
 
-
 // AJAX 기반 JSON 데이터를 다루는 컨트롤러
 @RestController("json/NoticeController")
 @RequestMapping("/json/notice")
@@ -98,9 +97,6 @@ public class NoticeController {
     return content;
   }
 }
-
-
-
 
 
 

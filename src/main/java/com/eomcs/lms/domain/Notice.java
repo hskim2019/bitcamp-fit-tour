@@ -6,41 +6,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Notice implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
 
-  private int notice_id;
+  private int no;
   private int viewcount;
   private String content;
   private String title;
   
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date createdDate;
-  
 
-  @Override
-  public Notice clone() throws CloneNotSupportedException {
-    return (Notice) super.clone();
+  public int getNo() {
+    return no;
   }
 
-
-
-  @Override
-  public String toString() {
-    return "Notice [notice_id=" + notice_id + ", viewcount=" + viewcount + ", content=" + content
-        + ", title=" + title + ", createdDate=" + createdDate + "]";
+  public void setNo(int no) {
+    this.no = no;
   }
-
-
-
-  public int getNotice_id() {
-    return notice_id;
-  }
-
-
-
-  public void setNotice_id(int notice_id) {
-    this.notice_id = notice_id;
-  }
-
-
 
   public int getViewcount() {
     return viewcount;
@@ -66,17 +46,21 @@ public class Notice implements Cloneable, Serializable {
     this.title = title;
   }
 
-
-
   public Date getCreatedDate() {
     return createdDate;
   }
 
-
-
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
+
+  @Override
+  public String toString() {
+    return "Notice [no=" + no + ", viewcount=" + viewcount + ", content=" + content + ", title="
+        + title + ", createdDate=" + createdDate + "]";
+  }
+
+ 
  
   
   

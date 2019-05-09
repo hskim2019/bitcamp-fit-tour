@@ -1,16 +1,33 @@
-var param = location.href.split('?')[1];
+var param = location.href.split('?')[1],
+
+addBtn = $('#add-btn'),
+updateBtn = $('#update-btn'),
+deleteBtn = $('#delete-btn'),
+no = $('#no'),
+title = $('#title'),
+content = $('#content'),
+viewcount = $('#viewcount'),
+createdDate = $('#createdDate'),
+bitNewItem = $('.bit-new-item'),
+bitViewItem = $('.bit-view-item'),
+templateSrc = $('#tr-template').html();
+
+
+
 if (param) {
-  document.querySelector('h1').innerHTML = "게시물 조회"
+ 
+  $('h1').html('게시물 보기');
   loadData(param.split('=')[1])
-  var el = document.querySelectorAll('.bit-new-item');
+  var el = document.querySelectorAll('.bit-view-item');
   for (e of el) {
     e.style.display = 'none';
   }
 } else {
-  document.querySelector('h1').innerHTML = "새 글"
-  var el = document.querySelectorAll('.bit-view-item');
+
+  document.querySelector('h1').innerHTML = "새글"
+  var el = document.querySelectorAll('.bit-new-item');
   for (e of el) {
-    e.style.display = 'none';
+    //e.style.display = 'none';
   }
 }
 
@@ -29,7 +46,7 @@ document.querySelector('#add-btn').onclick = () => {
       alert('등록 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('POST', '../../app/json/notice/add', true)
+  xhr.open('GET', '../../app/json/notice/add', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   var content = document.querySelector('#content').value;
@@ -72,7 +89,7 @@ document.querySelector('#update-btn').onclick = () => {
       alert('변경 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('POST', '../../app/json/notice/update', true)
+  xhr.open('GET', '../../app/json/notice/update', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   var no = document.querySelector('#no').value;
@@ -80,7 +97,8 @@ document.querySelector('#update-btn').onclick = () => {
   
   var qs = 'content=' + encodeURIComponent(content) +
     '&no=' + no;
-  
+  console.log(qs);
+  alert(qs);
   xhr.send(qs);
 };
 

@@ -29,7 +29,7 @@ document.querySelector('#add-btn').onclick = () => {
       alert('등록 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('POST', '../../app/json/board/add', true)
+  xhr.open('GET', '../../app/json/board/add', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   var contents = document.querySelector('#contents').value;

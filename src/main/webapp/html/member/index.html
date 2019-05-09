@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>게시물 목록</title>
+  <title>회원 관리</title>
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
@@ -13,17 +13,18 @@
 <header class="bit-main-header"></header>
 
 <div class="container">
-<h1>게시물 목록</h1>
-<p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p>
+<h1>회원 목록 </h1>
+<p><a href='view.html' class="btn btn-primary btn-sm">새 회원</a></p>
 
 <div class="bit-list">
 <table class="table table-hover">
 <thead>
   <tr> 
     <th scope="col">번호</th>
-    <th scope="col">제목</th>
-    <th scope="col">등록일</th>
-    <th scope="col">조회수</th>
+    <th scope="col">이름</th>
+    <th scope="col">이메일</th>
+    <th scope="col">가입일</th>
+    <th scope="col">휴대폰</th>
   </tr>
 </thead>
 <tbody></tbody>
@@ -48,9 +49,10 @@
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{contents}}</a></td>
-  <td>{{createdDate}}</td>
-  <td>{{viewCount}}</td>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{email}}</td>
+  <td>{{registeredDate}}</td>
+  <td>{{tel}}</td>
 </tr>
 {{/each}}
 </script>

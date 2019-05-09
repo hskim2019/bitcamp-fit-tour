@@ -1,5 +1,5 @@
 drop table member_photo;
-alter table member add phooto varchar(100) not null default 'defalut.jpg';
+alter table member add photo varchar(100) not null default 'defalut.jpg';
 alter table member modify tel varchar(50);
-alter table member drop phooto;
+alter table member drop photo;
 alter table member add photo varchar(255) not null default 'defalut.jpg';

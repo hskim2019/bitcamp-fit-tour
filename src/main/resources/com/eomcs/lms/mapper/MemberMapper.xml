@@ -3,112 +3,156 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.eomcs.lms.dao.MemberDao">
-  
+
   <resultMap type="member" id="memberMap">
-    <id column="member_id"  property="no"/>
-    <result column="name"   property="name"/>
-    <result column="email"  property="email"/>
-    <result column="pwd"    property="password"/>
-    <result column="cdt"    property="registeredDate"/>
-    <result column="tel"    property="tel"/>
-    <result column="photo"  property="photo"/>
+    <id column="member_id" property="no" />
+    <result column="email" property="email" />
+    <result column="password" property="password" />
+    <result column="name" property="name" />
+    <result column="nickname" property="nickname" />
+    <result column="birth" property="birth" />
+    <result column="sms_check" property="smsCheck" />
+    <result column="email_check" property="emailCheck" />
+    <result column="phone_check" property="phoneCheck" />
+    <result column="tel" property="tel" />
+    <result column="registered_date" property="registeredDate" />
+    <result column="rank" property="rank" />
+    <result column="login_type_id" property="loginTypeNo" />
+    <result column="photo" property="photo" />
   </resultMap>
-  
+
   <sql id="default-columns">
-      member_id, 
-      name, 
-      email, 
-      tel,
-      cdt
+    member_id,
+    name,
+    email,
+    registered_date,
+    tel
   </sql>
-  
+
   <select id="findAll" resultMap="memberMap" parameterType="map">
-    select 
-      <include refid="default-columns"/>
-    from 
-      lms_member
+    select
+    <include refid="default-columns" />
+    from
+    member
     <where>
       <if test="search != null">
-        <bind name="pattern1" value="'%' + search + '%'"/>
+        <bind name="pattern1" value="'%' + search + '%'" />
         name like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>
-    </where>   
-    order by 
-      name asc
+    </where>
+    order by
+    registered_date asc
     <if test="#{size != null || rowNo != null}">
       limit #{rowNo}, #{size}
     </if>
   </select>
-  
+
   <select id="findByNo" resultMap="memberMap" parameterType="int">
-    select 
-      <include refid="default-columns"/>, 
-      photo
-    from 
-      lms_member
-    where 
-      member_id = #{value}
+    select
+    
+    member_id,
+    login_type_id,
+    name,
+    email,
+    nickname,
+    birth,
+    sms_check,
+    email_check,
+    tel,
+    registered_date,
+    phone_check,
+    rank,
+    photo
+
+    from
+    member
+    where
+    member_id = #{value}
   </select>
-  
+
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
-    select 
-      <include refid="default-columns"/>, 
-      photo
-    from 
-      lms_member
-    where 
-      email = #{email}
-      and pwd = password(#{password})
+    select
+    <include refid="default-columns" />
+    
+
+
+    from
+    member
+    where
+    email = #{email}
+    and password = password(#{password})
   </select>
-  
+
   <insert id="insert" parameterType="member">
-    insert into lms_member(
-      name,
-      email,
-      pwd,
-      tel,
-      photo)
+    insert into member(
+    member_id ,
+    login_type_id,
+    email,
+    password,
+    name,
+    nickname,
+    birth,
+    sms_check,
+    email_check,
+    tel,
+    phone_check,
+    rank,
+    photo)
     values(
-      #{name},
-      #{email},
-      password(#{password}),
-      #{tel},
-      #{photo})
+    #{login_type_id},
+    #{email},
+    password(#{password}),
+    #{nickname},
+    #{birth},
+    #{sms_check},
+    #{email_check},
+    #{tel},
+    #{phone_check},
+    #{rank},
+    #{photo})
   </insert>
-  
+
   <update id="update" parameterType="member">
-    update lms_member
+    update member
     <set>
       <if test="name != null">name = #{name},</if>
       <if test="email != null">email = #{email},</if>
-      <if test="password != null">pwd = password(#{password}),</if>
+      <if test="password != null">password = password(#{password}),</if>
+      <if test="nickname != null"> nickname = #{nickname},</if>
+      <if test="birth != null"> birth = #{birth},</if>
+      <if test="smsCheck != null">sms_check = #{smsCheck},</if>
+      <if test="emailCheck != null">email_check = #{emailCheck},</if>
       <if test="tel != null">tel = #{tel},</if>
+      <if test="phoneCheck != null">phone_check = #{phoneCheck},</if>
+      <if test="loginTypeNo != null">login_type_id = #{loginTypeNo},</if>
       <if test="photo != null">photo = #{photo}</if>
-    </set>  
-    where 
-      member_id = #{no}
+
+
+    </set>
+    where
+    member_id = #{no}
   </update>
-  
+
   <delete id="delete" parameterType="int">
-    delete from lms_member 
+    delete from member
     where member_id = #{value}
   </delete>
-  
+
   <select id="countAll" resultType="int" parameterType="string">
-    select count(*) 
-    from lms_member
+    select count(*)
+    from member
     <where>
       <if test="_parameter != null">
-        <bind name="pattern1" value="'%' + _parameter + '%'"/>
+        <bind name="pattern1" value="'%' + _parameter + '%'" />
         name like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>
-    </where> 
+    </where>
   </select>
 </mapper>
 

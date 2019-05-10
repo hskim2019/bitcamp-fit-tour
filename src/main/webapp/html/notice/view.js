@@ -29,8 +29,8 @@ if (param) {
    e.style.display = 'none';
   }
 }
+document.querySelector('#add-btn').onclick = () => {
 
-$('#add-btn').click(() => {
   var xhr = new XMLHttpRequest()
   xhr.onreadystatechange = function() {
     if (xhr.readyState != 4 || xhr.status != 200)
@@ -45,13 +45,17 @@ $('#add-btn').click(() => {
       alert('등록 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('GET', '../../app/json/notice/add', true)
+  xhr.open('POST', '../../app/json/notice/add', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
+  var title = document.querySelector('#title').value;
   var content = document.querySelector('#content').value;
   
-  xhr.send("content=" + encodeURIComponent(content));
-});
+  xhr.send("title=" + encodeURIComponent(title)
+      +"&content=" + encodeURIComponent(content)
+  );
+  
+};
 
 document.querySelector('#delete-btn').onclick = () => {
   var xhr = new XMLHttpRequest()
@@ -68,8 +72,8 @@ document.querySelector('#delete-btn').onclick = () => {
       alert('삭제 실패입니다!\n' + data.message)
     }
   };
-  var notice_id = document.querySelector('#notice_id').value;
-  xhr.open('GET', '../../app/json/notice/delete?notice_id=' + notice_id, true)
+  var no = document.querySelector('#no').value;
+  xhr.open('GET', '../../app/json/notice/delete?no=' + no, true)
   xhr.send();
 };
 
@@ -100,8 +104,6 @@ document.querySelector('#update-btn').onclick = () => {
     '&content=' + encodeURIComponent(content) +
   
     '&no=' + no;
-  console.log(qs);
-  alert(qs);
   xhr.send(qs);
 };
 

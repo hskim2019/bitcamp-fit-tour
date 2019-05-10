@@ -43,6 +43,15 @@
       <result column="theme" property="theme"/>
     </collection>
     
+    <collection property="tourComment" ofType="tourComment">
+      <id column="tour_comment_id" property="no"/>
+      <result column="member_id" property="memberNo"/>
+      <result column="tour_id" property="tourNo"/>
+      <result column="ranking" property="order"/>
+      <result column="level" property="level"/>
+      <result column="content" property="content"/>
+      <result column="created_date" property="createdDate"/>
+    </collection>
     
   </resultMap>
   
@@ -75,15 +84,10 @@
    select 
 		* 
 		from tour as t 
-		left outer join
-		tour_guidance_photo p
-		on t.tour_id = p.tour_id
-		join 
-		tour_theme as toth
-		on t.tour_id = toth.tour_id
-		join
-		theme as th
-		on toth.theme_id = th.theme_id
+		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+		join tour_theme as toth on t.tour_id = toth.tour_id
+		join theme as th on toth.theme_id = th.theme_id
+		left outer join tour_comment as tc on tc.tour_id = t.tour_id
 		where t.tour_id = #{value};
   </select>
   

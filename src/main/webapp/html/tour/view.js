@@ -103,6 +103,7 @@ function loadData(no) {
     document.querySelector('#photoname').value = data.tourPhoto[0].name;
     document.querySelector('#photpath').value = data.tourPhoto[0].path;
     document.querySelector('#theme').value = data.theme[0].theme;
+    document.querySelector('#comment').value = data.tourComment[0].content;
   };
   xhr.open('GET', '../../app/json/tour/detail?no=' + no, true)
   xhr.send()

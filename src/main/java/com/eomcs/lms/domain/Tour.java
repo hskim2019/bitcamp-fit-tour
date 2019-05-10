@@ -1,6 +1,7 @@
 package com.eomcs.lms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Tour {
   private int no;
@@ -14,13 +15,29 @@ public class Tour {
   private String transportation;
   private int price;
   
+  private List<TourGuidancePhoto> tourPhoto;
+  
+  
+  
   @Override
   public String toString() {
     return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
         + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
         + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
-        + price + "]";
+        + price + ", tourPhoto=" + tourPhoto + "]";
   }
+
+
+  public List<TourGuidancePhoto> getTourPhoto() {
+    return tourPhoto;
+  }
+
+
+  public void setTourPhoto(List<TourGuidancePhoto> tourPhoto) {
+    this.tourPhoto = tourPhoto;
+  }
+
+
   public int getNo() {
     return no;
   }

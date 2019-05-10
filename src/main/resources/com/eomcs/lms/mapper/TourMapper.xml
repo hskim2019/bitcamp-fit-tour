@@ -19,6 +19,26 @@
     <result column="price" property="price"/>
   </resultMap>
   
+  <resultMap type="tour" id="tourPhotoMap">
+    <id column="tour_id" property="no"/>
+    <result column="title" property="title"/>
+    <result column="sub_heading" property="subHeading"/>
+    <result column="content" property="content"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="total_hour" property="totalHour"/>
+    <result column="hash_tag" property="hashTag"/>
+    <result column="personnel" property="personnel"/>
+    <result column="transportation" property="transportation"/>
+    <result column="price" property="price"/>
+    
+    <collection property="tourPhoto" ofType="tourGuidancePhoto">
+      <id column="photo_id"    property="no"/>
+      <result column="tour_id"    property="tourNo"/>
+      <result column="photo_name" property="name"/>
+      <result column="photo_path" property="path"/>
+    </collection>
+  </resultMap>
+  
   <sql id="select1">
     select 
       tour_id, 
@@ -44,10 +64,24 @@
     </if>
   </select>
   
-   <select id="findByNo" resultMap="tourMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-      tour_id = #{value}
+   <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
+   select
+    t.tour_id, 
+      t.title, 
+      t.sub_heading, 
+      t.content, 
+      t.total_hour, 
+      t.hash_tag, 
+      t.personnel, 
+      t.transportation, 
+      t.price,
+      p.name,
+       p.path,
+   from
+     tour t
+      left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+      where
+      photo_id = #{value}
   </select>
   
   

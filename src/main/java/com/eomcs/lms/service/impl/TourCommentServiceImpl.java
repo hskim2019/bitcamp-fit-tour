@@ -36,7 +36,7 @@ public class TourCommentServiceImpl implements TourCommentService {
   @Override
   public List<TourComment> get(int no) {
     
-    List<TourComment> tourComment = tourCommentDao.findByNo(no);
+    List<TourComment> tourComment = tourCommentDao.findByTourNo(no);
     return tourComment;
   }
   

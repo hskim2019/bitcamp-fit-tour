@@ -19,6 +19,7 @@ public class TourController {
   
   @Autowired TourService tourService;
   @Autowired TourCommentService tourCommentService;
+  
 //  @PostMapping("add")
 //  public Object add(Tour tour) {
 //    HashMap<String,Object> content = new HashMap<>();

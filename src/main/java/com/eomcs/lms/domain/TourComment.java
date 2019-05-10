@@ -10,16 +10,30 @@ public class TourComment {
   private int order;
   private int level;
   private String content;
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "GMT+9")
   private Date createdDate;
+  
+  private Member member;
+  
   
   @Override
   public String toString() {
     return "TourComment [no=" + no + ", memberNo=" + memberNo + ", tourNo=" + tourNo + ", order="
         + order + ", level=" + level + ", content=" + content + ", createdDate=" + createdDate
-        + "]";
+        + ", member=" + member + "]";
   }
   
+  
+  public Member getMember() {
+    return member;
+  }
+
+
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
+
   public int getNo() {
     return no;
   }

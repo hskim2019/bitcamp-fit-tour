@@ -6,7 +6,7 @@ import com.eomcs.lms.domain.TourComment;
 public interface TourCommentDao {
   int insert(TourComment tourComment);
   List<TourComment> findAll();
-  List<TourComment> findByNo(int no);
+  List<TourComment> findByTourNo(int no);
   int update(TourComment tourComment);
   int delete(int no);
   int countAll();

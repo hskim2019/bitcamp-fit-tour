@@ -115,10 +115,11 @@ $(document.body).bind('loaded-list', () => {
   
   $('#bit-comment-add-button').click((e) => {
     e.preventDefault();
+    var tourNo = location.href.split('?')[1].split('=')[1];
     var content = $('#bit-comment-add').val();
     $.post('../../app/json/tourcomment/add',
         {
-      tourNo : 1,
+      tourNo : tourNo,
       memberNo : 101,
       order : 1,
       level : 1,
@@ -126,7 +127,7 @@ $(document.body).bind('loaded-list', () => {
         }, 
         function(obj) {
           if (obj.status == 'success') {
-            //location.href = "index.html"
+            location.href = location.href;
 
           } else {
             alert('등록 실패입니다!\n' + obj.message)

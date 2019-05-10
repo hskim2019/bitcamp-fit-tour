@@ -114,8 +114,12 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
+<div>
+  <span>{{member.name}} {{createdDate}}</span>
+  <span style="margin:250px;"><a href="#" id="bit-comment-update">수정</a>
+  <a href="#" id="bit-comment-delete">삭제</a></span>
+</div>
 <div class="form-group row bit-view-item">
-    <label for="comment" class="col-sm-2 col-form-label">댓글</label>
     <div class="col-sm-10">
       <input type="text" readonly class="form-control-plaintext" value={{content}}>
     </div>

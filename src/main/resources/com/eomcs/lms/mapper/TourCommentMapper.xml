@@ -14,6 +14,14 @@
     <result column="level" property="level"/>
     <result column="content" property="content"/>
     <result column="created_date" property="createdDate"/>
+    
+    <association property="member" javaType="member">
+    <id column="member_id" property="no"/>
+    <result column="email" property="email"/>
+    <result column="name" property="name"/>
+    <result column="nickname" property="nickname"/>
+    <result column="photo" property="photo"/>
+    </association>
   </resultMap>
   
   <sql id="select1">
@@ -29,25 +37,22 @@
       tour_comment
   </sql>
   
-  <select id="findAll" resultMap="commentMap">
+<!--   <select id="findAll" resultMap="commentMap">
     <include refid="select1"/>
     order by 
       tour_comment_id asc
-  </select>
+  </select> -->
   
-  <select id="findByNo" resultMap="commentMap" parameterType="int">
-    <include refid="select1"/>
+  <select id="findByTourNo" resultMap="commentMap" parameterType="int">
+    select
+    *
+    from tour_comment as t
+    join member as m
+    on t.member_id = m.member_id
     where 
       tour_id = #{value}
   </select>
   
-  <update id="increaseCount" parameterType="int">
-    update lms_board 
-    set 
-      vw_cnt = vw_cnt + 1 
-    where board_id = #{value}
-  </update>
-
   
   <insert id="insert" parameterType="tourComment">
     insert into tour_comment(member_id, tour_id, ranking, level, content) 

@@ -92,17 +92,17 @@ function loadData(no) {
     
     var data = JSON.parse(xhr.responseText);
     console.log(data);
-    document.querySelector('#title').value = data.title;
-    document.querySelector('#subHeading').value = data.subHeading;
-    document.querySelector('#content').value = data.content;
-    document.querySelector('#totalHour').value = data.totalHour;
-    document.querySelector('#hashTag').value = data.hashTag;
-    document.querySelector('#personnel').value = data.personnel;
-    document.querySelector('#transportation').value = data.transportation;
-    document.querySelector('#price').value = data.price;
-    document.querySelector('#photoname').value = data.tourPhoto[0].name;
-    document.querySelector('#photpath').value = data.tourPhoto[0].path;
-    document.querySelector('#theme').value = data.theme[0].theme;
+    document.querySelector('#title').value = data.tour.title;
+    document.querySelector('#subHeading').value = data.tour.subHeading;
+    document.querySelector('#content').value = data.tour.content;
+    document.querySelector('#totalHour').value = data.tour.totalHour;
+    document.querySelector('#hashTag').value = data.tour.hashTag;
+    document.querySelector('#personnel').value = data.tour.personnel;
+    document.querySelector('#transportation').value = data.tour.transportation;
+    document.querySelector('#price').value = data.tour.price;
+    document.querySelector('#photoname').value = data.tour.tourPhoto[0].name;
+    document.querySelector('#photpath').value = data.tour.tourPhoto[0].path;
+    document.querySelector('#theme').value = data.tour.theme[0].theme;
     document.querySelector('#comment').value = data.tourComment[0].content;
   };
   xhr.open('GET', '../../app/json/tour/detail?no=' + no, true)

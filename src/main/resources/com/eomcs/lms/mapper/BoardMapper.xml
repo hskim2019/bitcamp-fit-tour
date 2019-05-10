@@ -38,14 +38,7 @@
       board_id = #{value}
   </select>
   
-  <update id="increaseCount" parameterType="int">
-    update lms_board 
-    set 
-      vw_cnt = vw_cnt + 1 
-    where board_id = #{value}
-  </update>
-  
-  <insert id="insert" parameterType="board">
+<!--   <insert id="insert" parameterType="board">
     insert into lms_board(conts) 
     values(#{contents})
   </insert>
@@ -60,7 +53,7 @@
   <delete id="delete" parameterType="int">
     delete from lms_board 
     where board_id = #{no}
-  </delete>
+  </delete> -->
   
   <select id="countAll" resultType="int">
     select count(*) from lms_board

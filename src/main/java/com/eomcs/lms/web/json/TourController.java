@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Tour;
+import com.eomcs.lms.domain.TourComment;
+import com.eomcs.lms.service.TourCommentService;
 import com.eomcs.lms.service.TourService;
 
 
@@ -16,7 +18,7 @@ import com.eomcs.lms.service.TourService;
 public class TourController {
   
   @Autowired TourService tourService;
-  
+  @Autowired TourCommentService tourCommentService;
 //  @PostMapping("add")
 //  public Object add(Tour tour) {
 //    HashMap<String,Object> content = new HashMap<>();
@@ -49,8 +51,13 @@ public class TourController {
   
   @GetMapping("detail")
   public Object detail(int no) {
+    
+    HashMap<String, Object> map = new HashMap<>();
     Tour tour = tourService.get(no);
-    return tour;
+    List<TourComment> tourComments = tourCommentService.get(no);
+    map.put("tour", tour);
+    map.put("tourComment", tourComments);
+    return map;
   }
   
   @GetMapping("list")
@@ -72,6 +79,7 @@ public class TourController {
       pageNo = totalPage;
     
     List<Tour> tours = tourService.list(pageNo, pageSize);
+    
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", tours);

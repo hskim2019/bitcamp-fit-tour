@@ -37,6 +37,13 @@
       <result column="photo_name" property="name"/>
       <result column="photo_path" property="path"/>
     </collection>
+    
+    <collection property="theme" ofType="theme">
+      <id column="theme_id"    property="no"/>
+      <result column="theme" property="theme"/>
+    </collection>
+    
+    
   </resultMap>
   
   <sql id="select1">
@@ -65,20 +72,8 @@
   </select>
   
    <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
-   
    select
-    t.tour_id, 
-      t.title, 
-      t.sub_heading, 
-      t.content, 
-      t.total_hour, 
-      t.hash_tag, 
-      t.personnel, 
-      t.transportation, 
-      t.price,
-      p.tour_id as tourNo,
-      p.photo_name,
-      p.photo_path
+      *
      from
      tour t
      left outer join tour_guidance_photo p on t.tour_id = p.tour_id

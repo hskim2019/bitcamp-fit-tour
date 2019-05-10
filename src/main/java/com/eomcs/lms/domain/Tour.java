@@ -16,15 +16,26 @@ public class Tour {
   private int price;
   
   private List<TourGuidancePhoto> tourPhoto;
+  private List<Theme> theme;
   
   
-  
+
+
   @Override
   public String toString() {
     return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
         + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
         + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
-        + price + ", tourPhoto=" + tourPhoto + "]";
+        + price + ", tourPhoto=" + tourPhoto + ", theme=" + theme + "]";
+  }
+
+  public List<Theme> getTheme() {
+    return theme;
+  }
+
+
+  public void setTheme(List<Theme> theme) {
+    this.theme = theme;
   }
 
 

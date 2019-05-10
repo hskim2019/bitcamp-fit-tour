@@ -100,6 +100,8 @@ function loadData(no) {
     document.querySelector('#personnel').value = data.personnel;
     document.querySelector('#transportation').value = data.transportation;
     document.querySelector('#price').value = data.price;
+    document.querySelector('#photoname').value = data.tourPhoto[0].name;
+    document.querySelector('#photpath').value = data.tourPhoto[0].path;
   };
   xhr.open('GET', '../../app/json/tour/detail?no=' + no, true)
   xhr.send()

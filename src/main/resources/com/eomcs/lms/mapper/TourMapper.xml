@@ -65,6 +65,7 @@
   </select>
   
    <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
+   
    select
     t.tour_id, 
       t.title, 
@@ -75,13 +76,14 @@
       t.personnel, 
       t.transportation, 
       t.price,
-      p.name,
-       p.path,
-   from
+      p.tour_id as tourNo,
+      p.photo_name,
+      p.photo_path
+     from
      tour t
-      left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+     left outer join tour_guidance_photo p on t.tour_id = p.tour_id
       where
-      photo_id = #{value}
+      t.tour_id = #{value}
   </select>
   
   

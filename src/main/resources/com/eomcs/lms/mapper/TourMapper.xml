@@ -72,15 +72,20 @@
   </select>
   
    <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
-   select
-      *
-     from
-     tour t
-     left outer join tour_guidance_photo p on t.tour_id = p.tour_id
-      where
-      t.tour_id = #{value}
+   select 
+		* 
+		from tour as t 
+		left outer join
+		tour_guidance_photo p
+		on t.tour_id = p.tour_id
+		join 
+		tour_theme as toth
+		on t.tour_id = toth.tour_id
+		join
+		theme as th
+		on toth.theme_id = th.theme_id
+		where t.tour_id = #{value};
   </select>
-  
   
   <!--
   <update id="increaseCount" parameterType="int">

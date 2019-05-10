@@ -21,6 +21,12 @@
     <result column="rank" property="rank" />
     <result column="login_type_id" property="loginTypeNo" />
     <result column="photo" property="photo" />
+
+
+  <association property="loginType" javaType="loginType">
+    <result column="login_type_id" property="no" />
+    <result column="login_type" property="loginType" />
+ </association>
   </resultMap>
 
   <sql id="default-columns">
@@ -51,33 +57,38 @@
     </if>
   </select>
 
+
+
   <select id="findByNo" resultMap="memberMap" parameterType="int">
     select
-    
-    member_id,
-    login_type_id,
-    name,
-    email,
-    nickname,
-    birth,
-    sms_check,
-    email_check,
-    tel,
-    registered_date,
-    phone_check,
-    rank,
-    photo
 
-    from
-    member
+    m.member_id,
+    l.login_type,
+    m.name,
+    m.email,
+    m.nickname,
+    m.birth,
+    m.sms_check,
+    m.email_check,
+    m.tel,
+    m.registered_date,
+    m.phone_check,
+    m.rank,
+    m.photo,
+    l.login_type
+
+    from member m, login_type l
     where
-    member_id = #{value}
+    m.login_type_id = l.login_type_id
+    and m.member_id = #{value}
+
   </select>
+
 
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
     select
     <include refid="default-columns" />
-    
+
 
 
     from
@@ -116,7 +127,7 @@
 
   <update id="update" parameterType="member">
     update member
- <set>
+    <set>
       <if test="name != null">name = #{name},</if>
       <if test="email != null">email = #{email},</if>
       <if test="password != null">password = password(#{password}),</if>

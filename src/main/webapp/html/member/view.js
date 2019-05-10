@@ -29,7 +29,7 @@ $('#add-btn').click(() => {
     phoneCheck: $('#phoneCheck').val(),
     tel: $('#tel').val(),
     rank: $('#rank').val(),
-    loginTypeNo: $('#loginTypeNo').val()
+    loginType: $('#loginType').val()
    
     
   },
@@ -94,7 +94,7 @@ function loadData(no) {
     $('#tel').val(data.tel);
     $('#registeredDate').val(data.registeredDate);
     $('#rank').val(data.rank);
-    $('#loginTypeNo').val(data.loginTypeNo);
+    $('#loginType').val(data.loginType.loginType);
     $('#photo').val(data.photo);
     
   });

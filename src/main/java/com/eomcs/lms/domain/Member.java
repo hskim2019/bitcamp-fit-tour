@@ -18,6 +18,7 @@ public class Member implements Cloneable, Serializable {
   private String tel;
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date registeredDate;
+  private LoginType loginType; 
   
   private int rank;
   private int loginTypeNo;
@@ -88,6 +89,12 @@ public class Member implements Cloneable, Serializable {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+  public LoginType getLoginType() {
+    return loginType;
+  }
+  public void setLoginType(LoginType loginType) {
+    this.loginType = loginType;
+  }
   public int getRank() {
     return rank;
   }
@@ -111,9 +118,10 @@ public class Member implements Cloneable, Serializable {
     return "Member [no=" + no + ", email=" + email + ", password=" + password + ", name=" + name
         + ", nickname=" + nickname + ", birth=" + birth + ", smsCheck=" + smsCheck + ", emailCheck="
         + emailCheck + ", phoneCheck=" + phoneCheck + ", tel=" + tel + ", registeredDate="
-        + registeredDate + ", rank=" + rank + ", loginTypeNo=" + loginTypeNo + ", photo=" + photo
-        + "]";
+        + registeredDate + ", loginType=" + loginType + ", rank=" + rank + ", loginTypeNo="
+        + loginTypeNo + ", photo=" + photo + "]";
   }
+ 
 
   
 }

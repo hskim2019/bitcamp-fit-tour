@@ -45,7 +45,7 @@
       </if>
     </where>
     order by
-    registered_date asc
+    registered_date desc
     <if test="#{size != null || rowNo != null}">
       limit #{rowNo}, #{size}
     </if>
@@ -89,7 +89,6 @@
 
   <insert id="insert" parameterType="member">
     insert into member(
-    member_id ,
     login_type_id,
     email,
     password,
@@ -100,25 +99,24 @@
     email_check,
     tel,
     phone_check,
-    rank,
-    photo)
+    rank)
     values(
-    #{login_type_id},
+    #{loginTypeNo},
     #{email},
     password(#{password}),
+    #{name},
     #{nickname},
     #{birth},
-    #{sms_check},
-    #{email_check},
+    #{smsCheck},
+    #{emailCheck},
     #{tel},
-    #{phone_check},
-    #{rank},
-    #{photo})
+    #{phoneCheck},
+    #{rank})
   </insert>
 
   <update id="update" parameterType="member">
     update member
-    <set>
+ <set>
       <if test="name != null">name = #{name},</if>
       <if test="email != null">email = #{email},</if>
       <if test="password != null">password = password(#{password}),</if>
@@ -127,11 +125,10 @@
       <if test="smsCheck != null">sms_check = #{smsCheck},</if>
       <if test="emailCheck != null">email_check = #{emailCheck},</if>
       <if test="tel != null">tel = #{tel},</if>
+      <if test="rank != null">rank = #{rank},</if>
       <if test="phoneCheck != null">phone_check = #{phoneCheck},</if>
       <if test="loginTypeNo != null">login_type_id = #{loginTypeNo},</if>
       <if test="photo != null">photo = #{photo}</if>
-
-
     </set>
     where
     member_id = #{no}

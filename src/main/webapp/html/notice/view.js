@@ -27,28 +27,30 @@ function loadData(no) {
 $('#add-btn').click(() => {
   $.post('../../app/json/notice/add', {
 
-    title: $('#title').val(),
-    content: $('#content').val()
+    content: $('#content').val(),
+    title: $('#title').val()
+   
   },
 
   function(data) {
-    headers: ("Content-Type", "application/x-www-form-urlencoded");
-  if(data.status == 'success') {
-    location.href = "index.html";  
-  } 
-  }).fail(function(data){
-    alert('등록 실패 입니다.\n' + data.message);
-  })
-});
-
-$('#delete-btn').click(() => {
-  $.getJSON('../../app/json/notice/delete?no=' + param.split('=')[1], function(data) {
+    
     if(data.status == 'success') {
       location.href = "index.html";  
     } else {
-      alert('삭제 실패 입니다.\n', + data.message);
+      alert('등록 실패 입니다.\n' + data.message);
     }
-  })
+  });
+});
+$('#delete-btn').click(() => {
+  $.getJSON('../../app/json/notice/delete?no=' + param.split('=')[1], 
+      function(data) {
+    
+    if(data.status == 'success') {
+      location.href = "index.html";  
+    } else {
+      alert('삭제 실패 입니다.\n' + data.message);
+    }
+  });
 });
 
 $('#update-btn').click (() => {
@@ -58,13 +60,13 @@ $('#update-btn').click (() => {
     content: $('#content').val()
   },
   function(data) {
-    headers: ("Content-Type", "application/x-www-form-urlencoded");
-  if(data.status == 'success') {
-    location.href = "index.html";  
-  } 
-  }).fail(function(data){
-    alert('등록 실패 입니다.\n' + data.message);
-  })
+    
+    if(data.status == 'success') {
+      location.href = "index.html";  
+    } else {
+      alert('수정 실패 입니다.\n' + data.message);
+    }
+  });
 });
 
 

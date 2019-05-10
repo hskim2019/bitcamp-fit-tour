@@ -114,6 +114,6 @@ public class Member implements Cloneable, Serializable {
         + registeredDate + ", rank=" + rank + ", loginTypeNo=" + loginTypeNo + ", photo=" + photo
         + "]";
   }
-  
+
   
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.eomcs.lms.dao.TourDao">
+  
+  <resultMap type="tour" id="tourMap">
+    <id column="tour_id" property="no"/>
+    <result column="title" property="title"/>
+    <result column="sub_heading" property="subHeading"/>
+    <result column="content" property="content"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="total_hour" property="totalHour"/>
+    <result column="hash_tag" property="hashTag"/>
+    <result column="personnel" property="personnel"/>
+    <result column="transportation" property="transportation"/>
+    <result column="price" property="price"/>
+  </resultMap>
+  
+  <sql id="select1">
+    select 
+      tour_id, 
+      title, 
+      sub_heading, 
+      content, 
+      created_date, 
+      total_hour, 
+      hash_tag, 
+      personnel, 
+      transportation, 
+      price
+    from 
+      tour
+  </sql>
+  
+  <select id="findAll" resultMap="tourMap" parameterType="map">
+    <include refid="select1"/>
+    order by 
+      tour_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+   <select id="findByNo" resultMap="tourMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      tour_id = #{value}
+  </select>
+  
+  
+  <!--
+  <update id="increaseCount" parameterType="int">
+    update lms_board 
+    set 
+      vw_cnt = vw_cnt + 1 
+    where board_id = #{value}
+  </update>
+  
+  <insert id="insert" parameterType="board">
+    insert into lms_board(conts) 
+    values(#{contents})
+  </insert>
+  
+  <update id="update" parameterType="board">
+    update lms_board 
+    set 
+      conts = #{contents} 
+    where board_id = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from lms_board 
+    where board_id = #{no}
+  </delete>
+  -->
+  <select id="countAll" resultType="int">
+    select count(*) from tour
+  </select> 
+</mapper>
+
+
+
+
+
+
+
+
+
+

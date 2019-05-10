@@ -1,4 +1,9 @@
 var param = location.href.split('?')[1];
+    templateSrc = $('#comment-template').html(),
+    comment = $('#comment');
+
+var trGenerator = Handlebars.compile(templateSrc);
+
 if (param) {
   document.querySelector('h1').innerHTML = "게시물 조회"
   loadData(param.split('=')[1])
@@ -84,34 +89,51 @@ document.querySelector('#update-btn').onclick = () => {
   xhr.send(qs);
 };
 
+
 function loadData(no) {
-  var xhr = new XMLHttpRequest()
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState != 4 || xhr.status != 200)
-      return;
+  
+  $.getJSON('../../app/json/tour/detail?no=' + no,
+      function(obj) {
+    $('#title').val(obj.tour.title);
+    $('#subHeading').val(obj.tour.subHeading);
+    $('#content').val(obj.tour.content);
+    $('#totalHour').val(obj.tour.totalHour);
+    $('#hashTag').val(obj.tour.hashTag);
+    $('#personnel').val(obj.tour.personnel);
+    $('#transportation').val(obj.tour.transportation);
+    $('#price').val(obj.tour.price);
+    $('#photoname').val(obj.tour.tourPhoto[0].name);
+    $('#photpath').val(obj.tour.tourPhoto[0].path);
+    $('#theme').val(obj.tour.theme[0].theme);
+    $(trGenerator(obj)).appendTo(comment);
     
-    var data = JSON.parse(xhr.responseText);
-    console.log(data);
-    document.querySelector('#title').value = data.tour.title;
-    document.querySelector('#subHeading').value = data.tour.subHeading;
-    document.querySelector('#content').value = data.tour.content;
-    document.querySelector('#totalHour').value = data.tour.totalHour;
-    document.querySelector('#hashTag').value = data.tour.hashTag;
-    document.querySelector('#personnel').value = data.tour.personnel;
-    document.querySelector('#transportation').value = data.tour.transportation;
-    document.querySelector('#price').value = data.tour.price;
-    document.querySelector('#photoname').value = data.tour.tourPhoto[0].name;
-    document.querySelector('#photpath').value = data.tour.tourPhoto[0].path;
-    document.querySelector('#theme').value = data.tour.theme[0].theme;
-    document.querySelector('#comment').value = data.tourComment[0].content;
-  };
-  xhr.open('GET', '../../app/json/tour/detail?no=' + no, true)
-  xhr.send()
+    $(document.body).trigger('loaded-list');
+});
 }
 
+$(document.body).bind('loaded-list', () => {
+  
+  $('#bit-comment-add-button').click((e) => {
+    e.preventDefault();
+    var content = $('#bit-comment-add').val();
+    $.post('../../app/json/tourcomment/add',
+        {
+      tourNo : 1,
+      memberNo : 101,
+      order : 1,
+      level : 1,
+      content : content
+        }, 
+        function(obj) {
+          if (obj.status == 'success') {
+            //location.href = "index.html"
 
-
-
+          } else {
+            alert('등록 실패입니다!\n' + obj.message)
+          }
+        });
+  });
+});
 
 
 

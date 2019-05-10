@@ -11,36 +11,14 @@ var trGenerator = Handlebars.compile(templateSrc);
     // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
     $(trGenerator(obj)).appendTo(div);
     
-    $(document.body).trigger('loaded-list');
+    
 
   }); // $.getJSON()
 
 })(); // loadList()
 
 
-$(document.body).bind('loaded-list', () => {
-  
-  $('#bit-comment-add-button').click((e) => {
-    e.preventDefault();
-    var content = $('#bit-comment-add').val();
-    $.post('../../app/json/tourcomment/add',
-        {
-      tourNo : 1,
-      memberNo : 101,
-      order : 1,
-      level : 1,
-      content : content
-        }, 
-        function(obj) {
-          if (obj.status == 'success') {
-            location.href = "index.html"
 
-          } else {
-            alert('등록 실패입니다!\n' + obj.message)
-          }
-        });
-  });
-});
 
 
 

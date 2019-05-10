@@ -6,10 +6,8 @@ deleteBtn = $('#delete-btn'),
 no = $('#no'),
 title = $('#title'),
 content = $('#content'),
-viewcount = $('#viewcount'),
+viewCount = $('#viewCount'),
 createdDate = $('#createdDate'),
-bitNewItem = $('.bit-new-item'),
-bitViewItem = $('.bit-view-item'),
 templateSrc = $('#tr-template').html();
 
 
@@ -18,20 +16,21 @@ if (param) {
  
   $('h1').html('게시물 보기');
   loadData(param.split('=')[1])
-  var el = document.querySelectorAll('.bit-view-item');
+  var el =  $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
 } else {
 
-  document.querySelector('h1').innerHTML = "새글"
-  var el = document.querySelectorAll('.bit-new-item');
+  $('h1').html('새글');
+
+  var el = $('.bit-view-item');
   for (e of el) {
-    //e.style.display = 'none';
+   e.style.display = 'none';
   }
 }
 
-document.querySelector('#add-btn').onclick = () => {
+$('#add-btn').click(() => {
   var xhr = new XMLHttpRequest()
   xhr.onreadystatechange = function() {
     if (xhr.readyState != 4 || xhr.status != 200)
@@ -52,7 +51,7 @@ document.querySelector('#add-btn').onclick = () => {
   var content = document.querySelector('#content').value;
   
   xhr.send("content=" + encodeURIComponent(content));
-};
+});
 
 document.querySelector('#delete-btn').onclick = () => {
   var xhr = new XMLHttpRequest()
@@ -89,13 +88,17 @@ document.querySelector('#update-btn').onclick = () => {
       alert('변경 실패입니다!\n' + data.message)
     }
   };
-  xhr.open('GET', '../../app/json/notice/update', true)
+  xhr.open('POST', '../../app/json/notice/update', true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   
   var no = document.querySelector('#no').value;
+  var title = document.querySelector('#title').value;
   var content = document.querySelector('#content').value;
   
-  var qs = 'content=' + encodeURIComponent(content) +
+  var qs = 'title=' + encodeURIComponent(title)+
+  
+    '&content=' + encodeURIComponent(content) +
+  
     '&no=' + no;
   console.log(qs);
   alert(qs);
@@ -112,8 +115,9 @@ function loadData(no) {
     console.log(data);
     document.querySelector('#no').value = data.no;
     document.querySelector('#content').value = data.content;
+     document.querySelector('#title').value = data.title;
     document.querySelector('#createdDate').value = data.createdDate;
-    document.querySelector('#viewcount').value = data.viewcount;
+    document.querySelector('#viewCount').value = data.viewCount;
   };
   xhr.open('GET', '../../app/json/notice/detail?no=' + no, true)
   xhr.send()

@@ -7,7 +7,7 @@ public class Notice implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
 
   private int no;
-  private int viewcount;
+  private int viewCount;
   private String content;
   private String title;
   
@@ -22,12 +22,12 @@ public class Notice implements Cloneable, Serializable {
     this.no = no;
   }
 
-  public int getViewcount() {
-    return viewcount;
+  public int getViewCount() {
+    return viewCount;
   }
 
-  public void setViewcount(int viewcount) {
-    this.viewcount = viewcount;
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
   }
 
   public String getContent() {
@@ -56,11 +56,10 @@ public class Notice implements Cloneable, Serializable {
 
   @Override
   public String toString() {
-    return "Notice [no=" + no + ", viewcount=" + viewcount + ", content=" + content + ", title="
+    return "Notice [no=" + no + ", viewCount=" + viewCount + ", content=" + content + ", title="
         + title + ", createdDate=" + createdDate + "]";
   }
 
- 
  
   
   

@@ -91,11 +91,16 @@ function loadData(no) {
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
     
-    // 삭제 버튼에 이름 부여하기
     var deleteBottons = $('.bit-comment-delete-btn');
     for(deleteBotton of deleteBottons){
       var commentNoNode = $(deleteBotton).parent().prev().children().first();
-      $(deleteBotton).attr('id', commentNoNode.val());
+      $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
+    }
+    
+    var updateBottons = $('.bit-comment-update-btn');
+    for(updateBotton of updateBottons){
+      var commentNoNode = $(updateBotton).parent().prev().children().first();
+      $(updateBotton).attr('id', 'update' + commentNoNode.val());
     }
     
     
@@ -109,10 +114,10 @@ function loadData(no) {
 //comment-add
 $(document.body).bind('loaded-list', () => {
 
-  $('#bit-comment-add-button').click((e) => {
+  $('#comment-add-button').click((e) => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
-    var content = $('#bit-comment-add').val();
+    var content = $('#comment-add').val();
     $.post('../../app/json/tourcomment/add',
             {
       tourNo : tourNo,
@@ -136,8 +141,7 @@ $(document.body).bind('loaded-list', () => {
 $(document.body).bind('loaded-list', () => {
   $('.bit-comment-delete-btn').click((e) => {
     e.preventDefault();
-    console.log($(e.target).attr('id'));
-    $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id'),
+    $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id').replace(/[^0-9]/g,""),
             function(obj) {
       if (obj.status == 'success') {
         location.href = location.href;
@@ -148,3 +152,56 @@ $(document.body).bind('loaded-list', () => {
     });
   });
 });
+
+//comment-update
+$(document.body).bind('loaded-list', () => {
+  $('.bit-comment-update-btn').click((e) => {
+    e.preventDefault();
+    
+    var contentNode = $(e.target).parent().parent().next().children().children(),
+        preContentValue = contentNode.val();
+    
+
+    contentNode.removeAttr("readonly")
+    contentNode.focus();
+    
+    $(e.target).hide();
+    $(e.target).next().hide();
+    $(e.target).parent().append('<a href="#" class="bit-comment-updateSave-btn">저장</a>  ');
+    $(e.target).parent().append('<a href="#" class="bit-comment-updateCancel-btn">취소</a>');
+    
+    //comment-update-cancel
+    $('.bit-comment-updateCancel-btn').click((e)=>{
+      e.preventDefault();
+      $(e.target).prev().prev().show();
+      $(e.target).prev().prev().prev().show();
+      $(e.target).prev().remove()
+      $(e.target).remove();
+      
+      contentNode.attr("readonly",'ture')
+      contentNode.val(preContentValue);
+    })
+    
+    //comment-update-save
+    $('.bit-comment-updateSave-btn').click((e)=>{
+      e.preventDefault();
+      
+      $.post('../../app/json/tourcomment/update',
+              {
+                
+                no : $(e.target).prev().attr('id').replace(/[^0-9]/g,""),
+                content : contentNode.val()
+              }, 
+              function(obj) {
+                if (obj.status == 'success') {
+                  location.href = location.href;
+
+                } else {
+                  alert('등록 실패입니다!\n' + obj.message)
+                }
+              });
+    });
+    
+    }) // bit-comment-update-btn
+    
+}); //comment-update

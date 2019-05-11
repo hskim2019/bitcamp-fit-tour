@@ -60,21 +60,21 @@
     where tour_comment_id = #{no}
   </delete>
   
-  
+  <!-- update comment by commentNo -->
+  <update id="update" parameterType="TourComment">
+    update tour_comment 
+    set 
+      content = #{content},
+      created_date = now()
+    where tour_comment_id = #{no}
+  </update>
+
   <!-- <select id="findAll" resultMap="commentMap">
     <include refid="select1"/>
     order by 
       tour_comment_id asc
   </select> -->
   
-   <!--
-  <update id="update" parameterType="board">
-    update lms_board 
-    set 
-      conts = #{contents} 
-    where board_id = #{no}
-  </update>
-  -->
   
   <!--
   <select id="countAll" resultType="int">

@@ -62,20 +62,20 @@ public class TourCommentController {
     return content;
   }
   
-//  @PostMapping("update")
-//  public Object update(TourComment tourComment) {
-//    HashMap<String,Object> content = new HashMap<>();
-//    try {
-//      if (tourCommentService.update(tourComment) == 0) 
-//        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-//      content.put("status", "success");
-//      
-//    } catch (Exception e) {
-//      content.put("status", "fail");
-//      content.put("message", e.getMessage());
-//    }
-//    return content;
-//  }
+  @PostMapping("update")
+  public Object update(TourComment tourComment) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (tourCommentService.update(tourComment) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 }
 
 

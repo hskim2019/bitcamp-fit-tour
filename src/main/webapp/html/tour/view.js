@@ -77,6 +77,7 @@ function loadData(no) {
 
   $.getJSON('../../app/json/tour/detail?no=' + no,
           function(obj) {
+
     $('#title').val(obj.tour.title);
     $('#subHeading').val(obj.tour.subHeading);
     $('#content').val(obj.tour.content);
@@ -89,8 +90,18 @@ function loadData(no) {
     $('#photpath').val(obj.tour.tourPhoto[0].path);
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
-
+    
+    // 삭제 버튼에 이름 부여하기
+    var deleteBottons = $('.bit-comment-delete-btn');
+    for(deleteBotton of deleteBottons){
+      var commentNoNode = $(deleteBotton).parent().prev().children().first();
+      $(deleteBotton).attr('id', commentNoNode.val());
+    }
+    
+    
     $(document.body).trigger('loaded-list');
+    
+    
   });
 }
 
@@ -122,25 +133,18 @@ $(document.body).bind('loaded-list', () => {
 });
 
 //comment-delete
-$('#bit-comment-delete-button').click((e) => {
-  e.preventDefault();
-  var tourNo = location.href.split('?')[1].split('=')[1];
-  var content = $('#bit-comment-add').val();
-  $.post('../../app/json/tourcomment/add',
-          {
-    tourNo : tourNo,
-    memberNo : 101,
-    order : 1,
-    level : 1,
-    content : content
-          }, 
-          function(obj) {
-            if (obj.status == 'success') {
-              location.href = location.href;
+$(document.body).bind('loaded-list', () => {
+  $('.bit-comment-delete-btn').click((e) => {
+    e.preventDefault();
+    console.log($(e.target).attr('id'));
+    $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id'),
+            function(obj) {
+      if (obj.status == 'success') {
+        location.href = location.href;
 
-            } else {
-              alert('등록 실패입니다!\n' + obj.message)
-            }
-          });
+      } else {
+        alert('삭제 실패입니다!\n' + obj.message)
+      }
+    });
+  });
 });
-

@@ -37,12 +37,7 @@
       tour_comment
   </sql>
   
-<!--   <select id="findAll" resultMap="commentMap">
-    <include refid="select1"/>
-    order by 
-      tour_comment_id asc
-  </select> -->
-  
+  <!-- find comment by tourNo -->
   <select id="findByTourNo" resultMap="commentMap" parameterType="int">
     select
     *
@@ -53,12 +48,25 @@
       tour_id = #{value}
   </select>
   
-  
-  <insert id="insert" parameterType="tourComment">
+  <!-- insert comment -->
+  <insert id="insert" parameterType="tourComment" >
     insert into tour_comment(member_id, tour_id, ranking, level, content) 
     values(#{memberNo},#{tourNo},#{order},#{level},#{content})
   </insert>
    
+   <!-- delete comment by commentNo -->
+  <delete id="delete" parameterType="int">
+    delete from tour_comment 
+    where tour_comment_id = #{no}
+  </delete>
+  
+  
+  <!-- <select id="findAll" resultMap="commentMap">
+    <include refid="select1"/>
+    order by 
+      tour_comment_id asc
+  </select> -->
+  
    <!--
   <update id="update" parameterType="board">
     update lms_board 
@@ -66,12 +74,9 @@
       conts = #{contents} 
     where board_id = #{no}
   </update>
+  -->
   
-  <delete id="delete" parameterType="int">
-    delete from lms_board 
-    where board_id = #{no}
-  </delete>
-  
+  <!--
   <select id="countAll" resultType="int">
     select count(*) from lms_board
   </select> -->

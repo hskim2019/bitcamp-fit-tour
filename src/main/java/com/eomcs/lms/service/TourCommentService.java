@@ -9,4 +9,5 @@ public interface TourCommentService {
   List<TourComment> get(int no);
   int update(TourComment tourComment);
   int delete(int no);
+  int countCommentbyTourNo(int no);
 }

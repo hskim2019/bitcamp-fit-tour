@@ -90,6 +90,7 @@ function loadData(no) {
     $('#photpath').val(obj.tour.tourPhoto[0].path);
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
+    $('#commentMount').html($('#commentMount').html()+obj.commentAmount);
     
     var deleteBottons = $('.bit-comment-delete-btn');
     for(deleteBotton of deleteBottons){
@@ -178,7 +179,7 @@ $(document.body).bind('loaded-list', () => {
       $(e.target).prev().remove()
       $(e.target).remove();
       
-      contentNode.attr("readonly",'ture')
+      contentNode.attr("readonly",'true')
       contentNode.val(preContentValue);
     })
     
@@ -194,7 +195,7 @@ $(document.body).bind('loaded-list', () => {
               }, 
               function(obj) {
                 if (obj.status == 'success') {
-                  location.href = location.href;
+                  contentNode.attr("readonly",'true')
 
                 } else {
                   alert('등록 실패입니다!\n' + obj.message)

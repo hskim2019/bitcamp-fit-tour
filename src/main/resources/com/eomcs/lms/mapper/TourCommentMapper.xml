@@ -69,17 +69,19 @@
     where tour_comment_id = #{no}
   </update>
 
+  <select id="countCommentbyTourNo" resultType="int" parameterType="int">
+    select count(*) from tour_comment
+    where tour_id = #{no}
+  </select>
+  
+  
   <!-- <select id="findAll" resultMap="commentMap">
     <include refid="select1"/>
     order by 
       tour_comment_id asc
   </select> -->
   
-  
-  <!--
-  <select id="countAll" resultType="int">
-    select count(*) from lms_board
-  </select> -->
+   
 </mapper>
 
 

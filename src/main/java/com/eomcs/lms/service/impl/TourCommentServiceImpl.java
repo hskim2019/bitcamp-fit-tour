@@ -53,6 +53,13 @@ public class TourCommentServiceImpl implements TourCommentService {
     // 그래도 항상 Command 객체는 이 Service 객체를 통해서 데이터를 처리해야 한다.
     return tourCommentDao.delete(no);
   }
+
+  @Override
+  public int countCommentbyTourNo(int no) {
+    return tourCommentDao.countCommentbyTourNo(no);
+  }
+  
+  
   
 }
 

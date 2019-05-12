@@ -17,17 +17,17 @@ public class Tour {
 
 	private List<TourGuidancePhoto> tourPhoto;
 	private List<Theme> theme;
-	private List<TourComment> tourComment;
+
 
 	@Override
-	public String toString() {
-		return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content=" + content
-				+ ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag=" + hashTag + ", personnel="
-				+ personnel + ", transportation=" + transportation + ", price=" + price + ", tourPhoto=" + tourPhoto
-				+ ", theme=" + theme + ", tourComment=" + tourComment + "]";
-	}
+  public String toString() {
+    return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
+        + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
+        + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
+        + price + ", tourPhoto=" + tourPhoto + ", theme=" + theme + "]";
+  }
 
-	public int getNo() {
+  public int getNo() {
 		return no;
 	}
 
@@ -122,15 +122,6 @@ public class Tour {
 	public void setTheme(List<Theme> theme) {
 		this.theme = theme;
 	}
-
-	public List<TourComment> getTourComment() {
-		return tourComment;
-	}
-
-	public void setTourComment(List<TourComment> tourComment) {
-		this.tourComment = tourComment;
-	}
-
 
 
 

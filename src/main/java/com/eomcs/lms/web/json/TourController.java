@@ -56,7 +56,10 @@ public class TourController {
     HashMap<String, Object> map = new HashMap<>();
     Tour tour = tourService.get(no);
     List<TourComment> tourComments = tourCommentService.get(no);
+    int commentAmount = tourCommentService.countCommentbyTourNo(no);
+    System.out.println(commentAmount);
     map.put("tour", tour);
+    map.put("commentAmount", commentAmount);
     map.put("tourComment", tourComments);
     return map;
   }
@@ -80,6 +83,7 @@ public class TourController {
       pageNo = totalPage;
     
     List<Tour> tours = tourService.list(pageNo, pageSize);
+    
     
     
     HashMap<String,Object> content = new HashMap<>();

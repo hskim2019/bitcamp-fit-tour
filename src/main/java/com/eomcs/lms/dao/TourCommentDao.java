@@ -9,7 +9,7 @@ public interface TourCommentDao {
   List<TourComment> findByTourNo(int no);
   int update(TourComment tourComment);
   int delete(int no);
-  int countAll();
+  int countCommentbyTourNo(int no);
 }
 
 

@@ -1,5 +1,6 @@
 package com.eomcs.lms.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.TourCommentDao;
@@ -34,9 +35,12 @@ public class TourCommentServiceImpl implements TourCommentService {
   }
   
   @Override
-  public List<TourComment> get(int no) {
-    
-    List<TourComment> tourComment = tourCommentDao.findByTourNo(no);
+  public List<TourComment> get(int no, int pageNo, int pageSize) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("no", no);
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    List<TourComment> tourComment = tourCommentDao.findByTourNo(params);
     return tourComment;
   }
   
@@ -56,7 +60,13 @@ public class TourCommentServiceImpl implements TourCommentService {
 
   @Override
   public int countCommentbyTourNo(int no) {
+    
     return tourCommentDao.countCommentbyTourNo(no);
+  }
+
+  @Override
+  public int size() {
+    return tourCommentDao.countAll();
   }
   
   

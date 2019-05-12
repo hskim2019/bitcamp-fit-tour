@@ -42,8 +42,6 @@
       <id column="theme_id"    property="no"/>
       <result column="theme" property="theme"/>
     </collection>
-    
-    
   </resultMap>
   
   <sql id="select1">
@@ -106,9 +104,12 @@
     where board_id = #{no}
   </delete>
   -->
+  
   <select id="countAll" resultType="int">
     select count(*) from tour
   </select> 
+  
+  
 </mapper>
 
 

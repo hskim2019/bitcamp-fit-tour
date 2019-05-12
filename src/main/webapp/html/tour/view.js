@@ -1,6 +1,7 @@
 var param = location.href.split('?')[1];
 templateSrc = $('#comment-template').html(),
 comment = $('#comment');
+var pageNo = 1;
 
 var trGenerator = Handlebars.compile(templateSrc);
 
@@ -91,31 +92,28 @@ function loadData(no) {
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
     $('#commentMount').html($('#commentMount').html()+obj.commentAmount);
-    
-    var deleteBottons = $('.bit-comment-delete-btn');
-    for(deleteBotton of deleteBottons){
-      var commentNoNode = $(deleteBotton).parent().prev().children().first();
-      $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
+
+
+    if(obj.commentAmount <= obj.pageSize){
+      $('#next-comment-btn').hide();
+    } else{
+      $(document.body).trigger('activate-next-commet');
     }
-    
-    var updateBottons = $('.bit-comment-update-btn');
-    for(updateBotton of updateBottons){
-      var commentNoNode = $(updateBotton).parent().prev().children().first();
-      $(updateBotton).attr('id', 'update' + commentNoNode.val());
+
+    if (obj.tourComment.length){
+      giveId();
     }
-    
-    
+
+
     $(document.body).trigger('loaded-list');
-    
-    
   });
+
 }
 
-
-//comment-add
 $(document.body).bind('loaded-list', () => {
 
-  $('#comment-add-button').click((e) => {
+  //comment-add
+  $('#comment-add-button').off().click((e) => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
     var content = $('#comment-add').val();
@@ -123,86 +121,127 @@ $(document.body).bind('loaded-list', () => {
             {
       tourNo : tourNo,
       memberNo : 101,
-      order : 1,
-      level : 1,
+      order : 0,
+      level : 0,
       content : content
             }, 
             function(obj) {
               if (obj.status == 'success') {
-                location.href = location.href;
+                location.reload(true); 
 
               } else {
                 alert('등록 실패입니다!\n' + obj.message)
               }
             });
   });
-});
 
-//comment-delete
-$(document.body).bind('loaded-list', () => {
-  $('.bit-comment-delete-btn').click((e) => {
+  //comment-delete
+  $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
     $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id').replace(/[^0-9]/g,""),
             function(obj) {
       if (obj.status == 'success') {
-        location.href = location.href;
+        location.reload(true);
 
       } else {
         alert('삭제 실패입니다!\n' + obj.message)
       }
     });
   });
-});
 
-//comment-update
-$(document.body).bind('loaded-list', () => {
-  $('.bit-comment-update-btn').click((e) => {
+  //comment-update
+  $('.bit-comment-update-btn').off().click((e) => {
     e.preventDefault();
-    
-    var contentNode = $(e.target).parent().parent().next().children().children(),
-        preContentValue = contentNode.val();
-    
+
+    var contentNode = $(e.target).parent().next().children(),
+    preContentValue = contentNode.val();
+
 
     contentNode.removeAttr("readonly")
     contentNode.focus();
-    
+
     $(e.target).hide();
     $(e.target).next().hide();
     $(e.target).parent().append('<a href="#" class="bit-comment-updateSave-btn">저장</a>  ');
     $(e.target).parent().append('<a href="#" class="bit-comment-updateCancel-btn">취소</a>');
-    
+
     //comment-update-cancel
-    $('.bit-comment-updateCancel-btn').click((e)=>{
+    $('.bit-comment-updateCancel-btn').off().click((e)=>{
       e.preventDefault();
       $(e.target).prev().prev().show();
       $(e.target).prev().prev().prev().show();
       $(e.target).prev().remove()
       $(e.target).remove();
-      
+
       contentNode.attr("readonly",'true')
       contentNode.val(preContentValue);
     })
-    
+
     //comment-update-save
-    $('.bit-comment-updateSave-btn').click((e)=>{
+    $('.bit-comment-updateSave-btn').off().click((e)=>{
       e.preventDefault();
-      
       $.post('../../app/json/tourcomment/update',
               {
-                
-                no : $(e.target).prev().attr('id').replace(/[^0-9]/g,""),
-                content : contentNode.val()
+
+        no : $(e.target).prev().attr('id').replace(/[^0-9]/g,""),
+        content : contentNode.val()
               }, 
               function(obj) {
                 if (obj.status == 'success') {
                   contentNode.attr("readonly",'true')
-
+                  $(e.target).prev().prev().show();
+                  $(e.target).prev().show();
+                  $(e.target).next().remove();
+                  $(e.target).remove();
                 } else {
-                  alert('등록 실패입니다!\n' + obj.message)
+                  alert('수정 실패입니다!\n' + obj.message)
                 }
               });
     });
-    
-    }) // bit-comment-update-btn
-    
-}); //comment-update
+
+  }) //comment-update
+
+}); //loaded-list
+
+
+//next-comment
+$(document.body).bind('activate-next-commet', () => {
+  $('#next-comment-btn').click((e)=>{
+    e.preventDefault();
+
+    pageNo++;
+    var no = param.split('=')[1];
+
+    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo,
+            function(obj) {
+      $(trGenerator(obj)).appendTo(comment);
+      giveId();
+      
+      if(pageNo >= obj.totalPage){
+        $('#next-comment-btn').hide();
+      }
+      $(document.body).trigger('loaded-list');
+    });
+  });
+});
+
+//give delete-btn,update-btn id
+function giveId() {
+
+  var deleteBottons = $('.bit-comment-delete-btn');
+  for(deleteBotton of deleteBottons) {
+    if (!$(deleteBotton).attr('id')) {
+      var commentNoNode = $(deleteBotton).parent().prev().children().first();
+      $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
+    }
+  }
+
+  var updateBottons = $('.bit-comment-update-btn');
+  for(updateBotton of updateBottons) {
+    if (!$(updateBotton).attr('id')) {
+      var commentNoNode = $(updateBotton).parent().prev().children().first();
+      $(updateBotton).attr('id', 'update' + commentNoNode.val());
+    }
+  }
+}
+

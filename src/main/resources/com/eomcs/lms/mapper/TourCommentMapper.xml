@@ -38,14 +38,17 @@
   </sql>
   
   <!-- find comment by tourNo -->
-  <select id="findByTourNo" resultMap="commentMap" parameterType="int">
+  <select id="findByTourNo" resultMap="commentMap" parameterType="map">
     select
     *
     from tour_comment as t
     join member as m
     on t.member_id = m.member_id
     where 
-      tour_id = #{value}
+      tour_id = #{no}
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
   </select>
   
   <!-- insert comment -->
@@ -68,12 +71,17 @@
       created_date = now()
     where tour_comment_id = #{no}
   </update>
-
+  
+  <!-- count all comment by Tour No -->
   <select id="countCommentbyTourNo" resultType="int" parameterType="int">
     select count(*) from tour_comment
     where tour_id = #{no}
   </select>
   
+  <!-- cout all comment -->
+  <select id="countAll" resultType="int">
+    select count(*) from tour_comment
+  </select>
   
   <!-- <select id="findAll" resultMap="commentMap">
     <include refid="select1"/>

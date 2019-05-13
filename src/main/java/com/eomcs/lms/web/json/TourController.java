@@ -79,8 +79,6 @@ public class TourController {
 
     HashMap<String, Object> map = new HashMap<>();
     Tour tour = tourService.get(no);
-    System.out.println(pageNo);
-    System.out.println(pageSize);
     List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize);
     int commentAmount = tourCommentService.countCommentbyTourNo(no);
 
@@ -114,8 +112,6 @@ public class TourController {
       pageNo = totalPage;
 
     List<Tour> tours = tourService.list(pageNo, pageSize);
-
-
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", tours);

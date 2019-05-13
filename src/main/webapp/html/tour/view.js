@@ -3,7 +3,7 @@ templateSrc = $('#comment-template').html(),
 comment = $('#comment'),
 pageNo = 1;
 
-console.log(pageNo);
+
 var trGenerator = Handlebars.compile(templateSrc);
 
 if (param) {
@@ -43,21 +43,24 @@ function loadData(no) {
     $(trGenerator(obj)).appendTo(comment);
     $('#commentAmount').html($('#commentAmount').html()+obj.commentAmount);
 
-
-    if(obj.commentAmount <= obj.pageSize){
-      $('#next-comment-btn').hide();
-    } else{
-      $(document.body).trigger('activate-next-commet');
-    }
-
-    if (obj.tourComment.length){
-      giveId();
-    }
-
+    a(obj);
 
     $(document.body).trigger('loaded-list');
   });
 
+}
+
+function a(obj){
+  if(obj.commentAmount <= obj.pageSize){
+    $('#next-comment-btn').hide();
+  } else{
+    $('#next-comment-btn').show();
+    $(document.body).trigger('activate-next-comment');
+  }
+
+  if (obj.tourComment.length){
+    giveId();
+  }
 }
 
 $(document.body).bind('loaded-list', () => {
@@ -77,10 +80,25 @@ $(document.body).bind('loaded-list', () => {
             }, 
             function(obj) {
               if (obj.status == 'success') {
-                location.reload(true); 
+                $.post('../../app/json/tourcomment/list',{
+                  tourNo : tourNo
+                },
+                function(obj) {
+
+                  var el = $('#comment').contents();
+                  for(e of el){
+                    e.remove();
+                      }
+                  
+                  $(trGenerator(obj)).appendTo(comment);
+                  pageNo = 1;
+                  a(obj);
+                  $('#commentAmount').html('댓글수' + obj.commentAmount)
+                  $('#comment-add').val('');
+                  
+                });
                 
-                //refresh 시도
-                //$('#comment').load(location + ' #comment');
+                
 
               } else {
                 alert('등록 실패입니다!\n' + obj.message)
@@ -158,11 +176,11 @@ $(document.body).bind('loaded-list', () => {
 
 
 //next-comment
-$(document.body).bind('activate-next-commet', () => {
-  $('#next-comment-btn').click((e)=>{
+$(document.body).bind('activate-next-comment', () => {
+  $('#next-comment-btn').off().click((e)=>{
     e.preventDefault();
-      console.log(pageNo);
     pageNo++;
+    console.log(pageNo);
     var no = param.split('=')[1];
 
     $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo,
@@ -175,6 +193,7 @@ $(document.body).bind('activate-next-commet', () => {
       }
       $(document.body).trigger('loaded-list');
     });
+    
   });
 });
 

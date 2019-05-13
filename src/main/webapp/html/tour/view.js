@@ -3,6 +3,9 @@ templateSrc = $('#comment-template').html(),
 comment = $('#comment'),
 pageNo = 1;
 
+if(sessionStorage.getItem('loginUser') != undefined){
+  var user = JSON.parse(sessionStorage.getItem('loginUser'));
+}
 
 
 var trGenerator = Handlebars.compile(templateSrc);
@@ -28,7 +31,7 @@ else {
 function loadData(no) {
 
   $.getJSON('../../app/json/tour/detail?no=' + no,
-          function(obj) {
+      function(obj) {
 
     $('#title').val(obj.tour.title);
     $('#subHeading').val(obj.tour.subHeading);
@@ -44,24 +47,26 @@ function loadData(no) {
     $(trGenerator(obj)).appendTo(comment);
     $('#commentAmount').html($('#commentAmount').html()+obj.commentAmount);
 
-    a(obj);
+    controlNextComment(obj);
 
     $(document.body).trigger('loaded-list');
   });
 
 }
 
-function a(obj){
+function controlNextComment(obj){
   if(obj.commentAmount <= obj.pageSize){
     $('#next-comment-btn').hide();
   } else{
     $('#next-comment-btn').show();
     $(document.body).trigger('activate-next-comment');
   }
-
-  if (obj.tourComment.length){
-    giveId();
-  }
+  
+    
+    if (obj.tourComment.length){
+//    giveId();
+      a();
+    }
 }
 
 $(document.body).bind('loaded-list', () => {
@@ -71,52 +76,46 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
     var content = $('#comment-add').val();
-    
-    if(sessionStorage.getItem('loginUser') != undefined){
-      var user = JSON.parse(sessionStorage.getItem('loginUser'));
-    }
-    
+
     $.post('../../app/json/tourcomment/add',
-            {
+        {
       tourNo : tourNo,
       memberNo : user.no,
       order : 0,
       level : 0,
       content : content
-            }, 
+        }, 
+        function(obj) {
+          if (obj.status == 'success') {
+            $.post('../../app/json/tourcomment/list',{
+              tourNo : tourNo
+            },
             function(obj) {
-              if (obj.status == 'success') {
-                $.post('../../app/json/tourcomment/list',{
-                  tourNo : tourNo
-                },
-                function(obj) {
 
-                  var el = $('#comment').contents();
-                  for(e of el){
-                    e.remove();
-                      }
-                  
-                  $(trGenerator(obj)).appendTo(comment);
-                  pageNo = 1;
-                  a(obj);
-                  $('#commentAmount').html('댓글수' + obj.commentAmount)
-                  $('#comment-add').val('');
-                  
-                });
-                
-                
-
-              } else {
-                alert('등록 실패입니다!\n' + obj.message)
+              var el = $('#comment').contents();
+              for(e of el){
+                e.remove();
               }
+
+              $(trGenerator(obj)).appendTo(comment);
+              pageNo = 1;
+              controlNextComment(obj);
+              $('#commentAmount').html('댓글수' + obj.commentAmount)
+              $('#comment-add').val('');
+
             });
+
+          } else {
+            alert('등록 실패입니다!\n' + obj.message)
+          }
+        });
   });
 
   //comment-delete
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
     $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id').replace(/[^0-9]/g,""),
-            function(obj) {
+        function(obj) {
       if (obj.status == 'success') {
         location.reload(true);
 
@@ -158,22 +157,22 @@ $(document.body).bind('loaded-list', () => {
     $('.bit-comment-updateSave-btn').off().click((e)=>{
       e.preventDefault();
       $.post('../../app/json/tourcomment/update',
-              {
+          {
 
         no : $(e.target).prev().attr('id').replace(/[^0-9]/g,""),
         content : contentNode.val()
-              }, 
-              function(obj) {
-                if (obj.status == 'success') {
-                  contentNode.attr("readonly",'true')
-                  $(e.target).prev().prev().show();
-                  $(e.target).prev().show();
-                  $(e.target).next().remove();
-                  $(e.target).remove();
-                } else {
-                  alert('수정 실패입니다!\n' + obj.message)
-                }
-              });
+          }, 
+          function(obj) {
+            if (obj.status == 'success') {
+              contentNode.attr("readonly",'true')
+              $(e.target).prev().prev().show();
+              $(e.target).prev().show();
+              $(e.target).next().remove();
+              $(e.target).remove();
+            } else {
+              alert('수정 실패입니다!\n' + obj.message)
+            }
+          });
     });
 
   }) //comment-update
@@ -190,16 +189,16 @@ $(document.body).bind('activate-next-comment', () => {
     var no = param.split('=')[1];
 
     $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo,
-            function(obj) {
+        function(obj) {
       $(trGenerator(obj)).appendTo(comment);
-      giveId();
-      
+      a();
+
       if(pageNo >= obj.totalPage){
         $('#next-comment-btn').hide();
       }
       $(document.body).trigger('loaded-list');
     });
-    
+
   });
 });
 
@@ -208,18 +207,37 @@ function giveId() {
 
   var deleteBottons = $('.bit-comment-delete-btn');
   for(deleteBotton of deleteBottons) {
-    if (!$(deleteBotton).attr('id')) {
-      var commentNoNode = $(deleteBotton).parent().prev().children().first();
-      $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
-    }
+    if ($(deleteBotton).attr('id')) 
+      continue;
+    
+    var commentNoNode = $(deleteBotton).parent().prev().prev().children().first();
+    $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
+
   }
 
   var updateBottons = $('.bit-comment-update-btn');
   for(updateBotton of updateBottons) {
-    if (!$(updateBotton).attr('id')) {
-      var commentNoNode = $(updateBotton).parent().prev().children().first();
-      $(updateBotton).attr('id', 'update' + commentNoNode.val());
-    }
+    if ($(updateBotton).attr('id')) 
+      continue;
+
+    var commentNoNode = $(updateBotton).parent().prev().prev().children().first();
+    $(updateBotton).attr('id', 'update' + commentNoNode.val());
+
   }
 }
+
+function a() {
+  
+  var memberNameNodes = $('.bit-member-name');
+  for (memberNameNode of memberNameNodes) {
+    
+    if(user.name == $(memberNameNode).html()) {
+      console.log(user.name);
+      console.log($(memberNameNode).html());
+      $(memberNameNode).parent().next().children().show();
+      giveId();
+    }
+    
+  }
+};
 

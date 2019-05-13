@@ -129,14 +129,17 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
-    <div class="col-sm-10 primary">
+    <div>
       <input type="hidden" value={{no}}> 
-      {{member.name}}&ensp;{{createdDate}}
+    </div>
+
+    <div class="col-sm-10 primary">
+      <span class="bit-member-name">{{member.name}}</span> {{createdDate}}
     </div>
 
     <div class="col-sm-2">
-      <a href="#" class="bit-comment-update-btn">수정</a> 
-      <a href="#" class="bit-comment-delete-btn">삭제</a>
+      <a href="#" class="bit-comment-update-btn" style="display:none">수정</a> 
+      <a href="#" class="bit-comment-delete-btn" style="display:none">삭제</a>
     </div>
 
     <div class="col-sm-12">

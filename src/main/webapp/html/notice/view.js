@@ -1,6 +1,5 @@
 var param = location.href.split('?')[1];
 
-
 if (param) {
   $('h1').html('게시물 보기');
   loadData(param.split('=')[1]);
@@ -10,12 +9,14 @@ if (param) {
   }
 } else {
   $('h1').html('새글');
+  quilljsediterInit();
   var el = $('.bit-view-item');
-  
+
   for (e of el) {
     e.style.display = 'none';
   }
 }
+
 function loadData(no) {
   $.getJSON('../../app/json/notice/detail?no=' + param.split('=')[1], function(data) {
     $('#no').val(data.no);
@@ -25,27 +26,11 @@ function loadData(no) {
     $('#viewCount').val(data.viewCount);
   });
 };
-$('#add-btn').click(() => {
-  $.post('../../app/json/notice/add', {
 
-    content: $('#content').val(),
-    title: $('#title').val()
-   
-  },
-
-  function(data) {
-    
-    if(data.status == 'success') {
-      location.href = "index.html";  
-    } else {
-      alert('등록 실패 입니다.\n' + data.message);
-    }
-  });
-});
 $('#delete-btn').click(() => {
   $.getJSON('../../app/json/notice/delete?no=' + param.split('=')[1], 
       function(data) {
-    
+
     if(data.status == 'success') {
       location.href = "index.html";  
     } else {
@@ -55,13 +40,13 @@ $('#delete-btn').click(() => {
 });
 
 $('#update-btn').click (() => {
- 
+
   $.post('../../app/json/notice/update?no=' + param.split('=')[1],{
     title: $('#title').val(),
     content: $('#content').val()
   },
   function(data) {
-    
+
     if(data.status == 'success') {
       location.href = "index.html";  
     } else {
@@ -70,92 +55,72 @@ $('#update-btn').click (() => {
   });
 });
 
-var Counter = function(quill, options) {
+$('#add-btn').click(() => {
+  $.post('../../app/json/notice/add', {
 
-  this.quill = quill;
-
-  this.options = options;
-
-  var container = document.querySelector(options.container);
-
-  var _this = this;
-
-  quill.on('text-change', function() {
-
-    var length = _this.calculate();
-
-    container.innerText = length + ' ' + options.unit + 's';
-
-  });
-
-};
-
- 
-
-Counter.prototype.calculate = function() {
-
-  var text = this.quill.getText();
-
-  if (this.options.unit === 'word') {
-
-    return text.split(/\s+/).length;
-
-  } else {
-
-    return text.length;
-
-  }
-
-};
-
- 
-
-Quill.register('modules/counter', Counter);
-
- 
-
-var quill = new Quill('#editor', {
-
-  modules: {
-
-    counter: {
-
-      container: '#counter',
-
-      unit: 'word'
-
-    },
-
-    toolbar: [
-
-      [{ header: [1, 2, false] }],
-
-      ['bold', 'italic', 'underline'],
-
-      ['image', 'code-block']
-
-    ]
+    content: delta,
+    title: $('#title').val()
 
   },
 
- 
+  function(data) {
 
-  
-
-       placeholder: 'Compose an epic...',
-
-  theme: 'snow'  // or 'bubble'
-
-  
-
+    if(data.status == 'success') {
+      location.href = "index.html";  
+    } else {
+      alert('등록 실패 입니다.\n' + data.message);
+    }
+  });
 });
 
- 
+function quilljsediterInit() {
+  var options = {
+      modules: {
+          toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block']
+          ]
+      },
+      placeholder: 'Compose an epic...',
+      theme: 'snow'
+  };
+  quill = new Quill('#editor', options);
+  
+  quill.setContexts($('#content')); 
+  
+  quill.getModule('toolbar').addHandler('image', function() {
+      selectLocalImage();
+  });
+}
+function selectLocalImage() {
+  const input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.click();
 
-var counter = quill.getModule('counter');
+  // Listen upload local image and save to server
+  input.onchange = function() {
+      const fd = new FormData();
+      const file = $(this)[0].files[0];
+      fd.append('image', file);
 
- 
-
-// We can now access calculate() directly
-
-console.log(counter.calculate(), 'words');
+      $.ajax({
+          type: 'post',
+          enctype: 'multipart/form-data',
+          url: '/bitcamp-fit-tour/upload/',
+          data: fd,
+          processData: false,
+          contentType: false,
+          beforeSend: function(xhr) {
+              xhr.setRequestHeader($("#_csrf_header").val(), $("#_csrf").val());
+          },
+          success: function(data) {
+              const range = quill.getSelection();
+              quill.insertEmbed(range.index, 'image', '/bitcamp-fit-tour/upload/'+data);
+          },
+          error: function(err) {
+              console.error("Error ::: "+err);
+          }
+      });
+  };
+}

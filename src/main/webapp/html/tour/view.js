@@ -4,6 +4,7 @@ comment = $('#comment'),
 pageNo = 1;
 
 
+
 var trGenerator = Handlebars.compile(templateSrc);
 
 if (param) {
@@ -70,10 +71,15 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
     var content = $('#comment-add').val();
+    
+    if(sessionStorage.getItem('loginUser') != undefined){
+      var user = JSON.parse(sessionStorage.getItem('loginUser'));
+    }
+    
     $.post('../../app/json/tourcomment/add',
             {
       tourNo : tourNo,
-      memberNo : 101,
+      memberNo : user.no,
       order : 0,
       level : 0,
       content : content

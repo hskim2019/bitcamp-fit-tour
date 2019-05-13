@@ -32,7 +32,7 @@ document.body.addEventListener('loaded.header', () => {
     xhr.onreadystatechange = function() {
       if (xhr.readyState != 4 || xhr.status != 200)
         return;
-      
+       sessionStorage.clear();
       location.href = '/bitcamp-fit-tour/html/index.html';
       
     };
@@ -50,15 +50,20 @@ function loadLoginUser() {
     if (xhr.readyState != 4 || xhr.status != 200)
       return;
     
+    
     var data = JSON.parse(xhr.responseText);
     
+
     var loginState = document.querySelector('#bit-login-state'),
         notLoginState = document.querySelector('#bit-not-login-state');
     
     if (data.status == 'success') {
+      sessionStorage.setItem('loginUser',JSON.stringify(data.user));
+      
       loginState.className = 
         loginState.className.replace('bit-invisible', '');
       document.querySelector('#login-username').innerHTML = data.user.name;
+      
       document.querySelector('#login-userphoto').src = 
         "/bitcamp-fit-tour/upload/member/" + data.user.photo;
     } else {

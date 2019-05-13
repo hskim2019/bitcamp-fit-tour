@@ -29,7 +29,7 @@ $('#add-btn').click(() => {
     phoneCheck: $('#phoneCheck').val(),
     tel: $('#tel').val(),
     rank: $('#rank').val(),
-    loginType: $('#loginTypeNo').val()
+    loginTypeNo: $('#loginType').val()
    
     
   },
@@ -67,7 +67,6 @@ $('#update-btn').click (() => {
     phoneCheck: $('#phoneCheck').val(),
     tel: $('#tel').val(),
     rank: $('#rank').val(),
-    loginTypeNo: $('#loginTypeNo').val(),
     photo: $('#photo').val()
   },
   function(data) {
@@ -94,7 +93,7 @@ function loadData(no) {
     $('#tel').val(data.tel);
     $('#registeredDate').val(data.registeredDate);
     $('#rank').val(data.rank);
-    $('#loginType').val(data.loginType.loginType);
+    $('#loginType').val(data.loginType.typeName);
     $('#photo').val(data.photo);
     
   });

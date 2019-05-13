@@ -24,8 +24,8 @@
 
 
   <association property="loginType" javaType="loginType">
-    <result column="login_type_id" property="no" />
-    <result column="login_type" property="loginType" />
+    <id column="login_type_id" property="no" />
+    <result column="type_name" property="typeName" />
  </association>
   </resultMap>
 
@@ -63,7 +63,6 @@
     select
 
     m.member_id,
-    l.login_type,
     m.name,
     m.email,
     m.nickname,
@@ -75,7 +74,7 @@
     m.phone_check,
     m.rank,
     m.photo,
-    l.login_type
+    l.type_name
 
     from member m, login_type l
     where
@@ -138,7 +137,6 @@
       <if test="tel != null">tel = #{tel},</if>
       <if test="rank != null">rank = #{rank},</if>
       <if test="phoneCheck != null">phone_check = #{phoneCheck},</if>
-      <if test="loginTypeNo != null">login_type_id = #{loginTypeNo},</if>
       <if test="photo != null">photo = #{photo}</if>
     </set>
     where

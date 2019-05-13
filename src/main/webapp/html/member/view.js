@@ -29,7 +29,7 @@ $('#add-btn').click(() => {
     phoneCheck: $('#phoneCheck').val(),
     tel: $('#tel').val(),
     rank: $('#rank').val(),
-    loginType: $('#loginType').val()
+    loginType: $('#loginTypeNo').val()
    
     
   },

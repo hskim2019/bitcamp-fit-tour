@@ -3,12 +3,14 @@ var param = location.href.split('?')[1];
 if (param) {
   $('h1').html('회원 조회');
   loadData(param.split('=')[1]);
+  $('#loginType').attr('readonly','');  
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
 } else {
   $('h1').html('새 회원');
+  
   var el = $('.bit-view-item');
   for (e of el) {
     e.style.display = 'none';

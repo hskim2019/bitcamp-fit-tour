@@ -103,7 +103,3 @@ function loadData(no) {
 
 
 
-
-
-
-

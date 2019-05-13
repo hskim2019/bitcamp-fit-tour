@@ -11,6 +11,7 @@ if (param) {
 } else {
   $('h1').html('새글');
   var el = $('.bit-view-item');
+  
   for (e of el) {
     e.style.display = 'none';
   }
@@ -69,4 +70,92 @@ $('#update-btn').click (() => {
   });
 });
 
+var Counter = function(quill, options) {
 
+  this.quill = quill;
+
+  this.options = options;
+
+  var container = document.querySelector(options.container);
+
+  var _this = this;
+
+  quill.on('text-change', function() {
+
+    var length = _this.calculate();
+
+    container.innerText = length + ' ' + options.unit + 's';
+
+  });
+
+};
+
+ 
+
+Counter.prototype.calculate = function() {
+
+  var text = this.quill.getText();
+
+  if (this.options.unit === 'word') {
+
+    return text.split(/\s+/).length;
+
+  } else {
+
+    return text.length;
+
+  }
+
+};
+
+ 
+
+Quill.register('modules/counter', Counter);
+
+ 
+
+var quill = new Quill('#editor', {
+
+  modules: {
+
+    counter: {
+
+      container: '#counter',
+
+      unit: 'word'
+
+    },
+
+    toolbar: [
+
+      [{ header: [1, 2, false] }],
+
+      ['bold', 'italic', 'underline'],
+
+      ['image', 'code-block']
+
+    ]
+
+  },
+
+ 
+
+  
+
+       placeholder: 'Compose an epic...',
+
+  theme: 'snow'  // or 'bubble'
+
+  
+
+});
+
+ 
+
+var counter = quill.getModule('counter');
+
+ 
+
+// We can now access calculate() directly
+
+console.log(counter.calculate(), 'words');

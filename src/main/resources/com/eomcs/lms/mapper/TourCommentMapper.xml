@@ -46,6 +46,7 @@
     on t.member_id = m.member_id
     where 
       tour_id = #{no}
+    order by tour_comment_id asc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>

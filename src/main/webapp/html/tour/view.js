@@ -49,7 +49,8 @@ function loadData(no) {
 
     controlNextComment(obj);
 
-    $(document.body).trigger('loaded-list');
+    $(document.body).trigger('addEventAddButton');
+    $(document.body).trigger('addEventUpdateDetailButton');
   });
 
 }
@@ -61,17 +62,14 @@ function controlNextComment(obj){
     $('#next-comment-btn').show();
     $(document.body).trigger('activate-next-comment');
   }
-  
-    
-    if (obj.tourComment.length){
-//    giveId();
-      a();
-    }
+
+  if (obj.tourComment.length){
+    showUpdateDeleteButton();
+  }
 }
 
-$(document.body).bind('loaded-list', () => {
-
-  //comment-add
+//comment-add
+$(document.body).bind('addEventAddButton', () => {
   $('#comment-add-button').off().click((e) => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
@@ -98,6 +96,7 @@ $(document.body).bind('loaded-list', () => {
               }
 
               $(trGenerator(obj)).appendTo(comment);
+              $(document.body).trigger('addEventUpdateDetailButton');
               pageNo = 1;
               controlNextComment(obj);
               $('#commentAmount').html('댓글수' + obj.commentAmount)
@@ -108,8 +107,13 @@ $(document.body).bind('loaded-list', () => {
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
+          
         });
   });
+});
+
+
+$(document.body).bind('addEventUpdateDetailButton', () => {
 
   //comment-delete
   $('.bit-comment-delete-btn').off().click((e) => {
@@ -140,8 +144,8 @@ $(document.body).bind('loaded-list', () => {
     $(e.target).next().hide();
     $(e.target).parent().append('<a href="#" >저장</a>  ');
     $(e.target).parent().append('<a href="#" >취소</a>');
-    
-    
+
+
     //comment-update-cancel
     $($(e.target).next().next().next()).off().click((e)=>{
       e.preventDefault();
@@ -192,12 +196,12 @@ $(document.body).bind('activate-next-comment', () => {
     $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo,
         function(obj) {
       $(trGenerator(obj)).appendTo(comment);
-      a();
+      showUpdateDeleteButton();
 
       if(pageNo >= obj.totalPage){
         $('#next-comment-btn').hide();
       }
-      $(document.body).trigger('loaded-list');
+      $(document.body).trigger('addEventUpdateDetailButton');
     });
 
   });
@@ -210,7 +214,7 @@ function giveId() {
   for(deleteButton of deleteButtons) {
     if ($(deleteButton).attr('id')) 
       continue;
-    
+
     var commentNoNode = $(deleteButton).parent().prev().prev().children().first();
     $(deleteButton).attr('id', 'delete' + commentNoNode.val());
 
@@ -227,18 +231,18 @@ function giveId() {
   }
 }
 
-function a() {
-  
+function showUpdateDeleteButton() {
+
   var memberNameNodes = $('.bit-member-name');
   for (memberNameNode of memberNameNodes) {
-    
+
     if(user.name == $(memberNameNode).html()) {
       console.log(user.name);
       console.log($(memberNameNode).html());
       $(memberNameNode).parent().next().children().show();
       giveId();
     }
-    
+
   }
 };
 

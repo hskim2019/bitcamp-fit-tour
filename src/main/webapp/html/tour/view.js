@@ -138,11 +138,12 @@ $(document.body).bind('loaded-list', () => {
 
     $(e.target).hide();
     $(e.target).next().hide();
-    $(e.target).parent().append('<a href="#" class="bit-comment-updateSave-btn">저장</a>  ');
-    $(e.target).parent().append('<a href="#" class="bit-comment-updateCancel-btn">취소</a>');
-
+    $(e.target).parent().append('<a href="#" >저장</a>  ');
+    $(e.target).parent().append('<a href="#" >취소</a>');
+    
+    
     //comment-update-cancel
-    $('.bit-comment-updateCancel-btn').off().click((e)=>{
+    $($(e.target).next().next().next()).off().click((e)=>{
       e.preventDefault();
       $(e.target).prev().prev().show();
       $(e.target).prev().prev().prev().show();
@@ -154,7 +155,7 @@ $(document.body).bind('loaded-list', () => {
     })
 
     //comment-update-save
-    $('.bit-comment-updateSave-btn').off().click((e)=>{
+    $($(e.target).next().next()).off().click((e)=>{
       e.preventDefault();
       $.post('../../app/json/tourcomment/update',
           {
@@ -205,23 +206,23 @@ $(document.body).bind('activate-next-comment', () => {
 //give delete-btn,update-btn id
 function giveId() {
 
-  var deleteBottons = $('.bit-comment-delete-btn');
-  for(deleteBotton of deleteBottons) {
-    if ($(deleteBotton).attr('id')) 
+  var deleteButtons = $('.bit-comment-delete-btn');
+  for(deleteButton of deleteButtons) {
+    if ($(deleteButton).attr('id')) 
       continue;
     
-    var commentNoNode = $(deleteBotton).parent().prev().prev().children().first();
-    $(deleteBotton).attr('id', 'delete' + commentNoNode.val());
+    var commentNoNode = $(deleteButton).parent().prev().prev().children().first();
+    $(deleteButton).attr('id', 'delete' + commentNoNode.val());
 
   }
 
-  var updateBottons = $('.bit-comment-update-btn');
-  for(updateBotton of updateBottons) {
-    if ($(updateBotton).attr('id')) 
+  var updateButtons = $('.bit-comment-update-btn');
+  for(updateButton of updateButtons) {
+    if ($(updateButton).attr('id')) 
       continue;
 
-    var commentNoNode = $(updateBotton).parent().prev().prev().children().first();
-    $(updateBotton).attr('id', 'update' + commentNoNode.val());
+    var commentNoNode = $(updateButton).parent().prev().prev().children().first();
+    $(updateButton).attr('id', 'update' + commentNoNode.val());
 
   }
 }

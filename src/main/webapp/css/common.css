@@ -34,6 +34,14 @@ div.container {
   margin: 0px 10px;
 }
 
+.bit-comment-update-btn{
+	display:none;
+}
+
+.bit-comment-delete-btn{
+  display:none;
+}
+
 #next-comment-btn {
 	font-size: 120%;
 }

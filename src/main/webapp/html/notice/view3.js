@@ -9,6 +9,7 @@ if (param) {
   }
 } else {
   $('h1').html('새글');
+  quilljsediterInit();
   var el = $('.bit-view-item');
 
   for (e of el) {
@@ -54,26 +55,6 @@ $('#update-btn').click (() => {
   });
 });
 
-var Counter = function(quill, options) {
-
-  this.quill = quill;
-
-  this.options = options;
-
-  var container = document.querySelector(options.container);
-
-  var _this = this;
-
-  quill.on('text-change', function() {
-
-    var length = _this.calculate();
-
-    container.innerText = length + ' ' + options.unit + 's';
-
-  });
-
-};
-
 $('#add-btn').click(() => {
   $.post('../../app/json/notice/add', {
 
@@ -92,47 +73,54 @@ $('#add-btn').click(() => {
   });
 });
 
-
-Counter.prototype.calculate = function() {
-
-  var delta =JSON.stringify(quill.getContents());
-  var text = this.quill.getText();
-  var quillHtml = quill.root.innerHTML.trim();
-
+function quilljsediterInit() {
+  var options = {
+      modules: {
+          toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block']
+          ]
+      },
+      placeholder: 'Compose an epic...',
+      theme: 'snow'
+  };
+  quill = new Quill('#editor', options);
   
+  quill.setContexts($('#content')); 
+  
+  quill.getModule('toolbar').addHandler('image', function() {
+      selectLocalImage();
+  });
+}
+function selectLocalImage() {
+  const input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.click();
 
-  if (this.options.unit === 'word') {
+  // Listen upload local image and save to server
+  input.onchange = function() {
+      const fd = new FormData();
+      const file = $(this)[0].files[0];
+      fd.append('image', file);
 
-    return text.split(/\s+/).length;
-
-  } else {
-
-    return text.length;
-  }
-};
-
-Quill.register('modules/counter', Counter);
-
-var quill = new Quill('#editor', {
-  modules: {
-    counter: {
-      container: '#counter',
-      unit: 'word'
-    },
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
-      ['image', 'code-block']
-      ]
-  },
-  placeholder: 'Compose an epic...',
-
-  theme: 'snow'  // or 'bubble'
-
-});
-
-var counter = quill.getModule('counter');
-
-//We can now access calculate() directly
-
-console.log(counter.calculate(), 'words');
+      $.ajax({
+          type: 'post',
+          enctype: 'multipart/form-data',
+          url: '/bitcamp-fit-tour/upload/',
+          data: fd,
+          processData: false,
+          contentType: false,
+          beforeSend: function(xhr) {
+              xhr.setRequestHeader($("#_csrf_header").val(), $("#_csrf").val());
+          },
+          success: function(data) {
+              const range = quill.getSelection();
+              quill.insertEmbed(range.index, 'image', '/bitcamp-fit-tour/upload/'+data);
+          },
+          error: function(err) {
+              console.error("Error ::: "+err);
+          }
+      });
+  };
+}

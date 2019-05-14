@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.lms.dao.ReservationDao">
+
+  <resultMap type="reservation" id="reservationMap">
+    <id column="reservation_id" property="no" />
+    <result column="reservation_date" property="reservationDate" />
+    <result column="payment_date" property="paymentDate" />
+     <result column="payment_id" property="paymentNo" />
+      <result column="requirement" property="requirement" />
+      <result column="tourist_tel" property="touristTel" />
+       <result column="personnel" property="personnel" />
+       <result column="tour_date" property="tourDate" />
+        <result column="status_id" property="statusNo" />
+         <result column="member_id" property="memberNo" />
+         <result column="tour_id" property="tourNo" />
+         
+         
+   
+  
+   
+
+
+  <association property="paymentStatus" javaType="paymentStatus">
+    <id column="status_id" property="no" />
+    <result column="status" property="status" />
+  
+ </association>
+ 
+   <association property="member" javaType="member">
+    <id column="member_id" property="no" />
+    <result column="name" property="name" />
+  
+ </association>
+  </resultMap>
+
+  <sql id="default-columns">
+    reservation_id,
+    reservation_date
+  </sql>
+
+  <select id="findAll" resultMap="reservationMap" parameterType="map">
+   select r.reservation_id, r.reservation_date,m.name,s.status
+from reservation r, member m, payment_status s
+    <where>
+      <if test="search != null">
+        <bind name="pattern1" value="'%' + search + '%'" />
+        m.name like #{pattern1}
+        or s.status like #{pattern1}
+        or r.reservation_date like #{pattern1}
+      </if>
+      and r.member_id = m.member_id
+and r.status_id = s.status_id
+    </where>
+   
+    <if test="#{size != null || rowNo != null}">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+
+
+
+  <select id="findByNo" resultMap="reservationMap" parameterType="int">
+    select
+
+    r.reservation_id,
+    r.tour_id,
+    m.name,
+    s.status,
+    r.tour_date,
+    r.personnel,
+    r.tourist_tel,
+    r.requirement,
+    r.payment_id,
+    r.payment_date,
+    r.reservation_date
+    
+    
+  
+   
+    from reservation r, payment_status s , member m
+    where
+    r.reservation_id = #{value}
+    and r.member_id = m.member_id
+    and r.status_id = s.status_id
+
+  </select>
+
+
+ 
+
+  <insert id="insert" parameterType="reservation">
+    insert into reservation(
+   tour_id,
+   member_id,
+   status_id,
+   tour_date,
+   personnel,
+   tourist_tel,
+   requirement,
+   payment_id)
+    values(
+    #{tourNo},
+    #{memberNo},
+    1,
+    #{tourDate},
+    #{personnel},
+    #{touristTel},
+    #{requirement},
+    #{paymentNo})
+  </insert>
+
+  <update id="update" parameterType="reservation">
+    update reservation
+    <set>
+      <if test="tourDate != null">tour_date = #{tourDate},</if>
+      <if test="personnel != null">personnel = #{personnel},</if>
+      <if test="touristTel != null">tourist_tel = #{touristTel},</if>
+      <if test="requirement != null"> requirement = #{requirement}</if>
+    
+    </set>
+    where
+    reservation_id = #{no}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    delete from reservation
+    where reservation_id = #{value}
+  </delete>
+
+  <select id="countAll" resultType="int" parameterType="string">
+    select count(*)
+    from reservation r, member m, payment_status s
+    <where>
+      <if test="_parameter != null">
+        <bind name="pattern1" value="'%' + _parameter + '%'" />
+          m.name like #{pattern1}
+        or s.status like #{pattern1}
+        or r.reservation_date like #{pattern1}
+      </if>
+    </where>
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+

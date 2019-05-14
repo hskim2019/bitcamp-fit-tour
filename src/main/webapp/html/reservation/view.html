@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>회원</title>
+  <title>예약</title>
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
@@ -15,117 +15,95 @@
 <h1></h1>
 <form>
   <div class="form-group row bit-view-item">
-    <label for="no" class="col-sm-2 col-form-label">번호</label>
+    <label for="no" class="col-sm-2 col-form-label">예약번호</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="no" 
              name='no' readonly>
     </div>
   </div>
  <div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">이메일</label>
+    <label for="tourNo" class="col-sm-2 col-form-label">상품번호</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="email">
+          id="tourNo" >
     </div>
   </div>
   
   <div class="form-group row">
-    <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="password">
-    </div>
-  </div>
-  
-    <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="name">
+          id="name" >
+    </div>
+  </div>
+  
+    <div class="form-group row bit-view-item">
+    <label for="status" class="col-sm-2 col-form-label">상태</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="status" readonly>
     </div>
   </div>
   
      <div class="form-group row">
-    <label for="nickname" class="col-sm-2 col-form-label">별명</label>
+    <label for="tourDate" class="col-sm-2 col-form-label">여행일</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="nickname">
+          id="tourDate">
     </div>
   </div>
   
     <div class="form-group row">
-    <label for="birth" class="col-sm-2 col-form-label">생년월일</label>
+    <label for="personnel" class="col-sm-2 col-form-label">여행인원</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="birth">
+          id="personnel">
     </div>
   </div>
   
       <div class="form-group row">
-    <label for="smsCheck" class="col-sm-2 col-form-label">sms 수신동의</label>
+    <label for="touristTel" class="col-sm-2 col-form-label">예약자 연락처</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="smsCheck">
+          id="touristTel">
     </div>
   </div>
   
    <div class="form-group row">
-    <label for="emailCheck" class="col-sm-2 col-form-label">email 수신동의</label>
+    <label for="requirement" class="col-sm-2 col-form-label">요청사항</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="emailCheck">
+          id="requirement">
     </div>
   </div>
   
   <div class="form-group row">
-    <label for="phoneCheck" class="col-sm-2 col-form-label">휴대폰인증여부</label>
+    <label for="paymentNo" class="col-sm-2 col-form-label">결제번호</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="phoneCheck">
+          id="paymentNo" >
     </div>
   </div>
   
     
   <div class="form-group row  bit-view-item">
-    <label for="registeredDate" class="col-sm-2 col-form-label">가입일</label>
+    <label for="paymentDate" class="col-sm-2 col-form-label">결제일</label>
     <div class="col-sm-10">
       <input type="text" readonly class="form-control" 
-          id="registeredDate" >
+          id="paymentDate" readonly>
     </div>
   </div>
   
-    <div class="form-group row">
-    <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
+    <div class="form-group row bit-view-item">
+    <label for="reservationDate" class="col-sm-2 col-form-label">예약일</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" 
-          id="tel" >
+          id="reservationDate" readonly >
     </div>
   </div>
 
   
-   <div class="form-group row">
-    <label for="rank" class="col-sm-2 col-form-label">등급</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="rank" >
-    </div>
-  </div>
   
-   <div class="form-group row">
-    <label for="typeName" class="col-sm-2 col-form-label">로그인유형번호</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="typeName">
-    </div>
-  </div>
-  
-    <div class="form-group row  bit-view-item">
-    <label for="photo" class="col-sm-2 col-form-label">사진</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="photo" >
-    </div>
-  </div>
   <!-- 목록삭제  -->
   <div class="form-group row">
     <div class="col-sm-10">

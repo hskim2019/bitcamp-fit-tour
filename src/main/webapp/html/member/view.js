@@ -3,7 +3,7 @@ var param = location.href.split('?')[1];
 if (param) {
   $('h1').html('회원 조회');
   loadData(param.split('=')[1]);
-  $('#loginType').attr('readonly','');  
+  $('#typeName').attr('readonly','');  
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
@@ -31,7 +31,7 @@ $('#add-btn').click(() => {
     phoneCheck: $('#phoneCheck').val(),
     tel: $('#tel').val(),
     rank: $('#rank').val(),
-    loginTypeNo: $('#loginType').val()
+    loginTypeNo: $('#typeName').val()
    
     
   },
@@ -95,7 +95,7 @@ function loadData(no) {
     $('#tel').val(data.tel);
     $('#registeredDate').val(data.registeredDate);
     $('#rank').val(data.rank);
-    $('#loginType').val(data.loginType.typeName);
+    $('#typeName').val(data.loginType.typeName);
     $('#photo').val(data.photo);
     
   });

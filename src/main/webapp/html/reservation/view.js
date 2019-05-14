@@ -1,15 +1,17 @@
 var param = location.href.split('?')[1];
 
 if (param) {
-  $('h1').html('회원 조회');
+  $('h1').html('예약 조회');
   loadData(param.split('=')[1]);
-  $('#loginType').attr('readonly','');  
+  $('#tourNo').attr('readonly','');
+  $('#name').attr('readonly','');
+  $('#paymentNo').attr('readonly','');
   var el = $('.bit-new-item');
   for (e of el) {
     e.style.display = 'none';
   }
 } else {
-  $('h1').html('새 회원');
+  $('h1').html('새 예약');
   
   var el = $('.bit-view-item');
   for (e of el) {
@@ -19,19 +21,16 @@ if (param) {
 
 
 $('#add-btn').click(() => {
-  $.post('../../app/json/member/add', {
+  $.post('../../app/json/reservation/add', {
 
-    email: $('#email').val(),
-    password: $('#password').val(),
-    name: $('#name').val(),
-    nickname: $('#nickname').val(),
-    birth: $('#birth').val(),
-    smsCheck: $('#smsCheck').val(),
-    emailCheck: $('#emailCheck').val(),
-    phoneCheck: $('#phoneCheck').val(),
-    tel: $('#tel').val(),
-    rank: $('#rank').val(),
-    loginTypeNo: $('#loginType').val()
+    tourNo: $('#tourNo').val(),
+    memberNo: $('#name').val(),
+    statusNo: $('#statusNo').val(),
+    tourDate: $('#tourDate').val(),
+    personnel: $('#personnel').val(),
+    touristTel: $('#touristTel').val(),
+    requirement: $('#requirement').val(),
+    paymentNo: $('#paymentNo').val()
    
     
   },
@@ -45,7 +44,7 @@ $('#add-btn').click(() => {
   });
 });
 $('#delete-btn').click (() => {
-  $.getJSON('../../app/json/member/delete?no=' + param.split('=')[1], 
+  $.getJSON('../../app/json/reservation/delete?no=' + param.split('=')[1], 
       function(data) {
     
     if(data.status == 'success') {
@@ -58,18 +57,12 @@ $('#delete-btn').click (() => {
 
 $('#update-btn').click (() => {
   
-  $.post('../../app/json/member/update?no=' + param.split('=')[1],{
-    email: $('#email').val(),
-    password: $('#password').val(),
-    name: $('#name').val(),
-    nickname: $('#nickname').val(),
-    birth: $('#birth').val(),
-    smsCheck: $('#smsCheck').val(),
-    emailCheck: $('#emailCheck').val(),
-    phoneCheck: $('#phoneCheck').val(),
-    tel: $('#tel').val(),
-    rank: $('#rank').val(),
-    photo: $('#photo').val()
+  $.post('../../app/json/reservation/update?no=' + param.split('=')[1],{
+    tourDate: $('#tourDate').val(),
+    personnel: $('#personnel').val(),
+    touristTel: $('#touristTel').val(),
+    requirement: $('#requirement').val()
+    
   },
   function(data) {
    
@@ -82,21 +75,20 @@ $('#update-btn').click (() => {
 });
 
 function loadData(no) {
-  $.getJSON('../../app/json/member/detail?no=' + param.split('=')[1], 
+  $.getJSON('../../app/json/reservation/detail?no=' + param.split('=')[1], 
       function(data) {
     $('#no').val(data.no);
-    $('#email').val(data.email);
-    $('#name').val(data.name);
-    $('#nickname').val(data.nickname);
-    $('#birth').val(data.birth);
-    $('#smsCheck').val(data.smsCheck);
-    $('#emailCheck').val(data.emailCheck);
-    $('#phoneCheck').val(data.phoneCheck);
-    $('#tel').val(data.tel);
-    $('#registeredDate').val(data.registeredDate);
-    $('#rank').val(data.rank);
-    $('#loginType').val(data.loginType.typeName);
-    $('#photo').val(data.photo);
+    $('#tourNo').val(data.tourNo);
+    $('#name').val(data.member.name);
+    $('#status').val(data.paymentStatus.status);
+    $('#tourDate').val(data.tourDate);
+    $('#personnel').val(data.personnel);
+    $('#touristTel').val(data.touristTel);
+    $('#requirement').val(data.requirement);
+    $('#paymentNo').val(data.paymentNo);
+    $('#paymentDate').val(data.paymentDate);
+    $('#reservationDate').val(data.reservationDate);
+ 
     
   });
 };

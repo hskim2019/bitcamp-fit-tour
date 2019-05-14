@@ -12,7 +12,7 @@ var trGenerator = Handlebars.compile(templateSrc);
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
   
-  $.getJSON('../../app/json/member/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../../app/json/reservation/list?pageNo=' + pn + '&pageSize=' + pageSize, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;

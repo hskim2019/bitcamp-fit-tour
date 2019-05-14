@@ -20,13 +20,14 @@ public class Reservation implements Cloneable, Serializable {
   private Date paymentDate;//결제일
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date reservationDate;//예약일
-  private Reservation reservation;
+  private PaymentStatus paymentStatus;
   private Member member;
-  public Reservation getReservation() {
-    return reservation;
+
+  public PaymentStatus getPaymentStatus() {
+    return paymentStatus;
   }
-  public void setReservation(Reservation reservation) {
-    this.reservation = reservation;
+  public void setPaymentStatus(PaymentStatus paymentStatus) {
+    this.paymentStatus = paymentStatus;
   }
   public int getNo() {
     return no;
@@ -106,8 +107,8 @@ public class Reservation implements Cloneable, Serializable {
     return "Reservation [no=" + no + ", tourNo=" + tourNo + ", memberNo=" + memberNo + ", statusNo="
         + statusNo + ", tourDate=" + tourDate + ", personnel=" + personnel + ", touristTel="
         + touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo
-        + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate + ", reservation="
-        + reservation + ", member=" + member + "]";
+        + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
+        + ", paymentStatus=" + paymentStatus + ", member=" + member + "]";
   }
   
   

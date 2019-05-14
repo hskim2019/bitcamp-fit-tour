@@ -11,7 +11,7 @@
     <result column="reservation_date" property="reservationDate" />
     <result column="payment_date" property="paymentDate" />
      <result column="payment_id" property="paymentNo" />
-      <result column="requirment" property="requirement" />
+      <result column="requirement" property="requirement" />
       <result column="tourist_tel" property="touristTel" />
        <result column="personnel" property="personnel" />
        <result column="tour_date" property="tourDate" />
@@ -82,7 +82,7 @@ and r.status_id = s.status_id
     
   
    
-    from reservation r, payment_status s 
+    from reservation r, payment_status s , member m
     where
     r.reservation_id = #{value}
     and r.member_id = m.member_id
@@ -101,38 +101,27 @@ and r.status_id = s.status_id
    tour_date,
    personnel,
    tourist_tel,
-   requirment,
-   payment_id,
-   payment_date,
-   reservation_date)
+   requirement,
+   payment_id)
     values(
-    #{loginTypeNo},
-    #{email},
-    password(#{password}),
-    #{name},
-    #{nickname},
-    #{birth},
-    #{smsCheck},
-    #{emailCheck},
-    #{tel},
-    #{phoneCheck},
-    #{rank})
+    #{tourNo},
+    #{memberNo},
+    1,
+    #{tourDate},
+    #{personnel},
+    #{touristTel},
+    #{requirement},
+    #{paymentNo})
   </insert>
 
   <update id="update" parameterType="reservation">
     update reservation
     <set>
-      <if test="name != null">name = #{name},</if>
-      <if test="email != null">email = #{email},</if>
-      <if test="password != null">password = password(#{password}),</if>
-      <if test="nickname != null"> nickname = #{nickname},</if>
-      <if test="birth != null"> birth = #{birth},</if>
-      <if test="smsCheck != null">sms_check = #{smsCheck},</if>
-      <if test="emailCheck != null">email_check = #{emailCheck},</if>
-      <if test="tel != null">tel = #{tel},</if>
-      <if test="rank != null">rank = #{rank},</if>
-      <if test="phoneCheck != null">phone_check = #{phoneCheck},</if>
-      <if test="photo != null">photo = #{photo}</if>
+      <if test="tourDate != null">tour_date = #{tourDate},</if>
+      <if test="personnel != null">personnel = #{personnel},</if>
+      <if test="touristTel != null">tourist_tel = #{touristTel},</if>
+      <if test="requirement != null"> requirement = #{requirement}</if>
+    
     </set>
     where
     reservation_id = #{no}
@@ -145,13 +134,13 @@ and r.status_id = s.status_id
 
   <select id="countAll" resultType="int" parameterType="string">
     select count(*)
-    from reservation
+    from reservation r, member m, payment_status s
     <where>
       <if test="_parameter != null">
         <bind name="pattern1" value="'%' + _parameter + '%'" />
-        name like #{pattern1}
-        or email like #{pattern1}
-        or tel like #{pattern1}
+          m.name like #{pattern1}
+        or s.status like #{pattern1}
+        or r.reservation_date like #{pattern1}
       </if>
     </where>
   </select>

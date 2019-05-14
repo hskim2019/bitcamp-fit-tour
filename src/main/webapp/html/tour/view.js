@@ -3,7 +3,7 @@ templateSrc = $('#comment-template').html(),
 comment = $('#comment'),
 totalPage,
 pageNo = 1,
-deleteCount = 0,
+addDeleteCount = 0,
 user;
 
 if(sessionStorage.getItem('loginUser') != undefined){
@@ -54,6 +54,7 @@ function loadData(no) {
 
     $(document.body).trigger('addEventAddButton');
     $(document.body).trigger('addEventUpdateDetailButton');
+    $(document.body).trigger('addEventRecommentListButton');
   });
 
 }
@@ -77,7 +78,7 @@ $(document.body).bind('addEventAddButton', () => {
     e.preventDefault();
     var tourNo = location.href.split('?')[1].split('=')[1];
     var content = $('#comment-add').val();
-
+    addDeleteCount--;
     $.post('../../app/json/tourcomment/add',
         {
       tourNo : tourNo,
@@ -91,7 +92,7 @@ $(document.body).bind('addEventAddButton', () => {
             var no = obj.no;
             var name = user.name;
             var content = $('#comment-add').val();
-            var d = js_yyyy_mm_dd_hh_mm();
+            var d = now_yyyy_mm_dd_hh_mm();
 
             var obj ={
                 'tourComment' : [{
@@ -135,7 +136,7 @@ $(document.body).bind('addEventUpdateDetailButton', () => {
         
         $('#commentAmount').html('댓글수' + nextCommentAmount);
         
-        deleteCount++;
+        addDeleteCount++;
         
       } else {
         alert('삭제 실패입니다!\n' + obj.message)
@@ -207,7 +208,7 @@ $(document.body).bind('activate-next-comment', () => {
     var no = param.split('=')[1];
     
     console.log(pageNo);
-    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo + '&deleteCount=' + deleteCount,
+    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo + '&addDeleteCount=' + addDeleteCount,
         function(obj) {
       $(trGenerator(obj)).appendTo(comment);
       showUpdateDeleteButton();
@@ -220,6 +221,27 @@ $(document.body).bind('activate-next-comment', () => {
 
   });
 });
+
+$(document.body).bind('addEventRecommentListButton', () => {
+  $('#bit-recomment-list-btn').off().click((e)=>{
+    e.preventDefault();
+    pageNo++;
+    var no = param.split('=')[1];
+    
+    console.log(pageNo);
+    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo + '&addDeleteCount=' + addDeleteCount,
+        function(obj) {
+      $(trGenerator(obj)).appendTo(comment);
+      showUpdateDeleteButton();
+      
+      if(pageNo >= window.totalPage){
+        $('#next-comment-btn').hide();
+      }
+      $(document.body).trigger('addEventUpdateDetailButton');
+    });
+  });
+});
+
 
 //give delete-btn,update-btn id
 function giveId() {
@@ -248,7 +270,6 @@ function giveId() {
 //show Update,Delte Button
 function showUpdateDeleteButton() {
 
-
   if(user == undefined) 
     return;
 
@@ -264,8 +285,17 @@ function showUpdateDeleteButton() {
   }
 };
 
+//function showReCommentAddButton() {
+//  
+//  if(user == undefined){
+//    alert('로그인이 되어있지 않습니다.');
+//    location.href = "/bitcamp-fit-tour/html/auth/login.html";
+//  }
+//    
+//}
 
-function js_yyyy_mm_dd_hh_mm () {
+
+function now_yyyy_mm_dd_hh_mm () {
   now = new Date();
   year = "" + now.getFullYear();
   month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }

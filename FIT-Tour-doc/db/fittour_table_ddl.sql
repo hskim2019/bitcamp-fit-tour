@@ -121,7 +121,7 @@ phone_check     BOOLEAN      NOT NULL COMMENT '휴대폰인증여부', -- 휴대
 tel             VARCHAR(50)  NOT NULL COMMENT '전화번호', -- 전화번호
 registered_date DATETIME     NOT NULL DEFAULT now() COMMENT '가입일', -- 가입일
 rank            INTEGER      NOT NULL COMMENT '등급', -- 등급
-photo           VARCHAR(255) NOT NULL DEFAULT default.jpg COMMENT '사진' -- 사진
+photo           VARCHAR(255) NOT NULL DEFAULT 'default.jpg' COMMENT '사진' -- 사진
 )
 COMMENT '회원';
 

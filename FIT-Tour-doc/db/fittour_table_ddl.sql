@@ -337,7 +337,7 @@ personnel        INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
 tourist_tel      VARCHAR(50) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
 requirment       TEXT        NULL     COMMENT '요청사항', -- 요청사항
 payment_id       INTEGER     NOT NULL COMMENT '결제번호', -- 결제번호
-payment_date     DATETIME    NOT NULL DEFAULT now() COMMENT '결제일', -- 결제일
+payment_date     DATETIME    NULL     DEFAULT now() COMMENT '결제일', -- 결제일
 reservation_date DATETIME    NOT NULL DEFAULT now() COMMENT '예약일' -- 예약일
 )
 COMMENT '예약';
@@ -723,7 +723,7 @@ MODIFY COLUMN template_review_comment_id INTEGER NOT NULL AUTO_INCREMENT COMMENT
 -- 로그인유형
 CREATE TABLE login_type (
 login_type_id INTEGER     NOT NULL COMMENT '로그인유형번호', -- 로그인유형번호
-type_name    VARCHAR(50) NOT NULL COMMENT '로그인유형' -- 로그인유형
+type_name     VARCHAR(50) NOT NULL COMMENT '로그인유형' -- 로그인유형
 )
 COMMENT '로그인유형';
 
@@ -737,7 +737,7 @@ login_type_id -- 로그인유형번호
 -- 로그인유형 유니크 인덱스
 CREATE UNIQUE INDEX UIX_login_type
 ON login_type ( -- 로그인유형
-login_type ASC -- 로그인유형
+type_name ASC -- 로그인유형
 );
 
 ALTER TABLE login_type

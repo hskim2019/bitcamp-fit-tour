@@ -1,11 +1,14 @@
 var param = location.href.split('?')[1],
 templateSrc = $('#comment-template').html(),
 comment = $('#comment'),
-pageNo = 1;
+totalPage,
+pageNo = 1,
+deleteCount = 0,
+user;
 
 if(sessionStorage.getItem('loginUser') != undefined){
-  var user = JSON.parse(sessionStorage.getItem('loginUser'));
-}
+  user = JSON.parse(sessionStorage.getItem('loginUser'));
+} 
 
 
 var trGenerator = Handlebars.compile(templateSrc);
@@ -32,7 +35,6 @@ function loadData(no) {
 
   $.getJSON('../../app/json/tour/detail?no=' + no,
       function(obj) {
-
     $('#title').val(obj.tour.title);
     $('#subHeading').val(obj.tour.subHeading);
     $('#content').val(obj.tour.content);
@@ -46,7 +48,8 @@ function loadData(no) {
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
     $('#commentAmount').html($('#commentAmount').html()+obj.commentAmount);
-
+    totalPage = obj.totalPage;
+      
     controlNextComment(obj);
 
     $(document.body).trigger('addEventAddButton');
@@ -85,29 +88,33 @@ $(document.body).bind('addEventAddButton', () => {
         }, 
         function(obj) {
           if (obj.status == 'success') {
-            $.post('../../app/json/tourcomment/list',{
-              tourNo : tourNo
-            },
-            function(obj) {
+            var no = obj.no;
+            var name = user.name;
+            var content = $('#comment-add').val();
+            var d = js_yyyy_mm_dd_hh_mm();
 
-              var el = $('#comment').contents();
-              for(e of el){
-                e.remove();
-              }
+            var obj ={
+                'tourComment' : [{
+                  'no': no,
+                  'content': content,
+                  'createdDate' : d,
+                  'member' : {name: name}
+                }]
+            };
 
-              $(trGenerator(obj)).appendTo(comment);
-              $(document.body).trigger('addEventUpdateDetailButton');
-              pageNo = 1;
-              controlNextComment(obj);
-              $('#commentAmount').html('댓글수' + obj.commentAmount)
-              $('#comment-add').val('');
-
-            });
+            $(trGenerator(obj)).prependTo(comment);
+            $(document.body).trigger('addEventUpdateDetailButton');
+            showUpdateDeleteButton();
+            var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
+                nextCommentAmount =commentAmount + 1
+                
+            $('#commentAmount').html('댓글수' + nextCommentAmount);
+            $('#comment-add').val('');
 
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
-          
+
         });
   });
 });
@@ -118,11 +125,18 @@ $(document.body).bind('addEventUpdateDetailButton', () => {
   //comment-delete
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
-    $.getJSON('../../app/json/tourcomment/delete?no=' + $(e.target).attr('id').replace(/[^0-9]/g,""),
+    var no = $(e.target).attr('id').replace(/[^0-9]/g,"");
+    $.getJSON('../../app/json/tourcomment/delete?no=' + no,
         function(obj) {
       if (obj.status == 'success') {
-        location.reload(true);
-
+        $(e.target).parent().parent().remove();
+        var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
+        nextCommentAmount =commentAmount + -1;
+        
+        $('#commentAmount').html('댓글수' + nextCommentAmount);
+        
+        deleteCount++;
+        
       } else {
         alert('삭제 실패입니다!\n' + obj.message)
       }
@@ -190,15 +204,15 @@ $(document.body).bind('activate-next-comment', () => {
   $('#next-comment-btn').off().click((e)=>{
     e.preventDefault();
     pageNo++;
-    console.log(pageNo);
     var no = param.split('=')[1];
-
-    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo,
+    
+    console.log(pageNo);
+    $.getJSON('../../app/json/tour/detail?no=' + no + '&pageNo=' + pageNo + '&deleteCount=' + deleteCount,
         function(obj) {
       $(trGenerator(obj)).appendTo(comment);
       showUpdateDeleteButton();
-
-      if(pageNo >= obj.totalPage){
+      
+      if(pageNo >= window.totalPage){
         $('#next-comment-btn').hide();
       }
       $(document.body).trigger('addEventUpdateDetailButton');
@@ -231,18 +245,33 @@ function giveId() {
   }
 }
 
+//show Update,Delte Button
 function showUpdateDeleteButton() {
+
+
+  if(user == undefined) 
+    return;
 
   var memberNameNodes = $('.bit-member-name');
   for (memberNameNode of memberNameNodes) {
 
     if(user.name == $(memberNameNode).html()) {
-      console.log(user.name);
-      console.log($(memberNameNode).html());
+
       $(memberNameNode).parent().next().children().show();
       giveId();
     }
 
   }
 };
+
+
+function js_yyyy_mm_dd_hh_mm () {
+  now = new Date();
+  year = "" + now.getFullYear();
+  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+  hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+  minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+  return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+}
 

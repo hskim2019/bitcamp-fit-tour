@@ -35,11 +35,17 @@ public class TourCommentServiceImpl implements TourCommentService {
   }
   
   @Override
-  public List<TourComment> get(int no, int pageNo, int pageSize) {
+  public List<TourComment> get(int no, int pageNo, int pageSize, int deleteCount) {
     HashMap<String,Object> params = new HashMap<>();
     params.put("no", no);
     params.put("size", pageSize);
-    params.put("rowNo", (pageNo - 1) * pageSize);
+    
+    
+//    if (pageNo == 2 && deleteCount == 3) {
+//      deleteCount = 0;
+//    }
+    
+    params.put("rowNo", ((pageNo - 1) * pageSize) - deleteCount);
     List<TourComment> tourComment = tourCommentDao.findByTourNo(params);
     return tourComment;
   }

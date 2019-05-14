@@ -24,6 +24,7 @@ public class TourCommentController {
     try {
       tourCommentService.add(tourComment);
       content.put("status", "success");
+      content.put("no", tourComment.getNo());
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -52,7 +53,8 @@ public class TourCommentController {
   @PostMapping("list")
   public Object list(int tourNo,
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize) {
+      @RequestParam(defaultValue="3") int pageSize,
+      @RequestParam(defaultValue="0") int deleteCount) {
 
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
@@ -70,14 +72,16 @@ public class TourCommentController {
         totalPage++;
     }
     
-    if (pageNo < 1) 
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
+    
+    
+//    if (pageNo < 1) 
+//      pageNo = 1;
+//    else if (pageNo > totalPage)
+//      pageNo = totalPage;
     
 
     HashMap<String, Object> map = new HashMap<>();
-    List<TourComment> tourComments = tourCommentService.get(tourNo, pageNo, pageSize);
+    List<TourComment> tourComments = tourCommentService.get(tourNo, pageNo, pageSize, deleteCount);
     int commentAmount = tourCommentService.countCommentbyTourNo(tourNo);
     
     map.put("pageNo", pageNo);

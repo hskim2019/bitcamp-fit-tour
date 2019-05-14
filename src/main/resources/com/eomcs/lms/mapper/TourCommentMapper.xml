@@ -46,14 +46,14 @@
     on t.member_id = m.member_id
     where 
       tour_id = #{no}
-    order by tour_comment_id asc
+    order by tour_comment_id desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
   </select>
   
   <!-- insert comment -->
-  <insert id="insert" parameterType="tourComment" >
+  <insert id="insert" parameterType="tourComment" useGeneratedKeys="true"  keyProperty="no" >
     insert into tour_comment(member_id, tour_id, ranking, level, content) 
     values(#{memberNo},#{tourNo},#{order},#{level},#{content})
   </insert>

@@ -103,11 +103,9 @@
   
     
   <div class="form-group row bit-invisible" id="comment-textarea" >
-    <div class="col-sm-10">
-      <textarea id="comment-add" name="content" cols ="65" rows='3'></textarea>
-    </div>
-    <div class="col-sm-2">
-      <button type="button" id="comment-add-button" class="btn btn-primary">등록</button>
+    <div class="col-sm-12">
+      <input type="text" id="comment-add" class="col-sm-11" style="height:60px;"  name="content" >
+      <button type="button" id="comment-add-button" class="btn btn-primary col-sm-0">등록</button>
     </div>
   </div>
   
@@ -137,23 +135,24 @@
     </div>
 
     <div class="col-sm-10">
-      <span class="bit-member-name col-sm-0">{{member.name}}</span> {{createdDate}}
+      <span class="bit-member col-sm-0" id="{{member.no}}">{{member.name}}</span> {{createdDate}}
     </div>
 
     <div class="col-sm-2">
-      <a href="#" class="bit-comment-update-btn">수정</a> 
-      <a href="#" class="bit-comment-delete-btn">삭제</a>
+      <a href="#" class="bit-comment-update-btn bit-invisible">수정</a> 
+      <a href="#" class="bit-comment-delete-btn bit-invisible">삭제</a>
     </div>
 
     <div class="col-sm-12">
       <input type="text" readonly class="form-control-plaintext" value={{content}}>
     </div>
 
-    <div class="col-sm-10">
-      <a href="#" class="bit-recomment-list-btn bit-invisible">답글보기</a>
+    <div class="col-sm-12">
+      <button type="button" class="bit-recomment-add-btn bit-invisible">답글</a>
     </div>
-    <div class="col-sm-2">
-      <a href="#" class="bit-recomment-add-btn bit-invisible" id="comment-reply-button">답글</a>
+
+    <div class="col-sm-12">
+      <a href="#" class="bit-recomment-list-btn bit-invisible">답글보기</a>
     </div>
 
     <div class="col-sm-12"><hr <hr style="border: solid 1px blue;"></div> 

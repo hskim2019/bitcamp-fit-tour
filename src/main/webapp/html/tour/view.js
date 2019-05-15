@@ -3,7 +3,8 @@ var param = location.href.split('?')[1],
     templateSrc = $('#comment-template').html(),
     trGenerator = Handlebars.compile(templateSrc),
     pageNo = 1,
-    addDeleteCount = 0;
+    addDeleteCount = 0,
+    storage = {};
     
 
 
@@ -48,10 +49,10 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
         '&originCommentNo=' + originCommentNo,
       function(obj) {
     $(trGenerator(obj)).appendTo($('#comment'));
-    showUpdateDeleteButton();
-    showReCommentAddButton();
     commentAmountUpdate(obj.commentAmount, true);
+    showUpdateDeleteButton();
     showReCommentListButton();
+    showReCommentAddButton();
     if(user){
       $('#comment-textarea').removeClass('bit-invisible');
       $(document.body).trigger('addEventAddButton');
@@ -63,22 +64,21 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
 
 //Show Update,Delete Button
 function showUpdateDeleteButton() {
-
   if(user == undefined) 
     return;
 
-  var memberNameNodes = $('.bit-member-name');
-  for (memberNameNode of memberNameNodes) {
-
-  if(user.name == $(memberNameNode).html()) {
-    $(memberNameNode).parent().next().children().show();
-      giveDeleteUdpateBtnId();
+  var memberNodes = $('.bit-member');
+  for (memberNode of memberNodes) {
+    
+  if(user.no ==  $(memberNode).attr('id')) {
+    $(memberNode).parent().next().children().show();
+      giveUdpateDeleteBtnId();
     }
   }
 };
 
 //Give Update,Delete Button Id
-function giveDeleteUdpateBtnId() {
+function giveUdpateDeleteBtnId() {
 
   var deleteButtons = $('.bit-comment-delete-btn');
   for(deleteButton of deleteButtons) {
@@ -128,13 +128,12 @@ $(document.body).bind('addEventAddButton', () => {
       }, 
       function(obj) {
         if (obj.status == 'success') {
-          
           var newComment ={
             'tourComment' : [{
             'no': obj.no,
             'content': $('#comment-add').val(),
             'createdDate' : now_yyyy_mm_dd_hh_mm(),
-            'member' : {name: user.name}
+            'member' : {name: user.name, no: user.no}
             }]
           };
           
@@ -260,7 +259,10 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
         '&addDeleteCount=' + addDeleteCount + 
         '&originCommentNo=' + originCommentNo,
       function(obj) {
-        console.log(obj);
+        for(tourComment of obj.tourComment){
+          tourComment.member.name = '　└─　' + tourComment.member.name
+          tourComment.content = '　　　　' + tourComment.content
+        }
         $(ReCommnetListButton).parent().parent().after(trGenerator(obj));
         showUpdateDeleteButton();
     if(user){
@@ -273,107 +275,98 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
 
 //Show ReCommentListButton
 function showReCommentListButton() {
-  var commentRows = $('.commentRow');
-  console.log(commentRows);
   
-  for(commentRow of commentRows){
-    var commentNo = $(commentRow).children().first().children().first().val();
+  for(commentRow of $('.commentRow')){
     
+    var commentNo = $(commentRow).children().first().children().first().val();
     $.ajaxSetup({async:false});
     $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + commentNo,
        function(obj) {
          if(obj.commentAmount != 0){
-           var ReCommentListBtn = $(commentRow).children().eq(4).children().first();
-             $(ReCommentListBtn).removeClass('bit-invisible');
-             $(ReCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
+           var reCommentListBtn = $(commentRow).children().eq(5).children().first();
+             $(reCommentListBtn).removeClass('bit-invisible');
+             $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
+             
            }
          });
   }
-  $.ajaxSetup({async:true});
   
-//  $('.bit-recomment-list-btn').removeClass('bit-invisible');
-//  if(user){
-//    $(document.body).trigger('addEventReCommentListButton');
-//    
-//  }
-}
+  $.ajaxSetup({async:true});
+  $(document.body).trigger('addEventReCommentListButton');
 
+}
 
 //AddEvnet ReCommnetListButton
 $(document.body).bind('addEventReCommentListButton', () => {
+  
   $('.bit-recomment-list-btn').off().click((e)=>{
     e.preventDefault();
+    $(e.target).hide();
     var originCommentNo = $(e.target).parent().parent().children().first().children().first().val();
-    reCommentList(tourNo, recommentPageNo, recommentAddDeleteCount, originCommentNo, e.target);
+    reCommentList(tourNo, 1, 0, originCommentNo, e.target);
     
   });
 });
 
 
-
 //Show ReCommentAddButton
 function showReCommentAddButton() {
-  
   if(user){
     $('.bit-recomment-add-btn').removeClass('bit-invisible');
     $(document.body).trigger('addEventReCommentAddButton');
   }
 }
 
+//AddEvnet ReCommentAddButton
+$(document.body).bind('addEventReCommentAddButton', () => {
+  
+  $('.bit-recomment-add-btn').off().click((e)=>{
+    $('.bit-recomment-add-btn').off();
+    e.preventDefault();
+    $('<div class="col-sm-12" ><input type="text" name="recommentContent" class="col-sm-11" >' +
+          '<button type="button" class="btn btn-primary col-sm-0">등록</button>')
+          .insertAfter($(e.target).parent());
+  });
+});
 
-////addEventReplyButton
-//$(document.body).bind('addEventReplyButton', () => {
-//$('#comment-reply-button').off().click((e) => {
-//  e.preventDefault();
-//  if(user == undefined) {
-//    location.href = "/bitcamp-fit-tour/html/auth/login.html";
-//  }
-//  
-//  var tourNo = location.href.split('?')[1].split('=')[1];
-//  var content = $('#comment-add').val();
-//  addDeleteCount--;
-//  $.post('../../app/json/tourcomment/add',
-//      {
-//    tourNo : tourNo,
-//    memberNo : user.no,
-//    originCommentNo : 0,
-//    level : 2,
-//    content : content
-//      }, 
-//      function(obj) {
-//        if (obj.status == 'success') {
-//          var no = obj.no;
-//          var name = user.name;
-//          var content = $('#comment-add').val();
-//          var d = now_yyyy_mm_dd_hh_mm();
-//
-//          var obj ={
-//              'tourComment' : [{
-//                'no': no,
-//                'content': content,
-//                'createdDate' : d,
-//                'member' : {name: name}
-//              }]
-//          };
-//
-//          $(trGenerator(obj)).prependTo(comment);
-//          $(document.body).trigger('addEventUpdateDeleteButton');
-//          showUpdateDeleteButton();
-//          var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
-//              nextCommentAmount =commentAmount + 1
-//              
-//          $('#commentAmount').html('댓글수' + nextCommentAmount);
-//          $('#comment-add').val('');
-//
-//        } else {
-//          alert('등록 실패입니다!\n' + obj.message)
-//        }
-//
-//      });
-//});
-//});  // addEventReplyButton
+//AddEvent Comment Add Button
+$(document.body).bind('addEventRecommentAddButton', () => {
+  $('#comment-add-button').off().click((e) => {
+    e.preventDefault();
+    $.post('../../app/json/tourcomment/add',
+      {
+        tourNo : tourNo,
+        memberNo : user.no,
+        parentNo : 0,
+        level : 1,
+        content : $('#comment-add').val()
+      }, 
+      function(obj) {
+        if (obj.status == 'success') {
+          var newComment ={
+            'tourComment' : [{
+            'no': obj.no,
+            'content': $('#comment-add').val(),
+            'createdDate' : now_yyyy_mm_dd_hh_mm(),
+            'member' : {name: user.name, no: user.no}
+            }]
+          };
+          
+          $(trGenerator(newComment)).prependTo($('#comment'));
+          showUpdateDeleteButton();
+          $(document.body).trigger('addEventUpdateDeleteButton');
+          commentAmountUpdate(1, false);
+          $('#comment-add').val('');
+          addDeleteCount--;
+          checkMoreComment();
+          } else {
+            alert('등록 실패입니다!\n' + obj.message)
+          }
+    });
+  });
+});
 
-//Print current time yyyy_mm_dd_hh_mm format
+
 
 function now_yyyy_mm_dd_hh_mm () {
   now = new Date();
@@ -385,3 +378,58 @@ function now_yyyy_mm_dd_hh_mm () {
   return year + "-" + month + "-" + day + " " + hour + ":" + minute;
 }
 
+
+
+////addEventReplyButton
+//$(document.body).bind('addEventReplyButton', () => {
+//$('#comment-reply-button').off().click((e) => {
+//e.preventDefault();
+//if(user == undefined) {
+//  location.href = "/bitcamp-fit-tour/html/auth/login.html";
+//}
+//
+//var tourNo = location.href.split('?')[1].split('=')[1];
+//var content = $('#comment-add').val();
+//addDeleteCount--;
+//$.post('../../app/json/tourcomment/add',
+//    {
+//  tourNo : tourNo,
+//  memberNo : user.no,
+//  originCommentNo : 0,
+//  level : 2,
+//  content : content
+//    }, 
+//    function(obj) {
+//      if (obj.status == 'success') {
+//        var no = obj.no;
+//        var name = user.name;
+//        var content = $('#comment-add').val();
+//        var d = now_yyyy_mm_dd_hh_mm();
+//
+//        var obj ={
+//            'tourComment' : [{
+//              'no': no,
+//              'content': content,
+//              'createdDate' : d,
+//              'member' : {name: name}
+//            }]
+//        };
+//
+//        $(trGenerator(obj)).prependTo(comment);
+//        $(document.body).trigger('addEventUpdateDeleteButton');
+//        showUpdateDeleteButton();
+//        var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
+//            nextCommentAmount =commentAmount + 1
+//            
+//        $('#commentAmount').html('댓글수' + nextCommentAmount);
+//        $('#comment-add').val('');
+//
+//      } else {
+//        alert('등록 실패입니다!\n' + obj.message)
+//      }
+//
+//    });
+//});
+//});  // addEventReplyButton
+
+//Print current time yyyy_mm_dd_hh_mm format

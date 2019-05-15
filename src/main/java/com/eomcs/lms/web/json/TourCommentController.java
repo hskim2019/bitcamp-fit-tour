@@ -91,6 +91,18 @@ public class TourCommentController {
     
     return map;
   }
+  
+//countComment
+  @GetMapping("count")
+  public Object list(int tourNo, @RequestParam(defaultValue="0") int originCommentNo) {
+    
+    int commentAmount = tourCommentService.countCommentbyTourNo(tourNo, originCommentNo);
+    
+    HashMap<String, Object> map = new HashMap<>();
+    map.put("commentAmount", commentAmount);
+    
+    return map;
+  }
 
   @PostMapping("update")
   public Object update(TourComment tourComment) {

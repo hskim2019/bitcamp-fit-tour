@@ -4,9 +4,7 @@ var param = location.href.split('?')[1],
     trGenerator = Handlebars.compile(templateSrc),
     pageNo = 1,
     addDeleteCount = 0;
-
-var recommentPageNo = 1,
-    recommentAddDeleteCount = 0;
+    
 
 
 if(sessionStorage.getItem('loginUser')){
@@ -255,7 +253,8 @@ $(document.body).bind('addEventMoreCommentButton', () => {
 
 //ReCommentList
 function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommnetListButton) {
-    console.log(tourNo, pageNo, addDeleteCount);
+  
+    console.log(tourNo , pageNo , addDeleteCount);
     $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo +
         '&pageNo=' + pageNo + 
         '&addDeleteCount=' + addDeleteCount + 
@@ -272,15 +271,31 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
 }
 
 
-
 //Show ReCommentListButton
 function showReCommentListButton() {
+  var commentRows = $('.commentRow');
+  console.log(commentRows);
   
-  $('.bit-recomment-list-btn').removeClass('bit-invisible');
-  if(user){
-    $(document.body).trigger('addEventReCommentListButton');
+  for(commentRow of commentRows){
+    var commentNo = $(commentRow).children().first().children().first().val();
     
+    $.ajaxSetup({async:false});
+    $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + commentNo,
+       function(obj) {
+         if(obj.commentAmount != 0){
+           var ReCommentListBtn = $(commentRow).children().eq(4).children().first();
+             $(ReCommentListBtn).removeClass('bit-invisible');
+             $(ReCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
+           }
+         });
   }
+  $.ajaxSetup({async:true});
+  
+//  $('.bit-recomment-list-btn').removeClass('bit-invisible');
+//  if(user){
+//    $(document.body).trigger('addEventReCommentListButton');
+//    
+//  }
 }
 
 

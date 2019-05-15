@@ -87,16 +87,21 @@
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
     select
     <include refid="default-columns" />
-
-
-
     from
     member
     where
     email = #{email}
     and password = password(#{password})
   </select>
-
+<select id="findByEmail" resultMap="memberMap" parameterType="map">
+    select
+    email
+    from
+    member
+    where
+    email = #{email}
+   
+  </select>
   <insert id="insert" parameterType="member">
     insert into member(
     login_type_id,

@@ -62,6 +62,15 @@ public class MemberServiceImpl implements MemberService {
   }
   
   @Override
+  public Member get(String email) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+   
+    
+    return memberDao.findByEmail(paramMap);
+  }
+  
+  @Override
   public int size(String search) {
     return memberDao.countAll(search);
   }

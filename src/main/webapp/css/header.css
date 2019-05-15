@@ -5,9 +5,12 @@
 }
 
 #bit-login-state img {
-  height:30px;
+  height: 30px;
 }
+/* 로고사이즈 */
+#logo {
 
-
-
-
+  width: 200px;
+  height: 70px;
+  
+}

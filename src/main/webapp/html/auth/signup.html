@@ -15,32 +15,26 @@
     <h3>회원가입 폼 입니다.</h3>
     <form action="" method="post" id="myForm">
     
-    <div class="form-group has-feedback">
+    <div class="form-group">
             <label class="control-label" for="email">이메일</label>
             <input class="form-control" type="text" name="email" id="email"/>
-            <span id="emailErr" class="help-block">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span>
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span id="emailErr" class="invalid-feedback">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span>
+            <span id="overlapErr" class="invalid-feedback">사용할 수 없는 아이디 입니다.</span>
         </div>
     
         
-        <div class="form-group has-feedback">
+        <div class="form-group">
             <label class="control-label" for="pwd">비밀번호</label>
             <input class="form-control" type="password" name="pwd" id="pwd"/>
-            <span id="pwdRegErr" class="help-block">8글자 이상 입력하세요.</span>
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span id="pwdRegErr" class="invalid-feedback">8글자 이상 입력하세요.</span>
         </div>
-        <div class="form-group has-feedback">
+        
+        <div class="form-group">
             <label class="control-label" for="rePwd">비밀번호 재확인</label>
             <input class="form-control" type="password" name="rePwd" id="rePwd"/>
-            <span id="rePwdErr" class="help-block">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span id="rePwdErr" class="invalid-feedback">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
         </div>
-        <div class="form-group has-feedback">
-            <label class="control-label" for="id">아이디</label>
-            <input class="form-control" type="text" name="id" id="id"/>
-            <span id="overlapErr" class="help-block">사용할 수 없는 아이디 입니다.</span>
-            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-        </div>
+       
         <button class="btn btn-success" id="add-btn" type="submit">가입</button>
     </form>
 </div><!-- .container -->

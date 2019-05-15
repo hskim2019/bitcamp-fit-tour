@@ -74,32 +74,29 @@ var Counter = function(quill, options) {
 
 };
 
-$('#add-btn').click(() => {
-  $.post('../../app/json/notice/add', {
-
-    content: delta,
-    title: $('#title').val()
-
-  },
-
-  function(data) {
-
-    if(data.status == 'success') {
-      location.href = "index.html";  
-    } else {
-      alert('등록 실패 입니다.\n' + data.message);
-    }
-  });
-});
-
-
 Counter.prototype.calculate = function() {
 
   var delta =JSON.stringify(quill.getContents());
   var text = this.quill.getText();
   var quillHtml = quill.root.innerHTML.trim();
 
-  
+  $('#add-btn').click(() => {
+    $.post('../../app/json/notice/add', {
+
+      content: delta,
+      title: $('#title').val()
+
+    },
+
+    function(data) {
+
+      if(data.status == 'success') {
+        location.href = "index.html";  
+      } else {
+        alert('등록 실패 입니다.\n' + data.message);
+      }
+    });
+  });
 
   if (this.options.unit === 'word') {
 

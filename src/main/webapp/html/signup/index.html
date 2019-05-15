@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>회원 관리</title>
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+ <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<header class="bit-main-header"></header>
+
+<div class="container">
+<h1>회원 목록 </h1>
+<p><a href='view.html' class="btn btn-primary btn-sm">새 회원</a></p>
+
+<div class="bit-list">
+<table class="table table-hover">
+<thead>
+  <tr> 
+    <th scope="col">번호</th>
+    <th scope="col">이름</th>
+    <th scope="col">이메일</th>
+    <th scope="col">가입일</th>
+    <th scope="col">휴대폰</th>
+  </tr>
+</thead>
+<tbody></tbody>
+</table>
+</div><!-- .bit-list -->
+
+<nav aria-label="목록 페이지 이동">
+  <ul class="pagination justify-content-center">
+    <li id="prevPage" class="page-item">
+      <a class="page-link" 
+        href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
+    <li id="nextPage" class="page-item ">
+      <a class="page-link" 
+         href="?pageNo=2&pageSize=3">다음</a></li>
+  </ul>
+</nav>
+</div><!-- .container -->
+
+<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td>{{email}}</td>
+  <td>{{registeredDate}}</td>
+  <td>{{tel}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../header.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+

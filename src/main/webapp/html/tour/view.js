@@ -48,11 +48,17 @@ function loadData(no) {
     $('#theme').val(obj.tour.theme[0].theme);
     $(trGenerator(obj)).appendTo(comment);
     $('#commentAmount').html($('#commentAmount').html()+obj.commentAmount);
+    
+    var commentTextArea = document.querySelector('#comment-textarea');
+    if(user != undefined) {
+      commentTextArea.className = commentTextArea.className.replace('bit-invisible', '');
+    }
     totalPage = obj.totalPage;
       
     controlNextComment(obj);
 
     $(document.body).trigger('addEventAddButton');
+    $(document.body).trigger('addEventReplyButton');
     $(document.body).trigger('addEventUpdateDetailButton');
     $(document.body).trigger('addEventRecommentListButton');
   });
@@ -119,6 +125,61 @@ $(document.body).bind('addEventAddButton', () => {
         });
   });
 });
+
+// addEventReplyButton
+$(document.body).bind('addEventReplyButton', () => {
+  $('#comment-reply-button').off().click((e) => {
+    e.preventDefault();
+    if(user == undefined) {
+      location.href = "/bitcamp-fit-tour/html/auth/login.html";
+    }
+    
+    var tourNo = location.href.split('?')[1].split('=')[1];
+    var content = $('#comment-add').val();
+    addDeleteCount--;
+    $.post('../../app/json/tourcomment/add',
+        {
+      tourNo : tourNo,
+      memberNo : user.no,
+      originCommentNo : 0,
+      level : 2,
+      content : content
+        }, 
+        function(obj) {
+          if (obj.status == 'success') {
+            var no = obj.no;
+            var name = user.name;
+            var content = $('#comment-add').val();
+            var d = now_yyyy_mm_dd_hh_mm();
+
+            var obj ={
+                'tourComment' : [{
+                  'no': no,
+                  'content': content,
+                  'createdDate' : d,
+                  'member' : {name: name}
+                }]
+            };
+
+            $(trGenerator(obj)).prependTo(comment);
+            $(document.body).trigger('addEventUpdateDetailButton');
+            showUpdateDeleteButton();
+            var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
+                nextCommentAmount =commentAmount + 1
+                
+            $('#commentAmount').html('댓글수' + nextCommentAmount);
+            $('#comment-add').val('');
+
+          } else {
+            alert('등록 실패입니다!\n' + obj.message)
+          }
+
+        });
+  });
+});  // addEventReplyButton
+
+
+
 
 
 $(document.body).bind('addEventUpdateDetailButton', () => {

@@ -102,7 +102,7 @@
   </div>
   
     
-  <div class="form-group row">
+  <div class="form-group row bit-invisible" id="comment-textarea" class="form-group row">
     <div class="col-sm-10">
       <textarea id="comment-add" name="content" cols ="80" rows='3'></textarea>
     </div>
@@ -149,9 +149,11 @@
       <input type="text" readonly class="form-control-plaintext" value={{content}}>
     </div>
 
-    <div class="col-sm-12">
-      <a href="#" class="bit-recomment-add-btn">답글</a>
+    <div class="col-sm-10">
       <a href="#" class="bit-recomment-list-btn">답글보기</a>
+    </div>
+    <div class="col-sm-2">
+      <a href="#" class="bit-recomment-add-btn" id="comment-reply-button">답글</a>
     </div>
 
     <div class="col-sm-12"><hr <hr style="border: solid 1px blue;"></div> 

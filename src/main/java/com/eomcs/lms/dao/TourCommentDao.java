@@ -10,7 +10,7 @@ public interface TourCommentDao {
   List<TourComment> findByTourNo(int no);
   int update(TourComment tourComment);
   int delete(int no);
-  int countCommentbyTourNo(int no);
+  int countCommentbyTourNo(HashMap<String, Object> params);
   List<TourComment> findByTourNo(HashMap<String, Object> params);
   int countAll();
 }

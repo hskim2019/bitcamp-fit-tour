@@ -59,7 +59,7 @@ public class TourController {
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
     
-    int rowCount = tourCommentService.countCommentbyTourNo(no);
+    int rowCount = tourCommentService.countCommentbyTourNo(no, 0);
     int totalPage;
     
     if(rowCount == 0) {
@@ -80,8 +80,8 @@ public class TourController {
 
     HashMap<String, Object> map = new HashMap<>();
     Tour tour = tourService.get(no);
-    List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize, addDeleteCount);
-    int commentAmount = tourCommentService.countCommentbyTourNo(no);
+    List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize, addDeleteCount, 0);
+    int commentAmount = tourCommentService.countCommentbyTourNo(no, 0);
 
     map.put("pageNo", pageNo);
     map.put("pageSize", pageSize);

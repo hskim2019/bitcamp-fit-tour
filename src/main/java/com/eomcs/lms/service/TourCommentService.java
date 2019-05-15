@@ -6,9 +6,9 @@ import com.eomcs.lms.domain.TourComment;
 public interface TourCommentService {
   List<TourComment> list();
   int add(TourComment tourComment);
-  List<TourComment> get(int no, int pageNo, int pageSize, int deleteCount);
+  List<TourComment> get(int no, int pageNo, int pageSize, int deleteCount, int originCommentNo);
   int update(TourComment tourComment);
   int delete(int no);
-  int countCommentbyTourNo(int no);
+  int countCommentbyTourNo(int no, int originCommentNo);
   int size();
 }

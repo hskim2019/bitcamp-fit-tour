@@ -2,9 +2,12 @@ var param = location.href.split('?')[1],
     tourNo = param.split('=')[1],
     templateSrc = $('#comment-template').html(),
     trGenerator = Handlebars.compile(templateSrc),
-    totalPage = 1,
     pageNo = 1,
     addDeleteCount = 0;
+
+var recommentPageNo = 1,
+    recommentAddDeleteCount = 0;
+
 
 if(sessionStorage.getItem('loginUser')){
   var user = JSON.parse(sessionStorage.getItem('loginUser'))
@@ -14,7 +17,7 @@ if(sessionStorage.getItem('loginUser')){
 if (param) {
   $('h1').html('투어 조회');
   tourList(tourNo);
-  commentList(tourNo, pageNo, addDeleteCount);
+  commentList(tourNo, pageNo, addDeleteCount, 0);
 }
 
 
@@ -35,22 +38,26 @@ function tourList(tourNo) {
     $('#photpath').val(obj.tour.tourPhoto[0].path);
     $('#theme').val(obj.tour.theme[0].theme);
     
-    
   });
 }
 
 //CommentList
-function commentList(tourNo, pageNo, addDeleteCount) {
+function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
     console.log(tourNo, pageNo, addDeleteCount);
-    $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo + '&pageNo=' + pageNo + '&addDeleteCount=' + addDeleteCount,
+    $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo +
+        '&pageNo=' + pageNo + 
+        '&addDeleteCount=' + addDeleteCount + 
+        '&originCommentNo=' + originCommentNo,
       function(obj) {
     $(trGenerator(obj)).appendTo($('#comment'));
     showUpdateDeleteButton();
+    showReCommentAddButton();
     commentAmountUpdate(obj.commentAmount, true);
+    showReCommentListButton();
     if(user){
-      $('#comment-textarea').show();
+      $('#comment-textarea').removeClass('bit-invisible');
       $(document.body).trigger('addEventAddButton');
-      $(document.body).trigger('addEventUpdateDetailButton');
+      $(document.body).trigger('addEventUpdateDeleteButton');
     }
     checkMoreComment();
   });
@@ -135,7 +142,7 @@ $(document.body).bind('addEventAddButton', () => {
           
           $(trGenerator(newComment)).prependTo($('#comment'));
           showUpdateDeleteButton();
-          $(document.body).trigger('addEventUpdateDetailButton');
+          $(document.body).trigger('addEventUpdateDeleteButton');
           commentAmountUpdate(1, false);
           $('#comment-add').val('');
           addDeleteCount--;
@@ -148,7 +155,7 @@ $(document.body).bind('addEventAddButton', () => {
 });
 
 //AddEvent Comment Update,Delete Button
-$(document.body).bind('addEventUpdateDetailButton', () => {
+$(document.body).bind('addEventUpdateDeleteButton', () => {
   
   //AddEvent Comment Delete Button
   $('.bit-comment-delete-btn').off().click((e) => {
@@ -216,7 +223,6 @@ $(document.body).bind('addEventUpdateDetailButton', () => {
 });
 
 
-
 //CheckMoreComment
 function checkMoreComment() {
   
@@ -233,25 +239,72 @@ function checkMoreComment() {
 
 //AddEventMoreCommentButton
 $(document.body).bind('addEventMoreCommentButton', () => {
-
+  
   $('#more-comment-btn').off().click((e)=>{
     e.preventDefault();
     pageNo++;
-    commentList(tourNo, pageNo, addDeleteCount);
+    commentList(tourNo, pageNo, addDeleteCount, 0);
   });
 });
 
 
 
+/************************************************************************************************/
+//ReComment
+/************************************************************************************************/
 
-//function showReCommentAddButton() {
-//  
-//  if(user == undefined){
-//    alert('로그인이 되어있지 않습니다.');
-//    location.href = "/bitcamp-fit-tour/html/auth/login.html";
-//  }
-//    
-//}
+//ReCommentList
+function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommnetListButton) {
+    console.log(tourNo, pageNo, addDeleteCount);
+    $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo +
+        '&pageNo=' + pageNo + 
+        '&addDeleteCount=' + addDeleteCount + 
+        '&originCommentNo=' + originCommentNo,
+      function(obj) {
+        console.log(obj);
+        $(ReCommnetListButton).parent().parent().after(trGenerator(obj));
+        showUpdateDeleteButton();
+    if(user){
+      $(document.body).trigger('addEventUpdateDeleteButton');
+    }
+    checkMoreComment();
+  });
+}
+
+
+
+//Show ReCommentListButton
+function showReCommentListButton() {
+  
+  $('.bit-recomment-list-btn').removeClass('bit-invisible');
+  if(user){
+    $(document.body).trigger('addEventReCommentListButton');
+    
+  }
+}
+
+
+//AddEvnet ReCommnetListButton
+$(document.body).bind('addEventReCommentListButton', () => {
+  $('.bit-recomment-list-btn').off().click((e)=>{
+    e.preventDefault();
+    var originCommentNo = $(e.target).parent().parent().children().first().children().first().val();
+    reCommentList(tourNo, recommentPageNo, recommentAddDeleteCount, originCommentNo, e.target);
+    
+  });
+});
+
+
+
+//Show ReCommentAddButton
+function showReCommentAddButton() {
+  
+  if(user){
+    $('.bit-recomment-add-btn').removeClass('bit-invisible');
+    $(document.body).trigger('addEventReCommentAddButton');
+  }
+}
+
 
 ////addEventReplyButton
 //$(document.body).bind('addEventReplyButton', () => {
@@ -289,7 +342,7 @@ $(document.body).bind('addEventMoreCommentButton', () => {
 //          };
 //
 //          $(trGenerator(obj)).prependTo(comment);
-//          $(document.body).trigger('addEventUpdateDetailButton');
+//          $(document.body).trigger('addEventUpdateDeleteButton');
 //          showUpdateDeleteButton();
 //          var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
 //              nextCommentAmount =commentAmount + 1
@@ -306,6 +359,7 @@ $(document.body).bind('addEventMoreCommentButton', () => {
 //});  // addEventReplyButton
 
 //Print current time yyyy_mm_dd_hh_mm format
+
 function now_yyyy_mm_dd_hh_mm () {
   now = new Date();
   year = "" + now.getFullYear();

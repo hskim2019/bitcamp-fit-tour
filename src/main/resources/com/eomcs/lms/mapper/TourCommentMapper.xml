@@ -45,7 +45,7 @@
     join member as m
     on t.member_id = m.member_id
     where 
-      tour_id = #{no}
+      tour_id = #{no} and parent_id = #{originCommentNo}
     order by tour_comment_id desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
@@ -74,14 +74,14 @@
   </update>
   
   <!-- count all comment by Tour No -->
-  <select id="countCommentbyTourNo" resultType="int" parameterType="int">
+  <select id="countCommentbyTourNo" resultType="int" parameterType="map">
     select count(*) from tour_comment
-    where tour_id = #{no}
+    where tour_id = #{no} and parent_id = #{originCommentNo}
   </select>
   
   <!-- cout all comment -->
   <select id="countAll" resultType="int">
-    select count(*) from tour_comment
+    select count(*) from tour_comment 
   </select>
   
   <!-- <select id="findAll" resultMap="commentMap">

@@ -35,7 +35,7 @@ public class TourCommentServiceImpl implements TourCommentService {
   }
   
   @Override
-  public List<TourComment> get(int no, int pageNo, int pageSize, int addDeleteCount) {
+  public List<TourComment> get(int no, int pageNo, int pageSize, int addDeleteCount, int originCommentNo) {
     HashMap<String,Object> params = new HashMap<>();
     params.put("no", no);
     params.put("size", pageSize);
@@ -46,6 +46,7 @@ public class TourCommentServiceImpl implements TourCommentService {
 //    }
     
     params.put("rowNo", ((pageNo - 1) * pageSize) - addDeleteCount);
+    params.put("originCommentNo", originCommentNo);
     List<TourComment> tourComment = tourCommentDao.findByTourNo(params);
     return tourComment;
   }
@@ -65,9 +66,11 @@ public class TourCommentServiceImpl implements TourCommentService {
   }
 
   @Override
-  public int countCommentbyTourNo(int no) {
-    
-    return tourCommentDao.countCommentbyTourNo(no);
+  public int countCommentbyTourNo(int no, int originCommentNo) {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("no", no);
+    params.put("originCommentNo", originCommentNo);
+    return tourCommentDao.countCommentbyTourNo(params);
   }
 
   @Override

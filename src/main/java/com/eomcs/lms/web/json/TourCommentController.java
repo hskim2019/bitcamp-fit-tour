@@ -50,12 +50,12 @@ public class TourCommentController {
   }
 
   //tourCommentList
-  @PostMapping("list")
+  @GetMapping("list")
   public Object list(int tourNo,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam(defaultValue="0") int deleteCount) {
-
+      @RequestParam(defaultValue="0") int addDeleteCount) {
+    System.out.println(addDeleteCount);
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
     
@@ -72,8 +72,6 @@ public class TourCommentController {
         totalPage++;
     }
     
-    
-    
 //    if (pageNo < 1) 
 //      pageNo = 1;
 //    else if (pageNo > totalPage)
@@ -81,7 +79,7 @@ public class TourCommentController {
     
 
     HashMap<String, Object> map = new HashMap<>();
-    List<TourComment> tourComments = tourCommentService.get(tourNo, pageNo, pageSize, deleteCount);
+    List<TourComment> tourComments = tourCommentService.get(tourNo, pageNo, pageSize, addDeleteCount);
     int commentAmount = tourCommentService.countCommentbyTourNo(tourNo);
     
     map.put("pageNo", pageNo);

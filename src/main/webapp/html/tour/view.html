@@ -97,7 +97,7 @@
   <!-- commentAmout -->
   <div class="form-group row">
     <div class="col-sm-12">
-    <h4 id=commentAmount>댓글수</h4>
+    <h4 id=commentAmount></h4>
     </div>
   </div>
   
@@ -116,7 +116,7 @@
   
   <!-- next-comment-btn -->
   <div class="form-group row">
-  <a href="#" id="next-comment-btn" class="col-sm-12">댓글 더보기</a>
+  <a href="#" id="more-comment-btn" class="col-sm-12">댓글 더보기</a>
   </div>
 
     
@@ -131,7 +131,7 @@
 
 <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
-<div class="row">
+<div class="commentRow row">
     <div class="col-sm-12">
       <input type="hidden" value={{no}}> 
     </div>

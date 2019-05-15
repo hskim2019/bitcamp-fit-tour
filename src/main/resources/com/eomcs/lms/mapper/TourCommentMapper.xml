@@ -10,7 +10,7 @@
     <id column="tour_comment_id" property="no"/>
     <result column="member_id" property="memberNo"/>
     <result column="tour_id" property="tourNo"/>
-    <result column="ranking" property="order"/>
+    <result column="parent_id" property="originCommentNo"/>
     <result column="level" property="level"/>
     <result column="content" property="content"/>
     <result column="created_date" property="createdDate"/>
@@ -29,7 +29,7 @@
       tour_comment_id,
       member_id,
       tour_id, 
-      ranking, 
+      parent_id, 
       level, 
       content,
       created_date 
@@ -54,8 +54,8 @@
   
   <!-- insert comment -->
   <insert id="insert" parameterType="tourComment" useGeneratedKeys="true"  keyProperty="no" >
-    insert into tour_comment(member_id, tour_id, ranking, level, content) 
-    values(#{memberNo},#{tourNo},#{order},#{level},#{content})
+    insert into tour_comment(member_id, tour_id, parent_id, level, content) 
+    values(#{memberNo},#{tourNo},#{originCommentNo},#{level},#{content})
   </insert>
    
    <!-- delete comment by commentNo -->

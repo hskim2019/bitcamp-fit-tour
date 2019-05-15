@@ -83,8 +83,8 @@ $(document.body).bind('addEventAddButton', () => {
         {
       tourNo : tourNo,
       memberNo : user.no,
-      order : 0,
-      level : 0,
+      originCommentNo : 0,
+      level : 1,
       content : content
         }, 
         function(obj) {

@@ -54,7 +54,7 @@ public class TourController {
   public Object detail(int no,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      @RequestParam(defaultValue="0") int deleteCount) {
+      @RequestParam(defaultValue="0") int addDeleteCount) {
 
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
@@ -80,7 +80,7 @@ public class TourController {
 
     HashMap<String, Object> map = new HashMap<>();
     Tour tour = tourService.get(no);
-    List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize, deleteCount);
+    List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize, addDeleteCount);
     int commentAmount = tourCommentService.countCommentbyTourNo(no);
 
     map.put("pageNo", pageNo);

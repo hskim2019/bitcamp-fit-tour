@@ -118,7 +118,6 @@ $(document.body).bind('addEventAddButton', () => {
           $('#comment-add').val('');
           addDeleteCount--;
           showReCommentAddButton();
-          //checkMoreComment(); 혹시나
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
@@ -142,7 +141,6 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
             addDeleteCount++;
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] +1;
             console.log(storage['addDeleteCount' + originCommentNo]);
-            //checkMoreComment(); 혹시나
           } else {
             alert('삭제 실패입니다!\n' + obj.message)
           }

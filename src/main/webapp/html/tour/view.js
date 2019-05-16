@@ -8,19 +8,15 @@ var param = location.href.split('?')[1],
     addDeleteCount = 0,
     storage = {};
     
-
-
 if(sessionStorage.getItem('loginUser')){
   var user = JSON.parse(sessionStorage.getItem('loginUser'))
 }
-
 
 if (param) {
   $('h1').html('투어 조회');
   tourList(tourNo);
   commentList(tourNo, pageNo, addDeleteCount, 0);
 }
-
 
 //TourList
 function tourList(tourNo) {
@@ -44,7 +40,7 @@ function tourList(tourNo) {
 
 //CommentList
 function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
-    console.log(tourNo, pageNo, addDeleteCount);
+    //console.log(tourNo, pageNo, addDeleteCount);
     $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo +
         '&pageNo=' + pageNo + 
         '&addDeleteCount=' + addDeleteCount + 
@@ -122,7 +118,7 @@ $(document.body).bind('addEventAddButton', () => {
           $('#comment-add').val('');
           addDeleteCount--;
           showReCommentAddButton();
-          checkMoreComment();
+          //checkMoreComment(); 혹시나
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
@@ -136,14 +132,17 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
   //AddEvent Comment Delete Button
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
-    console.log($(e.target).parent().parent());
     var commentNo = $(e.target).parent().parent().attr('id');
+    var originCommentNo = $(e.target).parent().parent().parent().parent().attr('id');
     $.getJSON('../../app/json/tourcomment/delete?no=' + commentNo,
         function(obj) {
           if (obj.status == 'success') {
             $(e.target).parent().parent().remove();
             commentAmountUpdate(-1);
             addDeleteCount++;
+            storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] +1;
+            console.log(storage['addDeleteCount' + originCommentNo]);
+            //checkMoreComment(); 혹시나
           } else {
             alert('삭제 실패입니다!\n' + obj.message)
           }
@@ -161,7 +160,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
     $(e.target).hide();
     $(e.target).next().hide();
     $(e.target).parent().append('<a href="#" >저장</a>');
-    $(e.target).parent().append('<a href="#" >취소</a>');
+    $(e.target).parent().append(' <a href="#" >취소</a>');
 
     //AddEvent Comment Update Cancle
     $($(e.target).next().next().next()).off().click((e)=>{
@@ -204,11 +203,13 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
 function checkMoreComment() {
   
   var currentPageCommentAmount = $('.commentRow').length,
-      allCommentAmout = Number($('#commentAmount').html().replace(/[^0-9]/g,""));
+      allCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,""));
       
-      if(allCommentAmout > currentPageCommentAmount){
+      if(allCommentAmount > currentPageCommentAmount){
         $('#more-comment-btn').show();
+        $('#more-comment-btn').html('댓글' + (allCommentAmount -currentPageCommentAmount) + '개 더보기');
         $(document.body).trigger('addEventMoreCommentButton');
+        
       } else {
         $('#more-comment-btn').hide();
       }
@@ -221,19 +222,21 @@ $(document.body).bind('addEventMoreCommentButton', () => {
     e.preventDefault();
     pageNo++;
     commentList(tourNo, pageNo, addDeleteCount, 0);
+    $('#more-comment-btn').html()
   });
 });
 
 
 
-/************************************************************************************************/
-//ReComment
+/*************************************************************************************************/
+/********************************ReComment************************************/
 /************************************************************************************************/
 
 //ReCommentList
 function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommnetListButton) {
-  
-    console.log(tourNo , pageNo , addDeleteCount);
+    var allReCommentAmount;
+    //console.log(tourNo , pageNo , addDeleteCount);
+    $.ajaxSetup({async:false});
     $.getJSON('../../app/json/tourcomment/list?tourNo=' + tourNo +
         '&pageNo=' + pageNo + 
         '&addDeleteCount=' + addDeleteCount + 
@@ -244,8 +247,10 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
     if(user){
       $(document.body).trigger('addEventUpdateDeleteButton');
     }
-    checkMoreComment();
+    allReCommentAmount = obj.commentAmount;
   });
+    $.ajaxSetup({async:true});
+    return allReCommentAmount;
 }
 
 
@@ -254,15 +259,16 @@ function showReCommentListButton() {
   
   for(commentRow of $('.commentRow')){
     
-    var commentNo = $(commentRow).attr('id');
+    var originCommentNo = $(commentRow).attr('id');
     $.ajaxSetup({async:false});
-    $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + commentNo,
+    $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + originCommentNo,
        function(obj) {
          if(obj.commentAmount != 0){
            var reCommentListBtn = $(commentRow).children().eq(4).children().first();
              $(reCommentListBtn).removeClass('bit-invisible');
              $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
-             
+             storage['pageNo' + originCommentNo] = 1;
+             storage['addDeleteCount' + originCommentNo] = 0;
            }
          });
   }
@@ -272,6 +278,7 @@ function showReCommentListButton() {
 
 }
 
+
 //AddEvnet ReCommnetListButton
 $(document.body).bind('addEventReCommentListButton', () => {
   
@@ -279,10 +286,30 @@ $(document.body).bind('addEventReCommentListButton', () => {
     e.preventDefault();
     $(e.target).hide();
     var originCommentNo = $(e.target).parent().parent().attr('id');
-    reCommentList(tourNo, 1, 0, originCommentNo, e.target);
     
+    var allReCommentAmount = reCommentList(
+          tourNo, 
+          storage['pageNo' + originCommentNo], 
+          storage['addDeleteCount' + originCommentNo], 
+          originCommentNo, 
+          e.target);
+    storage['pageNo' + originCommentNo] = storage['pageNo' + originCommentNo] + 1
+    checkMoreReComment(e.target, allReCommentAmount);
   });
 });
+
+//CheckMoreReComment
+function checkMoreReComment(reCommentListButton, allReCommentAmount) {
+  var currentPageReCommentAmount = $(reCommentListButton).parent().prev().children('div').length;
+      
+      if(allReCommentAmount > currentPageReCommentAmount){
+        $(reCommentListButton).show();
+        $(reCommentListButton).html('답글 '+(allReCommentAmount-currentPageReCommentAmount) +'개 더보기')
+        $(reCommentListButton).addClass('bit-recomment-list-button');
+      } else {
+        $(reCommentListButton).hide();
+      }
+}
 
 
 //Show ReCommentAddButton
@@ -301,8 +328,9 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     
     e.preventDefault();
     $(e.target).off();
-    $('<div class="col-sm-12" style="font-size:15px; padding: 30px 30px 30px 50px;"><input type="text" name="recommentContent" class="col-sm-10" >' +
-          '<button type="button" class="recomment-save-button btn btn-primary col-sm-0">등록</button></div>')
+    $('<div class="col-sm-12" style="font-size:15px; padding: 30px 0px 30px 0px">'+
+        '<input type="text" name="recommentContent" class="col-sm-10" >' +
+          ' <button type="button" class="btn btn-default btn-primary recomment-save-button">답글</button></div>')
           .insertAfter($(e.target));
     
     $(document.body).trigger('addEventReCommentSaveButton');
@@ -313,12 +341,12 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     
   $('.recomment-save-button').off().click((e)=>{
     
-    var parentNo = ($(e.target).parent().parent().parent().attr('id'));
+    var originCommentNo = ($(e.target).parent().parent().parent().attr('id'));
     $.post('../../app/json/tourcomment/add',
         {
       tourNo : tourNo,
       memberNo : user.no,
-      originCommentNo : parentNo,
+      originCommentNo : originCommentNo,
       level : 2,
       content : $(e.target).prev().val()
         }, 
@@ -333,15 +361,13 @@ $(document.body).bind('addEventReCommentAddButton', () => {
                   'member' : {name: user.name, no: user.no}
                 }]
             };
-            //newReComment.member.name = '　└─　' + newReComment.member[0].name
-            //newReComment.content = '　　　　' + newReComment.content
             
             $(reCommentGenerator(newReComment)).insertAfter($(e.target).parent());
             showUpdateDeleteButton();
             $(document.body).trigger('addEventUpdateDeleteButton');
             $(e.target).prev().val('');
-            //addDeleteCount--;
-            //checkMoreComment();
+            storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] -1;
+            console.log(storage['addDeleteCount' + originCommentNo]);
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
@@ -361,57 +387,3 @@ function now_yyyy_mm_dd_hh_mm () {
   minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
   return year + "-" + month + "-" + day + " " + hour + ":" + minute;
 }
-
-
-
-////addEventReplyButton
-//$(document.body).bind('addEventReplyButton', () => {
-//$('#comment-reply-button').off().click((e) => {
-//e.preventDefault();
-//if(user == undefined) {
-//  location.href = "/bitcamp-fit-tour/html/auth/login.html";
-//}
-//
-//var tourNo = location.href.split('?')[1].split('=')[1];
-//var content = $('#comment-add').val();
-//addDeleteCount--;
-//$.post('../../app/json/tourcomment/add',
-//    {
-//  tourNo : tourNo,
-//  memberNo : user.no,
-//  originCommentNo : 0,
-//  level : 2,
-//  content : content
-//    }, 
-//    function(obj) {
-//      if (obj.status == 'success') {
-//        var no = obj.no;
-//        var name = user.name;
-//        var content = $('#comment-add').val();
-//        var d = now_yyyy_mm_dd_hh_mm();
-//
-//        var obj ={
-//            'tourComment' : [{
-//              'no': no,
-//              'content': content,
-//              'createdDate' : d,
-//              'member' : {name: name}
-//            }]
-//        };
-//
-//        $(commentGenerator(obj)).prependTo(comment);
-//        $(document.body).trigger('addEventUpdateDeleteButton');
-//        showUpdateDeleteButton();
-//        var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
-//            nextCommentAmount =commentAmount + 1
-//            
-//        $('#commentAmount').html('댓글수' + nextCommentAmount);
-//        $('#comment-add').val('');
-//
-//      } else {
-//        alert('등록 실패입니다!\n' + obj.message)
-//      }
-//
-//    });
-//});
-//});  // addEventReplyButton

@@ -54,7 +54,7 @@ public class TourCommentController {
   @GetMapping("list")
   public Object list(int tourNo,
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize,
+      @RequestParam(defaultValue="4") int pageSize,
       @RequestParam(defaultValue="0") int addDeleteCount,
       @RequestParam(defaultValue="0") int originCommentNo) {
     System.out.println(addDeleteCount);

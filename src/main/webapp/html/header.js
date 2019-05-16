@@ -71,7 +71,7 @@ function loadLoginUser() {
         notLoginState.className.replace('bit-invisible', '');
     }
     
-    console.log(document.querySelector('#bit-login-state').className);
+    //console.log(document.querySelector('#bit-login-state').className);
   };
   xhr.open('GET', '/bitcamp-fit-tour/app/json/auth/user', true)
   xhr.send()

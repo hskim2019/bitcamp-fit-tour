@@ -91,9 +91,33 @@ function successState(sel){
   .removeClass("is-invalid")
   .addClass("is-valid")
   .show();
+ 
+  var countInvalid=0;
+  var invalids = $('.is-invalid');
+  for (invalid of invalids) {
+    countInvalid++;
+    if(countInvalid >0){
+    $("#myForm button[type=submit]")
+                .attr("disabled","disabled");
+    }
+  }
+  if(countInvalid == 0){
+    var countValid=0;
+    var valids = $('.is-valid');
+    for (valid of valids) {
+      
+      countValid++;
+      if(countValid ==3){ //입력폼 다정상입력시에만
+        
+        $("#myForm button[type=submit]")
+        .removeAttr("disabled");
+      }
+    }
 
-  $("#myForm button[type=submit]")
-              .removeAttr("disabled");
+  }
+  
+  
+  
 };
 // 에러 상태로 바꾸는 함수
 function errorState(sel){
@@ -101,8 +125,17 @@ function errorState(sel){
 .removeClass("is-valid")
   .addClass("is-invalid")
 
-  $("#myForm button[type=submit]")
-              .attr("disabled","disabled");
+     var countInvalid=0;
+  var invalids = $('.is-invalid');
+  for (invalid of invalids) {
+    
+    countInvalid++;
+    if(countInvalid >0){
+    
+    $("#myForm button[type=submit]")
+                .attr("disabled","disabled");
+    }
+  }
 };
 
 

@@ -38,6 +38,11 @@ public class MemberServiceImpl implements MemberService {
   }
   
   @Override
+  public int signUp(Member member) {
+    return memberDao.signUp(member);
+  }
+  
+  @Override
   public Member get(int no) {
     return memberDao.findByNo(no);
   }

@@ -1,60 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>회원</title>
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/signup.css">
-    <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<meta charset="UTF-8">
+<title>회원</title>
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/signup.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
 <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 <body>
 
-<header class="bit-main-header"></header>
+  <header class="bit-main-header"></header>
 
-<div class="container">
+  <div class="container">
     <h3>회원가입 폼 입니다.</h3>
     <form action="" method="post" id="myForm">
-    
-    <div class="form-group">
-            <label class="control-label" for="email">이메일</label>
-            <input class="form-control" type="email" name="email" id="email"/> 
-            <span id="emailErr" class="invalid-feedback">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span> <span id="overlapErr" class="invalid-feedback">중복된 아이디 입니다.</span>
-        </div>
-        
-    
-        <div class="form-group">
-            <label class="control-label" for="pwd">비밀번호</label>
-            <input class="form-control" type="password" name="pwd" id="pwd"/>
-            <span id="pwdRegErr" class="invalid-feedback">8글자 이상 입력하세요.</span>
-        </div>
-        
-        <div class="form-group">
-            <label class="control-label" for="rePwd">비밀번호 재확인</label>
-            <input class="form-control" type="password" name="rePwd" id="rePwd"/>
-            <span id="rePwdErr" class="invalid-feedback">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
-        </div>
-        
-        <div class="form-group">
-            <label class="control-label" for="name">이름</label>
-            <input class="form-control" type="text" name="name" id="name"/>
-            <span id="nameRegErr" class="invalid-feedback">2글자 이상 10글자 이하를 입력하세요.</span>
-        </div>
-        
-       <div class="form-group">
-            <label class="control-label" for="birth">생일</label>
-            <input class="form-control" type="date" name="birth" id="birth"/>
-            <span id="birthRegErr" class="invalid-feedback">2글자 이상 10글자 이하를 입력하세요.</span>
-        </div>
-        
-        <button class="btn btn-success" id="add-btn" type="submit" disabled>가입</button>
-    </form>
-</div><!-- .container -->
 
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-<script src="../header.js"></script>
-<script src="signup.js"></script>
+      <div class="form-group">
+        <label class="control-label" for="email">이메일</label> <input class="form-control"
+          type="email" name="email" id="email" /> <span id="emailErr" class="invalid-feedback">올바른
+          이메일 형식이 아닙니다. 다시 입력해 주세요.</span> <span id="overlapErr" class="invalid-feedback">중복된 아이디
+          입니다.</span>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label" for="password">비밀번호</label> <input class="form-control"
+          type="password" name="password" id="password" /> <span id="passwordRegErr" class="invalid-feedback">8글자
+          이상 입력하세요.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="rePwd">비밀번호 재확인</label> <input class="form-control"
+          type="password" name="rePwd" id="rePwd" /> <span id="rePwdErr" class="invalid-feedback">비밀번호와
+          일치하지 않습니다. 다시 입력해 주세요.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="name">이름</label> <input class="form-control" type="text"
+          name="name" id="name" /> <span id="nameRegErr" class="invalid-feedback">2글자 이상
+          15글자 이하를 입력하세요.</span>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="birth">생일</label> <input class="form-control" type="date"
+          name="birth" id="birth" /> <span id="birthRegErr" class="invalid-feedback">생일을 선택
+          또는 입력하세요.</span>
+      </div>
+      
+      
+      <label class="checkbox-inline"> <input type="checkbox" name="checkAll" 
+      id="inlineCheckbox1" value="option1"> 추천 상품, 이벤트 및 마케팅 정보 수신에 동의(선택) </label> 
+      <div id="checkBox" class="form-group">
+      <label class="checkbox-inline"> <input type="checkbox" name="checkOne" 
+      id="emailCheck" > Email </label>
+      <label class="checkbox-inline"> <input type="checkbox" name="checkOne"
+      id="phoneCheck" > SMS </label>
+      </div>
+
+      <button class="btn btn-danger" id="add-btn" type="button" disabled>가입</button>
+    </form>
+  </div>
+  <!-- .container -->
+
+  <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../header.js"></script>
+  <script src="signup.js"></script>
 </body>
 </html>
 

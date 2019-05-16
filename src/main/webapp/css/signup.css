@@ -1,28 +1,27 @@
 @charset "UTF-8";
 
-
- /* 회원가입버튼 가운데정렬 */
-#signup { 
-  
+/* 회원가입버튼 가운데정렬 */
+#signup {
   text-align: center;
 }
 
- /* 로그아웃 버튼 숨기기 */
+/* 로그아웃 버튼 숨기기 */
 .bit-invisible {
   display: none;
 }
 
-
 div.vacuum {
-  border:1px solid red;
+  border: 1px solid red;
   width: 800px;
 }
 
-  /* .help-block 을 일단 보이지 않게 설정 */
-        #myForm .help-block{
-            display: none;
-        }
-        /* glyphicon 을 일단 보이지 않게 설정 */
-        #myForm .glyphicon{
-            display: none;
-        }
+/* .help-block 을 일단 보이지 않게 설정 */
+#myForm.help-block {
+  display: none;
+}
+/* glyphicon 을 일단 보이지 않게 설정 */
+#myForm.glyphicon {
+  display: none;
+}
+
+checkBox

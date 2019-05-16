@@ -114,7 +114,7 @@ email           VARCHAR(40)  NOT NULL COMMENT '이메일(아이디)', -- 이메�
 password        VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
 name            VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
 nickname        VARCHAR(50)  NULL     COMMENT '별명', -- 별명
-birth           VARCHAR(8)   NOT NULL COMMENT '생년월일', -- 생년월일
+birth           VARCHAR(20)  NOT NULL COMMENT '생년월일', -- 생년월일
 sms_check       BOOLEAN      NOT NULL COMMENT 'sms 수신동의', -- sms 수신동의
 email_check     BOOLEAN      NOT NULL COMMENT '이메일 수신동의', -- 이메일 수신동의
 phone_check     BOOLEAN      NOT NULL COMMENT '휴대폰인증여부', -- 휴대폰인증여부

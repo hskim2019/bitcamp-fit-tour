@@ -128,7 +128,32 @@
     #{phoneCheck},
     #{rank})
   </insert>
-
+<insert id="signUp" parameterType="member">
+    insert into member(
+    login_type_id,
+    email,
+    password,
+    name,
+    nickname,
+    birth,
+    sms_check,
+    email_check,
+    tel,
+    phone_check,
+    rank)
+    values(
+    1,
+    #{email},
+    password(#{password}),
+    #{name},
+  '회원',
+    #{birth},
+    #{smsCheck},
+    #{emailCheck},
+    '0',
+    0,
+    1)
+  </insert>
   <update id="update" parameterType="member">
     update member
     <set>

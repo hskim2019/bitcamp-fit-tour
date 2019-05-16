@@ -14,21 +14,18 @@ $('#add-btn').click(() => {
     email: $('#email').val(),
     password: $('#password').val(),
     name: $('#name').val(),
-    nickname: $('#nickname').val(),
     birth: $('#birth').val(),
     smsCheck: $('#smsCheck').val(),
-    emailCheck: $('#emailCheck').val(),
-    phoneCheck: $('#phoneCheck').val(),
-    tel: $('#tel').val(),
-    rank: $('#rank').val(),
-    loginTypeNo: $('#typeName').val()
+    emailCheck: $('#emailCheck').prop("checked"),
+    phoneCheck: $('#phoneCheck').prop("checked")
+
    
     
   },
   function(data) {
     
     if(data.status == 'success') {
-      location.href = "index.html";  
+      location.href = "../../html/index.html";  
     } else {
       alert('등록 실패 입니다.\n' + data.message);
     }
@@ -59,29 +56,30 @@ $("#email").keyup(function(){
   
   
 });
-$("#pwd").keyup(function(){
-  var pwd=$(this).val();
+$("#password").keyup(function(){
+  var password=$(this).val();
   // 비밀번호 검증할 정규 표현식
   var reg=/^.{8,}$/;
-  if(reg.test(pwd)){// 정규표현식을 통과 한다면
-              $("#pwdRegErr").hide();
-              successState("#pwd");
+  
+  if(reg.test(password)){// 정규표현식을 통과 한다면
+              $("#passwordRegErr").hide();
+              successState("#password");
             
   }else{// 정규표현식을 통과하지 못하면
-              $("#pwdRegErr").show();
-              errorState("#pwd");
+              $("#passwordRegErr").show();
+              errorState("#password");
   }
-  pwdCheckup();
+  passwordCheckup();
 });
 
 $("#rePwd").keyup(function(){
-  pwdCheckup();
+  passwordCheckup();
 });
 
 $("#name").keyup(function(){
   var name=$(this).val();
-  //  검증할 정규 표현식
-  var reg=/^[가-힣a-z0-9_-]{2,10}$/;
+  // 검증할 정규 표현식
+  var reg=/^[가-힣a-zA-Z0-9_-]{2,15}$/;
   if(reg.test(name)){// 정규표현식을 통과 한다면
               $("#nameRegErr").hide();
               successState("#name");
@@ -93,11 +91,11 @@ $("#name").keyup(function(){
   }
 });
 
-$("#birth").click(function(){
+$("#birth").on("mouseleave keyup",function(){
   var birth=$(this).val();
   // 생일 검증할 정규 표현식
-  var reg=/^.{2,11}$/;
- 
+  var reg=/^.{10,}$/;
+  
   if(reg.test(birth)){// 정규표현식을 통과 한다면
               $("#birthRegErr").hide();
               successState("#birth");
@@ -109,9 +107,9 @@ $("#birth").click(function(){
   }
 });
 
-function pwdCheckup(){  //비밀번호 같은지
+function passwordCheckup(){  // 비밀번호 같은지
   var rePwd=$("#rePwd").val();
-  var pw=$("#pwd").val();
+  var pw=$("#password").val();
   // 비밀번호 같은지 확인
   if(rePwd==pw){// 비밀번호 같다면
       $("#rePwdErr").hide();
@@ -137,7 +135,9 @@ function successState(sel){
   for (invalid of invalids) {
     countInvalid++;
     if(countInvalid >0){
-    $("#myForm button[type=submit]")
+    $("#add-btn")
+    .removeClass("btn-success")
+  .addClass("btn-danger")
                 .attr("disabled","disabled");
     }
   }
@@ -147,9 +147,11 @@ function successState(sel){
     for (valid of valids) {
       
       countValid++;
-      if(countValid ==4){ //입력폼 수
+      if(countValid ==5){ // 입력폼 수
         
-        $("#myForm button[type=submit]")
+        $("#add-btn")
+        .removeClass("btn-danger")
+  .addClass("btn-success")
         .removeAttr("disabled");
       }
     }
@@ -169,13 +171,51 @@ function errorState(sel){
     countInvalid++;
     if(countInvalid >0){
     
-    $("#myForm button[type=submit]")
+    $("#add-btn")
+    .removeClass("btn-success")
+  .addClass("btn-danger")
                 .attr("disabled","disabled");
     }
   }
 };
 
+function allCheckFunc( obj ) {
+  $("[name=checkOne]").prop("checked", $(obj).prop("checked") );
+}
 
+/* 체크박스 체크시 전체선택 체크 여부 */
+function oneCheckFunc( obj )
+{
+var allObj = $("[name=checkAll]");
+var objName = $(obj).attr("name");
+
+if( $(obj).prop("checked") )
+{
+  checkBoxLength = $("[name="+ objName +"]").length;
+  checkedLength = $("[name="+ objName +"]:checked").length;
+
+  if( checkBoxLength == checkedLength ) {
+    allObj.prop("checked", true);
+  } else {
+    allObj.prop("checked", false);
+  }
+}
+else
+{
+  allObj.prop("checked", false);
+}
+}
+
+$(function(){
+$("[name=checkAll]").click(function(){
+  allCheckFunc( this );
+});
+$("[name=checkOne]").each(function(){
+  $(this).click(function(){
+    oneCheckFunc( $(this) );
+  });
+});
+});
 
 
 

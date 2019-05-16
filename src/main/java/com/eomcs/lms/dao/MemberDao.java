@@ -7,6 +7,7 @@ import com.eomcs.lms.domain.Member;
 
 public interface MemberDao {
   int insert(Member member);
+  int signUp(Member member);
   List<Member> findAll(Map<String,Object> paramMap);
   Member findByNo(int no);
   Member findByEmailPassword(Map<String,Object> paramMap);

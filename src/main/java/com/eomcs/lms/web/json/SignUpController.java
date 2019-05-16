@@ -19,7 +19,7 @@ public class SignUpController {
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     try {
-      memberService.add(member);
+      memberService.signUp(member);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");

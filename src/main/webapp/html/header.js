@@ -64,8 +64,11 @@ function loadLoginUser() {
         loginState.className.replace('bit-invisible', '');
       document.querySelector('#login-username').innerHTML = data.user.name;
       
-      document.querySelector('#login-userphoto').src = 
-        "/bitcamp-fit-tour/upload/member/" + data.user.photo;
+      if(data.user.photo){
+        document.querySelector('#login-userphoto').src = 
+          "/bitcamp-fit-tour/upload/member/" + data.user.photo;
+      }
+      
     } else {
       notLoginState.className = 
         notLoginState.className.replace('bit-invisible', '');

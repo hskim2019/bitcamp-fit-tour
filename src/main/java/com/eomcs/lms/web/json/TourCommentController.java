@@ -20,6 +20,7 @@ public class TourCommentController {
   //tourCommentAdd
   @PostMapping("add")
   public Object add(TourComment tourComment) {
+    System.out.println(tourComment);
     HashMap<String,Object> content = new HashMap<>();
     try {
       tourCommentService.add(tourComment);

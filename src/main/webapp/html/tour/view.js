@@ -1,7 +1,9 @@
 var param = location.href.split('?')[1],
     tourNo = param.split('=')[1],
-    templateSrc = $('#comment-template').html(),
-    trGenerator = Handlebars.compile(templateSrc),
+    commentTemplateSrc = $('#comment-template').html(),
+    reCommenttemplateSrc = $('#reComment-template').html(),
+    commentGenerator = Handlebars.compile(commentTemplateSrc),
+    reCommentGenerator = Handlebars.compile(reCommenttemplateSrc),
     pageNo = 1,
     addDeleteCount = 0,
     storage = {};
@@ -48,7 +50,7 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
         '&addDeleteCount=' + addDeleteCount + 
         '&originCommentNo=' + originCommentNo,
       function(obj) {
-    $(trGenerator(obj)).appendTo($('#comment'));
+    $(commentGenerator(obj)).appendTo($('#comment'));
     commentAmountUpdate(obj.commentAmount, true);
     showUpdateDeleteButton();
     showReCommentListButton();
@@ -72,34 +74,10 @@ function showUpdateDeleteButton() {
     
   if(user.no ==  $(memberNode).attr('id')) {
     $(memberNode).parent().next().children().show();
-      giveUdpateDeleteBtnId();
     }
   }
 };
 
-//Give Update,Delete Button Id
-function giveUdpateDeleteBtnId() {
-
-  var deleteButtons = $('.bit-comment-delete-btn');
-  for(deleteButton of deleteButtons) {
-    if ($(deleteButton).attr('id')) 
-      continue;
-
-    var commentNoNode = $(deleteButton).parent().prev().prev().children().first();
-    $(deleteButton).attr('id', 'delete' + commentNoNode.val());
-
-  }
-
-  var updateButtons = $('.bit-comment-update-btn');
-  for(updateButton of updateButtons) {
-    if ($(updateButton).attr('id')) 
-      continue;
-
-    var commentNoNode = $(updateButton).parent().prev().prev().children().first();
-    $(updateButton).attr('id', 'update' + commentNoNode.val());
-
-  }
-}
 
 //CommentAmount Update
 function commentAmountUpdate(commentAmount, init) {
@@ -137,7 +115,7 @@ $(document.body).bind('addEventAddButton', () => {
             }]
           };
           
-          $(trGenerator(newComment)).prependTo($('#comment'));
+          $(commentGenerator(newComment)).prependTo($('#comment'));
           showUpdateDeleteButton();
           $(document.body).trigger('addEventUpdateDeleteButton');
           commentAmountUpdate(1, false);
@@ -157,7 +135,8 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
   //AddEvent Comment Delete Button
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
-    var commentNo = $(e.target).attr('id').replace(/[^0-9]/g,"");
+    console.log($(e.target).parent().parent());
+    var commentNo = $(e.target).parent().parent().attr('id');
     $.getJSON('../../app/json/tourcomment/delete?no=' + commentNo,
         function(obj) {
           if (obj.status == 'success') {
@@ -201,7 +180,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
       e.preventDefault();
       $.post('../../app/json/tourcomment/update',
           {
-            no : $(e.target).prev().attr('id').replace(/[^0-9]/g,""),
+            no : $(e.target).parent().parent().attr('id'),
             content : contentNode.val()
           }, 
           function(obj) {
@@ -259,11 +238,7 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
         '&addDeleteCount=' + addDeleteCount + 
         '&originCommentNo=' + originCommentNo,
       function(obj) {
-        for(tourComment of obj.tourComment){
-          tourComment.member.name = '　└─　' + tourComment.member.name
-          tourComment.content = '　　　　' + tourComment.content
-        }
-        $(ReCommnetListButton).parent().parent().after(trGenerator(obj));
+        $(ReCommnetListButton).parent().parent().after(reCommentGenerator(obj));
         showUpdateDeleteButton();
     if(user){
       $(document.body).trigger('addEventUpdateDeleteButton');
@@ -278,12 +253,12 @@ function showReCommentListButton() {
   
   for(commentRow of $('.commentRow')){
     
-    var commentNo = $(commentRow).children().first().children().first().val();
+    var commentNo = $(commentRow).attr('id');
     $.ajaxSetup({async:false});
     $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + commentNo,
        function(obj) {
          if(obj.commentAmount != 0){
-           var reCommentListBtn = $(commentRow).children().eq(5).children().first();
+           var reCommentListBtn = $(commentRow).children().eq(4).children().first();
              $(reCommentListBtn).removeClass('bit-invisible');
              $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
              
@@ -302,7 +277,7 @@ $(document.body).bind('addEventReCommentListButton', () => {
   $('.bit-recomment-list-btn').off().click((e)=>{
     e.preventDefault();
     $(e.target).hide();
-    var originCommentNo = $(e.target).parent().parent().children().first().children().first().val();
+    var originCommentNo = $(e.target).parent().parent().attr('id');
     reCommentList(tourNo, 1, 0, originCommentNo, e.target);
     
   });
@@ -317,57 +292,64 @@ function showReCommentAddButton() {
   }
 }
 
-//AddEvnet ReCommentAddButton
+//AddEvnet ReCommentAddButton and AddEventReCommentSaveButton
 $(document.body).bind('addEventReCommentAddButton', () => {
   
+  //AddEvent ReCommentAddButton
   $('.bit-recomment-add-btn').off().click((e)=>{
-    $('.bit-recomment-add-btn').off();
+    
     e.preventDefault();
-    $('<div class="col-sm-12" ><input type="text" name="recommentContent" class="col-sm-11" >' +
-          '<button type="button" class="btn btn-primary col-sm-0">등록</button>')
+    $(e.target).off();
+    $('<div class="col-sm-12"><input type="text" name="recommentContent" class="col-sm-11" >' +
+          '<button type="button" class="recomment-save-button btn btn-primary col-sm-0">등록</button>')
           .insertAfter($(e.target).parent());
+    
+    $(document.body).trigger('addEventReCommentSaveButton');
   });
-});
-
-//AddEvent Comment Add Button
-$(document.body).bind('addEventRecommentAddButton', () => {
-  $('#comment-add-button').off().click((e) => {
-    e.preventDefault();
+  
+  //AddEventReCommentSaveButton
+  $(document.body).bind('addEventReCommentSaveButton', () => {
+    
+  $('.recomment-save-button').off().click((e)=>{
+    
+    var parentNo = ($(e.target).parent().parent().attr('id'));
     $.post('../../app/json/tourcomment/add',
-      {
-        tourNo : tourNo,
-        memberNo : user.no,
-        parentNo : 0,
-        level : 1,
-        content : $('#comment-add').val()
-      }, 
-      function(obj) {
-        if (obj.status == 'success') {
-          var newComment ={
-            'tourComment' : [{
-            'no': obj.no,
-            'content': $('#comment-add').val(),
-            'createdDate' : now_yyyy_mm_dd_hh_mm(),
-            'member' : {name: user.name, no: user.no}
-            }]
-          };
-          
-          $(trGenerator(newComment)).prependTo($('#comment'));
-          showUpdateDeleteButton();
-          $(document.body).trigger('addEventUpdateDeleteButton');
-          commentAmountUpdate(1, false);
-          $('#comment-add').val('');
-          addDeleteCount--;
-          checkMoreComment();
+        {
+      tourNo : tourNo,
+      memberNo : user.no,
+      originCommentNo : parentNo,
+      level : 2,
+      content : $(e.target).prev().val()
+        }, 
+        
+        function(obj) {
+          if (obj.status == 'success') {
+            var newReComment ={
+                'tourComment' : [{
+                  'no': obj.no,
+                  'content': $(e.target).prev().val(),
+                  'createdDate' : now_yyyy_mm_dd_hh_mm(),
+                  'member' : {name: user.name, no: user.no}
+                }]
+            };
+            //newReComment.member.name = '　└─　' + newReComment.member[0].name
+            //newReComment.content = '　　　　' + newReComment.content
+            $(reCommentGenerator(newReComment)).insertAfter($(e.target));
+            showUpdateDeleteButton();
+            $(document.body).trigger('addEventUpdateDeleteButton');
+            $(e.target).prev().val('');
+            //addDeleteCount--;
+            //checkMoreComment();
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
-    });
+        });
   });
+});
 });
 
 
-
+//Print current time yyyy_mm_dd_hh_mm format
 function now_yyyy_mm_dd_hh_mm () {
   now = new Date();
   year = "" + now.getFullYear();
@@ -415,7 +397,7 @@ function now_yyyy_mm_dd_hh_mm () {
 //            }]
 //        };
 //
-//        $(trGenerator(obj)).prependTo(comment);
+//        $(commentGenerator(obj)).prependTo(comment);
 //        $(document.body).trigger('addEventUpdateDeleteButton');
 //        showUpdateDeleteButton();
 //        var commentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")),
@@ -431,5 +413,3 @@ function now_yyyy_mm_dd_hh_mm () {
 //    });
 //});
 //});  // addEventReplyButton
-
-//Print current time yyyy_mm_dd_hh_mm format

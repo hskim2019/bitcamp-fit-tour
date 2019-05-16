@@ -121,6 +121,7 @@ $(document.body).bind('addEventAddButton', () => {
           commentAmountUpdate(1, false);
           $('#comment-add').val('');
           addDeleteCount--;
+          showReCommentAddButton();
           checkMoreComment();
           } else {
             alert('등록 실패입니다!\n' + obj.message)
@@ -238,7 +239,7 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
         '&addDeleteCount=' + addDeleteCount + 
         '&originCommentNo=' + originCommentNo,
       function(obj) {
-        $(ReCommnetListButton).parent().parent().after(reCommentGenerator(obj));
+        $(ReCommnetListButton).parent().prev().append(reCommentGenerator(obj));
         showUpdateDeleteButton();
     if(user){
       $(document.body).trigger('addEventUpdateDeleteButton');
@@ -300,9 +301,9 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     
     e.preventDefault();
     $(e.target).off();
-    $('<div class="col-sm-12"><input type="text" name="recommentContent" class="col-sm-11" >' +
-          '<button type="button" class="recomment-save-button btn btn-primary col-sm-0">등록</button>')
-          .insertAfter($(e.target).parent());
+    $('<div class="col-sm-12" style="font-size:15px; padding: 30px 30px 30px 50px;"><input type="text" name="recommentContent" class="col-sm-10" >' +
+          '<button type="button" class="recomment-save-button btn btn-primary col-sm-0">등록</button></div>')
+          .insertAfter($(e.target));
     
     $(document.body).trigger('addEventReCommentSaveButton');
   });
@@ -312,7 +313,7 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     
   $('.recomment-save-button').off().click((e)=>{
     
-    var parentNo = ($(e.target).parent().parent().attr('id'));
+    var parentNo = ($(e.target).parent().parent().parent().attr('id'));
     $.post('../../app/json/tourcomment/add',
         {
       tourNo : tourNo,
@@ -334,7 +335,8 @@ $(document.body).bind('addEventReCommentAddButton', () => {
             };
             //newReComment.member.name = '　└─　' + newReComment.member[0].name
             //newReComment.content = '　　　　' + newReComment.content
-            $(reCommentGenerator(newReComment)).insertAfter($(e.target));
+            
+            $(reCommentGenerator(newReComment)).insertAfter($(e.target).parent());
             showUpdateDeleteButton();
             $(document.body).trigger('addEventUpdateDeleteButton');
             $(e.target).prev().val('');

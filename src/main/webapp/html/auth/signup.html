@@ -17,12 +17,11 @@
     
     <div class="form-group">
             <label class="control-label" for="email">이메일</label>
-            <input class="form-control" type="text" name="email" id="email"/>
-            <span id="emailErr" class="invalid-feedback">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span>
-            <span id="overlapErr" class="invalid-feedback">중복된 아이디 입니다.</span>
+            <input class="form-control" type="email" name="email" id="email"/> 
+            <span id="emailErr" class="invalid-feedback">올바른 이메일 형식이 아닙니다. 다시 입력해 주세요.</span> <span id="overlapErr" class="invalid-feedback">중복된 아이디 입니다.</span>
         </div>
-    
         
+    
         <div class="form-group">
             <label class="control-label" for="pwd">비밀번호</label>
             <input class="form-control" type="password" name="pwd" id="pwd"/>
@@ -34,7 +33,19 @@
             <input class="form-control" type="password" name="rePwd" id="rePwd"/>
             <span id="rePwdErr" class="invalid-feedback">비밀번호와 일치하지 않습니다. 다시 입력해 주세요.</span>
         </div>
-       
+        
+        <div class="form-group">
+            <label class="control-label" for="name">이름</label>
+            <input class="form-control" type="text" name="name" id="name"/>
+            <span id="nameRegErr" class="invalid-feedback">2글자 이상 10글자 이하를 입력하세요.</span>
+        </div>
+        
+       <div class="form-group">
+            <label class="control-label" for="birth">생일</label>
+            <input class="form-control" type="date" name="birth" id="birth"/>
+            <span id="birthRegErr" class="invalid-feedback">2글자 이상 10글자 이하를 입력하세요.</span>
+        </div>
+        
         <button class="btn btn-success" id="add-btn" type="submit" disabled>가입</button>
     </form>
 </div><!-- .container -->

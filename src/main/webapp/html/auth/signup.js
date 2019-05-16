@@ -34,32 +34,6 @@ $('#add-btn').click(() => {
     }
   });
 });
-
-
-$("#pwd").keyup(function(){
-  var pwd=$(this).val();
-  // 비밀번호 검증할 정규 표현식
-  var reg=/^.{8,}$/;
-  if(reg.test(pwd)){// 정규표현식을 통과 한다면
-              $("#pwdRegErr").hide();
-              successState("#pwd");
-  }else{// 정규표현식을 통과하지 못하면
-              $("#pwdRegErr").show();
-              errorState("#pwd");
-  }
-});
-$("#rePwd").keyup(function(){
-  var rePwd=$(this).val();
-  var pwd=$("#pwd").val();
-  // 비밀번호 같은지 확인
-  if(rePwd==pwd){// 비밀번호 같다면
-      $("#rePwdErr").hide();
-      successState("#rePwd");
-  }else{// 비밀번호 다르다면
-      $("#rePwdErr").show();
-      errorState("#rePwd");
-  }
-});
 $("#email").keyup(function(){
   $("#overlapErr").hide();
   var email=$(this).val();
@@ -85,6 +59,72 @@ $("#email").keyup(function(){
   
   
 });
+$("#pwd").keyup(function(){
+  var pwd=$(this).val();
+  // 비밀번호 검증할 정규 표현식
+  var reg=/^.{8,}$/;
+  if(reg.test(pwd)){// 정규표현식을 통과 한다면
+              $("#pwdRegErr").hide();
+              successState("#pwd");
+            
+  }else{// 정규표현식을 통과하지 못하면
+              $("#pwdRegErr").show();
+              errorState("#pwd");
+  }
+  pwdCheckup();
+});
+
+$("#rePwd").keyup(function(){
+  pwdCheckup();
+});
+
+$("#name").keyup(function(){
+  var name=$(this).val();
+  //  검증할 정규 표현식
+  var reg=/^[가-힣a-z0-9_-]{2,10}$/;
+  if(reg.test(name)){// 정규표현식을 통과 한다면
+              $("#nameRegErr").hide();
+              successState("#name");
+              
+  }else{// 정규표현식을 통과하지 못하면
+              $("#nameRegErr").show();
+              errorState("#name");
+             
+  }
+});
+
+$("#birth").click(function(){
+  var birth=$(this).val();
+  // 생일 검증할 정규 표현식
+  var reg=/^.{2,11}$/;
+ 
+  if(reg.test(birth)){// 정규표현식을 통과 한다면
+              $("#birthRegErr").hide();
+              successState("#birth");
+              
+  }else{// 정규표현식을 통과하지 못하면
+              $("#birthRegErr").show();
+              errorState("#birth");
+             
+  }
+});
+
+function pwdCheckup(){  //비밀번호 같은지
+  var rePwd=$("#rePwd").val();
+  var pw=$("#pwd").val();
+  // 비밀번호 같은지 확인
+  if(rePwd==pw){// 비밀번호 같다면
+      $("#rePwdErr").hide();
+      successState("#rePwd");
+  }else{// 비밀번호 다르다면
+      $("#rePwdErr").show();
+      errorState("#rePwd");
+  }
+
+}
+
+
+
 // 성공 상태로 바꾸는 함수
 function successState(sel){
   $(sel)
@@ -107,7 +147,7 @@ function successState(sel){
     for (valid of valids) {
       
       countValid++;
-      if(countValid ==3){ //입력폼 다정상입력시에만
+      if(countValid ==4){ //입력폼 수
         
         $("#myForm button[type=submit]")
         .removeAttr("disabled");
@@ -115,9 +155,6 @@ function successState(sel){
     }
 
   }
-  
-  
-  
 };
 // 에러 상태로 바꾸는 함수
 function errorState(sel){

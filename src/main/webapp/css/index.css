@@ -1,0 +1,28 @@
+.bg {
+  background-image: url("../images/beach22.jpg");
+  height:500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+.navbar .navbar-toggler:focus {
+  outline-color: white;
+}
+
+.bit-logo {
+	background-image: url("/bitcamp-fit-tour/images/logo.png");
+  background-repeat: no-repeat;
+	width:194px; height:70px;
+	background-size: contain;
+	display:inline-block;
+}
+
+
+
+

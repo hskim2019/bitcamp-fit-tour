@@ -5,7 +5,9 @@
 }
 
 #bit-login-state img {
-  height: 30px;
+  height: 35px;
+  background-position: center;
+  border-radius: 10px;
 }
 
 .bit-logo {

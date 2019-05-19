@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>FitTour</title>
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/index.css">
@@ -11,87 +11,94 @@
 </head>
 <body>
 
-<div class="bg">
+<div class="bit-index-bg">
+<!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark ">
+
+  <!-- logo -->
+  <a class="navbar-brand bit-logo" href="/bitcamp-fit-tour/html/index.html"></a>
+  
+  <!-- navbar button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   
-  <a class="navbar-brand bit-logo" href="/bitcamp-fit-tour/html/index.html"></a>
-  
+  <!-- navbar list -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/notice/index.html">공지사항</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/notice/index.html">공지사항</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/member/index.html">회원관리</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/member/index.html">회원관리</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/index.html">투어</a></li>
-         <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/reservation/index.html">예약</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/index.html">투어</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/bitcamp-fit-tour/html/reservation/index.html">예약</a>
+      </li>
     </ul>
-     <div id="bit-not-login-state" class="bit-invisible">
-      <a id="login-menu" class="btn btn-success btn-sm" 
-         href='/bitcamp-fit-tour/html/auth/login.html'>로그인</a>
-      <a id="login-menu" class="btn btn-danger btn-sm" 
-         href='/bitcamp-fit-tour/html/auth/signup.html'>회원가입</a>
-    </div>
-      
-    <div id="bit-login-state" class="bit-invisible">
-      <img id="login-userphoto" src='/bitcamp-fit-tour/images/default.jpg'>
-      <span id="login-username"></span>
-      <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a> 
+    
+    <!-- not login state -->
+    <div id="bit-not-login-state" class="bit-invisible">
+      <a id="login-menu" class="btn btn-success btn-sm" href='/bitcamp-fit-tour/html/auth/login.html'>로그인</a>
+      <a id="login-menu" class="btn btn-danger btn-sm" href='/bitcamp-fit-tour/html/auth/signup.html'>회원가입</a>
     </div>
     
-    <!--
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="검색">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-    </form>
-    -->
+    <!-- login state -->
+    <div id="bit-login-state" class="bit-invisible">
+      <img id="login-userphoto" class="img-rounded mr-sm-2" src='/bitcamp-fit-tour/images/default.jpg'>
+      <span id="login-username" class="mr-sm-2"></span>
+      <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a> 
+    </div>
   </div>
 </nav>
-<div></div>
-<!-- Search form -->
-<form class="form-inline col-sm-5 offset-4" style="opacity: 0.8;">
+
+<!-- Search -->
+<form class="form-inline col-sm-5 offset-4 mt-5" style="opacity: 0.8;">
   <i class="fas fa-search" aria-hidden="true"></i>
   <input class="form-control form-control ml-3 w-75" type="text" placeholder="여행지나 상품을 검색해보세요!" >
 </form>
-</div>
 
+</div> <!-- bit-index-bg -->
+
+<!-- container -->
 <div class="container">
-<div class="card-group pt-sm-5">
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">미서부</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+<!-- card group -->
+  <div class="card-group mt-sm-5">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">미서부</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">유럽</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">유럽</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">일본/아시아/그외지역</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">일본/아시아/그외지역</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
     </div>
-  </div>
-</div>
-</div>
+    
+  </div><!-- card group -->
+</div> <!-- container -->
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.slim.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="index.js"></script>
-
 </body>
 </html>

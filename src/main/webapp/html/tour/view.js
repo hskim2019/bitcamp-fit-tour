@@ -10,6 +10,7 @@ var param = location.href.split('?')[1],
     
 if(sessionStorage.getItem('loginUser')){
   var user = JSON.parse(sessionStorage.getItem('loginUser'))
+  console.log(user)
 }
 
 if (param) {
@@ -46,6 +47,7 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
         '&addDeleteCount=' + addDeleteCount + 
         '&originCommentNo=' + originCommentNo,
       function(obj) {
+      console.log(obj);
     $(commentGenerator(obj)).appendTo($('#comment'));
     commentAmountUpdate(obj.commentAmount, true);
     showUpdateDeleteButton();
@@ -90,6 +92,7 @@ function commentAmountUpdate(commentAmount, init) {
 
 //AddEvent Comment Add Button
 $(document.body).bind('addEventAddButton', () => {
+  
   $('#comment-add-button').off().click((e) => {
     e.preventDefault();
     $.post('../../app/json/tourcomment/add',
@@ -107,7 +110,7 @@ $(document.body).bind('addEventAddButton', () => {
             'no': obj.no,
             'content': $('#comment-add').val(),
             'createdDate' : now_yyyy_mm_dd_hh_mm(),
-            'member' : {name: user.name, no: user.no}
+            'member' : {name: user.name, no: user.no, photo: user.photo}
             }]
           };
           
@@ -118,11 +121,33 @@ $(document.body).bind('addEventAddButton', () => {
           $('#comment-add').val('');
           addDeleteCount--;
           showReCommentAddButton();
+          $('#comment-add-button').attr("disabled", true);
+          $('#comment-add-button').addClass("btn-secondary");
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
     });
   });
+  
+  //CommentAddButton Active Check
+  $('#comment-add').keyup(function() {
+    console.log($('#comment-add').val());
+    
+    var noBlacnkComment = $('#comment-add').val().replace(/\s/gi, ""); // remove blanck comment
+
+    if (noBlacnkComment == null || noBlacnkComment ==''){
+      $('#comment-add-button').attr("disabled", true);
+      $('#comment-add-button').addClass("btn-secondary");
+      return;
+    }
+    
+    $('#comment-add-button').removeClass("btn-secondary",);
+    $('#comment-add-button').addClass("btn-primary",);
+    $('#comment-add-button').removeAttr("disabled");
+    
+  });
+
+  
 });
 
 //AddEvent Comment Update,Delete Button
@@ -342,11 +367,11 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     var originCommentNo = ($(e.target).parent().parent().parent().attr('id'));
     $.post('../../app/json/tourcomment/add',
         {
-      tourNo : tourNo,
-      memberNo : user.no,
-      originCommentNo : originCommentNo,
-      level : 2,
-      content : $(e.target).prev().val()
+          tourNo : tourNo,
+          memberNo : user.no,
+          originCommentNo : originCommentNo,
+          level : 2,
+          content : $(e.target).prev().val()
         }, 
         
         function(obj) {
@@ -356,7 +381,7 @@ $(document.body).bind('addEventReCommentAddButton', () => {
                   'no': obj.no,
                   'content': $(e.target).prev().val(),
                   'createdDate' : now_yyyy_mm_dd_hh_mm(),
-                  'member' : {name: user.name, no: user.no}
+                  'member' : {name: user.name, no: user.no, photo:user.photo}
                 }]
             };
             

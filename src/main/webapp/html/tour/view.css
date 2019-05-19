@@ -3,3 +3,14 @@
   padding: 30px 30px 30px 50px;
 	
 }
+
+.commentRow img {
+  height: 35px;
+  background-position: center;
+  border-radius: 10px;
+  box-sizing : border-box;
+}
+
+#comment-add-button {
+	margin-bottom : 40px;
+}

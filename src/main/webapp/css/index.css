@@ -13,6 +13,9 @@
   background-size: cover;
 }
 
+.navbar-nav {
+  font-weight: 700;
+}
 
 .navbar:not(.top-nav-collapse) {
   background: transparent !important;

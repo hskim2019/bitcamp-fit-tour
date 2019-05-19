@@ -353,11 +353,27 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     $(e.target).off();
     $('<div class="col-sm-12" style="font-size:15px; padding: 30px 0px 30px 0px">'+
         '<input type="text" name="recommentContent" class="col-sm-10" >' +
-          ' <button type="button" class="btn btn-default btn-primary recomment-save-button">답글</button></div>')
+          ' <button type="button" class="btn btn-default btn-secondary recomment-save-button" disabled>답글</button></div>')
           .insertAfter($(e.target));
-    
     $(document.body).trigger('addEventReCommentSaveButton');
+  
+    $(e.target).next().children().first().keyup(function() {
+      
+      var noBlacnkComment = $(e.target).next().children().first().val().replace(/\s/gi, ""); // remove blanck comment
+  
+      if (noBlacnkComment == null || noBlacnkComment ==''){
+        $(e.target).next().children().first().next().attr("disabled", true);
+        $(e.target).next().children().first().next().addClass("btn-secondary");
+        return;
+      }
+      
+      $(e.target).next().children().first().next().removeClass("btn-secondary",);
+      $(e.target).next().children().first().next().addClass("btn-primary",);
+      $(e.target).next().children().first().next().removeAttr("disabled");
+      
+    });
   });
+  
   
   //AddEventReCommentSaveButton
   $(document.body).bind('addEventReCommentSaveButton', () => {

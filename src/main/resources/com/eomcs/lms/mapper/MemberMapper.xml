@@ -34,7 +34,8 @@
     name,
     email,
     registered_date,
-    tel
+    tel,
+    photo
   </sql>
 
   <select id="findAll" resultMap="memberMap" parameterType="map">
@@ -93,6 +94,7 @@
     email = #{email}
     and password = password(#{password})
   </select>
+  
 <select id="findByEmail" resultMap="memberMap" parameterType="map">
     select
     email

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.navbar-nav {
+  font-weight: 700;
+}
+
 .bit-main-header {
   min-height: 60px;
 }

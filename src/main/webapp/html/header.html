@@ -1,44 +1,42 @@
+<!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   
+  <!-- logo -->
   <a class="navbar-brand bit-logo" href="/bitcamp-fit-tour/html/index.html"></a>
+  
+  <!-- navbar button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
- 
-  
+  <!-- navbar list -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/notice/index.html">공지사항</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/notice/index.html">공지사항</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/member/index.html">회원관리</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/member/index.html">회원관리</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/index.html">투어</a></li>
-         <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/reservation/index.html">예약</a></li>
+        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/index.html">투어</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/bitcamp-fit-tour/html/reservation/index.html">예약</a>
+      </li>
     </ul>
-     <div id="bit-not-login-state" class="bit-invisible">
-      <a id="login-menu" class="btn btn-success btn-sm" 
-         href='/bitcamp-fit-tour/html/auth/login.html'>로그인</a>
-      <a id="login-menu" class="btn btn-danger btn-sm" 
-         href='/bitcamp-fit-tour/html/auth/signup.html'>회원가입</a>
+    
+    <!-- not login state -->
+    <div id="bit-not-login-state" class="bit-invisible">
+      <a id="login-menu" class="btn btn-success btn-sm" href='/bitcamp-fit-tour/html/auth/login.html'>로그인</a>
+      <a id="login-menu" class="btn btn-danger btn-sm" href='/bitcamp-fit-tour/html/auth/signup.html'>회원가입</a>
     </div>
     
-    
-      
+    <!-- login state -->
     <div id="bit-login-state" class="bit-invisible">
-      <img id="login-userphoto" src='/bitcamp-fit-tour/images/default.jpg'>
-      <span id="login-username"></span>
-      <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a> 
+      <img id="login-userphoto" class="img-rounded mr-sm-2" src='/bitcamp-fit-tour/images/default.jpg'>
+      <span id="login-username" class="mr-sm-2"></span>
+      <a id="logout-menu " class="btn btn-dark btn-sm" href='#'>로그아웃</a> 
     </div>
     
-    <!--
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="검색" aria-label="검색">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
-    </form>
-    -->
   </div>
-  
-  
 </nav>

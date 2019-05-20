@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 // => app-servlet.xml의 설정을 이 클래스가 대체한다.
 // 
 
-/*
+
 @Configuration 
 public class MailConfig {
   
@@ -19,26 +19,23 @@ public class MailConfig {
       JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
       mailSender.setHost("smtp.gmail.com");
       mailSender.setPort(587);
-       
+
       mailSender.setUsername("fittour8253@gmail.com");
       mailSender.setPassword("qlxmzoavm1");
       mailSender.setDefaultEncoding("UTF-8");
-     
       
-      
-       
+
       Properties props = mailSender.getJavaMailProperties();
       props.put("mail.transport.protocol", "smtp");
       props.put("mail.smtp.auth", "true");
       props.put("mail.smtp.starttls.enable", "true");
       props.put("mail.debug", "true");
-       
+
       return mailSender;
   }
   
 
 }
-*/
 
 
 

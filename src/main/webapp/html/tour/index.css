@@ -166,7 +166,7 @@ td:nth-child(4) {
       }
 
     * + .tiles {
-      margin-top: 2em;
+      /* margin-top: 2em; */
     }
 
 

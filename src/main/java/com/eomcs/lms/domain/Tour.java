@@ -14,20 +14,23 @@ public class Tour {
 	private int personnel;
 	private String transportation;
 	private int price;
+	private int cityNo;
 
 	private List<TourGuidancePhoto> tourPhoto;
 	private List<Theme> theme;
-
+	private City city;
+	private Country country;
+	
 
 	@Override
-  public String toString() {
-    return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
-        + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
-        + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
-        + price + ", tourPhoto=" + tourPhoto + ", theme=" + theme + "]";
-  }
+	public String toString() {
+		return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content=" + content
+				+ ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag=" + hashTag + ", personnel="
+				+ personnel + ", transportation=" + transportation + ", price=" + price + ", cityNo=" + cityNo
+				+ ", tourPhoto=" + tourPhoto + ", theme=" + theme + ", city=" + city + ", country=" + country + "]";
+	}
 
-  public int getNo() {
+	public int getNo() {
 		return no;
 	}
 
@@ -107,6 +110,14 @@ public class Tour {
 		this.price = price;
 	}
 
+	public int getCityNo() {
+		return cityNo;
+	}
+
+	public void setCityNo(int cityNo) {
+		this.cityNo = cityNo;
+	}
+
 	public List<TourGuidancePhoto> getTourPhoto() {
 		return tourPhoto;
 	}
@@ -123,7 +134,23 @@ public class Tour {
 		this.theme = theme;
 	}
 
+	public City getCity() {
+		return city;
+	}
 
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	
+  
 
 }
 

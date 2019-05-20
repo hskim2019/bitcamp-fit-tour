@@ -80,10 +80,10 @@ DROP TABLE IF EXISTS template_review_photo RESTRICT;
 DROP TABLE IF EXISTS free_review_photo RESTRICT;
 
 -- 도시
-DROP TABLE IF EXISTS tour_free_review_city RESTRICT;
+DROP TABLE IF EXISTS city RESTRICT;
 
 -- 국가
-DROP TABLE IF EXISTS tour_free_review_country RESTRICT;
+DROP TABLE IF EXISTS country RESTRICT;
 
 -- 자유후기댓글
 DROP TABLE IF EXISTS free_review_comment RESTRICT;
@@ -111,6 +111,7 @@ CREATE TABLE member (
 member_id       INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
 login_type_id   INTEGER      NOT NULL COMMENT '로그인유형번호', -- 로그인유형번호
 email           VARCHAR(40)  NOT NULL COMMENT '이메일(아이디)', -- 이메일(아이디)
+certification   VARCHAR(255) NOT NULL COMMENT '인증번호', -- 인증번호
 password        VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
 name            VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
 nickname        VARCHAR(50)  NULL     COMMENT '별명', -- 별명
@@ -136,7 +137,8 @@ member_id -- 회원번호
 CREATE UNIQUE INDEX UIX_member
 ON member ( -- 회원
 email ASC,         -- 이메일(아이디)
-login_type_id ASC  -- 로그인유형번호
+login_type_id ASC, -- 로그인유형번호
+certification ASC  -- 인증번호
 );
 
 ALTER TABLE member
@@ -145,6 +147,7 @@ MODIFY COLUMN member_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 -- 상품
 CREATE TABLE tour (
 tour_id        INTEGER      NOT NULL COMMENT '상품번호', -- 상품번호
+city_id        INTEGER      NULL     COMMENT '도시번호', -- 도시번호
 title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
 sub_heading    VARCHAR(255) NULL     COMMENT '소제목', -- 소제목
 content        TEXT         NOT NULL COMMENT '내용', -- 내용
@@ -636,44 +639,44 @@ ALTER TABLE free_review_photo
 MODIFY COLUMN photo_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '사진번호';
 
 -- 도시
-CREATE TABLE tour_free_review_city (
+CREATE TABLE city (
 city_id    INTEGER     NOT NULL COMMENT '도시번호', -- 도시번호
 country_id INTEGER     NOT NULL COMMENT '국가번호', -- 국가번호
-city       VARCHAR(50) NOT NULL COMMENT '도시이름' -- 도시이름
+city_name  VARCHAR(50) NOT NULL COMMENT '도시이름' -- 도시이름
 )
 COMMENT '도시';
 
 -- 도시
-ALTER TABLE tour_free_review_city
-ADD CONSTRAINT PK_tour_free_review_city -- 도시 기본키
+ALTER TABLE city
+ADD CONSTRAINT PK_city -- 도시 기본키
 PRIMARY KEY (
 city_id -- 도시번호
 );
 
-ALTER TABLE tour_free_review_city
+ALTER TABLE city
 MODIFY COLUMN city_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '도시번호';
 
 -- 국가
-CREATE TABLE tour_free_review_country (
-country_id INTEGER     NOT NULL COMMENT '국가번호', -- 국가번호
-country    VARCHAR(50) NOT NULL COMMENT '국가' -- 국가
+CREATE TABLE country (
+country_id   INTEGER     NOT NULL COMMENT '국가번호', -- 국가번호
+country_name VARCHAR(50) NOT NULL COMMENT '국가' -- 국가
 )
 COMMENT '국가';
 
 -- 국가
-ALTER TABLE tour_free_review_country
-ADD CONSTRAINT PK_tour_free_review_country -- 국가 기본키
+ALTER TABLE country
+ADD CONSTRAINT PK_country -- 국가 기본키
 PRIMARY KEY (
 country_id -- 국가번호
 );
 
 -- 국가 유니크 인덱스
-CREATE UNIQUE INDEX UIX_tour_free_review_country
-ON tour_free_review_country ( -- 국가
-country ASC -- 국가
+CREATE UNIQUE INDEX UIX_country
+ON country ( -- 국가
+country_name ASC -- 국가
 );
 
-ALTER TABLE tour_free_review_country
+ALTER TABLE country
 MODIFY COLUMN country_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '국가번호';
 
 -- 자유후기댓글
@@ -835,6 +838,16 @@ REFERENCES login_type ( -- 로그인유형
 login_type_id -- 로그인유형번호
 );
 
+-- 상품
+ALTER TABLE tour
+ADD CONSTRAINT FK_city_TO_tour -- 도시 -> 상품
+FOREIGN KEY (
+city_id -- 도시번호
+)
+REFERENCES city ( -- 도시
+city_id -- 도시번호
+);
+
 -- 일정(후기)
 ALTER TABLE template_review_date
 ADD CONSTRAINT FK_template_review_TO_template_review_date -- 여행후기(템플릿) -> 일정(후기)
@@ -847,11 +860,11 @@ review_id -- 여행후기 번호
 
 -- 일정(후기)
 ALTER TABLE template_review_date
-ADD CONSTRAINT FK_tour_free_review_city_TO_template_review_date -- 도시 -> 일정(후기)
+ADD CONSTRAINT FK_city_TO_template_review_date -- 도시 -> 일정(후기)
 FOREIGN KEY (
 city_id -- 도시번호
 )
-REFERENCES tour_free_review_city ( -- 도시
+REFERENCES city ( -- 도시
 city_id -- 도시번호
 );
 
@@ -1186,12 +1199,12 @@ free_review_id -- 자유후기번호
 );
 
 -- 도시
-ALTER TABLE tour_free_review_city
-ADD CONSTRAINT FK_tour_free_review_country_TO_tour_free_review_city -- 국가 -> 도시
+ALTER TABLE city
+ADD CONSTRAINT FK_country_TO_city -- 국가 -> 도시
 FOREIGN KEY (
 country_id -- 국가번호
 )
-REFERENCES tour_free_review_country ( -- 국가
+REFERENCES country ( -- 국가
 country_id -- 국가번호
 );
 
@@ -1257,11 +1270,11 @@ date_id -- 일정번호
 
 -- 자유후기방문도시
 ALTER TABLE free_review_city
-ADD CONSTRAINT FK_tour_free_review_city_TO_free_review_city -- 도시 -> 자유후기방문도시
+ADD CONSTRAINT FK_city_TO_free_review_city -- 도시 -> 자유후기방문도시
 FOREIGN KEY (
 city_id -- 도시번호
 )
-REFERENCES tour_free_review_city ( -- 도시
+REFERENCES city ( -- 도시
 city_id -- 도시번호
 );
 

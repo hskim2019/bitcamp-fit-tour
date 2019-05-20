@@ -17,6 +17,18 @@
     <result column="personnel" property="personnel"/>
     <result column="transportation" property="transportation"/>
     <result column="price" property="price"/>
+    <result column="city_id" property="cityNo"/>
+    
+    <association property="city" javaType="city">
+    <id column="city_id"        property="no"/>
+    <result column="country_id"  property="countryNo"/>
+    <result column="city_name"          property="cityName"/>
+    </association>
+    
+    <association property="country" javaType="country">
+    <id column="country_id"        property="no"/>
+    <result column="country_name"  property="countryName"/>
+    </association>
   </resultMap>
   
   <resultMap type="tour" id="tourPhotoMap">
@@ -55,19 +67,34 @@
       hash_tag, 
       personnel, 
       transportation, 
-      price
+      price,
+      cityNo
     from 
       tour
   </sql>
   
-  <select id="findAll" resultMap="tourMap" parameterType="map">
+<!--   <select id="findAll" resultMap="tourMap" parameterType="map">
     <include refid="select1"/>
     order by 
       tour_id desc
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
+  </select> -->
+  
+  <select id="findAll" resultMap="tourMap" parameterType="map">
+    select
+     *
+   from tour as t
+   join city as ci on t.city_id = ci.city_id
+   join country as co on ci.country_id = co.country_id   
+    order by 
+      tour_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
   </select>
+  
   
    <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
    select 

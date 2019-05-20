@@ -13,7 +13,7 @@ import com.eomcs.lms.service.MemberService;
 public class SignUpController {
   
   @Autowired MemberService memberService;
-  @Autowired 
+ 
 
   @PostMapping("add")
   public Object add(Member member) throws Exception {

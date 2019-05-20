@@ -230,7 +230,7 @@ function checkMoreComment() {
       
       if(allCommentAmount > currentPageCommentAmount){
         $('#more-comment-btn').show();
-        $('#more-comment-btn').html('댓글' + (allCommentAmount -currentPageCommentAmount) + '개 더보기');
+        $('#more-comment-btn').html('댓글' + (allCommentAmount -currentPageCommentAmount) + '개 더보기 ' + '<i class="fas fa-angle-down"></i>');
         $(document.body).trigger('addEventMoreCommentButton');
         
       } else {
@@ -289,7 +289,8 @@ function showReCommentListButton() {
          if(obj.commentAmount != 0){
            var reCommentListBtn = $(commentRow).children().eq(4).children().first();
              $(reCommentListBtn).removeClass('bit-invisible');
-             $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기');
+             $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기 ' + '<i class="fas fa-angle-down"></i>');
+             
              storage['pageNo' + originCommentNo] = 1;
              storage['addDeleteCount' + originCommentNo] = 0;
            }
@@ -327,7 +328,7 @@ function checkMoreReComment(reCommentListButton, allReCommentAmount) {
       
       if(allReCommentAmount > currentPageReCommentAmount){
         $(reCommentListButton).show();
-        $(reCommentListButton).html('답글 '+(allReCommentAmount-currentPageReCommentAmount) +'개 더보기')
+        $(reCommentListButton).html('답글 '+(allReCommentAmount-currentPageReCommentAmount) +'개 더보기 ' + '<i class="fas fa-angle-down"></i>')
         $(reCommentListButton).addClass('bit-recomment-list-button');
       } else {
         $(reCommentListButton).hide();
@@ -406,6 +407,8 @@ $(document.body).bind('addEventReCommentAddButton', () => {
             $(document.body).trigger('addEventUpdateDeleteButton');
             $(e.target).prev().val('');
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] -1;
+            $(e.target).attr("disabled", true);
+            $(e.target).addClass("btn-secondary");
             console.log(storage['addDeleteCount' + originCommentNo]);
           } else {
             alert('등록 실패입니다!\n' + obj.message)

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
   <link rel="stylesheet" href="view.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 <body>
@@ -115,7 +116,7 @@
   
   
   <!-- next-comment-btn -->
-  <div class="form-group row">
+  <div class="form-group row mt-3">
   <a href="#" id="more-comment-btn" class="col-sm-12">댓글 더보기</a>
   </div>
   
@@ -153,9 +154,8 @@
     </div>
 
     <div class="col-sm-12">
-      <a href="#" class="bit-recomment-list-btn bit-invisible">답글보기</a>
+      <a href="#" class="bit-recomment-list-btn bit-invisible">답글보기 </a>
     </div>
-    
 </div>
 {{/each}}
 </script>
@@ -178,10 +178,11 @@
       <input type="text" readonly class="form-control-plaintext ml-5" value={{content}}>
     </div>
 
+    {{!-- 대댓글 임시 미구현
     <div class="col-sm-12">
       <button type="button" class="bit-recomment-add-btn bit-invisible">답글</a>
     </div>
-
+    --}}
     
 </div>
 {{/each}}

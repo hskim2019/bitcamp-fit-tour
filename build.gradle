@@ -13,6 +13,10 @@ repositories {
 
 // 프로젝트에서 사용할 외부 라이브러리 정보 
 dependencies {
+    
+    //
+
+
     // servlet-api
     // => 프로젝트를 컴파일 할 때만 사용할 라이브러리라면 providedCompile 메서드를 사용하라.
     // => 이 메서드로 지정된 라이브러리는 배포할 때 배포 파일(.war, .jar 등)에 포함되지 않는다. 
@@ -31,6 +35,10 @@ dependencies {
     
     // Spring WebMVC 프레임워크 라이브러리
     compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.6.RELEASE'
+    
+    // Spring 콘텍스트 서포터 email 보내기 이용
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.1.7.RELEASE'
+    
     
     // Mybatis를 Spring과 연동시키는 라이브러리
     compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.0'

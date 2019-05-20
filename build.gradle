@@ -28,6 +28,8 @@ dependencies {
     // MariaDB JDBC Driver
     compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.0'
     
+    // 자바 메일보내기
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
     
     // Spring IoC 컨테이너 라이브러리
     // => Spring WebMVC 라이브러리를 추가하면 의존 라이브러리로 자동 추가된다.

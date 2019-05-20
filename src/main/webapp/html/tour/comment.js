@@ -102,7 +102,6 @@ $(document.body).bind('addEventAddButton', () => {
   
   //CommentAddButton Active Check
   $('#comment-add').keyup(function() {
-    console.log($('#comment-add').val());
     
     var noBlacnkComment = $('#comment-add').val().replace(/\s/gi, ""); // remove blanck comment
 

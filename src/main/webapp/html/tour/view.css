@@ -14,3 +14,19 @@
 #comment-add-button {
 	margin-bottom : 40px;
 }
+
+#title {
+    font-family: 'Benton Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+#subHeading {
+    font-family: 'Miller Daily', 'Georgia', 'Times', 'Times New Roman', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+#price {
+    line-height: 1;
+    font-size: 24px;
+}

@@ -20,18 +20,12 @@ td:nth-child(4) {
 
   .tiles {
     display: flex;
-    -moz-flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     postiion: relative;
     margin: -2.5em 0 0 -2.5em;
   }
 
     .tiles article {
-      -moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
-      -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
-      -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
       transition: transform 0.5s ease, opacity 0.5s ease;
       position: relative;
       width: calc(25% - 2.5em);
@@ -39,9 +33,6 @@ td:nth-child(4) {
     }
 
       .tiles article > .image {
-        -moz-transition: -moz-transform 0.5s ease;
-        -webkit-transition: -webkit-transform 0.5s ease;
-        -ms-transition: -ms-transform 0.5s ease;
         transition: transform 0.5s ease;
         position: relative;
         display: block;
@@ -57,9 +48,6 @@ td:nth-child(4) {
 
         .tiles article > .image:before {
           pointer-events: none;
-          -moz-transition: background-color 0.5s ease, opacity 0.5s ease;
-          -webkit-transition: background-color 0.5s ease, opacity 0.5s ease;
-          -ms-transition: background-color 0.5s ease, opacity 0.5s ease;
           transition: background-color 0.5s ease, opacity 0.5s ease;
           content: '';
           display: block;
@@ -68,16 +56,12 @@ td:nth-child(4) {
           left: 0;
           width: 100%;
           height: 100%;
-          opacity: 1.0;
           z-index: 1;
           opacity: 0.8;
         }
 
         .tiles article > .image:after {
           pointer-events: none;
-          -moz-transition: opacity 0.5s ease;
-          -webkit-transition: opacity 0.5s ease;
-          -ms-transition: opacity 0.5s ease;
           transition: opacity 0.5s ease;
           content: '';
           display: block;
@@ -95,25 +79,10 @@ td:nth-child(4) {
         }
 
       .tiles article > a {
-        display: -moz-flex;
-        display: -webkit-flex;
-        display: -ms-flex;
         display: flex;
-        -moz-flex-direction: column;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
         flex-direction: column;
-        -moz-align-items: center;
-        -webkit-align-items: center;
-        -ms-align-items: center;
         align-items: center;
-        -moz-justify-content: center;
-        -webkit-justify-content: center;
-        -ms-justify-content: center;
         justify-content: center;
-        -moz-transition: background-color 0.5s ease, -moz-transform 0.5s ease;
-        -webkit-transition: background-color 0.5s ease, -webkit-transform 0.5s ease;
-        -ms-transition: background-color 0.5s ease, -ms-transform 0.5s ease;
         transition: background-color 0.5s ease, transform 0.5s ease;
         position: absolute;
         top: 0;
@@ -142,9 +111,6 @@ td:nth-child(4) {
         }
 
         .tiles article > a .content {
-          -moz-transition: max-height 0.5s ease, opacity 0.5s ease;
-          -webkit-transition: max-height 0.5s ease, opacity 0.5s ease;
-          -ms-transition: max-height 0.5s ease, opacity 0.5s ease;
           transition: max-height 0.5s ease, opacity 0.5s ease;
           width: 100%;
           max-height: 0;
@@ -181,23 +147,20 @@ td:nth-child(4) {
         background-color: #8499e7;
       }
 
-      body:not(.is-touch) .tiles article:hover > .image {
-        -moz-transform: scale(1.1);
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
+      .tiles article:hover > .image {
         transform: scale(1.1);
       }
 
-        body:not(.is-touch) .tiles article:hover > .image:before {
+        .tiles article:hover > .image:before {
           background-color: #333333;
           opacity: 0.35;
         }
 
-        body:not(.is-touch) .tiles article:hover > .image:after {
+        .tiles article:hover > .image:after {
           opacity: 0;
         }
 
-      body:not(.is-touch) .tiles article:hover .content {
+       .tiles article:hover .content {
         max-height: 15em;
         opacity: 1;
       }

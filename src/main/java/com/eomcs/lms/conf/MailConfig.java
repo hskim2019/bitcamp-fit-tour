@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 // => app-servlet.xml의 설정을 이 클래스가 대체한다.
 // 
 @Configuration 
-@PropertySource("classpath:/com/eomcs/lms/conf/mail.properties")
 public class MailConfig {
   
   @Bean
@@ -20,8 +19,12 @@ public class MailConfig {
       mailSender.setHost("smtp.gmail.com");
       mailSender.setPort(587);
        
-      mailSender.setUsername("my.gmail@gmail.com");
-      mailSender.setPassword("password");
+      mailSender.setUsername("fittour8253@gmail.com");
+      mailSender.setPassword("qlxmzoavm1");
+      mailSender.setDefaultEncoding("UTF-8");
+     
+      
+      
        
       Properties props = mailSender.getJavaMailProperties();
       props.put("mail.transport.protocol", "smtp");

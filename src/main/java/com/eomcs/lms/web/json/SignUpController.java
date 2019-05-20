@@ -13,13 +13,14 @@ import com.eomcs.lms.service.MemberService;
 public class SignUpController {
   
   @Autowired MemberService memberService;
-  
+  @Autowired 
 
   @PostMapping("add")
   public Object add(Member member) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
     try {
       memberService.signUp(member);
+      
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");

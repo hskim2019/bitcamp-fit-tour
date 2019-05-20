@@ -47,6 +47,8 @@ $(function() {
   
   //초기값을 오늘 날짜로 설정
   $('#datepicker').datepicker('setDate', 'today');          
-
+  $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
+  $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-223px"});  //달력(calendar) 위치
+  $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 });
 

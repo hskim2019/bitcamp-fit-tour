@@ -1,0 +1,1 @@
+alter table city change city city_name VARCHAR(50);

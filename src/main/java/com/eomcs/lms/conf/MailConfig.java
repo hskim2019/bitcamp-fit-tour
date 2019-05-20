@@ -9,6 +9,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 // DispatcherServlet의 IoC 컨테이너가 준비해야 할 객체에 대한 정보.
 // => app-servlet.xml의 설정을 이 클래스가 대체한다.
 // 
+
+/*
 @Configuration 
 public class MailConfig {
   
@@ -36,7 +38,7 @@ public class MailConfig {
   
 
 }
-
+*/
 
 
 

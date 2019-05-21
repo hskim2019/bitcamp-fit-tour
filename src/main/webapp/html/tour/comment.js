@@ -92,8 +92,6 @@ $(document.body).bind('addEventAddButton', () => {
           $('#comment-add').val('');
           addDeleteCount--;
           showReCommentAddButton();
-          $('#comment-add-button').attr("disabled", true);
-          $('#comment-add-button').addClass("btn-secondary");
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
@@ -106,14 +104,11 @@ $(document.body).bind('addEventAddButton', () => {
     var noBlacnkComment = $('#comment-add').val().replace(/\s/gi, ""); // remove blanck comment
 
     if (noBlacnkComment == null || noBlacnkComment ==''){
-      $('#comment-add-button').attr("disabled", true);
-      $('#comment-add-button').addClass("btn-secondary");
+      $('#comment-add-button').addClass("disabled");
       return;
     }
     
-    $('#comment-add-button').removeClass("btn-secondary",);
-    $('#comment-add-button').addClass("btn-primary",);
-    $('#comment-add-button').removeAttr("disabled");
+    $('#comment-add-button').removeClass("disabled");
     
   });
 

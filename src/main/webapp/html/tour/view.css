@@ -48,9 +48,4 @@ i[class="fas fa-won-sign"] {
 }
 
 
-.ui-datepicker{ font-size: 15px; width: 300px; }
-.ui-datepicker select.ui-datepicker-month{ width:30%; font-size: 15px; }
-.ui-datepicker select.ui-datepicker-year{ width:40%; font-size: 15px; }
-.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:first-child a { color: red; }
-.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: blue; } 
 

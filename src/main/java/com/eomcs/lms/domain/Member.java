@@ -9,6 +9,7 @@ public class Member implements Cloneable, Serializable {
   private int no;
   private String email;
   private String password;
+  private String certification;
   private String name;
   private String nickname;
   private String birth;
@@ -40,6 +41,12 @@ public class Member implements Cloneable, Serializable {
   }
   public void setPassword(String password) {
     this.password = password;
+  }
+  public String getCertification() {
+    return certification;
+  }
+  public void setCertification(String certification) {
+    this.certification = certification;
   }
   public String getName() {
     return name;
@@ -115,12 +122,13 @@ public class Member implements Cloneable, Serializable {
   }
   @Override
   public String toString() {
-    return "Member [no=" + no + ", email=" + email + ", password=" + password + ", name=" + name
-        + ", nickname=" + nickname + ", birth=" + birth + ", smsCheck=" + smsCheck + ", emailCheck="
-        + emailCheck + ", phoneCheck=" + phoneCheck + ", tel=" + tel + ", registeredDate="
-        + registeredDate + ", loginType=" + loginType + ", rank=" + rank + ", loginTypeNo="
-        + loginTypeNo + ", photo=" + photo + "]";
+    return "Member [no=" + no + ", email=" + email + ", password=" + password + ", certification="
+        + certification + ", name=" + name + ", nickname=" + nickname + ", birth=" + birth
+        + ", smsCheck=" + smsCheck + ", emailCheck=" + emailCheck + ", phoneCheck=" + phoneCheck
+        + ", tel=" + tel + ", registeredDate=" + registeredDate + ", loginType=" + loginType
+        + ", rank=" + rank + ", loginTypeNo=" + loginTypeNo + ", photo=" + photo + "]";
   }
+  
  
 
   

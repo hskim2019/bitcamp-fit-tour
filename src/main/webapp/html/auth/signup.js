@@ -25,7 +25,7 @@ $('#add-btn').click(() => {
   function(data) {
     
     if(data.status == 'success') {
-      location.href = "../../html/index.html";  
+      location.href = "success.html";  
     } else {
       alert('등록 실패 입니다.\n' + data.message);
     }
@@ -33,6 +33,7 @@ $('#add-btn').click(() => {
 });
 $("#email").keyup(function(){
   $("#overlapErr").hide();
+   
   var email=$(this).val();
   // 이메일 검증할 정규 표현식
   var reg=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

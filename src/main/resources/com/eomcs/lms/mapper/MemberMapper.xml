@@ -9,6 +9,7 @@
   <resultMap type="member" id="memberMap">
     <id column="member_id" property="no" />
     <result column="email" property="email" />
+    <result column="certification" property="certification" />
     <result column="password" property="password" />
     <result column="name" property="name" />
     <result column="nickname" property="nickname" />
@@ -134,6 +135,7 @@
     insert into member(
     login_type_id,
     email,
+    certification,
     password,
     name,
     nickname,
@@ -146,6 +148,7 @@
     values(
     1,
     #{email},
+     #{certification},
     password(#{password}),
     #{name},
   '회원',
@@ -154,7 +157,7 @@
     #{emailCheck},
     '0',
     0,
-    1)
+    0)
   </insert>
   <update id="update" parameterType="member">
     update member
@@ -173,6 +176,18 @@
     </set>
     where
     member_id = #{no}
+  </update>
+  
+  <update id="confirm"  parameterType="member">
+    update member
+    set
+      certification = 'signUp-Success',
+      rank = 1
+    
+    where
+    email = #{email} 
+    and certification = #{certification} 
+    
   </update>
 
   <delete id="delete" parameterType="int">

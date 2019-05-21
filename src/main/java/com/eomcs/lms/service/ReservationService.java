@@ -1,7 +1,6 @@
 package com.eomcs.lms.service;
 
 import java.util.List;
-import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.domain.Reservation;
 
 public interface ReservationService {

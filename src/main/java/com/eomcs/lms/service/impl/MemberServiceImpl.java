@@ -2,10 +2,14 @@ package com.eomcs.lms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
+import com.eomcs.lms.util.MailUtils;
+import com.eomcs.lms.util.TempKey;
 
 // 스프링 IoC 컨테이너가 관리하는 객체 중에서 
 // 비즈니스 로직을 담당하는 객체는 
@@ -15,6 +19,8 @@ import com.eomcs.lms.service.MemberService;
 public class MemberServiceImpl implements MemberService {
   
   MemberDao memberDao;
+  @Autowired
+  private JavaMailSender mailSender;
   
   public MemberServiceImpl(MemberDao memberDao) {
     this.memberDao = memberDao;
@@ -38,7 +44,26 @@ public class MemberServiceImpl implements MemberService {
   }
   
   @Override
-  public int signUp(Member member) {
+  public int signUp(Member member) throws Exception {
+    String certification = new TempKey().getKey(50, false);
+    member.setCertification(certification);
+ // mail 작성 관련 
+
+    MailUtils sendMail = new MailUtils(mailSender);
+
+    sendMail.setSubject("[FIT-TOUR] 회원가입 이메일 인증");
+    sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1>")
+        .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+        .append("<a href='http://localhost:8080/bitcamp-fit-tour/app/json/signup/emailconfirm?")
+        .append("email=")
+        .append(member.getEmail())
+        .append("&certification=")
+        .append(certification)
+        .append("' target='_blenk'>이메일 인증 확인</a>")
+        .toString());
+    sendMail.setFrom("FIT-TOUR", "FIT TOUR 자유여행");
+    sendMail.setTo(member.getEmail());
+    sendMail.send();
     return memberDao.signUp(member);
   }
   
@@ -78,6 +103,15 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public int size(String search) {
     return memberDao.countAll(search);
+  }
+
+  @Override
+  public int confirm(String email, String certification) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+    paramMap.put("certification", certification);
+    
+   return memberDao.confirm(paramMap);
   }
 }
 

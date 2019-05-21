@@ -15,6 +15,7 @@ public interface MemberDao {
   int update(Member member);
   int delete(int no);
   int countAll(String search);
+  int confirm(Map<String,Object> paramMap);
 }
 
 

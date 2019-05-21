@@ -5,7 +5,7 @@
   <title>게시물</title>
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="stylesheet" href="view.css">
@@ -31,11 +31,11 @@
   <div class="row mt-sm-5 mb-sm-5">
   
     <!-- photo -->
-    <div class="col-sm-6">
+    <div class="col-sm-7">
       <img id="photo" class="img-thumbnail" alt="상품사진">
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <!-- date -->
       <div class="row ml-sm-5 mt-sm-3">
         <div class="col-sm-2"><i class="far fa-calendar-alt"></i></div>
@@ -53,14 +53,14 @@
         
         
       <!-- price -->
-      <div class="row ml-sm-5 mt-sm-3">
+      <div class="row ml-sm-5 mt-sm-4">
         <div class="offset-sm-7">
         <i class="fas fa-won-sign"></i>
         <span id="price"></span>
         <span id="perPrice">/ 1인</span></div>
       </div>
       
-      <div class="row ml-sm-5 mt-sm-3">
+      <div class="row ml-sm-5 mt-sm-5">
         <div class="col-sm-12">
         <!-- time -->
         <span><i class="fas fa-stopwatch"></i></span>
@@ -73,16 +73,16 @@
       
       <div class="row ml-sm-5 mt-sm-4">
         <div class="col-sm-12">
+          <button type="button" class="btn btn-outline-dark btn-block">위시리스트에 담기</button>
           <button type="button" class="btn btn-outline-dark btn-block">예약하기</button>
         </div>
       </div>
       
     </div> <!-- col-sm-6 -->
-    
   </div> <!-- row -->
   
 <div class= "row mt-sm-5 mb-sm-5">
-  <div class="col-sm-6">
+  <div class="col-sm-7">
   <p id=content></p>
   </div>
 </div>
@@ -111,10 +111,12 @@
     </div>
   </div> -->
   
+<div class= "row mt-sm-5 mb-sm-5">
   
+  <div id="comment-dive" class="col-sm-7">
 <form>
   <!-- commentAmout -->
-  <div class="form-group row">
+  <div class="form-group row mt-sm-5 mb-sm-3">
     <div class="col-sm-12">
     <h4 id=commentAmount></h4>
     </div>
@@ -143,9 +145,11 @@
       <a class="btn btn-primary" href='index.html'>목록</a>
     </div>
   </div>
-
-  </form>
+</form>
+</div>
+</div>
 </div><!-- .container -->
+
 
 <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
@@ -163,7 +167,7 @@
     </div>
 
     <div class="col-sm-12">
-      <input type="text" readonly class="form-control-plaintext ml-5" value={{content}}>
+      <input type="text" readonly class="form-control-plaintext ml-5" value="{{content}}">
     </div>
 
     <div class="col-sm-12 mt-3 mb-3">
@@ -206,9 +210,9 @@
 </script>
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../header.js"></script>
 <script src="comment.js"></script>

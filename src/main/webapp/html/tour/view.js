@@ -60,9 +60,10 @@ function addTransportaionIcon(transportation) {
 //datePicker
 $(function() {
   $("#datepicker").datepicker({
-       dateFormat: 'yy-mm-dd' //Input Display Format 변경
+       dateFormat: 'yy년 mm월 dd일' //Input Display Format 변경
       ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
       ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+      ,showAnim: "slideDown"
       ,changeYear: true //콤보박스에서 년 선택 가능
       ,changeMonth: true //콤보박스에서 월 선택 가능                
       //,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
@@ -80,8 +81,5 @@ $(function() {
   
   //초기값을 오늘 날짜로 설정
   $('#datepicker').datepicker('setDate', 'today');          
-  $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-  $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-223px"});  //달력(calendar) 위치
-  $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 });
 

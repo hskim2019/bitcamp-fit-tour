@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/fullpage.js/dist/fullpage.css" />
+<link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+</head>
+<body>
+  <div id="fullpage">
+  <div class="section" style="background-color: black">Some section</div>
+  <div class="section" style="background-color: red">Some section</div>
+  <div class="section" style="background-color: green">Some section</div>
+  <div class="section" style="background-color: blue">Some section</div>
+</div>
+</body>
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/fullpage.js/dist/fullpage.js"></script>
+<script>
+$(document).ready(function() {
+  $('#fullpage').fullpage({
+    //options here
+    autoScrolling:true,
+    scrollHorizontally: true
+  });
+
+  //methods
+  $.fn.fullpage.setAllowScrolling(false);
+});
+
+new fullpage('#fullpage', {
+  anchors:['firstPage', 'secondPage', 'thirdPage']
+});
+</script>
+
+
+
+</html>

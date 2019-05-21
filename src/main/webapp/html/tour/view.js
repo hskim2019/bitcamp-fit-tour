@@ -11,17 +11,50 @@ function tourList(tourNo) {
       function(obj) {
     $('#title').html(obj.tour.title);
     $('#subHeading').html(obj.tour.subHeading);
-    $('#content').val(obj.tour.content);
-    $('#totalHour').val(obj.tour.totalHour);
+    $('#content').html(obj.tour.content);
+    $('#totalHour').html(obj.tour.totalHour + '시간 소요');
     $('#hashTag').val(obj.tour.hashTag);
-    $('#personnel').val(obj.tour.personnel);
-    $('#transportation').val(obj.tour.transportation);
+    addPersonnelOption(obj.tour.personnel, obj.tour.price);
+    $('#transportation').html(obj.tour.transportation + ' 이동');
+    addTransportaionIcon(obj.tour.transportation);
     $('#price').html(obj.tour.price.toLocaleString() + '원');
     $('#photo').attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + obj.tour.tourPhoto[0].name +'.jpg');
     //$('#photpath').val(obj.tour.tourPhoto[0].path);
     $('#theme').val(obj.tour.theme[0].theme);
     
   });
+}
+
+// Add PersonnelOption
+function addPersonnelOption(personnel, price) {
+  for(var i=1; i <= personnel; i++){
+    $('<option value="'+ i +'">' + i +'명</option>').appendTo($('#personnel'));
+  }
+  $('#personnel').change((e)=> {
+    $('#price').html((price * $(e.target).val()).toLocaleString() +'원');
+    $('#perPrice').html('/' + $(e.target).val() + '인')
+  });
+}
+
+
+// Add TrpansportaionIcon
+function addTransportaionIcon(transportation) {
+  var transportaionIconTag = $('#transportation-icon');
+  
+  switch (transportation) {
+    case '버스' :
+      transportaionIconTag.addClass('fas fa-bus-alt')
+      break;
+    case '지하철' :
+      transportaionIconTag.addClass('fas fa-subway')
+      break;
+    case '도보' :
+      transportaionIconTag.addClass('fas fa-walking')
+      break;
+    case '자전거' :
+      transportaionIconTag.addClass('fas fa-bicycle')
+      break;
+  }
 }
 
 //datePicker
@@ -32,8 +65,8 @@ $(function() {
       ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
       ,changeYear: true //콤보박스에서 년 선택 가능
       ,changeMonth: true //콤보박스에서 월 선택 가능                
-      ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-      ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+      //,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+      //,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
       ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
       ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
       ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트

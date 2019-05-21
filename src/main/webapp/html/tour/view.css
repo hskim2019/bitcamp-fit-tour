@@ -1,3 +1,15 @@
+i {
+	font-size: 25px;
+}
+
+i[class="fas fa-won-sign"] {
+	font-size: 12px;
+}
+
+#perPrice {
+	color: #888a85;
+}
+
 .bit-recomment-list-button {
   font-size:15px; 
   padding: 30px 30px 30px 50px;
@@ -38,6 +50,6 @@
 .ui-datepicker-week-end {color:red;}
 .ui-datepicker-week-end .ui-state-default {color:red;}
 $('img.ui-datepicker-trigger').css({'cursor':'pointer', 'margin-left':'5px'});  //아이콘(icon) 위치
-$('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-223px"});  //달력(calendar) 위치
+/* $('.ui-datepicker ').css({ "margin-left" : "141px", "margin-top": "-223px"});  //달력(calendar) 위치 */
 $('img.ui-datepicker-trigger').attr('align', 'absmiddle');
 

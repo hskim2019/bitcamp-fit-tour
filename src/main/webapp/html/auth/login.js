@@ -13,7 +13,9 @@ document.querySelector('#login-btn').onclick = () => {
     
     if (data.status == 'success') {
       location.href = "../index.html"
-        
+    } else if(data.status == 'stand-by'){
+      location.href = "success.html"
+      
     } else {
       alert('로그인 실패입니다!\n' + data.message);
     }

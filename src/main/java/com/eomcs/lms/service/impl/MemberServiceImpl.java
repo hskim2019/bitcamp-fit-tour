@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
     sendMail.setSubject("[FIT-TOUR] 회원가입 이메일 인증");
     sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1>")
         .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-        .append("<a href='http://localhost:8080/bitcamp-fit-tour/app/json/signup/emailconfirm?")
+        .append("<a href='http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/app/json/signup/emailconfirm?")
         .append("email=")
         .append(member.getEmail())
         .append("&certification=")

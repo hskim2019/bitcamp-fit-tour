@@ -1,3 +1,17 @@
+
+RENAME TABLE tour_free_review_city TO city;
+RENAME TABLE tour_free_review_country TO country;
+alter table tour add city_id int(11) not null;
+
+ALTER TABLE tour
+ADD CONSTRAINT FK_city_TO_tour -- 도시 -> 투어
+FOREIGN KEY (
+city_id -- 도시번호
+)
+REFERENCES city ( -- 도시
+city_id -- 도시번호
+);
+
 alter table country change country country_name VARCHAR(50);
 
 insert into country(country_id, country_name) values(1, '네덜란드');

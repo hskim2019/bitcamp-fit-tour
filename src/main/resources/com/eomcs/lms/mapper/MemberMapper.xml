@@ -42,6 +42,7 @@
   <select id="findAll" resultMap="memberMap" parameterType="map">
     select
     <include refid="default-columns" />
+    
     from
     member
     <where>
@@ -89,6 +90,7 @@
   <select id="findByEmailPassword" resultMap="memberMap" parameterType="map">
     select
     <include refid="default-columns" />
+    , rank
     from
     member
     where

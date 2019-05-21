@@ -63,7 +63,7 @@ public class DefaultWebConfig implements WebMvcConfigurer {
     </bean>
      */
     InternalResourceViewResolver vr = new InternalResourceViewResolver(
-        "/WEB-INF/jsp/", ".jsp");
+        "/", ".html");
     vr.setViewClass(JstlView.class);
     return vr;
   }

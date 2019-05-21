@@ -2,10 +2,13 @@ package com.eomcs.lms.web.json;
 
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
@@ -18,6 +21,7 @@ public class SignUpController {
 
 
   @PostMapping("add")
+
   public Object add(Member member) throws Exception {
     HashMap<String, Object> content = new HashMap<>();
     try {
@@ -34,15 +38,16 @@ public class SignUpController {
 
   
   @GetMapping("emailoverlap")
+  
   public Object emailOverlap(String email) {
     Member member = memberService.get(email);
     return member;
   }
 
   @GetMapping("emailconfirm")
-  public String Confirm(String email,String certification) {
+  public ModelAndView Confirm(String email,String certification) {
     memberService.confirm(email,certification);
-    return  "success.html";
+    return  new ModelAndView("html/auth/success");
   }
 
 

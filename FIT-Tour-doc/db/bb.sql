@@ -11,6 +11,6 @@ DROP INDEX UIX_member ON member;
 CREATE UNIQUE INDEX UIX_member
 ON member ( -- 회원
 email ASC,         -- 이메일(아이디)
-login_type_id ASC, -- 로그인유형번호
-certification ASC  -- 인증번호
+login_type_id ASC -- 로그인유형번호
+
 );

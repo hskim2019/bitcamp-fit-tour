@@ -96,6 +96,8 @@ public class TourController {
   //tourList
   @GetMapping("list")
   public Object list(
+		  String countryName,
+		  String cityName,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize) {
 
@@ -112,7 +114,7 @@ public class TourController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
 
-    List<Tour> tours = tourService.list(pageNo, pageSize);
+    List<Tour> tours = tourService.list(countryName, cityName, pageNo, pageSize);
 
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", tours);

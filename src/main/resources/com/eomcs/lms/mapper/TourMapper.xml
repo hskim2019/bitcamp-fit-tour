@@ -79,6 +79,10 @@
    from tour as t
    join city as ci on t.city_id = ci.city_id
    join country as co on ci.country_id = co.country_id
+       <where>
+      <if test="countryName != null">or country_name = #{countryName}</if>
+      <if test="cityName != null">or city_name = #{cityName}</if>
+     </where>
     order by 
       tour_id desc
     <if test="size != null and rowNo != null">

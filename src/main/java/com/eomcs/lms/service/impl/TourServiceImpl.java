@@ -22,7 +22,10 @@ public class TourServiceImpl implements TourService {
   
   // 비지니스 객체에서 메서드 이름은 가능한 업무 용어를 사용한다.
   @Override
-  public List<Tour> list(int pageNo, int pageSize) {
+  public List<Tour> list(
+		  String countryName,
+		  String cityName,
+		  int pageNo, int pageSize) {
     // 게시물 목록을 가져오는 경우 서비스 객체에서 특별하게 할 일이 없다.
     // 그럼에도 불구하고 Command 객체와 DAO 사이에 Service 객체를 두기로 했으면 
     // 일관성을 위해 Command 객체는 항상 Service 객체를 통해 데이터를 다뤄야 한다.
@@ -32,7 +35,19 @@ public class TourServiceImpl implements TourService {
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     
-    return tourDao.findAll(params);
+    if (countryName == null && cityName == null) {
+    	return tourDao.findAll(params);
+    } else {
+    	System.out.println("countryname: " + countryName + "cityname: " + cityName);
+    	if (countryName != null) {
+    		params.put("countryName", countryName);
+    	}
+    	if (cityName != null) {
+    		params.put("cityName", cityName);
+    	}
+    	
+    	return tourDao.findAll(params);
+    }
   }
   
   @Override

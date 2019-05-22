@@ -1,319 +1,280 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>상품 목록</title>
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
-  <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
-  <link rel="stylesheet" href="index.css">
+<meta charset="UTF-8">
+<title>상품 목록</title>
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
+  media="screen,projection" />
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-<header class="bit-main-header"></header>
+  <header class="bit-main-header"></header>
 
-<div class="container">
-<!-- <h1>상품 목록</h1> -->
-<!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p> -->
+  <div class="container">
+    <!-- <h1>상품 목록</h1> -->
+    <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p> -->
 
-<!-- Nav -->
-        <nav id="nav">
+    <!-- Nav -->
+    <nav id="nav">
+      <ul>
+        <li class="current"><a href="index.html">전체보기</a></li>
+        <li><a href="#" class="continent">유럽</a>
           <ul>
-            <li class="current"><a href="index.html">전체보기</a></li>
-            <li>
-              <a href="#">유럽</a>
+            <li><a href="#" class="country-list-btn">독일</a>
               <ul>
-                <li>
-                  <a href="#" class="country-list-btn">독일</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn">베를린</a></li>
-                    <li><a href="#" class="city-list-btn">뮌헨</a></li>
-                    <li><a href="#" class="city-list-btn">프랑크푸르트</a></li>
-                    <li><a href="#" class="city-list-btn">드레스덴</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">스위스</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn">인터라켄</a></li>
-                    <li><a href="#" class="city-list-btn">취리히</a></li>
-                    <li><a href="#" class="city-list-btn">루체른</a></li>
-                    <li><a href="#" class="city-list-btn">제네바</a></li>
-                   <li><a href="#" class="city-list-btn">체르마트</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">이탈리아</a>
-                  <ul>
-                     <li><a href="#" class="city-list-btn">로마</a></li>
-                     <li><a href="#" class="city-list-btn">피렌체</a></li>
-                     <li><a href="#" class="city-list-btn">베네치아</a></li>
-                     <li><a href="#" class="city-list-btn">밀라노</a></li>
-                   </ul>
-                  </li>
-                  <li>
-                   <a href="#" class="country-list-btn">영국</a>
-                    <ul>
-                      <li><a href="#" class="city-list-btn">런던</a></li>
-                      <li><a href="#" class="city-list-btn">에딘버러</a></li>
-                      <li><a href="#" class="city-list-btn">옥스포드</a></li>
-                      <li><a href="#" class="city-list-btn">캠브리지</a></li>
-                      <li><a href="#" class="city-list-btn">브라이튼</a></li>
-                     </ul>
-                   </li>
-                  <li>
-                   <a href="#" class="country-list-btn">스페인</a>
-                    <ul>
-                      <li><a href="#" class="city-list-btn">바르셀로나</a></li>
-                      <li><a href="#" class="city-list-btn">마드리드</a></li>
-                      <li><a href="#" class="city-list-btn">세비야</a></li>
-                      <li><a href="#" class="city-list-btn">그라나다</a></li>
-                      <li><a href="#" class="city-list-btn">발렌시아</a></li>
-                      <li><a href="#" class="city-list-btn">톨레도</a></li>
-                     </ul>
-                   </li>
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#" >아시아</a>
+                <li><a href="#" class="city-list-btn">베를린</a></li>
+                <li><a href="#" class="city-list-btn">뮌헨</a></li>
+                <li><a href="#" class="city-list-btn">프랑크푸르트</a></li>
+                <li><a href="#" class="city-list-btn">드레스덴</a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">스위스</a>
               <ul>
-                <li>
-                  <a href="#" class="country-list-btn">베트남</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">인도네시아</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                   <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">태국</a>
-                  <ul>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                   </ul>
-                  </li>
-                  <li>
-                   <a href="#" class="country-list-btn">일본</a>
-                    <ul>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                     </ul>
-                   </li>
-                   <li>
-                   <a href="#" class="country-list-btn">중국</a>
-                    <ul>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                      <li><a href="#" class="city-list-btn"></a></li>
-                     </ul>
-                   </li>
-                   
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#">아메리카</a>
+                <li><a href="#" class="city-list-btn">인터라켄</a></li>
+                <li><a href="#" class="city-list-btn">취리히</a></li>
+                <li><a href="#" class="city-list-btn">루체른</a></li>
+                <li><a href="#" class="city-list-btn">제네바</a></li>
+                <li><a href="#" class="city-list-btn">체르마트</a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">이탈리아</a>
               <ul>
-                <li>
-                  <a href="#" class="country-list-btn">미국</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">캐나다</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                   <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">브라질</a>
-                  <ul>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                   </ul>
-                  </li>
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#" class="country-list-btn">오세아니아</a>
+                <li><a href="#" class="city-list-btn">로마</a></li>
+                <li><a href="#" class="city-list-btn">피렌체</a></li>
+                <li><a href="#" class="city-list-btn">베네치아</a></li>
+                <li><a href="#" class="city-list-btn">밀라노</a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">영국</a>
               <ul>
-                <li>
-                  <a href="#">뉴질랜드</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">오스트레일리아</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                   <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            
-            <li>
-              <a href="#">아프리카</a>
+                <li><a href="#" class="city-list-btn">런던</a></li>
+                <li><a href="#" class="city-list-btn">에딘버러</a></li>
+                <li><a href="#" class="city-list-btn">옥스포드</a></li>
+                <li><a href="#" class="city-list-btn">캠브리지</a></li>
+                <li><a href="#" class="city-list-btn">브라이튼</a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">스페인</a>
               <ul>
-                <li>
-                  <a href="#" class="country-list-btn">이집트</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">모로코</a>
-                  <ul>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                    <li><a href="#" class="city-list-btn"></a></li>
-                   <li><a href="#" class="city-list-btn"></a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="country-list-btn">남아프리카 공화국</a>
-                  <ul>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                     <li><a href="#" class="city-list-btn"></a></li>
-                   </ul>
-                  </li>
-              </ul>
-            </li>
-                                                     
-          </ul>
-        </nav>
+                <li><a href="#" class="city-list-btn">바르셀로나</a></li>
+                <li><a href="#" class="city-list-btn">마드리드</a></li>
+                <li><a href="#" class="city-list-btn">세비야</a></li>
+                <li><a href="#" class="city-list-btn">그라나다</a></li>
+                <li><a href="#" class="city-list-btn">발렌시아</a></li>
+                <li><a href="#" class="city-list-btn">톨레도</a></li>
+              </ul></li>
+          </ul></li>
 
+        <li><a href="#" class="continent">아시아</a>
+          <ul>
+            <li><a href="#" class="country-list-btn">베트남</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">인도네시아</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">태국</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">일본</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">중국</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
 
-<!-- Main -->
-          <div id="main">
-            <div class="inner">
-                <h3>인기 도시</h3><br/>
-              <section class="tiles">
-                <article class="style1">
-                  <span class="image">
-                    <img src="/bitcamp-fit-tour/images/london.png" alt="" />
-                  </span>
-                  <a href="#">
-                    <h2>London</h2>
-                    <div class="content">
-                      <p>#타워브릿지 #대영박물관 #웨스트민스터 #템즈강 #런던아이</p>
-                    </div>
-                  </a>
-                </article>
-                <article class="style2">
-                  <span class="image">
-                    <img src="/bitcamp-fit-tour/images/pic02.jpg" alt="" />
-                  </span>
-                  <a href="#">
-                    <h2>Paris</h2>
-                    <div class="content">
-                      <p>#몽마르트 #베르사유궁전 #노트르담 성당 #세느강</p>
-                    </div>
-                  </a>
-                </article>
-                <article class="style3">
-                  <span class="image">
-                    <img src="/bitcamp-fit-tour/images/pic03.jpg" alt="" />
-                  </span>
-                  <a href="#l">
-                    <h2>Barcelona</h2>
-                    <div class="content">
-                      <p>#사그라다 파밀리아 성당 #고딕지구 #구엘공원 #람브라스거리</p>
-                    </div>
-                  </a>
-                </article>
-                <article class="style4">
-                  <span class="image">
-                    <img src="/bitcamp-fit-tour/images/pic04.jpg" alt="" />
-                  </span>
-                  <a href="#">
-                    <h2>Rome</h2>
-                    <div class="content">
-                      <p>#콜로세움 #포로 로마노 #판테온 #바티칸 #트레비분수 #캄피돌리오 언덕</p>
-                    </div>
-                  </a>
-                </article>
-              </section>
-            </div>
-          </div>
+          </ul></li>
 
+        <li><a href="#" class="continent">아메리카</a>
+          <ul>
+            <li><a href="#" class="country-list-btn">미국</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">캐나다</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">브라질</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+          </ul></li>
 
-<div class="bit-list">
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th scope="col">제목</th>
-    <th scope="col">소제목</th>
-    <th scope="col">테마</th>
-    <th scope="col">가격</th>
-    <th scope="col">국가</th>
-    <th scope="col">도시</th>
-  </tr>
-</thead>
-<tbody></tbody>
-</table>
-</div><!-- .bit-list -->
+        <li><a href="#" class="continent">오세아니아</a>
+          <ul>
+            <li><a href="#" class="country-list-btn">뉴질랜드</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">오스트레일리아</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+          </ul></li>
 
-  <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link"
-        href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link"
-         href="?pageNo=2&pageSize=3">다음</a></li>
-  </ul>
-</div><!-- .container -->
+        <li><a href="#" class="continent">아프리카</a>
+          <ul>
+            <li><a href="#" class="country-list-btn">이집트</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">모로코</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+            <li><a href="#" class="country-list-btn">남아프리카 공화국</a>
+              <ul>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+                <li><a href="#" class="city-list-btn"></a></li>
+              </ul></li>
+          </ul></li>
 
-<footer class="bit-main-footer"></footer>
+      </ul>
+      
+    </nav>
+    <!-- nav -->
 
-<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+      <div class="col s12">
+        <a href="#!" class="breadcrumbs-continent">aa</a>
+        <a href="#!" class="breadcrumbs-country">b</a>
+        <a href="#!" class="breadcrumbs-city">c</a>
+      </div>
+
+    <!--나중에 다른 곳으로 옮길 것 -->
+    <div id="main">
+      <div class="inner">
+        <h3>인기 도시</h3>
+        <br />
+        <section class="tiles">
+          <article class="style1">
+            <span class="image"> <img src="/bitcamp-fit-tour/images/london.png" alt="" />
+            </span> <a href="#">
+              <h2>London</h2>
+              <div class="content">
+                <p>#타워브릿지 #대영박물관 #웨스트민스터 #템즈강 #런던아이</p>
+              </div>
+            </a>
+          </article>
+          <article class="style2">
+            <span class="image"> <img src="/bitcamp-fit-tour/images/pic02.jpg" alt="" />
+            </span> <a href="#">
+              <h2>Paris</h2>
+              <div class="content">
+                <p>#몽마르트 #베르사유궁전 #노트르담 성당 #세느강</p>
+              </div>
+            </a>
+          </article>
+          <article class="style3">
+            <span class="image"> <img src="/bitcamp-fit-tour/images/pic03.jpg" alt="" />
+            </span> <a href="#l">
+              <h2>Barcelona</h2>
+              <div class="content">
+                <p>#사그라다 파밀리아 성당 #고딕지구 #구엘공원 #람브라스거리</p>
+              </div>
+            </a>
+          </article>
+          <article class="style4">
+            <span class="image"> <img src="/bitcamp-fit-tour/images/pic04.jpg" alt="" />
+            </span> <a href="#">
+              <h2>Rome</h2>
+              <div class="content">
+                <p>#콜로세움 #포로 로마노 #판테온 #바티칸 #트레비분수 #캄피돌리오 언덕</p>
+              </div>
+            </a>
+          </article>
+        </section>
+      </div>
+    </div>
+
+  
+<main>
+  <section>
+    <div class="bit-list">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">제목</th>
+            <th scope="col">소제목</th>
+            <th scope="col">테마</th>
+            <th scope="col">가격</th>
+            <th scope="col">국가</th>
+            <th scope="col">도시</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div> <!-- .bit-list -->
+
+    <ul class="pagination justify-content-center">
+      <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+      <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
+      <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+    </ul>
+  
+    </section>
+    <aside>
+    사이드바
+    </aside>
+ </main>
+  </div>
+  <!-- .container -->
+
+  <footer class="bit-main-footer"></footer>
+
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th scope='row'>{{no}}</th>
@@ -326,16 +287,16 @@
 {{/each}}
 </script>
 
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="js/jquery.dropotron.min.js"></script>
-<script src="js/jquery.scrolly.min.js"></script>
-<script src="js/breakpoints.min.js"></script>
-<script src="../header.js"></script>
-<script src="../footer.js"></script>
-<script src="index.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="js/jquery.dropotron.min.js"></script>
+  <script src="js/jquery.scrolly.min.js"></script>
+  <script src="js/breakpoints.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="index.js"></script>
 
 </body>
 </html>

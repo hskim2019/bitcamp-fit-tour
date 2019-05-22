@@ -9,6 +9,7 @@ for (e of el) {
 
 
 $('#add-btn').click(() => {
+  $('#add-btn').hide();  
   $.post('../../app/json/signup/add', {
 
     email: $('#email').val(),
@@ -22,6 +23,7 @@ $('#add-btn').click(() => {
    
     
   },
+ 
   function(data) {
     
     if(data.status == 'success') {

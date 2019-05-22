@@ -100,7 +100,8 @@
   
 <select id="findByEmail" resultMap="memberMap" parameterType="map">
     select
-    email
+    email,
+    certification
     from
     member
     where

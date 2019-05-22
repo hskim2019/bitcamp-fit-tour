@@ -6,22 +6,27 @@
 <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/signup.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+  <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+
 <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 <body>
 
   <header class="bit-main-header"></header>
 
    <div class="container">
-    <h1>회원가입을 축하합니다</h1>
+    <h1>이메일 인증을 부탁합니다.</h1>
     <form>
-    <div class='title'>가입 마지막 단계입니다!<br>
+    <div class='bit-standby-item' >가입 마지막 단계입니다!<br>
     가입한 이메일에서 인증 확인 버튼 눌러주세요!<br>
     인증 이메일을 받지 못하셨나요?
-    
-    
     </div>
     
-   <button class="btn btn-danger" id="reEamil" type="button" >이메일 재전송</button>
+    <div class='bit-success-item' >FIT TOUR에 오신 것을 환영합니다!<br>
+    FIT TOUR의 회원이 되어 주셔서 고맙습니다.<br>
+    현지 투어! 자유여행에 필요한 모든 서비스를 지금 FIT TOUR에서 만나보세요.
+    </div>
+    <br>
+   <button class="btn btn-danger bit-standby-item" id="reEamil" type="button">이메일 재전송</button>
    
    </form>
    
@@ -36,7 +41,10 @@
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+ <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+ 
   <script src="/bitcamp-fit-tour/html/header.js"></script>
+ <script src="/bitcamp-fit-tour/html/auth/success.js"></script>
 </body>
 </html>
 

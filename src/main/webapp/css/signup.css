@@ -14,14 +14,9 @@ div.vacuum {
   border: 1px solid red;
   width: 800px;
 }
-
-/* .help-block 을 일단 보이지 않게 설정 */
-#myForm.help-block {
-  display: none;
-}
-/* glyphicon 을 일단 보이지 않게 설정 */
-#myForm.glyphicon {
-  display: none;
+#sms-span{
+ margin : 10% 10% 10%;  
+  
 }
 
-checkBox
+

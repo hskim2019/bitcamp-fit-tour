@@ -51,22 +51,28 @@ public class MemberServiceImpl implements MemberService {
 
     MailUtils sendMail = new MailUtils(mailSender);
 
+    emailSend(sendMail,member.getEmail(),certification);
+    
+    return memberDao.signUp(member);
+  }
+  
+  private void emailSend(MailUtils sendMail, String email, String certification) throws Exception {
     sendMail.setSubject("[FIT-TOUR] 회원가입 이메일 인증");
     sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1>")
         .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
         .append("<a href='http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/app/json/signup/emailconfirm?")
         .append("email=")
-        .append(member.getEmail())
+        .append(email)
         .append("&certification=")
         .append(certification)
         .append("' target='_blenk'>이메일 인증 확인</a>")
         .toString());
     sendMail.setFrom("FIT-TOUR", "FIT TOUR 자유여행");
-    sendMail.setTo(member.getEmail());
+    sendMail.setTo(email);
     sendMail.send();
-    return memberDao.signUp(member);
+    
   }
-  
+
   @Override
   public Member get(int no) {
     return memberDao.findByNo(no);
@@ -112,6 +118,17 @@ public class MemberServiceImpl implements MemberService {
     paramMap.put("certification", certification);
     
    return memberDao.confirm(paramMap);
+  }
+
+  @Override
+  public void reEamil(String email) throws Exception {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+   Member member =  memberDao.findByEmail(paramMap);
+   MailUtils sendMail = new MailUtils(mailSender);
+ 
+   emailSend(sendMail,member.getEmail(),member.getCertification());
+   
   }
 }
 

@@ -2,11 +2,9 @@ package com.eomcs.lms.web.json;
 
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.lms.domain.Member;
@@ -45,9 +43,24 @@ public class SignUpController {
   }
 
   @GetMapping("emailconfirm")
-  public ModelAndView Confirm(String email,String certification) {
+  public ModelAndView confirm(String email,String certification) {
     memberService.confirm(email,certification);
     return  new ModelAndView("html/auth/success");
+  }
+  @GetMapping("reeamil")
+  public Object reEamil(String email) {
+    
+    HashMap<String, Object> content = new HashMap<>();
+    try {
+      
+      memberService.reEamil(email);
+
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
   }
 
 

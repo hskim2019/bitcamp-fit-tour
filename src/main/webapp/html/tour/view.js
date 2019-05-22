@@ -60,7 +60,9 @@ function addTransportaionIcon(transportation) {
 
 
 $(document).ready(function(){
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+    format : 'yyyy년 mm월 dd일',
+  });
 });
 
 $(document).ready(function() {

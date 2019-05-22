@@ -31,9 +31,9 @@ i[class="fas fa-won-sign"] {
 	margin-bottom : 40px;
 }
 
-#title {
+/* #title {
     font-family: 'Benton Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-}
+} */
 
 #subHeading {
     font-family: 'Miller Daily', 'Georgia', 'Times', 'Times New Roman', serif;
@@ -46,6 +46,11 @@ i[class="fas fa-won-sign"] {
     line-height: 1;
     font-size: 24px;
 }
+
+.datepicker-modal {
+	height: 352px;
+}
+
 
 
 

@@ -1,12 +1,9 @@
 // footer loading
 (function () {
-  $.ajax({
-    url:'/bitcamp-fit-tour/html/footer.html',
-    success: function(obj){
-      $('.bit-main-footer').html(obj);
-    }
-  });
-})();
+  console.log("footer")
+  $('.bit-main-footer').load('/bitcamp-fit-tour/html/footer.html')
+  }
+)();
 
 
 

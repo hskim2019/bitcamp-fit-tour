@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
-.navbar-nav {
+nav {
+  height: 100px
+}
+
+.nav-wrapper {
   font-weight: 700;
 }
 
-.bit-main-header {
-  min-height: 60px;
-}
 
 #bit-login-state img {
   height: 35px;
@@ -15,9 +16,10 @@
 }
 
 .bit-logo {
-  background-image: url("/bitcamp-fit-tour/images/logo2.png");
+  background-image: url("/bitcamp-fit-tour/images/logo.png");
   background-repeat: no-repeat;
   width:194px; height:70px;
   background-size: contain;
   display:inline-block;
+  margin-top: 8px;
 }

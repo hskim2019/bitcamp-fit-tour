@@ -67,5 +67,6 @@ $(document).ready(function(){
 
 $(document).ready(function() {
   $('textarea#comment-add').characterCounter();
+  $(".dropdown-trigger").dropdown();
 });
 

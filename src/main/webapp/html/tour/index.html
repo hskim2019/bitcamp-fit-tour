@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>상품 목록</title>
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
@@ -298,7 +299,6 @@
 </table>
 </div><!-- .bit-list -->
 
-<nav aria-label="목록 페이지 이동">
   <ul class="pagination justify-content-center">
     <li id="prevPage" class="page-item">
       <a class="page-link"
@@ -308,8 +308,9 @@
       <a class="page-link"
          href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
-</nav>
 </div><!-- .container -->
+
+<footer class="bit-main-footer"></footer>
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
@@ -333,6 +334,7 @@
 <script src="js/jquery.scrolly.min.js"></script>
 <script src="js/breakpoints.min.js"></script>
 <script src="../header.js"></script>
+<script src="../footer.js"></script>
 <script src="index.js"></script>
 
 </body>

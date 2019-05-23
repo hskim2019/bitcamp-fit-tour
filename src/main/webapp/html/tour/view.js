@@ -83,5 +83,5 @@ $('#reservation-btn').click((e) => {
   console.log(tourNo);
   var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
   var personnel = ($('.selected').children().first().html().replace(/[^0-9]/g,""));
-  location.href = '/bitcamp-fit-tour/html/tour/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
+  location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
 });

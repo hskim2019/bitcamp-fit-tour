@@ -575,7 +575,7 @@ values(80, '아구아스 깔리엔떼스');
 insert into city (country_id, city_name)
 values(81, '오클랜드');
 insert into city (country_id, city_name)
-values(81, '뮌스타운');
+values(81, '퀸스타운');
 
 insert into city (country_id, city_name)
 values(82, '시드니');

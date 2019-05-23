@@ -4,6 +4,7 @@ var pageNo = 1,
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
+    crumb = $('#breadcrumb-list'),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 var cityName;
@@ -72,6 +73,23 @@ loadList(1,'', '');
     });
 })();
 
+function showBreadCrumb(continentName, countryName, cityName) {
+  var firstcrumb = crumb.children().eq(0);
+  var secondcrumb = crumb.children().eq(1);
+  var thirdcrumb = crumb.children().eq(2);
+  
+    firstcrumb.removeClass('bit-invisible');
+    firstcrumb.html(continentName);
+    secondcrumb.removeClass('bit-invisible');
+    secondcrumb.html(countryName);
+    thirdcrumb.detach();
+    if(cityName != '') {
+      secondcrumb.after(thirdcrumb);
+      thirdcrumb.removeClass('bit-invisible');
+      thirdcrumb.html(cityName);
+    }
+};
+
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
   // 제목을 클릭했을 때 view.html로 전환시키기
@@ -84,19 +102,26 @@ $(document.body).bind('loaded-list', () => {
 
 $(document.body).bind('loaded-list', () => {
   $('.country-list-btn').click((e) => {
-    console.log("a");
     e.preventDefault();
-    var countryName = $(e.target).html();
-    console.log(countryName);
+    var continentName = $(e.target).attr('id');
+    countryName = $(e.target).html();
+    showBreadCrumb(continentName, countryName, '');
     loadList(1, countryName, '');
   });
 });
 
+
+
 $(document.body).bind('loaded-list', () => {
   $('.city-list-btn').click((e) => {
     e.preventDefault();
-    var cityName = $(e.target).html();
+    cityName = $(e.target).html();
+    var continentName = $(e.target).attr('id').split(',')[0];
+    countryName = $(e.target).attr('id').split(',')[1];
     console.log(cityName);
+    console.log(countryName);
+    console.log (continentName);
+    showBreadCrumb(continentName, countryName, cityName);
     loadList(1,'', cityName);
   });
 });

@@ -14,3 +14,8 @@ email ASC,         -- 이메일(아이디)
 login_type_id ASC -- 로그인유형번호
 
 );
+
+-- city 이름에 오타가 있으니 변경 해 주세요
+update city
+set city_name = '퀸스타운'
+where city_id = 248;

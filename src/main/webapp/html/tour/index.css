@@ -13,7 +13,12 @@ main {
 .clean {
 	background: none;
 	box-shadow: none;
+	height: 40px;
 }
+
+/* .clean > .nav-wrapper {
+	height: 30px;
+} */
 
 .breadcrumb {
 	color: #6B7770;

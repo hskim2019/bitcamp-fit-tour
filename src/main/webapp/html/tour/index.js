@@ -9,6 +9,10 @@ var pageNo = 1,
 
 var cityName;
 var countryName;
+var firstcrumb = crumb.children().eq(0);
+var secondcrumb = crumb.children().eq(1);
+var thirdcrumb = crumb.children().eq(2);
+var temp;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
@@ -74,17 +78,14 @@ loadList(1,'', '');
 })();
 
 function showBreadCrumb(continentName, countryName, cityName) {
-  var firstcrumb = crumb.children().eq(0);
-  var secondcrumb = crumb.children().eq(1);
-  var thirdcrumb = crumb.children().eq(2);
-  
+
     firstcrumb.removeClass('bit-invisible');
     firstcrumb.html(continentName);
     secondcrumb.removeClass('bit-invisible');
     secondcrumb.html(countryName);
-    thirdcrumb.detach();
+    temp = thirdcrumb.detach();
     if(cityName != '') {
-      secondcrumb.after(thirdcrumb);
+      secondcrumb.after(temp);
       thirdcrumb.removeClass('bit-invisible');
       thirdcrumb.html(cityName);
     }

@@ -52,12 +52,12 @@ function showUpdateDeleteButton() {
 function commentAmountUpdate(commentAmount, init) {
   
   if(init){
-    $('#commentAmount').html('댓글수' + commentAmount);
+    $('#commentAmount').html('댓글 ' + commentAmount + '개');
     
   }else {    
     var UpdatedCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")) + commentAmount;
     $('#commentAmount').html
-    ('댓글수' + UpdatedCommentAmount);
+    ('댓글 ' + UpdatedCommentAmount + '개');
   }
 }
 

@@ -7,12 +7,15 @@
 }
 
 #comment-add-button {
-	margin-bottom : 40px;
+  margin-bottom : 60px;
+  margin-left: 5px;
 }
 
-/* #title {
-    font-family: 'Benton Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-} */
+#comment-inputfield {
+    width: 485px;
+    display: inline-block;
+}
+
 
 #subHeading {
     font-family: 'Miller Daily', 'Georgia', 'Times', 'Times New Roman', serif;
@@ -44,9 +47,6 @@
 }
 
 
-.datepicker-modal {
-	height: 352px;
-}
 
 i {
 	font-size: 25px;
@@ -55,6 +55,7 @@ i {
 i[class="fas fa-won-sign"] {
 	font-size: 12px;
 }
+
 
 
 

@@ -338,7 +338,7 @@ status_id        INTEGER     NOT NULL COMMENT '상태번호', -- 상태번호
 tour_date        DATETIME    NOT NULL COMMENT '여행일', -- 여행일
 personnel        INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
 tourist_tel      VARCHAR(50) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
-requirment       TEXT        NULL     COMMENT '요청사항', -- 요청사항
+requirement       TEXT        NULL     COMMENT '요청사항', -- 요청사항
 payment_id       INTEGER     NOT NULL COMMENT '결제번호', -- 결제번호
 payment_date     DATETIME    NULL     DEFAULT now() COMMENT '결제일', -- 결제일
 reservation_date DATETIME    NOT NULL DEFAULT now() COMMENT '예약일' -- 예약일
@@ -386,7 +386,7 @@ CREATE TABLE tour_comment (
 tour_comment_id INTEGER  NOT NULL COMMENT '댓글번호', -- 댓글번호
 member_id       INTEGER  NOT NULL COMMENT '작성자', -- 작성자
 tour_id         INTEGER  NOT NULL COMMENT '상품번호', -- 상품번호
-ranking         INTEGER  NOT NULL COMMENT '댓글순서', -- 댓글순서
+parent_id       INTEGER  NOT NULL COMMENT '부모댓글', -- 부모댓글
 level           INTEGER  NOT NULL COMMENT '댓글레벨', -- 댓글레벨
 content         TEXT     NOT NULL COMMENT '내용', -- 내용
 created_date    DATETIME NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
@@ -1287,3 +1287,5 @@ free_review_id -- 자유후기번호
 REFERENCES free_review ( -- 자유후기
 free_review_id -- 자유후기번호
 );
+
+show tables;

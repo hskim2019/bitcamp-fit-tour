@@ -5,17 +5,22 @@ var pageNo = 1,
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
     crumb = $('#breadcrumb-list'),
-    templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+    templateSrc = $('#tr-template').html(),
+    templateSrc2 = $('#tr-template-for-theme').html();
+// script 태그에서 템플릿 데이터를 꺼낸다.
+
 
 var cityName;
 var countryName;
-var firstcrumb = crumb.children().eq(0);
-var secondcrumb = crumb.children().eq(1);
-var thirdcrumb = crumb.children().eq(2);
+var firstcrumb = crumb.children().eq(0),
+    secondcrumb = crumb.children().eq(1),
+    thirdcrumb = crumb.children().eq(2);
 var temp;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator = Handlebars.compile(templateSrc);
+var trGenerator = Handlebars.compile(templateSrc),
+trGenerator2 = Handlebars.compile(templateSrc);
+
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
@@ -24,7 +29,7 @@ function loadList(pn, countryName, cityName) {
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
-      
+      console.log(obj);
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       tbody.html(''); // 이전에 출력한 내용을 제거한다.
       

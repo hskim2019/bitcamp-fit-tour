@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>상품 목록</title>
-  <link type="text/css" rel="stylesheet"href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet"
+    href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
@@ -26,8 +27,7 @@
         <li class="current"><a href="index.html">전체보기</a></li>
         <li><a href="#" class="continent">유럽</a>
           <ul>
-            <li>
-              <a href="#" class="country-list-btn" id="유럽">독일</a>
+            <li><a href="#" class="country-list-btn" id="유럽">독일</a>
               <ul>
                 <li><a href="#" class="city-list-btn" id="유럽,독일">베를린</a></li>
                 <li><a href="#" class="city-list-btn" id="유럽,독일">뮌헨</a></li>
@@ -37,7 +37,6 @@
             </li>
             <li><a href="#" class="country-list-btn" id="유럽">스위스</a>
               <ul>
-                <li><a href="#" class="city-list-btn" id="유럽,스위스">인터라켄</a></li>
                 <li><a href="#" class="city-list-btn" id="유럽,스위스">취리히</a></li>
                 <li><a href="#" class="city-list-btn" id="유럽,스위스">루체른</a></li>
                 <li><a href="#" class="city-list-btn" id="유럽,스위스">제네바</a></li>
@@ -116,7 +115,7 @@
                 <li><a href="#" class="city-list-btn" id="아시아,중국">상하이</a></li>
                 <li><a href="#" class="city-list-btn" id="아시아,중국">베이징</a></li>
                 <li><a href="#" class="city-list-btn" id="아시아,중국">운남성</a></li>
-                <li><a href="#" class="city-list-btn"id="아시아,중국">심천</a></li>
+                <li><a href="#" class="city-list-btn" id="아시아,중국">심천</a></li>
                 <li><a href="#" class="city-list-btn" id="아시아,중국">장가계</a></li>
               </ul>
             </li>
@@ -194,28 +193,27 @@
             </li>
             <li><a href="#" class="country-list-btn" id="아프리카">이집트</a>
               <ul>
-                <li><a href="#" class="city-list-btn"id="아프리카,이집트">카이로</a></li>
+                <li><a href="#" class="city-list-btn" id="아프리카,이집트">카이로</a></li>
               </ul>
             </li>
-            
+
           </ul>
         </li>
 
       </ul>
 
-    </nav>
-    <!-- nav -->
+    </nav> <!-- nav -->
 
-<!-- breadcrumb -->
-<nav class="clean">
-  <div class="nav-wrapper">
-    <div class="col s12" id="breadcrumb-list">
-      <a onclick="" class="breadcrumb bit-invisible">First</a>
-      <a onclick="" class="breadcrumb bit-invisible">Second</a>
-      <a onclick="" class="breadcrumb bit-invisible">Third</a>
-    </div>
-  </div>
-</nav>
+
+    <!-- breadcrumb -->
+    <nav class="clean">
+      <div class="nav-wrapper">
+        <div class="col s12" id="breadcrumb-list">
+          <a onclick="" class="breadcrumb bit-invisible">First</a> <a onclick=""
+            class="breadcrumb bit-invisible">Second</a> <a onclick="" class="breadcrumb bit-invisible">Third</a>
+        </div>
+      </div>
+    </nav>
 
     <!--나중에 다른 곳으로 옮길 것 -->
     <div id="main">
@@ -244,7 +242,7 @@
           <article class="style3">
             <span class="image"> <img src="/bitcamp-fit-tour/images/pic03.jpg" alt="" />
             </span> <a href="#l">
-              <h2>Barcelona</h2>  
+              <h2>Barcelona</h2>
               <div class="content">
                 <p>#사그라다 파밀리아 성당 #고딕지구 #구엘공원 #람브라스거리</p>
               </div>
@@ -270,18 +268,19 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">제목</th>
-                <th scope="col">소제목</th>
-                <th scope="col">테마</th>
-                <th scope="col">가격</th>
                 <th scope="col">국가</th>
                 <th scope="col">도시</th>
+                <th scope="col">제목</th>
+                <th scope="col">소요시간</th>
+                <th scope="col">이동수단</th>
+                <th scope="col">가격</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
-        </div> <!-- .bit-list -->
-
+        </div>
+        <!-- .bit-list -->
+        
         <ul class="pagination justify-content-center">
           <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
           <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
@@ -289,33 +288,38 @@
         </ul>
 
       </section>
-      <aside>
-        사이드바
-      </aside>
+      <aside>사이드바</aside>
     </main>
   </div>
   <!-- .container -->
 
-  <footer class="bit-main-footer"></footer>
+<footer class="bit-main-footer page-footer teal"></footer>
 
   <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
   <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{subHeading}}</td>
-  <td>{{price}}</td>
   <td>{{country.countryName}}</td>
   <td>{{city.cityName}}</td>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td>{{totalHour}}</td>
+  <td>{{transportation}}</td>
+  <td>{{price}}</td>
 </tr>
+{{/each}}
+</script>
+
+<script id="tr-template-for-theme" type="text/x-handlebars-template">
+{{#each theme}}
+<span>{{theme}}</span>
 {{/each}}
 </script>
 
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
   <script src="js/jquery.dropotron.min.js"></script>
   <script src="js/jquery.scrolly.min.js"></script>
   <script src="js/breakpoints.min.js"></script>

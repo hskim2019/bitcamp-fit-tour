@@ -30,11 +30,39 @@
   </div>
 
   <div class="row mt-sm-5 mb-sm-5">
-  
-    <!-- photo -->
-    <div class="col-sm-7">
-      <img id="photo" class="img-thumbnail" alt="상품사진">
-    </div>
+    <!-- img -->
+    <div class="col-sm-7 slider">
+    <ul class="slides">
+      <li>
+        <img class="img-thumbnail materialboxed" src=""> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src=""> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Left Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src=""> <!-- random image -->
+        <div class="caption right-align">
+          <h3>Right Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src=""> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
 
     <div class="col-sm-5">
 
@@ -82,8 +110,8 @@
       
       <div class="row ml-sm-5 mt-sm-4">
         <div class="col-sm-12">
-          <button type="button" class="btn btn-outline-dark btn-block">위시리스트에 담기</button>
-          <button type="button" class="btn btn-outline-dark btn-block">예약하기</button>
+        <a class="waves-effect waves-light btn-large"><i class="material-icons left">favorite_border</i>위시리스트에 담기</a>
+        <a class="waves-effect waves-light btn-large pull-right">예약하기</a>
         </div>
       </div>
       
@@ -163,7 +191,7 @@
 </div>
 </div>
 </div><!-- .container -->
-<footer class="bit-main-footer"></footer>
+<footer class="bit-main-footer page-footer teal"></footer>
 
 <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
@@ -210,7 +238,7 @@
     </div>
 
     <div class="col-sm-12">
-      <input type="text" readonly class="form-control-plaintext ml-5" value={{content}}>
+      <input type="text" readonly class="form-control-plaintext ml-5 recomment-add" value={{content}}>
     </div>
 
     {{!-- 대댓글 임시 미구현

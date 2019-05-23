@@ -15,23 +15,24 @@
   <header class="bit-main-header"></header>
 
   <div class="container">
-    <h3>회원가입 폼 입니다.</h3>
+    <h3>FIT-TOUR 회원가입</h3>
     <h6> 모두 기입하셔야 가입 가능합니다.</h6>
-    <form class="col s12" action="" method="post" id="">
 
     
-
+<div class="row">
+    <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">email</i>
-          <input id="email" name="email" type="text" class="form-control">
-          <label for="icon_prefix">이메일</label>
+          <input id="email" name="email" type="text" class="form-control" autocomplete=off>
+          <label for="email">이메일</label>
           <span id="emailErr" class="invalid-feedback">올바른
           이메일 형식이 아닙니다. 다시 입력해 주세요.</span> <span id="overlapErr" class="invalid-feedback">중복된 아이디
           입니다.</span>
-        </div>
-        
+          </div>
       </div>
+    </form>
+  </div>
 
 
 
@@ -40,14 +41,14 @@
         <div class="input-field col s6">
           <i class="material-icons prefix">lock</i>
           <input id="password" name="password" type="password" class="form-control">
-          <label for="icon_prefix">비밀번호</label>
+          <label for="password">비밀번호</label>
           <span id="passwordRegErr" class="invalid-feedback">8글자
           이상 입력하세요.</span>
         </div>
         <div class="input-field col s6">
           <i class="material-icons prefix">lock</i>
           <input id="rePwd" name="rePwd" type="password" class="form-control">
-          <label for="icon_telephone">비밀번호 확인</label>
+          <label for="rePwd">비밀번호 확인</label>
             <span id="rePwdErr" class="invalid-feedback">비밀번호와
           일치하지 않습니다. 다시 입력해 주세요.</span>
         </div>
@@ -59,15 +60,15 @@
    <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">account_circle</i>
-          <input id="name" name="name" type="text" class="form-control">
-          <label for="icon_prefix">이름</label>
+          <input id="name" name="name" type="text" class="form-control" autocomplete=off>
+          <label for="name">이름</label>
           <span id="nameRegErr" class="invalid-feedback">2글자 이상
           15글자 이하를 입력하세요.</span>
         </div>
         <div class="input-field col s6">
           <i class="material-icons prefix">date_range</i>
           <input id="birth" name="birth" type="date" class="form-control">
-          <label class="blue-text text-darken-2" for="icon_telephone">생일</label>
+          <label class="blue-text text-darken-2" for="birth">생일</label>
         <span id="birthRegErr" class="invalid-feedback">생일을 선택
           또는 입력하세요.</span>
         </div>
@@ -83,9 +84,13 @@
       <label > <input type="checkbox" name="checkOne"
       id="phoneCheck" > <span class="blue-text text-darken-2" id="sms-span">SMS</span>  </label>
       </div>
-
-      <button class="btn btn-danger" id="add-btn" type="button" disabled>가입</button>
-    </form>
+     
+        <div id="add" class="row">
+         
+      <button class="btn-floating btn-large" id="add-btn" type="button" disabled>가입</button>
+      
+      </div>
+      
   </div>
   <!-- .container -->
 
@@ -98,9 +103,3 @@
   <script src="signup.js"></script>
 </body>
 </html>
-
-
-
-
-
-

@@ -19,15 +19,18 @@ if (param) {
 
 
 $('#reEamil').click (() => {
+  $("#reEamil").hide();
   $.getJSON('../../app/json/signup/reeamil?email='+window.localStorage.standby, 
       function(data) {
-    $("#reEamil").hide();
-    alert(data.status);
+    
+   
     if(data.status == 'success') {
-      location.href = 'success.html';  
+      M.toast({html: '이메일 재전송 성공',displayLength: '10000'})
     } else {
+      M.toast({html: '이메일 재전송 실패'})
       alert('재 전송 실패 입니다.\n' + data.message);
     }
+    $("#reEamil").show();
   });
 });
 

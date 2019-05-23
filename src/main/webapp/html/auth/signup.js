@@ -10,8 +10,9 @@ for (e of el) {
 
 $('#add-btn').click(() => {
   $('#add-btn').hide();  
+  
   $.post('../../app/json/signup/add', {
-
+   
     email: $('#email').val(),
     password: $('#password').val(),
     name: $('#name').val(),
@@ -27,9 +28,11 @@ $('#add-btn').click(() => {
   function(data) {
     
     if(data.status == 'success') {
+      window.localStorage.standby = $('#email').val();
       location.href = "success.html";  
     } else {
-      alert('등록 실패 입니다.\n' + data.message);
+      M.toast({html: '등록 실패 입니다',displayLength: '10000'})
+    
     }
   });
 });
@@ -139,8 +142,8 @@ function successState(sel){
     countInvalid++;
     if(countInvalid >0){
     $("#add-btn")
-    .removeClass("btn-success")
-  .addClass("btn-danger")
+    .removeClass("pulse")
+  .addClass("")
                 .attr("disabled","disabled");
     }
   }
@@ -153,8 +156,8 @@ function successState(sel){
       if(countValid ==5){ // 입력폼 수
         
         $("#add-btn")
-        .removeClass("btn-danger")
-  .addClass("btn-success")
+        .removeClass("")
+  .addClass("pulse")
         .removeAttr("disabled");
       }
     }
@@ -175,8 +178,8 @@ function errorState(sel){
     if(countInvalid >0){
     
     $("#add-btn")
-    .removeClass("btn-success")
-  .addClass("btn-danger")
+    .removeClass("pulse")
+  .addClass("")
                 .attr("disabled","disabled");
     }
   }

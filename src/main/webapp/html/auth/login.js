@@ -19,7 +19,8 @@ document.querySelector('#login-btn').onclick = () => {
       
       
     } else {
-      alert('로그인 실패입니다!\n' + data.message);
+      M.toast({html: '아이디나 비밀번호가 틀렸습니다.',displayLength: '10000'})
+
     }
   };
   xhr.open('POST', '../../app/json/auth/login', true)

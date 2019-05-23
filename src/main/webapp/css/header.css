@@ -4,12 +4,16 @@ nav {
   height: 90px
 }
 
-#nav-mobile li {
+#bit-header ul {
   margin-top: 11px;
 }
 
 .nav-wrapper {
   font-weight: 700;
+}
+
+#login-userphoto {
+	margin-top: 2px;
 }
 
 

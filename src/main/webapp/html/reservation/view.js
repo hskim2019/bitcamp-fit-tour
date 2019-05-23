@@ -89,9 +89,9 @@ function loadData(no) {
     $('#paymentDate').val(data.paymentDate);
     $('#reservationDate').val(data.reservationDate);
  
-    
   });
 };
+
 
 
 

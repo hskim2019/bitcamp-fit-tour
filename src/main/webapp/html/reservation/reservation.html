@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>예약</title>
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+<body>
+
+<header class="bit-main-header"></header>
+
+<div class="container">
+<h1></h1>
+<form>
+  <div class="form-group row bit-view-item">
+    <label for="no" class="col-sm-2 col-form-label">예약번호</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="no" 
+             name='no' readonly>
+    </div>
+  </div>
+ <div class="form-group row">
+    <label for="tourNo" class="col-sm-2 col-form-label">상품번호</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="tourNo" >
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">이름</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="name" >
+    </div>
+  </div>
+  
+    <div class="form-group row bit-view-item">
+    <label for="status" class="col-sm-2 col-form-label">상태</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="status" readonly>
+    </div>
+  </div>
+  
+     <div class="form-group row">
+    <label for="tourDate" class="col-sm-2 col-form-label">여행일</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="tourDate">
+    </div>
+  </div>
+  
+    <div class="form-group row">
+    <label for="personnel" class="col-sm-2 col-form-label">여행인원</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="personnel">
+    </div>
+  </div>
+  
+      <div class="form-group row">
+    <label for="touristTel" class="col-sm-2 col-form-label">예약자 연락처</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="touristTel">
+    </div>
+  </div>
+  
+   <div class="form-group row">
+    <label for="requirement" class="col-sm-2 col-form-label">요청사항</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="requirement">
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <label for="paymentNo" class="col-sm-2 col-form-label">결제번호</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="paymentNo" >
+    </div>
+  </div>
+  
+    
+  <div class="form-group row  bit-view-item">
+    <label for="paymentDate" class="col-sm-2 col-form-label">결제일</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control" 
+          id="paymentDate" readonly>
+    </div>
+  </div>
+  
+    <div class="form-group row bit-view-item">
+    <label for="reservationDate" class="col-sm-2 col-form-label">예약일</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" 
+          id="reservationDate" readonly >
+    </div>
+  </div>
+
+  
+  
+  <!-- 목록삭제  -->
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <a class="btn btn-primary" href='index.html'>목록</a> 
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
+      <button type="button" id="update-btn" class="btn btn-primary bit-view-item">변경</button>
+      <button type="button" id="add-btn" class="btn btn-primary bit-new-item">등록</button>
+    </div>
+  </div>
+  </form>
+</div><!-- .container -->
+
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+
+<script src="../header.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
+
+
+
+
+
+

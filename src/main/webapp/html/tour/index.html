@@ -241,7 +241,7 @@
           </article>
           <article class="style3">
             <span class="image"> <img src="/bitcamp-fit-tour/images/pic03.jpg" alt="" />
-            </span> <a href="#l">
+            </span> <a href="#">
               <h2>Barcelona</h2>
               <div class="content">
                 <p>#사그라다 파밀리아 성당 #고딕지구 #구엘공원 #람브라스거리</p>
@@ -264,7 +264,7 @@
 
     <main>
       <section>
-        <div class="bit-list">
+<!--         <div class="bit-list">
           <table class="table table-hover">
             <thead>
               <tr>
@@ -273,14 +273,52 @@
                 <th scope="col">제목</th>
                 <th scope="col">소요시간</th>
                 <th scope="col">이동수단</th>
+                <th scope="col">테마</th>
                 <th scope="col">가격</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
-        </div>
+        </div> -->
         <!-- .bit-list -->
-        
+<!-- temp -->
+<!-- <tr class="listRow" id='{{no}}'>
+  <td>{{country.countryName}}</td>
+  <td>{{city.cityName}}</td>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td>{{totalHour}}</td>
+  <td>{{transportation}}</td>
+  <td class='theme-list' id='{{no}}'></td>
+  <td>{{price}}</td>
+</tr>
+ -->
+        <!-- horizontal card -->
+  <div class="col s12 m7" id="tourlistcard">
+  
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="https://lorempixel.com/100/190/nature/6">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content exception1">
+          <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+        <div class="card-content second-line">
+          <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-content last-line row">
+          <p class="tour-item col s10">I am </p>
+          <p class="tour-item price col s2">I am</p>
+         </div>
+      </div>
+    </div>
+    
+  </div>
+        <!-- horizontal card end -->
+
         <ul class="pagination justify-content-center">
           <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
           <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
@@ -293,25 +331,42 @@
   </div>
   <!-- .container -->
 
-<footer class="bit-main-footer page-footer teal"></footer>
+  <footer class="bit-main-footer page-footer teal"></footer>
 
   <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
   <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <td>{{country.countryName}}</td>
-  <td>{{city.cityName}}</td>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{totalHour}}</td>
-  <td>{{transportation}}</td>
-  <td>{{price}}</td>
-</tr>
+
+    <div class="card horizontal listRow" id='{{no}}'>
+      <div class="card-image">
+        <img src="../../images/london.png">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content exception1">
+          <p class="tour-item">{{country.countryName}} | {{city.cityName}}</p>
+        </div>
+        <div class="card-action">
+          <a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a>
+        </div>
+        <div class="card-content second-line">
+          <p class="tour-item">{{totalHour}}시간 소요 | {{transportation}}이동</p>
+        </div>
+        <div class="card-content last-line row">
+          <p class="tour-item col s9"></p>
+          <p class="tour-item price col s3">{{price}}원</p>
+         </div>
+      </div>
+    </div>
+
 {{/each}}
+
+
+
 </script>
 
-<script id="tr-template-for-theme" type="text/x-handlebars-template">
-{{#each theme}}
-<span>{{theme}}</span>
+ <script id="tr-template-for-theme" type="text/x-handlebars-template">
+{{#each tour.theme}}
+<span>{{theme}}&nbsp;&nbsp;</span>
 {{/each}}
 </script>
 

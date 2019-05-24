@@ -10,9 +10,10 @@ selectPersonnel = param.split('=')[3];
 
 if (param) {
   $('h3').html('예약 하기');
-  //var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
-  alert(personnel);
+  // var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
+  // alert(selectPersonnel);
   loadData(tourNo);
+  
   $('#tourNo').attr('readonly','');
   $('#name').attr('readonly','');
   $('#paymentNo').attr('readonly','');
@@ -34,22 +35,33 @@ if (param) {
 $(document).ready(function(){
 $('.datepicker').datepicker({
    format : 'yyyy년 mm월 dd일',
-     defaultDate: new Date(tourYear, tourMonth-1, tourDay), // 월에 자동으로 +1이 들어가서 -해줘야한다;
+     defaultDate: new Date(tourYear, tourMonth-1, tourDay), // 월에 자동으로 +1이 들어가서
+                                                            // -해줘야한다;
      setDefaultDate: true
 });
 });
 
+$("#selectPersonnel").mouseenter(function(){
+  fnMove();
+});
 
-
-function addPersonnelOption(personnel, price) {//인원
+function fnMove(){
+var offset = $("#won").offset();
+var winH = $(window).height();
+$('html, body').animate({scrollTop : (offset.top - winH/2)}, 200);
+}
+function addPersonnelOption(personnel, price) {// 인원
   for(var i=1; i <= personnel; i++){
+   
     $('<option value="'+ i +'">' + i +'명</option>').appendTo($('#personnel'));
+  
   }
+ $('select').find('option[value='+ selectPersonnel +']').prop('selected', true);
   $('#personnel').change((e)=> {
     $('#price').html((price * $(e.target).val()).toLocaleString() +'원');
     $('#perPrice').html('/' + $(e.target).val() + '인')
   });
-  $('select').find('option[value='+ selectPersonnel +']').prop('selected', true);
+ 
   $('select').formSelect();
 }
 
@@ -60,14 +72,12 @@ function loadData(no) {
   $.getJSON('../../app/json/tour/detail?no=' + tourNo,
           function(obj) {
         $('h6').html(obj.tour.title);
-        $('#subHeading').html(obj.tour.subHeading);
-        $('#content').html(obj.tour.content);
-        $('#totalHour').html(obj.tour.totalHour + '시간 소요');
-        $('#hashTag').val(obj.tour.hashTag);
         addPersonnelOption(obj.tour.personnel, obj.tour.price);
-        $('#transportation').html(obj.tour.transportation + ' 이동');
-        $('#price').html(obj.tour.price.toLocaleString() + '원');
-        $('#theme').val(obj.tour.theme[0].theme);
+       
+        $('#price').html(obj.tour.price * selectPersonnel +'원');
+        $('#perPrice').html('/' + selectPersonnel + '인')
+
+        
         
       });
 };

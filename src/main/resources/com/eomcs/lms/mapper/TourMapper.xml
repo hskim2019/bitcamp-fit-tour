@@ -29,13 +29,6 @@
     <id column="country_id"        property="no"/>
     <result column="country_name"  property="countryName"/>
     </association>
-    
-    <collection property="tourPhoto" ofType="tourGuidancePhoto">
-    <id column="photo_id"    property="no"/>
-    <result column="tour_id"    property="tourNo"/>
-    <result column="photo_name" property="name"/>
-    <result column="photo_path" property="path"/>
-    </collection>
   </resultMap>
   
   <resultMap type="tour" id="tourPhotoMap">

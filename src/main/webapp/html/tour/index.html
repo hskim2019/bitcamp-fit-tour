@@ -216,7 +216,7 @@
     </nav>
 
     <!--나중에 다른 곳으로 옮길 것 -->
-    <div id="main">
+<!--     <div id="main">
       <div class="inner">
         <h3>인기 도시</h3>
         <br />
@@ -259,64 +259,35 @@
           </article>
         </section>
       </div>
-    </div>
-
+    </div> -->
 
     <main>
       <section>
-<!--         <div class="bit-list">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">국가</th>
-                <th scope="col">도시</th>
-                <th scope="col">제목</th>
-                <th scope="col">소요시간</th>
-                <th scope="col">이동수단</th>
-                <th scope="col">테마</th>
-                <th scope="col">가격</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div> -->
-        <!-- .bit-list -->
-<!-- temp -->
-<!-- <tr class="listRow" id='{{no}}'>
-  <td>{{country.countryName}}</td>
-  <td>{{city.cityName}}</td>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{totalHour}}</td>
-  <td>{{transportation}}</td>
-  <td class='theme-list' id='{{no}}'></td>
-  <td>{{price}}</td>
-</tr>
- -->
         <!-- horizontal card -->
-  <div class="col s12 m7" id="tourlistcard">
-  
-    <div class="card horizontal">
-      <div class="card-image">
-        <img src="https://lorempixel.com/100/190/nature/6">
-      </div>
-      <div class="card-stacked">
-        <div class="card-content exception1">
-          <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
+        <div class="col s12 m7" id="tourlistcard">
+
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="https://lorempixel.com/100/190/nature/6">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content exception1">
+                <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-action">
+                <a href="#">This is a link</a>
+              </div>
+              <div class="card-content second-line">
+                <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-content last-line row">
+                <p class="tour-item col s10">I am </p>
+                <p class="tour-item price col s2">I am</p>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-        <div class="card-content second-line">
-          <p class="tour-item">I am a very simple card. I am good at containing small bits of information.</p>
-        </div>
-        <div class="card-content last-line row">
-          <p class="tour-item col s10">I am </p>
-          <p class="tour-item price col s2">I am</p>
-         </div>
-      </div>
-    </div>
-    
-  </div>
         <!-- horizontal card end -->
 
         <ul class="pagination justify-content-center">
@@ -364,7 +335,7 @@
 
 </script>
 
- <script id="tr-template-for-theme" type="text/x-handlebars-template">
+  <script id="tr-template-for-theme" type="text/x-handlebars-template">
 {{#each tour.theme}}
 <span>{{theme}}&nbsp;&nbsp;</span>
 {{/each}}

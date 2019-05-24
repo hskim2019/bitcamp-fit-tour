@@ -97,4 +97,17 @@ public class ReservationController {
     }
     return content;
   }
+  @PostMapping("reservation")
+  public Object reservation(Reservation reservation) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      reservationService.add(reservation);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
 }

@@ -17,7 +17,7 @@ function tourList(tourNo) {
     addPersonnelOption(obj.tour.personnel, obj.tour.price);
     $('#transportation').html(obj.tour.transportation + ' 이동');
     addTransportaionIcon(obj.tour.transportation);
-    $('#price').html(obj.tour.price.toLocaleString() + '원');
+    $('#price').html($('#price').html() + obj.tour.price.toLocaleString() + '원');
     $('#photo').attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + obj.tour.tourPhoto[0].name +'.jpg');
     //$('#photpath').val(obj.tour.tourPhoto[0].path);
     $('#theme').val(obj.tour.theme[0].theme);

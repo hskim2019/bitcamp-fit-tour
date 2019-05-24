@@ -6,7 +6,7 @@ var pageNo = 1,
     currSpan = $('#currPage > span'),
     crumb = $('#breadcrumb-list'),
     templateSrc = $('#tr-template').html(),
-    templateSrc2 = $('#tr-template-for-theme').html();
+    themetemplateSrc = $('#tr-template-for-theme').html();
 // script 태그에서 템플릿 데이터를 꺼낸다.
 
 
@@ -19,22 +19,33 @@ var temp;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
-trGenerator2 = Handlebars.compile(templateSrc);
+themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
-  
   $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&countryName=' + countryName + '&cityName=' + cityName, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
-      console.log(obj);
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
-      tbody.html(''); // 이전에 출력한 내용을 제거한다.
-      
+      //tbody.html(''); // 이전에 출력한 내용을 제거한다.
+      $('#tourlistcard').html('');
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
-      $(trGenerator(obj)).appendTo(tbody);
+      $(trGenerator(obj)).appendTo($('#tourlistcard'));
+      
+      for(listRow of $('.listRow')) {
+        var tourNo = $(listRow).attr('id');
+        var target = $(listRow).children().eq(1).children().eq(3).children().eq(0);
+        console.log(target);
+        $.ajaxSetup({async:false});
+        $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
+            function(data) {
+          $(themetrGenerator(data)).appendTo(target);
+        });
+        $.ajaxSetup({async:true});
+      }
+     
       
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
@@ -56,7 +67,6 @@ function loadList(pn, countryName, cityName) {
       // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
       $(document.body).trigger('loaded-list');
     }); // Bitcamp.getJSON()
-  
 } // loadList()
 
 $('#prevPage > a').click((e) => {
@@ -95,6 +105,8 @@ function showBreadCrumb(continentName, countryName, cityName) {
       thirdcrumb.html(cityName);
     }
 };
+
+
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {

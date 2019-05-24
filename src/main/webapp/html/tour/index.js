@@ -1,6 +1,5 @@
 var pageNo = 1,
     pageSize = 3,
-    tbody = $('tbody'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
@@ -24,27 +23,29 @@ themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
+  $.ajaxSetup({async:false});
   $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&countryName=' + countryName + '&cityName=' + cityName, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
-      //tbody.html(''); // 이전에 출력한 내용을 제거한다.
+      // 이전에 출력한 내용을 제거한다.
       $('#tourlistcard').html('');
-      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
+      // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 ()안에 붙인다.
       $(trGenerator(obj)).appendTo($('#tourlistcard'));
+      
       
       for(listRow of $('.listRow')) {
         var tourNo = $(listRow).attr('id');
         var target = $(listRow).children().eq(1).children().eq(3).children().eq(0);
-        console.log(target);
-        $.ajaxSetup({async:false});
+        var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
+          $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
           $(themetrGenerator(data)).appendTo(target);
         });
-        $.ajaxSetup({async:true});
       }
+      $.ajaxSetup({async:true});
      
       
       // 현재 페이지의 번호를 갱신한다.

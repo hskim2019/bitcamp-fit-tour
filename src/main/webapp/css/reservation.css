@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+/* 회원가입버튼 가운데정렬 */
+h3 {
+  padding: 4% 2% 2%;
+  margin: auto;
+}
+
+h6 {
+  padding: 4% 2% 2%;
+  margin: auto;
+}
+
+#title {
+  font-size: 20px;
+  margin: auto;
+}
+
+#group {
+  font-size: 29px;
+  text-align: left;
+  padding-right: 7px;
+  margin-left: 2px;
+}
+#won {
+  font-size: 24px;
+  text-align: left;
+  padding-right: 7px;
+  margin-left: 4px;
+}
+
+#date {
+  margin-left: 84px;
+}

@@ -1,128 +1,218 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>예약</title>
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<meta charset="UTF-8">
+<title>예약</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
+  media="screen,projection" />
+<link rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/materialize-stepper/dist/css/mstepper.min.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/reservation.css">
 <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 <body>
 
-<header class="bit-main-header"></header>
+  <header class="bit-main-header"></header>
 
-<div class="container">
-<h1></h1>
-<form>
-  <div class="form-group row bit-view-item">
-    <label for="no" class="col-sm-2 col-form-label">예약번호</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="no" 
-             name='no' readonly>
+  <div class="container">
+
+    <div id="title" class="row">
+      <div class="col s12">
+        <h3></h3>
+        <h6></h6>
+        <form>
+          <ul class="stepper parallel horizontal">
+            <li class="step active">
+              <div class="step-title waves-effect waves-dark">정보 입력</div>
+              <div class="step-content">
+                <br>
+
+                <div class="row">
+                  <div class="input-field col s6 pl50">
+                    <i class="material-icons prefix">date_range</i> <label id="date">날짜 선택</label><input
+                      type="text" class="datepicker">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <i id="group" class="input-field col  material-icons prefix pl50">group</i>
+                  <div class="input-field col s5">
+                    <select id="personnel">
+                    </select> <label>인원 선택</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <i id="won" class="input-field col  material-icons prefix fas fa-won-sign pl50"></i>
+                  <div class="input-field col s5">
+                    <span id="price"></span> <span id="perPrice">/ 1인</span>
+                  </div>
+                </div>
+
+
+
+
+                <div class="step-actions">
+                  <button class="waves-effect waves-dark btn next-step"
+                    data-validator="validateStepOne">CONTINUE</button>
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                </div>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-title waves-effect waves-dark">결제</div>
+              <div class="step-content">
+                <div class="row">
+                  <div class='form-field col s12'>
+                    <p>Step with no custom validation</p>
+                    <div class="input-field col s12">
+                      <input type="text" name="textfield" class="required validate" /> <label
+                        for="textfield">Random textfield</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="step-actions">
+                  <button class="waves-effect waves-dark btn next-step">CONTINUE</button>
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                </div>
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-title waves-effect waves-dark">예약 완료</div>
+              <div class="step-content">
+                <div class="row">
+                  <div class='form-field'>
+                    <p>Step with feedback and custom validation</p>
+                    <p>
+                      <input name='checkbox3' type="checkbox" class="filled-in" id="checkbox3"
+                        value='checkbox3' /> <label for="checkbox3">Checkbox 3</label>
+                    </p>
+                    <p>
+                      <input name='checkbox4' type="checkbox" class="filled-in" id="checkbox4"
+                        value='checkbox4' /> <label for="checkbox4">Checkbox 4</label>
+                    </p>
+                  </div>
+                  <div class="input-field col s12">
+                    <input type="text" id="textfield2" name="textfield2" class="required validate" />
+                    <label for="textfield2">This field should contain the word materialize</label>
+                  </div>
+                </div>
+                <div class="step-actions">
+                  <button class="waves-effect waves-dark btn next-step"
+                    data-feedback="nextStepThreeHandler" data-validator="validateStepThree">SUBMIT</button>
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </form>
+
+      </div>
+
     </div>
-  </div>
- <div class="form-group row">
-    <label for="tourNo" class="col-sm-2 col-form-label">상품번호</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="tourNo" >
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="name" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="name" >
-    </div>
-  </div>
-  
+
+
     <div class="form-group row bit-view-item">
-    <label for="status" class="col-sm-2 col-form-label">상태</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="status" readonly>
+      <label for="no" class="col-sm-2 col-form-label">예약번호</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="no" name='no' readonly>
+      </div>
     </div>
-  </div>
-  
-     <div class="form-group row">
-    <label for="tourDate" class="col-sm-2 col-form-label">여행일</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="tourDate">
-    </div>
-  </div>
-  
     <div class="form-group row">
-    <label for="personnel" class="col-sm-2 col-form-label">여행인원</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="personnel">
+      <label for="tourNo" class="col-sm-2 col-form-label">상품번호</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tourNo">
+      </div>
     </div>
-  </div>
-  
-      <div class="form-group row">
-    <label for="touristTel" class="col-sm-2 col-form-label">예약자 연락처</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="touristTel">
+
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">이름</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name">
+      </div>
     </div>
-  </div>
-  
-   <div class="form-group row">
-    <label for="requirement" class="col-sm-2 col-form-label">요청사항</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="requirement">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="paymentNo" class="col-sm-2 col-form-label">결제번호</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="paymentNo" >
-    </div>
-  </div>
-  
-    
-  <div class="form-group row  bit-view-item">
-    <label for="paymentDate" class="col-sm-2 col-form-label">결제일</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control" 
-          id="paymentDate" readonly>
-    </div>
-  </div>
-  
+
     <div class="form-group row bit-view-item">
-    <label for="reservationDate" class="col-sm-2 col-form-label">예약일</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" 
-          id="reservationDate" readonly >
+      <label for="status" class="col-sm-2 col-form-label">상태</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="status" readonly>
+      </div>
     </div>
-  </div>
 
-  
-  
-  <!-- 목록삭제  -->
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <a class="btn btn-primary" href='index.html'>목록</a> 
-      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
-      <button type="button" id="update-btn" class="btn btn-primary bit-view-item">변경</button>
-      <button type="button" id="add-btn" class="btn btn-primary bit-new-item">등록</button>
+    <div class="form-group row">
+      <label for="tourDate" class="col-sm-2 col-form-label">여행일</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="tourDate">
+      </div>
     </div>
+
+    <div class="form-group row">
+      <label for="personnel" class="col-sm-2 col-form-label">여행인원</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="personnel">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="touristTel" class="col-sm-2 col-form-label">예약자 연락처</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="touristTel">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="requirement" class="col-sm-2 col-form-label">요청사항</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="requirement">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="paymentNo" class="col-sm-2 col-form-label">결제번호</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="paymentNo">
+      </div>
+    </div>
+
+
+    <div class="form-group row  bit-view-item">
+      <label for="paymentDate" class="col-sm-2 col-form-label">결제일</label>
+      <div class="col-sm-10">
+        <input type="text" readonly class="form-control" id="paymentDate" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row bit-view-item">
+      <label for="reservationDate" class="col-sm-2 col-form-label">예약일</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="reservationDate" readonly>
+      </div>
+    </div>
+
+
+
+    <!-- 목록삭제  -->
+
   </div>
-  </form>
-</div><!-- .container -->
+  <!-- .container -->
 
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
-<script src="../header.js"></script>
-<script src="view.js"></script>
+  <footer class="bit-main-footer page-footer teal"></footer>
+
+  <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/materialize-stepper/dist/js/mstepper.min.js"></script>
+  <script src="../footer.js"></script>
+  <script src="../header.js"></script>
+  <script src="reservation.js"></script>
 </body>
 </html>
 

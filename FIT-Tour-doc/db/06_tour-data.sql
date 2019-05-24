@@ -13,3 +13,5 @@ values(4, '부산투어', '야경 여행', '내용입니다.', '2019-10-01', 9, 
 insert into tour(tour_id, title, sub_heading, content, created_date, total_hour, hash_tag, personnel, transportation, price, city_id)
 values(5, '바르셀로나투어', '도보 여행', '내용입니다.', '2019-08-01', 9, 'FFAQ', 3, '도보', '120000', 5);
 
+insert into tour(tour_id, title, sub_heading, content, created_date, total_hour, hash_tag, personnel, transportation, price, city_id)
+values(6, '홍콩투어', '도보 여행', '내용입니다.', '2019-08-01', 9, 'FFAQED', 10, '도보', '120000', 5);

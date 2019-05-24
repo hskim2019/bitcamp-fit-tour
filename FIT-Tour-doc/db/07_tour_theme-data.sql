@@ -14,3 +14,6 @@ insert into tour_theme(tour_id, theme_id)
 values(5, 3);
 insert into tour_theme(tour_id, theme_id)
 values(5, 4);
+insert into tour_theme(tour_id, theme_id)
+values(6, 5);
+

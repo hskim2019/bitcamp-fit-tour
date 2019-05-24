@@ -32,12 +32,48 @@ main {
 
 
 section:not(.tiles)  {
- width: 900px;
+ width: 75%;
  float:right;	
  border: 2px solid red;	
 }
+
+.card-image {
+	width: 25%;
+	height: 150px;
+}
+
+.card-content {
+	padding: 0px 24px !important;
+/* 	margin: 0px; */
+}
+
+.exception1 {
+	margin-top: 10px !important;
+}
+
+.card-action {
+	padding: 0px 24px 2px 24px !important;
+	font-size: 24px;
+	height: 65px;
+}
+
+.last-line {
+	margin:0px !important;
+}
+
+.last-line {
+	margin: 0px !important;
+}
+
+.tour-item{
+	padding: 0px !important;
+}
+
+.price {
+	font-size: 20px !important;
+}
 aside {
-	width:250px;
+	width: 24%;
 	float: left;
 	border: 2px solid blue;
 }
@@ -45,6 +81,7 @@ aside {
 footer {
 	clear:both;
 }
+
 
 th:nth-child(1) {
   width: 50px;

@@ -78,6 +78,15 @@ aside {
 	border: 2px solid blue;
 }
 
+aside div {
+	visibility: visible !important;
+}
+
+#followquick { 
+  	visibility: visible !important;
+  	position:absolute;
+	}
+
 footer {
 	clear:both;
 }

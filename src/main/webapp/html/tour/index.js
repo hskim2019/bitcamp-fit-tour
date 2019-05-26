@@ -20,6 +20,19 @@ var temp;
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
+//follow quick menu
+$(window).scroll(function(){
+
+
+var scrollTop = $(document).scrollTop();
+
+if (scrollTop < 200) {
+ scrollTop = 200;
+}
+
+$("#followquick").stop();
+$("#followquick").animate( { "top" : scrollTop });
+});
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
@@ -69,6 +82,9 @@ function loadList(pn, countryName, cityName) {
       $(document.body).trigger('loaded-list');
     }); // Bitcamp.getJSON()
 } // loadList()
+
+
+
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();

@@ -2,7 +2,7 @@ insert into city (country_id, city_name)
 values(1, '암스테르담');
 insert into city (country_id, city_name)
 values(1, '로테르담');
-insert into city_id, city_name)
+insert into city (country_id, city_name)
 values(1, '헤이그');
 
 insert into city (country_id, city_name)

@@ -1,8 +1,13 @@
 package com.eomcs.lms.web.json;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -133,6 +138,56 @@ public class TourController {
 
 		return content;
 	}
+	
+      @PostMapping("add")
+	  public Object add(HttpServletRequest request) throws IOException, ServletException {
+        
+        StringBuffer json = new StringBuffer();
+        String line = null;
+     
+        try {
+            BufferedReader reader = request.getReader();
+            while((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+
+            System.out.println(json);
+        }catch(Exception e) {
+            System.out.println("Error reading JSON string: " + e.toString());
+        }
+        
+        Tour tour = new Tour();
+        tour.setTitle("투어123");
+        tour.setSubHeading("안녕");
+        tour.setContent(json.toString());
+        tour.setTotalHour(30);
+        tour.setHashTag("abc");
+        tour.setPersonnel(5);
+        tour.setTransportation("버스");
+        tour.setPrice(300000);
+        tour.setCityNo(1);
+        
+//	    Collection<Part> parts = request.getParts();
+//	    for (Part part : parts) {
+//	      
+//	      String filename = UUID.randomUUID().toString();
+//	      String filePath = request.getServletPath() + filename + ".jpg";
+//	      
+//	      part.write(filePath);
+//	      System.out.println(part.getName());
+	
+	    
+	    HashMap<String,Object> content = new HashMap<String,Object>();
+	    try {
+	      tourService.add(tour);
+	      content.put("status", "success");
+	    } catch (Exception e) {
+	      content.put("status", "fail");
+	      content.put("message", e.getMessage());
+	    }
+	    return content;
+	  }
+	
 
 	//  tourUpdate
 	//  @PostMapping("update")

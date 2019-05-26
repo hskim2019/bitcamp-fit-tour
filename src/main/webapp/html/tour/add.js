@@ -11,4 +11,20 @@ $(document).ready(function(){
   });
 });
 
-
+(function quilljsediterInit() {
+  var options = {
+      modules: {
+          toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block']
+          ]
+      },
+      placeholder: 'Compose an epic...',
+      theme: 'snow'
+  };
+  quill = new Quill('#quillEditor', options);
+  quill.getModule('toolbar').addHandler('image', function() {
+      selectLocalImage();
+  });
+})();

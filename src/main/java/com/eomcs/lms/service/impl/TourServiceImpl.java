@@ -52,8 +52,6 @@ public class TourServiceImpl implements TourService {
   
   @Override
   public int add(Tour tour) {
-    // 이 메서드도 하는 일이 없다.
-    // 그래도 일관된 프로그래밍을 위해 Command 객체는 항상 Service 객체를 경유하여 DAO를 사용해야 한다.
     return tourDao.insert(tour);
   }
   

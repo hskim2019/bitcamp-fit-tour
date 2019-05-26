@@ -109,9 +109,9 @@
     where board_id = #{value}
   </update>
   
-  <insert id="insert" parameterType="board">
-    insert into lms_board(conts) 
-    values(#{contents})
+  <insert id="insert" parameterType="tour">
+    insert into tour(title,sub_heading,content,total_hour,hash_tag,personnel,transportation,price,city_id) 
+    values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo})
   </insert>
   
   <update id="update" parameterType="board">

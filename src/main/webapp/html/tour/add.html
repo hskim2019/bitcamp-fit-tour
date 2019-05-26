@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="stylesheet" href="add.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/quill/dist/quill.snow.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 </head>
 
@@ -20,29 +21,27 @@
 
   <div class="container">
 
-    <div class="row mt-sm-5">
+    <div class="row mt-lg-5">
     
-     <div class = "col s12">
+     <div class = "col l12 mt-lg-5">
       <ul id="tabs-swipe-demo" class="tabs">
-        <li class="tab col s4 red"><a href="#test-swipe-1">Test 1</a></li>
-        <li class="tab col s4 blue"><a href="#test-swipe-2">Test 2</a></li>
-        <li class="tab col s4 green"><a href="#test-swipe-3">Test 3</a></li>
+        <li class="tab col l4"><a href="#swipe-1">기본 정보</a></li>
+        <li class="tab col l4"><a href="#swipe-2">내용</a></li>
+        <li class="tab col l4"><a href="#swipe-3">코스</a></li>
       </ul>
       </div>
 
-
-
-      <div id="test-swipe-1" class="col s12 white">
+      <div id="swipe-1" class="col l12 white">
         <!-- h -->
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-lg-12">
             <h5>여행 상품 제목 / 국가 / 도시 / 카테고리 / 이동수단</h5>
           </div>
         </div>
 
         <!-- title -->
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col l12">
             <i class="material-icons prefix">title</i>
             <input id="input-title" type="text" data-length="20">
             <label for="input-title"> 제목을 입력하세요.</label>
@@ -51,7 +50,7 @@
 
         <!-- subTitle -->
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col l12">
             <i class="material-icons prefix">subtitles</i>
             <input id="input-subtitles" type="text" data-length="30">
             <label for="input-subtitles"> 소제목을 입력하세요.</label>
@@ -60,13 +59,13 @@
 
         <!-- country -->
         <div class="row">
-          <div class="country input-field col-sm-6">
+          <div class="country input-field col-lg-6">
             <div class="row">
-              <div class="col-sm-1 p0">
+              <div class="col-lg-1 p0">
                 <i class="fas fa-globe-americas"></i>
               </div>
 
-              <div class="col-sm-11">
+              <div class="col-lg-11">
                 <select>
                   <option value="" disabled selected>국가를 선택하세요.</option>
                   <option value="1">Option 1</option>
@@ -78,13 +77,13 @@
           </div>
 
           <!-- city -->
-          <div class="city input-field col-sm-6">
+          <div class="city input-field col-lg-6">
             <div class="row">
-              <div class="col-sm-1">
+              <div class="col-lg-1">
                 <i class="fas fa-city"></i>
               </div>
 
-              <div class="col-sm-11">
+              <div class="col-lg-11">
                 <select>
                   <option value="" disabled selected>도시를 선택하세요.</option>
                   <option value="1">Option 1</option>
@@ -99,35 +98,35 @@
 
         <!-- transportaion h-->
         <div class="row">
-          <div class="col-sm-12">
-            <i class="small material-icons">directions_walk</i>&ensp;&ensp;이동수단
+          <div class="col-lg-12">
+            <i class="lgall material-icons">directions_walk</i>&ensp;&ensp;이동수단
           </div>
         </div>
 
         <!-- transportaion -->
         <div class="row justify-content-center">
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input name="transportaion" class="with-gap" type="radio" />
               <span>도보</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input name="transportaion" class="with-gap" type="radio" />
               <span>버스</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input name="transportaion" class="with-gap" type="radio" />
               <span>지하철</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input name="transportaion" class="with-gap" type="radio" />
               <span>자전거</span>
@@ -137,7 +136,7 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input name="transportaion" class="with-gap" type="radio" />
               <span>기타</span>
@@ -147,35 +146,35 @@
 
         <!-- category h-->
         <div class="row">
-          <div class="col-sm-12">
-            <i class="small material-icons">category</i>&ensp;&ensp;테마
+          <div class="col-lg-12">
+            <i class="lgall material-icons">category</i>&ensp;&ensp;테마
           </div>
         </div>
 
         <!-- category -->
         <div class="row justify-content-center">
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>자전거 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>야경 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>맛집 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>로컬 투어</span>
@@ -187,28 +186,28 @@
 
         <div class="row justify-content-center">
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>워킹 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>버스 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>반나절 투어</span>
             </label>
           </div>
 
-          <div class="col-sm-3">
+          <div class="col-lg-3">
             <label class="pl40">
               <input type="checkbox" />
               <span>종일 투어</span>
@@ -219,18 +218,17 @@
 
       </div>
 
+<!-- ***************************************************************************************** -->
 
 
 
-
-
-
-      <div id="test-swipe-2" class="col s12 red">Test 2</div>
-      <div id="test-swipe-3" class="col s12 green">Test 3</div>
+      <div id="swipe-2" class="col l12">
+      <div id="quillEditor">aaa</div>
+      </div>
+      
+      
+      <div id="swipe-3" class="col l12"></div>
     </div>
-
-    <!-- ***************************************************************************************** -->
-
 
 
   </div> <!-- container -->
@@ -240,6 +238,7 @@
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
 <script src="add.js"></script>

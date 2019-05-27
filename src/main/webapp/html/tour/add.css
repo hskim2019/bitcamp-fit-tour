@@ -5,3 +5,14 @@ i {
 .carousel {
     height: 1000px !important;
 }
+
+.dropdown-content {
+	height : 200px !important;
+}
+
+.modal.modal-fixed-footer {
+  height: 25%;
+	top: 30% !important;
+}
+
+

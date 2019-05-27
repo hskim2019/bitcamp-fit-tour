@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.TourDao;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
+import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourService;;
 
 // 스프링 IoC 컨테이너가 관리하는 객체 중에서 
@@ -62,11 +64,8 @@ public class TourServiceImpl implements TourService {
   }
   
   @Override
-  public void addTheme(int tourNo, int themeNo) {
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("tourNo", tourNo);
-    params.put("themeNo", themeNo);
-    tourDao.insertTheme(params);
+  public void addTheme(List<TourTheme> theme) {
+    tourDao.insertTheme(theme);
   }
   
   @Override
@@ -98,8 +97,13 @@ public class TourServiceImpl implements TourService {
   }
 
   @Override
-  public List<Country> ListCountry(String continent) {
+  public List<Country> listCountry(String continent) {
     return tourDao.findCountryByContinent(continent);
+  }
+
+  @Override
+  public List<City> listCity(int countryNo) {
+    return tourDao.findCityByCountry(countryNo);
   }
 
 }

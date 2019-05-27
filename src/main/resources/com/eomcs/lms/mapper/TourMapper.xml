@@ -64,6 +64,14 @@
     <result column="continent" property="continentName"/>
   </resultMap>
   
+  <!-- cityMap -->
+  <resultMap type="city" id="cityMap">
+    <id column="city_id" property="no"/>
+    <result column="country_id" property="countryNo"/>
+    <result column="city_name" property="cityName"/>
+  </resultMap>
+  
+  
   <sql id="select1">
     select 
       tour_id, 
@@ -117,10 +125,14 @@
     values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo})
   </insert>
   
+  
   <insert id="insertTheme" parameterType="map">
-    insert into tour_theme(tour_id, theme_id)
-    values(#{tourNo}, #{themeNo});
-  </insert>
+        insert into tour_theme(tour_id, theme_id)
+        values
+        <foreach collection="list" item="item" separator=" , ">
+            (#{item.tourNo}, #{item.themeNo})
+        </foreach>
+ </insert>
   
   
   <select id="countAll" resultType="int">
@@ -131,9 +143,10 @@
     select * from country where continent = #{continent}
   </select>
   
-  <select id="findCityByContinent" resultMap="countryMap" parameterType="string">
-    select * from country where continent = #{continent}
+  <select id="findCityByCountry" resultMap="cityMap" parameterType="int">
+    select * from city where country_id = #{countryNo}
   </select>
+  
   
 </mapper>
 

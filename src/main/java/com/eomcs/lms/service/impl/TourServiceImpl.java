@@ -23,6 +23,7 @@ public class TourServiceImpl implements TourService {
   // 비지니스 객체에서 메서드 이름은 가능한 업무 용어를 사용한다.
   @Override
   public List<Tour> list(
+		  String continentName,
 		  String countryName,
 		  String cityName,
 		  int pageNo, int pageSize) {
@@ -35,10 +36,14 @@ public class TourServiceImpl implements TourService {
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
     
-    if (countryName == null && cityName == null) {
+    if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);
     } else {
-    	System.out.println("countryname: " + countryName + "cityname: " + cityName);
+    	System.out.println("continentname: " + continentName + "countryname: " + countryName + "cityname: " + cityName);
+    	if (continentName != null) {
+    		params.put("continentName", continentName);
+    	}
+    	
     	if (countryName != null) {
     		params.put("countryName", countryName);
     	}

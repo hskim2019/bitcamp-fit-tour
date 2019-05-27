@@ -9,9 +9,9 @@ var pageNo = 1,
 // script 태그에서 템플릿 데이터를 꺼낸다.
 
 
-var cityName;
-var countryName;
-var continentName;
+var continentName = '';
+var countryName = '';
+var cityName= '';
 var firstcrumb = crumb.children().eq(0),
     secondcrumb = crumb.children().eq(1),
     thirdcrumb = crumb.children().eq(2);
@@ -24,11 +24,13 @@ var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn, countryName, cityName) {
-  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&countryName=' + countryName + '&cityName=' + cityName, 
+function loadList(pn, continentName, countryName, cityName) {
+  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + 
+      '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
+      
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       // 이전에 출력한 내용을 제거한다.
       $('#tourlistcard').html('');
@@ -38,18 +40,17 @@ function loadList(pn, countryName, cityName) {
       
       for(listRow of $('.listRow')) {
         var tourNo = $(listRow).attr('id');
-        var target = $(listRow).children().eq(1).children().eq(3).children().eq(0);
+        var targetforTheme = $(listRow).children().eq(1).children().eq(3).children().eq(0);
         var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
         $.ajaxSetup({async:false});
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
+          $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
-          $(themetrGenerator(data)).appendTo(target);
         });
         $.ajaxSetup({async:true});
+        
       }
-   
-     
       
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
@@ -69,22 +70,25 @@ function loadList(pn, countryName, cityName) {
       }
       
       // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
+      
       $(document.body).trigger('loaded-list');
+      
     }); // Bitcamp.getJSON()
+  
 } // loadList()
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1,'','');
+  loadList(pageNo - 1, continentName, countryName, cityName);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1,'','');
+  loadList(pageNo + 1, continentName, countryName, cityName);
 });
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1,'', '');
+loadList(1, continentName, countryName, cityName);
 
 
 (function() {
@@ -143,8 +147,6 @@ $( function() {
 // floating menu - search with options
 $('#searchwithOptions').click((e) => {
   e.preventDefault();
-  console.log(countryName);
-  
 });
 
 
@@ -152,6 +154,7 @@ $('#searchwithOptions').click((e) => {
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
   // 제목을 클릭했을 때 view.html로 전환시키기
+  console.log("a");
   $('.bit-view-link').click((e) => {
     e.preventDefault();
     window.location.href = 'view.html?no=' + 
@@ -160,12 +163,23 @@ $(document.body).bind('loaded-list', () => {
 });
 
 $(document.body).bind('loaded-list', () => {
+  $('.continent-list-btn').click((e) => {
+    e.preventDefault();
+    continentName = $(e.target).html();
+    showBreadCrumb(continentName, '', '');
+    loadList(1, continentName, '', '');
+  });
+});
+
+$(document.body).bind('loaded-list', () => {
   $('.country-list-btn').click((e) => {
     e.preventDefault();
     continentName = $(e.target).attr('id');
     countryName = $(e.target).html();
+    console.log(continentName);
+    console.log(countryName);
     showBreadCrumb(continentName, countryName, '');
-    loadList(1, countryName, '');
+    loadList(1, '', countryName, '');
   });
 });
 
@@ -176,7 +190,7 @@ $(document.body).bind('loaded-list', () => {
     continentName = $(e.target).attr('id').split(',')[0];
     countryName = $(e.target).attr('id').split(',')[1];
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1,'', cityName);
+    loadList(1, '', '', cityName);
   });
 });
 
@@ -184,16 +198,16 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     cityName = '';
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, countryName, '');
+    loadList(1, '', countryName, '');
   });
   
-//  $('#firstcrumb').click((e) => {
-//    e.preventDefault();
-//    cityName = '';
-//    countryName = '';
-//    showBreadCrumb(continentName, countryName, cityName);
-//    loadList(1, '', '');
-//  });
+  $('#firstcrumb').click((e) => {
+    e.preventDefault();
+    cityName = '';
+    countryName = '';
+    showBreadCrumb(continentName, countryName, cityName);
+    loadList(1, continentName, '', '');
+  });
 
 
 

@@ -28,6 +28,7 @@
     <association property="country" javaType="country">
     <id column="country_id"        property="no"/>
     <result column="country_name"  property="countryName"/>
+    <result column="continent"     property="continentName"/>
     </association>
   </resultMap>
   
@@ -80,8 +81,10 @@
    join city as ci on t.city_id = ci.city_id
    join country as co on ci.country_id = co.country_id
        <where>
+      <if test="continentName != null">or continent = #{continentName}</if>
       <if test="countryName != null">or country_name = #{countryName}</if>
       <if test="cityName != null">or city_name = #{cityName}</if>
+      <if test="price != null">or price = #{price}</if>
      </where>
     order by 
       tour_id desc

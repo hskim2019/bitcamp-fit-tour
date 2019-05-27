@@ -75,20 +75,26 @@ public class TourController {
 	//tourList
 	@GetMapping("list")
 	public Object list(
+			String continentName,
 			String countryName,
 			String cityName,
 			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="3") int pageSize) {
 
+		String searchContinentName = null;
 		String searchCountryName = null;
 		String searchCityName = null;
-
-		if (countryName.length() > 0) 
-			searchCountryName = countryName;
 		
-		if (cityName.length() > 0) 
+		if (continentName.length() > 0) { 
+			searchContinentName = continentName;
+		}
+		
+		if (countryName.length() > 0) {
+			searchCountryName = countryName;
+		}
+		if (cityName.length() > 0) {
 			searchCityName = cityName;
-
+		}
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
 
@@ -102,8 +108,8 @@ public class TourController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Tour> tours = tourService.list(searchCountryName, searchCityName, pageNo, pageSize);
-
+		List<Tour> tours = tourService.list(searchContinentName, searchCountryName, searchCityName, pageNo, pageSize);
+        
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", tours);
 		content.put("pageNo", pageNo);

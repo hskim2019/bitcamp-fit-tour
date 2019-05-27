@@ -15,7 +15,7 @@ public class Reservation implements Cloneable, Serializable {
   private int personnel;//여행인원
   private String touristTel;//예약자 연락처
   private String requirement;//요청사항
-  private int paymentNo;//결제번호
+  private String paymentNo;//결제번호
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date paymentDate;//결제일
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
@@ -23,6 +23,9 @@ public class Reservation implements Cloneable, Serializable {
   private PaymentStatus paymentStatus;
   private Member member;
 
+  public void setPaymentNo(String paymentNo) {
+    this.paymentNo = paymentNo;
+  }
   public PaymentStatus getPaymentStatus() {
     return paymentStatus;
   }
@@ -77,12 +80,7 @@ public class Reservation implements Cloneable, Serializable {
   public void setRequirement(String requirement) {
     this.requirement = requirement;
   }
-  public int getPaymentNo() {
-    return paymentNo;
-  }
-  public void setPaymentNo(int paymentNo) {
-    this.paymentNo = paymentNo;
-  }
+
   public Date getPaymentDate() {
     return paymentDate;
   }

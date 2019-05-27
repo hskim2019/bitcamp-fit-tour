@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.domain.Reservation;
+import com.eomcs.lms.service.MemberService;
 import com.eomcs.lms.service.ReservationService;
 
 @RestController("json/ReservationController")
@@ -15,7 +17,7 @@ import com.eomcs.lms.service.ReservationService;
 public class ReservationController {
   
   @Autowired ReservationService reservationService;
-  
+  @Autowired MemberService memberService;
 
   @PostMapping("add")
   public Object add(Reservation reservation) throws Exception {
@@ -108,6 +110,24 @@ public class ReservationController {
       content.put("message", e.getMessage());
     }
     return content;
+  }
+  @PostMapping("test")
+  public Object test(Reservation reservation) throws Exception {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      reservationService.add(reservation);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+ @GetMapping("nameGet")
+    public Object emailOverlap(String email) {
+    Member member = memberService.get(email);
+    return member;
   }
   
 }

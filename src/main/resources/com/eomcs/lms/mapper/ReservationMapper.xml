@@ -56,10 +56,11 @@ from reservation r, member m, payment_status s
       and r.member_id = m.member_id
 and r.status_id = s.status_id
     </where>
-   
+    ORDER BY r.reservation_id DESC 
     <if test="#{size != null || rowNo != null}">
       limit #{rowNo}, #{size}
     </if>
+   
   </select>
 
 

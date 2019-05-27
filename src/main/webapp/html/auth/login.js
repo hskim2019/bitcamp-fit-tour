@@ -28,7 +28,7 @@ document.querySelector('#login-btn').onclick = () => {
   
   var email = document.querySelector('#email').value;
   var password = document.querySelector('#password').value;
-  
+  window.localStorage.mail = email;
   if (document.querySelector('#saveEmail:checked') != null) {
     // 웹브라우저의 로컬 스토리지에 이메일을 저장한다.
     //window.localStorage.setItem("email", email);

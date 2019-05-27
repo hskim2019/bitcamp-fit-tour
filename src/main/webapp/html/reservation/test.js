@@ -126,7 +126,7 @@ $('#pay').click(() => {
       if ( rsp.success ) {
     
         addReservation(rsp,data.no)
-        $('#requirement').val('결제완료')
+        
         var msg = '결제가 완료되었습니다.';
  
       } else {
@@ -161,7 +161,6 @@ function addReservation(rsp,no){
     
     if(data.status == 'success') {
       M.toast({html: '예약 성공 입니다',displayLength: '10000'}) 
-      
     } else {
       M.toast({html: '예약 실패 입니다',displayLength: '10000'})
     

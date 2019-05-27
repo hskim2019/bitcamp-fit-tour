@@ -22,3 +22,6 @@ update country set continent = '아시아' where country_id between 39 and 63;
 update country set continent = '아메리카' where country_id between 64 and 80;
 update country set continent = '오세아니아' where country_id between 81 and 85;
 update country set continent = '아프리카' where country_id between 86 and 90;
+
+
+ALTER TABLE reservation CHANGE payment_id payment_id VARCHAR(100);

@@ -339,7 +339,7 @@ tour_date        DATETIME    NOT NULL COMMENT '여행일', -- 여행일
 personnel        INTEGER     NOT NULL COMMENT '여행인원', -- 여행인원
 tourist_tel      VARCHAR(50) NOT NULL COMMENT '예약자 연락처', -- 예약자 연락처
 requirement       TEXT        NULL     COMMENT '요청사항', -- 요청사항
-payment_id       INTEGER     NOT NULL COMMENT '결제번호', -- 결제번호
+payment_id       VARCHAR(100)NOT NULL COMMENT '결제번호', -- 결제번호
 payment_date     DATETIME    NULL     DEFAULT now() COMMENT '결제일', -- 결제일
 reservation_date DATETIME    NOT NULL DEFAULT now() COMMENT '예약일' -- 예약일
 )

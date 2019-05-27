@@ -2,6 +2,7 @@ package com.eomcs.lms.dao;
 
 import java.util.List;
 import java.util.Map;
+import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourComment;
 
@@ -15,6 +16,7 @@ public interface TourDao {
   int countAll();
   TourComment findComment();
   void insertTheme (Map<String,Object> params);
+  List<Country> findCountryByContinent(String continent);
 }
 
 

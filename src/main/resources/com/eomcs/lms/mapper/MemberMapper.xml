@@ -101,7 +101,9 @@
 <select id="findByEmail" resultMap="memberMap" parameterType="map">
     select
     email,
-    certification
+    certification,
+    member_id,
+    name
     from
     member
     where

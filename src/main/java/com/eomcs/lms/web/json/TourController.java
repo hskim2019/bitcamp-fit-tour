@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Theme;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourComment;
@@ -169,6 +170,14 @@ public class TourController {
        return json;
   }
   
+  @GetMapping("countrylist")
+  public Object countryList(String continent) {
+    
+    List<Country> countryList =tourService.ListCountry(continent);
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    content.put("countryList", countryList);
+    return content;
+  }
 
 	//  tourUpdate
 	//  @PostMapping("update")

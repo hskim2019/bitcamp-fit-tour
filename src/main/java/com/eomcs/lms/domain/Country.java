@@ -8,12 +8,13 @@ public class Country {
 	
 
 	@Override
-	public String toString() {
-		return "Country [no=" + no + ", countryName=" + countryName + ", continentName=" + continentName + "]";
-	}
+  public String toString() {
+    return "Country [no=" + no + ", countryName=" + countryName + ", continentName=" + continentName
+        + "]";
+  }
 
-	
-	public int getNo() {
+
+  public int getNo() {
 		return no;
 	}
 

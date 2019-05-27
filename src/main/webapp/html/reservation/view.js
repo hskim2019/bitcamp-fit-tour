@@ -77,6 +77,7 @@ $('#update-btn').click (() => {
 function loadData(no) {
   $.getJSON('../../app/json/reservation/detail?no=' + param.split('=')[1], 
       function(data) {
+    alert(data.paymentNo)
     $('#no').val(data.no);
     $('#tourNo').val(data.tourNo);
     $('#name').val(data.member.name);

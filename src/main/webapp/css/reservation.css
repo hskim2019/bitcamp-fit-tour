@@ -10,38 +10,15 @@ h6 {
   padding: 4% 2% 2%;
   margin: auto;
 }
+div{
+ /*  border: solid red 2px; */
+}
 
 #title {
   font-size: 20px;
   margin: auto;
   position    : relative; 
 }
-
-#group {
-  font-size: 29px;
-  text-align: left;
-  padding-right: 7px;
-  margin-left: 2px;
-  
-}
-
-
-#selectPersonnel{
-   position    : relative; 
-}
-
-}
-#won {
-  font-size: 24px;
-  text-align: left;
-  padding-right: 7px;
-  margin-left: 4px;
-}
-
-#date {
-  margin-left: 84px;
-}
-
 ul.stepper.horizontal {
-   min-height: 1000px;
+   min-height: 650px;
 }

@@ -41,7 +41,7 @@
           <!-- h -->
           <div class="row">
             <div class="col l12">
-              <h5>여행 상품 제목 / 대륙 / 국가 / 도시 / 이동수단 / 테마</h5>
+              <h5>투어 상품 제목 / 대륙 / 국가 / 도시 / 이동수단 / 테마</h5>
             </div>
           </div>
 
@@ -244,21 +244,34 @@
 
 
         <div id="swipe-2" class="col l12">
-          <div class="form-group">
-            <div id="quillEditor">
+
+          <div class="row">
+            <div class="col l12">
+              <h5>투어상품에 대한 설명을 자유롭게 작성해주세요!</h5>
             </div>
           </div>
+
+          <div class="row">
+            <div class="form-group">
+              <div id="quillEditor">
+              </div>
+            </div>
+          </div>
+
         </div>
 
 
         <div id="swipe-3" class="col l12">
-          <div class="row">
-            <button id="tour-add-btn" type="button">Save</button>
-          </div>
         </div>
 
       </div>
 
+      <div class="row">
+      <div class="col l3 offset-l9">
+        <a id="tour-add-btn" class="waves-effect waves-light btn-large"><i class="material-icons left">edit</i>상품
+          등록하기</a>
+          </div>
+      </div>
     </form>
 
   </div> <!-- container -->
@@ -270,11 +283,12 @@
       <p>등록된 상품을 확인 하시겠습니까?</p>
     </div>
     <div class="modal-footer">
-      <a id="tourConfirm"href="#!" class="modal-close waves-effect waves-green btn-flat">네</a>
+      <a id="tourConfirm" class="modal-close waves-effect waves-green btn-flat">네</a>
       <a href="add.html" class="modal-close waves-effect waves-red btn-flat">아니요</a>
     </div>
   </div>
   <button id="modal-button" data-target="modal" class="btn modal-trigger bit-invisible"></button>
+
 
   <footer class="bit-main-footer page-footer teal"></footer> <!-- footer -->
 </body>

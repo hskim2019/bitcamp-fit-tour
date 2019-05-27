@@ -3,7 +3,7 @@ i {
 }
 
 .carousel {
-    height: 1000px !important;
+    height: 800px !important;
 }
 
 .dropdown-content {
@@ -13,6 +13,10 @@ i {
 .modal.modal-fixed-footer {
   height: 25%;
 	top: 30% !important;
+}
+
+.ql-editor {
+  height: 50em;
 }
 
 

@@ -56,6 +56,14 @@ public class TourServiceImpl implements TourService {
   }
   
   @Override
+  public void addTheme(int tourNo, int themeNo) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("tourNo", tourNo);
+    params.put("themeNo", themeNo);
+    tourDao.insertTheme(params);
+  }
+  
+  @Override
   public Tour get(int no) {
     // 이제 조금 서비스 객체가 뭔가를 하는 구만.
     // Command 객체는 데이터를 조회한 후 조회수를 높이는 것에 대해 신경 쓸 필요가 없어졌다.

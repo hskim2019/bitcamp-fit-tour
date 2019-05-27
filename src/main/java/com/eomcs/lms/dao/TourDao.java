@@ -14,6 +14,7 @@ public interface TourDao {
   int delete(int no);
   int countAll();
   TourComment findComment();
+  void insertTheme (Map<String,Object> params);
 }
 
 

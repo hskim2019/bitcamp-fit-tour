@@ -12,7 +12,6 @@ public class TourComment {
 	private String content;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "GMT+9")
 	private Date createdDate;
-
 	private Member member;
 
 	@Override

@@ -102,29 +102,15 @@
   </select>
   
   
-  <update id="increaseCount" parameterType="int">
-    update lms_board 
-    set 
-      vw_cnt = vw_cnt + 1 
-    where board_id = #{value}
-  </update>
-  
-  <insert id="insert" parameterType="tour">
+  <insert id="insert" parameterType="tour" useGeneratedKeys="true"  keyProperty="no">
     insert into tour(title,sub_heading,content,total_hour,hash_tag,personnel,transportation,price,city_id) 
     values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo})
   </insert>
   
-  <update id="update" parameterType="board">
-    update lms_board 
-    set 
-      conts = #{contents} 
-    where board_id = #{no}
-  </update>
-  
-  <delete id="delete" parameterType="int">
-    delete from lms_board 
-    where board_id = #{no}
-  </delete>
+  <insert id="insertTheme" parameterType="map">
+    insert into tour_theme(tour_id, theme_id)
+    values(#{tourNo}, #{themeNo});
+  </insert>
   
   
   <select id="countAll" resultType="int">

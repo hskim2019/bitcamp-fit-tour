@@ -20,7 +20,6 @@ var temp;
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
-
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
   $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&countryName=' + countryName + '&cityName=' + cityName, 
@@ -83,6 +82,7 @@ $('#nextPage > a').click((e) => {
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
 loadList(1,'', '');
 
+
 (function() {
   // Dropdowns.
     $('#nav > ul').dropotron({
@@ -95,18 +95,16 @@ loadList(1,'', '');
 
 //follow quick menu
 $(window).scroll(function(){
-
-
 var scrollTop = $(document).scrollTop();
-
 if (scrollTop < 200) {
  scrollTop = 200;
 }
-
 $("#followquick").stop();
 $("#followquick").animate( { "top" : scrollTop });
 });
 
+
+// BreadCrumb
 function showBreadCrumb(continentName, countryName, cityName) {
 
     firstcrumb.removeClass('bit-invisible');
@@ -120,6 +118,23 @@ function showBreadCrumb(continentName, countryName, cityName) {
       thirdcrumb.html(cityName);
     }
 };
+
+// price slider-range
+$( function() {
+  $( "#slider-range" ).slider({
+    range: true,
+    min: 0,
+    max: 200000,
+    values: [ 25000, 105000 ],
+    slide: function( event, ui ) {
+      $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
+    }
+  });
+  $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
+      " -" + $( "#slider-range" ).slider( "values", 1 ).toLocaleString() + "원");
+} );
+
+
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {

@@ -7,6 +7,8 @@
   <link type="text/css" rel="stylesheet"
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
@@ -20,6 +22,8 @@
   <div class="container">
     <!-- <h1>상품 목록</h1> -->
     <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p> -->
+
+
 
     <!-- Nav -->
     <nav id="nav">
@@ -204,7 +208,6 @@
 
     </nav> <!-- nav -->
 
-
     <!-- breadcrumb -->
     <nav class="clean">
       <div class="nav-wrapper">
@@ -275,14 +278,18 @@
 
       </section>
       
-      <aside>
       <div class="grey lighten-4" id="followquick">
       따라다니는 메뉴
-     <div> 1</div>
-      </div>
-      </aside>
       
+<p>
+  <label for="amount">Price range:</label>
+<div id="slider-range"></div>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+      </div>
     </main>
+    
+      
   </div>
   <!-- .container -->
 
@@ -334,8 +341,10 @@
   <script src="js/jquery.scrolly.min.js"></script>
   <script src="js/breakpoints.min.js"></script>
   <script src="../header.js"></script>
-  <script src="../footer.js"></script>
   <script src="index.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="../footer.js"></script>
 
 </body>
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.TourDao;
+import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.service.TourService;;
 
@@ -89,6 +90,11 @@ public class TourServiceImpl implements TourService {
   public int size() {
     // 전체 게시물의 개수
     return tourDao.countAll();
+  }
+
+  @Override
+  public List<Country> ListCountry(String continent) {
+    return tourDao.findCountryByContinent(continent);
   }
 
 }

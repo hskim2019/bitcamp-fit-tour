@@ -25,8 +25,18 @@ $(document).ready(function() {
 
 $('#continent').change( function() {
   
-  console.log($('#continent option:selected').val());
-
+  console.log();
+  $.getJSON('../../app/json/tour/countrylist?continent='+ $('#continent option:selected').val(), 
+    function(obj){
+    console.log(obj)
+    console.log(obj.countryList.length);
+    console.log();
+    for(var i = 0; i < obj.countryList.length; i ++){
+      $('#country').append(
+          $('<option value='+ obj.countryList[0].no +'>' + obj.countryList[0].continentName + '</option>'));
+    }
+    
+  });
 });
 
 

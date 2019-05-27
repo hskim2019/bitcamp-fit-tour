@@ -4,13 +4,25 @@ public class Country {
 	
 	private int no;
 	private String countryName;
+	private String continentName;
 	
-	@Override
-	public String toString() {
-		return "Country [no=" + no + ", countryName=" + countryName + "]";
-	}
+	
 
-	public int getNo() {
+	@Override
+  public String toString() {
+    return "Country [no=" + no + ", countryName=" + countryName + ", continentName=" + continentName
+        + "]";
+  }
+
+  public String getContinentName() {
+    return continentName;
+  }
+
+  public void setContinentName(String continentName) {
+    this.continentName = continentName;
+  }
+
+  public int getNo() {
 		return no;
 	}
 

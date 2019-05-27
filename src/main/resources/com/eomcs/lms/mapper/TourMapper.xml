@@ -56,6 +56,13 @@
     </collection>
   </resultMap>
   
+  <!-- countryMap -->
+  <resultMap type="country" id="countryMap">
+    <id column="country_id" property="no"/>
+    <result column="country_name" property="countryName"/>
+    <result column="continent" property="continentName"/>
+  </resultMap>
+  
   <sql id="select1">
     select 
       tour_id, 
@@ -117,6 +124,9 @@
     select count(*) from tour
   </select> 
   
+  <select id="findCountryByContinent" resultMap="countryMap" parameterType="string">
+    select * from country where continent = #{continent}
+  </select>
   
 </mapper>
 

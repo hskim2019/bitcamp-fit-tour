@@ -1,6 +1,7 @@
 package com.eomcs.lms.service;
 
 import java.util.List;
+import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
 
 public interface TourService {
@@ -14,4 +15,5 @@ public interface TourService {
   int delete(int no);
   int size();
   void addTheme(int tourNo, int themeNo);
+  List<Country> ListCountry(String continent);
 }

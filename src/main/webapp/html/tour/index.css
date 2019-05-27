@@ -13,7 +13,8 @@ main {
 .clean {
 	background: none;
 	box-shadow: none;
-	height: 40px;
+	height: 50px !important;
+	clear: both;
 }
 
 .breadcrumb {
@@ -32,9 +33,9 @@ main {
 
 
 section:not(.tiles)  {
- width: 75%;
+ width: 750px;
  float:right;	
- border: 2px solid red;	
+/*  border: 2px solid red; */
 }
 
 .card-image {
@@ -72,19 +73,12 @@ section:not(.tiles)  {
 .price {
 	font-size: 20px !important;
 }
-aside {
-	width: 24%;
-	float: left;
-	border: 2px solid blue;
-}
 
-aside div {
-	visibility: visible !important;
-}
-
-#followquick { 
-  	visibility: visible !important;
-  	position:absolute;
+#followquick {
+	position: absolute;
+	width: 240px;
+/* 	border: 2px solid blue; */
+	border-radius: 4px;
 	}
 
 footer {

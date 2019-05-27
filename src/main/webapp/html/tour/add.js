@@ -24,19 +24,18 @@ $(document).ready(function() {
 
 
 $('#continent').change( function() {
-  
-  console.log();
+  $('#country').empty();
   $.getJSON('../../app/json/tour/countrylist?continent='+ $('#continent option:selected').val(), 
     function(obj){
-    console.log(obj)
-    console.log(obj.countryList.length);
-    console.log();
-    for(var i = 0; i < obj.countryList.length; i ++){
-      $('#country').append(
-          $('<option value='+ obj.countryList[0].no +'>' + obj.countryList[0].continentName + '</option>'));
+      
+      for(var i = 0; i < obj.countryList.length; i++){
+        console.log($('<option value="'+ obj.countryList[i].no +'">' + obj.countryList[i].countryName + '</option>'));
+        $('#country').append($('<option value="'+ obj.countryList[i].no +'">' + obj.countryList[i].countryName + '</option>'));
+        }
+      $('select').formSelect();
     }
     
-  });
+  );
 });
 
 

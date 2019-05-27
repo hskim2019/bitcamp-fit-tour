@@ -20,23 +20,9 @@ var temp;
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
-//follow quick menu
-$(window).scroll(function(){
-
-
-var scrollTop = $(document).scrollTop();
-
-if (scrollTop < 200) {
- scrollTop = 200;
-}
-
-$("#followquick").stop();
-$("#followquick").animate( { "top" : scrollTop });
-});
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, countryName, cityName) {
-  $.ajaxSetup({async:false});
   $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&countryName=' + countryName + '&cityName=' + cityName, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
@@ -48,6 +34,7 @@ function loadList(pn, countryName, cityName) {
       $(trGenerator(obj)).appendTo($('#tourlistcard'));
       
       
+      $.ajaxSetup({async:false});
       for(listRow of $('.listRow')) {
         var tourNo = $(listRow).attr('id');
         var target = $(listRow).children().eq(1).children().eq(3).children().eq(0);
@@ -83,9 +70,6 @@ function loadList(pn, countryName, cityName) {
     }); // Bitcamp.getJSON()
 } // loadList()
 
-
-
-
 $('#prevPage > a').click((e) => {
   e.preventDefault();
   loadList(pageNo - 1,'','');
@@ -109,6 +93,20 @@ loadList(1,'', '');
     });
 })();
 
+//follow quick menu
+$(window).scroll(function(){
+
+
+var scrollTop = $(document).scrollTop();
+
+if (scrollTop < 200) {
+ scrollTop = 200;
+}
+
+$("#followquick").stop();
+$("#followquick").animate( { "top" : scrollTop });
+});
+
 function showBreadCrumb(continentName, countryName, cityName) {
 
     firstcrumb.removeClass('bit-invisible');
@@ -123,10 +121,9 @@ function showBreadCrumb(continentName, countryName, cityName) {
     }
 };
 
-
-
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
+  console.log('eventt');
   // 제목을 클릭했을 때 view.html로 전환시키기
   $('.bit-view-link').click((e) => {
     e.preventDefault();
@@ -144,8 +141,6 @@ $(document.body).bind('loaded-list', () => {
     loadList(1, countryName, '');
   });
 });
-
-
 
 $(document.body).bind('loaded-list', () => {
   $('.city-list-btn').click((e) => {

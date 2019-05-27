@@ -15,7 +15,10 @@ login_type_id ASC -- 로그인유형번호
 
 );
 
--- city 이름에 오타가 있으니 변경 해 주세요
-update city
-set city_name = '퀸스타운'
-where city_id = 248;
+
+ALTER TABLE country ADD continent VARCHAR(50) NOT NULL;
+update country set continent = '유럽' where country_id between 1 and 38;
+update country set continent = '아시아' where country_id between 39 and 63;
+update country set continent = '아메리카' where country_id between 64 and 80;
+update country set continent = '오세아니아' where country_id between 81 and 85;
+update country set continent = '아프리카' where country_id between 86 and 90;

@@ -11,10 +11,13 @@ var pageNo = 1,
 
 var cityName;
 var countryName;
+var continentName;
 var firstcrumb = crumb.children().eq(0),
     secondcrumb = crumb.children().eq(1),
     thirdcrumb = crumb.children().eq(2);
 var temp;
+var minPrice;
+var maxPrice;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
@@ -33,18 +36,19 @@ function loadList(pn, countryName, cityName) {
       $(trGenerator(obj)).appendTo($('#tourlistcard'));
       
       
-      $.ajaxSetup({async:false});
       for(listRow of $('.listRow')) {
         var tourNo = $(listRow).attr('id');
         var target = $(listRow).children().eq(1).children().eq(3).children().eq(0);
         var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
+        $.ajaxSetup({async:false});
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
           $(themetrGenerator(data)).appendTo(target);
         });
+        $.ajaxSetup({async:true});
       }
-      $.ajaxSetup({async:true});
+   
      
       
       // 현재 페이지의 번호를 갱신한다.
@@ -125,20 +129,28 @@ $( function() {
     range: true,
     min: 0,
     max: 200000,
-    values: [ 25000, 105000 ],
+    values: [ 0, 200000 ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
+      minPrice = ui.values[ 0 ].toLocaleString();
+      maxPrice = ui.values[ 1 ].toLocaleString();
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
       " -" + $( "#slider-range" ).slider( "values", 1 ).toLocaleString() + "원");
 } );
 
+// floating menu - search with options
+$('#searchwithOptions').click((e) => {
+  e.preventDefault();
+  console.log(countryName);
+  
+});
+
 
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
-  console.log('eventt');
   // 제목을 클릭했을 때 view.html로 전환시키기
   $('.bit-view-link').click((e) => {
     e.preventDefault();
@@ -150,7 +162,7 @@ $(document.body).bind('loaded-list', () => {
 $(document.body).bind('loaded-list', () => {
   $('.country-list-btn').click((e) => {
     e.preventDefault();
-    var continentName = $(e.target).attr('id');
+    continentName = $(e.target).attr('id');
     countryName = $(e.target).html();
     showBreadCrumb(continentName, countryName, '');
     loadList(1, countryName, '');
@@ -161,16 +173,27 @@ $(document.body).bind('loaded-list', () => {
   $('.city-list-btn').click((e) => {
     e.preventDefault();
     cityName = $(e.target).html();
-    var continentName = $(e.target).attr('id').split(',')[0];
+    continentName = $(e.target).attr('id').split(',')[0];
     countryName = $(e.target).attr('id').split(',')[1];
-    console.log(cityName);
-    console.log(countryName);
-    console.log (continentName);
     showBreadCrumb(continentName, countryName, cityName);
     loadList(1,'', cityName);
   });
 });
 
+  $('#secondcrumb').click((e) => {
+    e.preventDefault();
+    cityName = '';
+    showBreadCrumb(continentName, countryName, cityName);
+    loadList(1, countryName, '');
+  });
+  
+//  $('#firstcrumb').click((e) => {
+//    e.preventDefault();
+//    cityName = '';
+//    countryName = '';
+//    showBreadCrumb(continentName, countryName, cityName);
+//    loadList(1, '', '');
+//  });
 
 
 

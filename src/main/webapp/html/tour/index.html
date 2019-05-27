@@ -8,7 +8,6 @@
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
@@ -211,14 +210,15 @@
     <nav class="clean">
       <div class="nav-wrapper">
         <div class="col s12" id="breadcrumb-list">
-          <a onclick="" class="breadcrumb bit-invisible">First</a> <a onclick=""
-            class="breadcrumb bit-invisible">Second</a> <a onclick="" class="breadcrumb bit-invisible">Third</a>
+          <a onclick="" class="breadcrumb bit-invisible" id="firstcrumb">First</a> 
+          <a href="#" class="breadcrumb bit-invisible" id="secondcrumb">Second</a> 
+          <a href="#" class="breadcrumb bit-invisible" id="thirdcrumb">Third</a>
         </div>
       </div>
     </nav>
 
     <!--나중에 다른 곳으로 옮길 것 -->
-<!--     <div id="main">
+    <!--     <div id="main">
       <div class="inner">
         <h3>인기 도시</h3>
         <br />
@@ -276,19 +276,20 @@
         </ul>
 
       </section>
-      
+
       <div class="grey lighten-4" id="followquick">
-      따라다니는 메뉴
-      
-<p>
-  <label for="amount">Price range:</label>
-<div id="slider-range"></div>
-  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-</p>
+        따라다니는 메뉴
+
+        <p>
+          <label for="amount">Price range:</label>
+          <div id="slider-range"></div>
+          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+<a class="waves-effect waves-light btn-small" id="searchwithOptions">검색</a>
+        </p>
       </div>
     </main>
-    
-      
+
+
   </div>
   <!-- .container -->
 

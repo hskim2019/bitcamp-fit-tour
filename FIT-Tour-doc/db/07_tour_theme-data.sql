@@ -17,3 +17,15 @@ values(5, 4);
 insert into tour_theme(tour_id, theme_id)
 values(6, 5);
 
+insert into tour_theme(tour_id, theme_id)
+values(7, 1);
+insert into tour_theme(tour_id, theme_id)
+values(7, 2);
+insert into tour_theme(tour_id, theme_id)
+values(7, 3);
+
+insert into tour_theme(tour_id, theme_id)
+values(8, 4);
+insert into tour_theme(tour_id, theme_id)
+values(8, 5);
+

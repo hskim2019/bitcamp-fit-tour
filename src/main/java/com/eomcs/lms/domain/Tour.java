@@ -16,10 +16,10 @@ public class Tour {
 	private int price;
 	private int cityNo;
 
-	private List<TourGuidancePhoto> tourPhoto;
-	private List<Theme> theme;
 	private City city;
 	private Country country;
+	private List<TourGuidancePhoto> tourPhoto;
+	private List<Theme> theme;
 	
   
   @Override

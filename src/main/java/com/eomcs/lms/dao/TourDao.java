@@ -6,6 +6,7 @@ import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourComment;
+import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
 
 public interface TourDao {
@@ -18,6 +19,7 @@ public interface TourDao {
   int countAll();
   TourComment findComment();
   void insertTheme (List<TourTheme> theme);
+  void insertPhoto (List<TourGuidancePhoto> photo);
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);
   int findMaxPrice();

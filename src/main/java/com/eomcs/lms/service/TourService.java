@@ -4,6 +4,7 @@ import java.util.List;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
+import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
 
 public interface TourService {
@@ -20,6 +21,7 @@ public interface TourService {
 	int delete(int no);
 	int size();
 	void addTheme(List<TourTheme> theme);
+	void addPhoto(List<TourGuidancePhoto> photo);
 	List<Country> listCountry(String continent);
 	List<City> listCity(int countryNo);
 	int maxValue();

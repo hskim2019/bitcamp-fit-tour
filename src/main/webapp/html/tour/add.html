@@ -242,8 +242,12 @@
         <!-- ***************************************************************************************** -->
 
           <div id="swipe-2" class="col l12">
+          
+          <input id="fileupload" type="file" name="files" multiple><br>
         </div>
-
+        
+        
+        <!-- ***************************************************************************************** -->
         <div id="swipe-3" class="col l12">
 
           <div class="row mt20 pr40 pl40">
@@ -267,9 +271,8 @@
       </div>
 
       <div class="row">
-      <div class="col l3 offset-l9">
-        <a id="tour-add-btn" class="waves-effect waves-light btn-large"><i class="material-icons left">edit</i>상품
-          등록하기</a>
+      <div class="col l12 pr0">
+      <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
           </div>
       </div>
     </form>
@@ -300,6 +303,10 @@
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <!-- quill -->
 <script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
+<!-- fileupload -->
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>

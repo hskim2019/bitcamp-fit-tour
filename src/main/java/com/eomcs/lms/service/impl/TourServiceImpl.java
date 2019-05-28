@@ -7,6 +7,7 @@ import com.eomcs.lms.dao.TourDao;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
+import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourService;;
 
@@ -72,6 +73,11 @@ public class TourServiceImpl implements TourService {
   }
   
   @Override
+  public void addPhoto(List<TourGuidancePhoto> photo) {
+    tourDao.insertPhoto(photo);
+  }
+  
+  @Override
   public Tour get(int no) {
     // 이제 조금 서비스 객체가 뭔가를 하는 구만.
     // Command 객체는 데이터를 조회한 후 조회수를 높이는 것에 대해 신경 쓸 필요가 없어졌다.
@@ -113,6 +119,7 @@ public class TourServiceImpl implements TourService {
 	public int maxValue() {
 		return tourDao.findMaxPrice();
 	}
+
 }
 
 

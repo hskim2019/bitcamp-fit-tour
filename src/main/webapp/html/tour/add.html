@@ -41,7 +41,9 @@
           <!-- h -->
           <div class="row mt20 pr40 pl40">
             <div class="col l12">
-              <blockquote><h5>투어 상품의 제목과 장소 이동수단 등 기본정보를 입력해주세요!</h5></blockquote>
+              <blockquote>
+                <h5>투어 상품의 제목과 장소 이동수단 등 기본정보를 입력해주세요!</h5>
+              </blockquote>
             </div>
           </div>
 
@@ -64,7 +66,7 @@
           </div>
 
           <div class="row pr40 pl40">
-          <!-- continent -->
+            <!-- continent -->
             <div class="input-field col l4">
               <div class="row">
                 <div class="col l2">
@@ -239,20 +241,42 @@
 
         </div>
 
-        <!-- ***************************************************************************************** -->
+        <!-- 2***************************************************************************************** -->
 
-          <div id="swipe-2" class="col l12">
-          
-          <input id="fileupload" type="file" name="files" multiple><br>
+        <div id="swipe-2" class="col l12">
+          <!-- <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input id="fileupload" type="file" name="files" multiple>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+              </div>
+            </div> -->
+
+          <div class="file-field input-field mb0">
+            <div class="btn">
+              <span>파일 업로드</span>
+              <input id="fileupload" type="file" multiple>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="여기로 파일을 드래그 하거나 버튼을 눌러 추가하세요.">
+            </div>
+          </div>
+          <div id="images-div" class="row">
+          </div>
+
         </div>
-        
-        
-        <!-- ***************************************************************************************** -->
+
+
+        <!-- 3***************************************************************************************** -->
         <div id="swipe-3" class="col l12">
 
           <div class="row mt20 pr40 pl40">
             <div class="col l12">
-              <blockquote><h5>투어상품에 대한 설명을 자유롭게 작성해주세요!</h5></blockquote>
+              <blockquote>
+                <h5>투어상품에 대한 설명을 자유롭게 작성해주세요!</h5>
+              </blockquote>
             </div>
           </div>
 
@@ -266,14 +290,12 @@
         </div>
 
 
-        
-
       </div>
 
       <div class="row">
-      <div class="col l12 pr0">
-      <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
-          </div>
+        <div class="col l12 pr0">
+          <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
+        </div>
       </div>
     </form>
 
@@ -292,8 +314,8 @@
   </div>
   <button id="modal-button" data-target="modal" class="btn modal-trigger bit-invisible"></button>
 
-
-  <footer class="bit-main-footer page-footer teal"></footer> <!-- footer -->
+  <!-- footer -->
+  <footer class="bit-main-footer page-footer teal"></footer> 
 </body>
 
 <!-- jquery -->
@@ -307,6 +329,10 @@
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>

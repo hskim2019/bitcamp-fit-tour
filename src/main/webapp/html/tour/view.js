@@ -25,7 +25,7 @@ function tourList(tourNo) {
     $('#thirdcrumb').html(obj.tour.city.cityName);
     
     for(var i = 0; i < obj.tour.theme.length; i++){
-      $('#themeDiv').append($('<div class="chip mr5">' + obj.tour.theme[i].theme + '</div>'));
+      $('#themeDiv').append($('<div class="chip ml0 mr5">' + obj.tour.theme[i].theme + '</div>'));
     }
     
     for(var i = 0; i < obj.tour.tourPhoto.length; i++){

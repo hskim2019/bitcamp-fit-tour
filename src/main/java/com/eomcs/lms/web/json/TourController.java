@@ -1,4 +1,5 @@
 package com.eomcs.lms.web.json;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourCommentService;
 import com.eomcs.lms.service.TourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.coobird.thumbnailator.Thumbnails;
 
 @RestController("json/TourController")
 @RequestMapping("/json/tour")
@@ -187,12 +189,25 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
          System.out.println(tour);
          
        } else if (part.getSize() > 0) {
+         
+         
+         
          String filename = UUID.randomUUID().toString();
          String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
          part.write(filepath);
+         System.out.println(filepath);
+         
+         File image = new File(filepath);
+         File thumbnail = new File(filepath + "thumbnail");
+         if (image.exists()) {
+           System.out.println("exists()");
+           thumbnail.getParentFile().mkdirs();
+           Thumbnails.of(image).size(554, 400).outputFormat("png").toFile(thumbnail);
+         }
+         
          TourGuidancePhoto tourGuidancePhoto = new TourGuidancePhoto();
-         tourGuidancePhoto.setName(filename);
-         tourGuidancePhoto.setPath(filepath);
+         tourGuidancePhoto.setName(filename + "thumbnail.png");
+         tourGuidancePhoto.setPath(filepath + "thumbnail.png");
          photos.add(tourGuidancePhoto);
        }
      }
@@ -275,4 +290,6 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
   //    return content;
   //  }
   //  
+
+  
 }

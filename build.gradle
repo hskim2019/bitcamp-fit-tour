@@ -14,8 +14,8 @@ repositories {
 // 프로젝트에서 사용할 외부 라이브러리 정보 
 dependencies {
     
-    //
-
+    // 자바 썸네일 라이브러리
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
 
     // servlet-api
     // => 프로젝트를 컴파일 할 때만 사용할 라이브러리라면 providedCompile 메서드를 사용하라.

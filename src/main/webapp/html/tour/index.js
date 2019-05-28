@@ -16,17 +16,16 @@ var firstcrumb = crumb.children().eq(0),
     secondcrumb = crumb.children().eq(1),
     thirdcrumb = crumb.children().eq(2);
 var temp;
-var minPrice;
-var maxPrice;
+var minPrice = 0;
+var maxPrice = 0;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn, continentName, countryName, cityName) {
-  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + 
-      '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName, 
+function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) {
+  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -70,29 +69,43 @@ function loadList(pn, continentName, countryName, cityName) {
       }
       
       // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
-      
       $(document.body).trigger('loaded-list');
-      
+      $('.bit-view-link').click((e) => {
+        e.preventDefault();
+        window.location.href = 'view.html?no=' + 
+          $(e.target).attr('data-no');
+      });
     }); // Bitcamp.getJSON()
   
 } // loadList()
 
+//테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
+//$(document.body).bind('loaded-list', () => {
+//  // 제목을 클릭했을 때 view.html로 전환시키기
+//  $('.bit-view-link').click((e) => {
+//    e.preventDefault();
+//    window.location.href = 'view.html?no=' + 
+//      $(e.target).attr('data-no');
+//  });
+//});
+
+
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1, continentName, countryName, cityName);
+  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1, continentName, countryName, cityName);
+  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice);
 });
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1, continentName, countryName, cityName);
+loadList(1, continentName, countryName, cityName, minPrice, maxPrice);
 
 
+// Dropdowns.
 (function() {
-  // Dropdowns.
     $('#nav > ul').dropotron({
       mode: 'fade',
       noOpenerFade: true,
@@ -110,7 +123,6 @@ if (scrollTop < 200) {
 $("#followquick").stop();
 $("#followquick").animate( { "top" : scrollTop });
 });
-
 
 // BreadCrumb
 function showBreadCrumb(continentName, countryName, cityName) {
@@ -136,8 +148,8 @@ $( function() {
     values: [ 0, 200000 ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
-      minPrice = ui.values[ 0 ].toLocaleString();
-      maxPrice = ui.values[ 1 ].toLocaleString();
+      minPrice = ui.values[ 0 ];
+      maxPrice = ui.values[ 1 ];
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
@@ -147,27 +159,19 @@ $( function() {
 // floating menu - search with options
 $('#searchwithOptions').click((e) => {
   e.preventDefault();
+  console.log(continentName, countryName, cityName, minPrice, maxPrice);
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice);
 });
 
-
-
-// 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
-$(document.body).bind('loaded-list', () => {
-  // 제목을 클릭했을 때 view.html로 전환시키기
-  console.log("a");
-  $('.bit-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
-  });
-});
 
 $(document.body).bind('loaded-list', () => {
   $('.continent-list-btn').click((e) => {
     e.preventDefault();
     continentName = $(e.target).html();
+    countryName = '';
+    cityName = '';
     showBreadCrumb(continentName, '', '');
-    loadList(1, continentName, '', '');
+    loadList(1, continentName, '', '', minPrice, maxPrice);
   });
 });
 
@@ -176,10 +180,9 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     continentName = $(e.target).attr('id');
     countryName = $(e.target).html();
-    console.log(continentName);
-    console.log(countryName);
+    cityName = '';
     showBreadCrumb(continentName, countryName, '');
-    loadList(1, '', countryName, '');
+    loadList(1, '', countryName, '', minPrice, 0);
   });
 });
 
@@ -190,7 +193,7 @@ $(document.body).bind('loaded-list', () => {
     continentName = $(e.target).attr('id').split(',')[0];
     countryName = $(e.target).attr('id').split(',')[1];
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, '', '', cityName);
+    loadList(1, '', '', cityName, minPrice, 0);
   });
 });
 
@@ -198,7 +201,7 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     cityName = '';
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, '', countryName, '');
+    loadList(1, '', countryName, '', minPrice, 0);
   });
   
   $('#firstcrumb').click((e) => {
@@ -206,7 +209,7 @@ $(document.body).bind('loaded-list', () => {
     cityName = '';
     countryName = '';
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, continentName, '', '');
+    loadList(1, continentName, '', '', minPrice, 0);
   });
 
 

@@ -20,6 +20,7 @@ public interface TourDao {
   void insertTheme (List<TourTheme> theme);
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);
+  int findMaxPrice();
 }
 
 

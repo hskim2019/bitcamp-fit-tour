@@ -97,9 +97,9 @@
    join country as co on ci.country_id = co.country_id
        <where>
       <if test="continentName != null">or continent = #{continentName}</if>
-      <if test="countryName != null">or country_name = #{countryName}</if>
-      <if test="cityName != null">or city_name = #{cityName}</if>
-      <if test="price != null">or price = #{price}</if>
+      <if test="countryName != null">and country_name = #{countryName}</if>
+      <if test="cityName != null">and city_name = #{cityName}</if>
+      <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
      </where>
     order by 
       tour_id desc
@@ -147,6 +147,9 @@
     select * from city where country_id = #{countryNo}
   </select>
   
+  <select id="findMaxPrice" resultType="int">
+    select price from tour where price=(select max(price) from tour)
+  </select> 
   
 </mapper>
 

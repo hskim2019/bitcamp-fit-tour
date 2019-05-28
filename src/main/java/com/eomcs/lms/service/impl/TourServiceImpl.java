@@ -29,6 +29,7 @@ public class TourServiceImpl implements TourService {
 		  String continentName,
 		  String countryName,
 		  String cityName,
+		  int minPrice, int maxPrice, 
 		  int pageNo, int pageSize) {
     // 게시물 목록을 가져오는 경우 서비스 객체에서 특별하게 할 일이 없다.
     // 그럼에도 불구하고 Command 객체와 DAO 사이에 Service 객체를 두기로 했으면 
@@ -38,6 +39,8 @@ public class TourServiceImpl implements TourService {
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("minPrice", minPrice);
+    params.put("maxPrice", maxPrice);
     
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);
@@ -106,6 +109,10 @@ public class TourServiceImpl implements TourService {
     return tourDao.findCityByCountry(countryNo);
   }
 
+  @Override
+	public int maxValue() {
+		return tourDao.findMaxPrice();
+	}
 }
 
 

@@ -11,6 +11,8 @@ public interface TourService {
 	String continentName,
 	String countryName,
 	String cityName,
+	int minPrice, 
+	int maxPrice, 
 	int pageNo, int pageSize);
 	int add(Tour tour);
 	Tour get(int no);
@@ -20,4 +22,5 @@ public interface TourService {
 	void addTheme(List<TourTheme> theme);
 	List<Country> listCountry(String continent);
 	List<City> listCity(int countryNo);
+	int maxValue();
 }

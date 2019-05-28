@@ -1,4 +1,5 @@
 package com.eomcs.lms.web.json;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -7,6 +8,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -27,6 +29,7 @@ import com.eomcs.lms.service.TourCommentService;
 import com.eomcs.lms.service.TourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 
 @RestController("json/TourController")
 @RequestMapping("/json/tour")
@@ -194,20 +197,23 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
          
          String filename = UUID.randomUUID().toString();
          String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
-         part.write(filepath);
-         System.out.println(filepath);
+         part.write(filepath+".jpg");
          
-         File image = new File(filepath);
-         File thumbnail = new File(filepath + "thumbnail");
-         if (image.exists()) {
-           System.out.println("exists()");
-           thumbnail.getParentFile().mkdirs();
-           Thumbnails.of(image).size(554, 400).outputFormat("png").toFile(thumbnail);
-         }
+//         File image = new File(filepath);
+//         File thumbnail = new File(filepath + "thumbnail");
+//         if (image.exists()) {
+//           System.out.println("exists()");
+//           Thumbnails.of(image).size(530, 400).outputFormat("jpg").toFile(thumbnail);
+//         }
+         
+         Thumbnails.of(filepath+".jpg")
+         .size(380, 400)
+         .outputFormat("jpg").width(100).height(100)
+         .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
          
          TourGuidancePhoto tourGuidancePhoto = new TourGuidancePhoto();
-         tourGuidancePhoto.setName(filename + "thumbnail.png");
-         tourGuidancePhoto.setPath(filepath + "thumbnail.png");
+         tourGuidancePhoto.setName(filename + "thumbnail.jpg");
+         tourGuidancePhoto.setPath(filepath + "thumbnail.jpg");
          photos.add(tourGuidancePhoto);
        }
      }

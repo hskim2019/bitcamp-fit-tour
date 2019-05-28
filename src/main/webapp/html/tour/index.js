@@ -52,6 +52,9 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
         
       }
       
+      // 현재 페이지의 번호를 갱신한다.
+      currSpan.html(String(pageNo));
+      
       
       // 1페이지일 경우 버튼을 비활성화 한다.
       if (pageNo == 1) {

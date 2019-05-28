@@ -125,6 +125,7 @@ public class TourController {
 		content.put("pageNo", pageNo);
 		content.put("pageSize", pageSize);
 		content.put("totalPage", totalPage);
+		content.put("currMaxPrice", currMaxPrice);
 
 		return content;
 	}

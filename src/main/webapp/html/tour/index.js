@@ -18,6 +18,7 @@ var firstcrumb = crumb.children().eq(0),
 var temp;
 var minPrice = 0;
 var maxPrice = 0;
+var currMaxPrice;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
@@ -29,7 +30,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
-      
+      currMaxPrice = obj.currMaxPrice;
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       // 이전에 출력한 내용을 제거한다.
       $('#tourlistcard').html('');
@@ -51,8 +52,6 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
         
       }
       
-      // 현재 페이지의 번호를 갱신한다.
-      currSpan.html(String(pageNo));
       
       // 1페이지일 경우 버튼을 비활성화 한다.
       if (pageNo == 1) {
@@ -144,8 +143,8 @@ $( function() {
   $( "#slider-range" ).slider({
     range: true,
     min: 0,
-    max: 200000,
-    values: [ 0, 200000 ],
+    max: currMaxPrice,
+    values: [ 0, currMaxPrice ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
       minPrice = ui.values[ 0 ];

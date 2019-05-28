@@ -76,14 +76,16 @@ section:not(.tiles)  {
 	width: 240px;
 /* 	border: 2px solid blue; */
 	border-radius: 4px;
+	padding: 15px;
 	}
 
 label {
 	font-size: 14px;
+	font-weight: 700;
 }
 
-.ui-slider-range{
-	
+#amount {
+	font-size: 16px;
 }
 footer {
 	clear:both;

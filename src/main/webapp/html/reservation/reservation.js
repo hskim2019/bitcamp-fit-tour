@@ -15,10 +15,9 @@ if (param) {
   // var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
   // alert(selectPersonnel);
   loadData(tourNo);
- 
-  $('#tourNo').attr('readonly','');
-  $('#name').attr('readonly','');
-  $('#paymentNo').attr('readonly','');
+  var user = JSON.parse(sessionStorage.getItem('loginUser'))
+  $('#email').val(user.email);
+  $('#name').val(user.name);
   $('#status').hide();
   var el = $('.bit-new-item');
   for (e of el) {
@@ -97,21 +96,21 @@ function someFunction(destroyFeedback) {
 
 $('#pay').click(() => {
 
-    var user = JSON.parse(sessionStorage.getItem('loginUser'))
+   
     
     IMP.request_pay({
       pg : 'html5_inicis',
       pay_method : 'card', 
       merchant_uid :'merchant_' + new Date().getTime(),
       name : $("h6").text(), amount : 1000,
-    buyer_email : user.email,
-    buyer_name : user.name,
+    buyer_email : $('#email').val(),
+    buyer_name : $('#name').val(),
     buyer_tel : $('#tel').val() 
     
     }, function(rsp) {
       if ( rsp.success ) {
     
-        addReservation(rsp,user.no)
+        addReservation(rsp)
         $('#payStatus').val('결제완료');;
         $("#payStatus").css("color", "#ff0000");
         $('#status').val('ok');
@@ -134,11 +133,10 @@ $('#pay').click(() => {
 });
 
 
-function addReservation(rsp,no){
-  $.post('../../app/json/reservation/add', {
+function addReservation(rsp){
+  $.post('../../app/json/reservation/reservation', {
       
       tourNo: tourNo,
-      memberNo: no,
       statusNo: 4,
       tourDate: tourYear+'-'+tourMonth+'-'+tourDay,
       personnel: selectPersonnel,
@@ -153,7 +151,8 @@ function addReservation(rsp,no){
       M.toast({html: '예약 성공 입니다',displayLength: '10000'}) 
       
     } else {
-      M.toast({html: '예약 실패 입니다',displayLength: '10000'})
+      M.toast({html: '예약 실패 입니다'+
+        data.message,displayLength: '10000'})
     
     }
   })

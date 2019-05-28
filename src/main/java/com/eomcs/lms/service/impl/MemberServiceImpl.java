@@ -58,8 +58,8 @@ public class MemberServiceImpl implements MemberService {
   
   private void emailSend(MailUtils sendMail, String email, String certification) throws Exception {
     sendMail.setSubject("[FIT-TOUR] 회원가입 이메일 인증");
-    sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1>")
-        .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+    sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1><br><br><br>")
+        .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p><br><br><br>")
         .append("<a href='http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/app/json/signup/emailconfirm?")
         .append("email=")
         .append(email)

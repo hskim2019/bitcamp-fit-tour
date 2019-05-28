@@ -37,7 +37,7 @@ function loadLoginUser() {
       $('#login-username').html(data.user.name);
 
       if(data.user.photo)
-        $('#login-userphoto').attr('src',"/bitcamp-fit-tour/images/" + data.user.photo);
+        $('#login-userphoto').attr('src',"/bitcamp-fit-tour/upload/member/" + data.user.photo);
 
     } else {
       notLoginState.removeClass('bit-invisible');

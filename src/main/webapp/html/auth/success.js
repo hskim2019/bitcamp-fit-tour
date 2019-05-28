@@ -20,7 +20,7 @@ if (param) {
 
 $('#reEamil').click (() => {
   $("#reEamil").hide();
-  $.getJSON('../../app/json/signup/reeamil?email='+window.localStorage.standby, 
+  $.getJSON('../../app/json/signup/reeamil', 
       function(data) {
     
    

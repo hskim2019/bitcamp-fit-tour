@@ -14,7 +14,6 @@ document.querySelector('#login-btn').onclick = () => {
     if (data.status == 'success') {
       location.href = "../index.html"
     } else if(data.status == 'stand-by'){
-      window.localStorage.standby = $('#email').val();
       location.href = 'success.html';
       
       

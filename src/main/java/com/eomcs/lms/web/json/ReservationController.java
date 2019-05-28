@@ -1,6 +1,7 @@
 package com.eomcs.lms.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,14 +101,17 @@ public class ReservationController {
     return content;
   }
   @PostMapping("reservation")
-  public Object reservation(Reservation reservation) throws Exception {
+  public Object reservation(Reservation reservation, HttpSession session) throws Exception {
     HashMap<String,Object> content = new HashMap<>();
+    Member loginUser = (Member)session.getAttribute("loginUser");
+    reservation.setMemberNo(loginUser.getNo());
     try {
+      
       reservationService.add(reservation);
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
-      content.put("message", e.getMessage());
+      content.put("message", loginUser.getNo());
     }
     return content;
   }

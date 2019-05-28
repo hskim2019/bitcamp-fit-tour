@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.TourDao;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Tour;
+import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourService;;
 
 // 스프링 IoC 컨테이너가 관리하는 객체 중에서 
@@ -24,8 +26,10 @@ public class TourServiceImpl implements TourService {
   // 비지니스 객체에서 메서드 이름은 가능한 업무 용어를 사용한다.
   @Override
   public List<Tour> list(
+		  String continentName,
 		  String countryName,
 		  String cityName,
+		  int minPrice, int maxPrice, 
 		  int pageNo, int pageSize) {
     // 게시물 목록을 가져오는 경우 서비스 객체에서 특별하게 할 일이 없다.
     // 그럼에도 불구하고 Command 객체와 DAO 사이에 Service 객체를 두기로 했으면 
@@ -35,11 +39,17 @@ public class TourServiceImpl implements TourService {
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
     params.put("rowNo", (pageNo - 1) * pageSize);
+    params.put("minPrice", minPrice);
+    params.put("maxPrice", maxPrice);
     
-    if (countryName == null && cityName == null) {
+    if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);
     } else {
-    	System.out.println("countryname: " + countryName + "cityname: " + cityName);
+    	System.out.println("continentname: " + continentName + "countryname: " + countryName + "cityname: " + cityName);
+    	if (continentName != null) {
+    		params.put("continentName", continentName);
+    	}
+    	
     	if (countryName != null) {
     		params.put("countryName", countryName);
     	}
@@ -57,11 +67,8 @@ public class TourServiceImpl implements TourService {
   }
   
   @Override
-  public void addTheme(int tourNo, int themeNo) {
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("tourNo", tourNo);
-    params.put("themeNo", themeNo);
-    tourDao.insertTheme(params);
+  public void addTheme(List<TourTheme> theme) {
+    tourDao.insertTheme(theme);
   }
   
   @Override
@@ -93,10 +100,19 @@ public class TourServiceImpl implements TourService {
   }
 
   @Override
-  public List<Country> ListCountry(String continent) {
+  public List<Country> listCountry(String continent) {
     return tourDao.findCountryByContinent(continent);
   }
 
+  @Override
+  public List<City> listCity(int countryNo) {
+    return tourDao.findCityByCountry(countryNo);
+  }
+
+  @Override
+	public int maxValue() {
+		return tourDao.findMaxPrice();
+	}
 }
 
 

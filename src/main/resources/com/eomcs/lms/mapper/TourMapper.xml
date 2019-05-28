@@ -28,6 +28,7 @@
     <association property="country" javaType="country">
     <id column="country_id"        property="no"/>
     <result column="country_name"  property="countryName"/>
+    <result column="continent"     property="continentName"/>
     </association>
   </resultMap>
   
@@ -63,6 +64,14 @@
     <result column="continent" property="continentName"/>
   </resultMap>
   
+  <!-- cityMap -->
+  <resultMap type="city" id="cityMap">
+    <id column="city_id" property="no"/>
+    <result column="country_id" property="countryNo"/>
+    <result column="city_name" property="cityName"/>
+  </resultMap>
+  
+  
   <sql id="select1">
     select 
       tour_id, 
@@ -87,8 +96,10 @@
    join city as ci on t.city_id = ci.city_id
    join country as co on ci.country_id = co.country_id
        <where>
-      <if test="countryName != null">or country_name = #{countryName}</if>
-      <if test="cityName != null">or city_name = #{cityName}</if>
+      <if test="continentName != null">or continent = #{continentName}</if>
+      <if test="countryName != null">and country_name = #{countryName}</if>
+      <if test="cityName != null">and city_name = #{cityName}</if>
+      <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
      </where>
     order by 
       tour_id desc
@@ -114,10 +125,14 @@
     values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo})
   </insert>
   
+  
   <insert id="insertTheme" parameterType="map">
-    insert into tour_theme(tour_id, theme_id)
-    values(#{tourNo}, #{themeNo});
-  </insert>
+        insert into tour_theme(tour_id, theme_id)
+        values
+        <foreach collection="list" item="item" separator=" , ">
+            (#{item.tourNo}, #{item.themeNo})
+        </foreach>
+ </insert>
   
   
   <select id="countAll" resultType="int">
@@ -126,6 +141,14 @@
   
   <select id="findCountryByContinent" resultMap="countryMap" parameterType="string">
     select * from country where continent = #{continent}
+  </select>
+  
+  <select id="findCityByCountry" resultMap="cityMap" parameterType="int">
+    select * from city where country_id = #{countryNo}
+  </select>
+  
+  <select id="findMaxPrice" resultType="int">
+    select price from tour where price=(select max(price) from tour) limit 1
   </select>
   
 </mapper>

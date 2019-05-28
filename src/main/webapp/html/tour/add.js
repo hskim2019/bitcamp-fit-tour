@@ -1,19 +1,29 @@
 $(document).ready(function() {
   $('input[type="text"]').characterCounter();
   $('select').formSelect();
-  $('.tabs').tabs({
-    swipeable: true,
-  });
+  $('.tabs').tabs({duration: 800});
+  $('.modal').modal();
 });
 
+// Initialize QuillEditer 
 (function quillEditerInit() {
   var quill = new Quill('#quillEditor', {
   modules: {
     toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
       ['image', 'code-block'],
-      [{color: ['red', 'blue']} ],
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      ['clean']                                         // remove formatting button
     ]
   },
   placeholder: 'Compose an epic...',
@@ -22,53 +32,73 @@ $(document).ready(function() {
   $('.ql-picker').next().remove();
 })();
 
-
+// Load CountryList
 $('#continent').change( function() {
-  
-  console.log();
+  $('#country').empty();
+  $('#country').removeAttr('disabled');
   $.getJSON('../../app/json/tour/countrylist?continent='+ $('#continent option:selected').val(), 
     function(obj){
-    console.log(obj)
-    console.log(obj.countryList.length);
-    console.log();
-    for(var i = 0; i < obj.countryList.length; i ++){
-      $('#country').append(
-          $('<option value='+ obj.countryList[0].no +'>' + obj.countryList[0].continentName + '</option>'));
+      for(var i = 0; i < obj.countryList.length; i++){
+        $('#country').append($('<option value="'+ obj.countryList[i].no +'">' + obj.countryList[i].countryName + '</option>'));
+        }
+      $('select').formSelect();
     }
     
-  });
+  );
+});
+
+// Load CityList
+$('#country').change( function() {
+  $('#city').empty();
+  $('#city').removeAttr('disabled');
+  $.getJSON('../../app/json/tour/citylist?countryNo='+ $('#country option:selected').val(), 
+    function(obj){
+      for(var i = 0; i < obj.cityList.length; i++){
+        $('#city').append($('<option value="'+ obj.cityList[i].no +'">' + obj.cityList[i].cityName + '</option>'));
+        }
+      $('select').formSelect();
+    }
+    
+  );
 });
 
 
-//$('#tour-add-btn').click( function() {
-//  console.log($('#input-title').val());
-//  console.log($('#input-subtitle').val());
-//  console.log($(".ql-editor").html());
-//  console.log($('input[name="transportaion"]:checked').next().html());
-//  
-//  var theme2 = new Array();
-//  
-//  $('input[name=theme]:checked').each(function() {
-//    console.log($(this).val());
-//    console.log($(this).next().html());
-//    Theme = new Object();
-//    Theme.no = $(this).val()
-//    Theme.theme = $(this).next().html();
-//    theme2.push(Theme);
-//  });
-//  console.log(theme2);
-//  
-//  $.post('../../app/json/tour/add2',
-//      JSON.stringify({
-//        title : $('#input-title').val(),
-//        subHeading : $('#input-subtitle').val(),
-//        content : $(".ql-editor").html(),
-//        totalHour : 100,
-//        personnel : '10',
-//        transportation : $('input[name="transportaion"]:checked').val(),
-//        cityNo : 1,
-//        theme : theme2
-//      }), 
-//      function(obj) {}
-//    );
-//});
+$('#tour-add-btn').click( function() {
+  console.log($('#input-title').val());
+  console.log($('#input-subtitle').val());
+  console.log($(".ql-editor").html());
+  console.log($('input[name="transportaion"]:checked').next().html());
+  console.log($('#city option:selected').val());
+  
+  var themeArray = new Array();
+  
+  $('input[name=theme]:checked').each(function() {
+    Theme = new Object();
+    Theme.no = $(this).val()
+    Theme.theme = $(this).next().html();
+    themeArray.push(Theme);
+  });
+  console.log(Theme)
+  $.post('../../app/json/tour/add',
+      encodeURIComponent(JSON.stringify({
+        title : $('#input-title').val(),
+        subHeading : $('#input-subtitle').val(),
+        content : $(".ql-editor").html(),
+        totalHour : 100,
+        personnel : 10,
+        transportation : $('input[name="transportaion"]:checked').next().html(),
+        cityNo : $('#city option:selected').val(),
+        theme : themeArray,
+        price : 100000
+      })),
+      function(obj) {
+    console.log(obj);
+      if(obj.status == 'success'){
+        $('#tourConfirm').attr('href','view.html?no='+ obj.tourNo);
+        $('#modal-button').trigger('click');
+      }
+    }
+    );
+});
+
+

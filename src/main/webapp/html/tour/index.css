@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Open+Sans+Condensed:700");
 
-
-main {
-}
-
  #nav ul li {
 	position: relative;
       width: calc(16.666% - 2.5em);
@@ -36,6 +32,7 @@ section:not(.tiles)  {
  width: 750px;
  float:right;	
 /*  border: 2px solid red; */
+  min-height: 500px;
 }
 
 .card-image {
@@ -81,6 +78,13 @@ section:not(.tiles)  {
 	border-radius: 4px;
 	}
 
+label {
+	font-size: 14px;
+}
+
+.ui-slider-range{
+	
+}
 footer {
 	clear:both;
 }

@@ -2,6 +2,31 @@ i {
 	font-size: 23px;
 }
 
-.carousel {
-    height: 1000px !important;
+#form-panel {
+    height: 900px !important;
 }
+
+.dropdown-content {
+	max-height : 200px !important;
+}
+
+.modal.modal-fixed-footer {
+  height: 25%;
+	top: 30% !important;
+}
+
+.ql-editor {
+  height: 50em;
+}
+
+.tab > a {
+	font-size: 20px !important;
+	font-weight: bold;
+	border-top : 1px solid #f9e5e5;
+	border-bottom : 3px solid #f9e5e5;
+}
+
+.indicator {
+	height: 3px !important;
+}
+

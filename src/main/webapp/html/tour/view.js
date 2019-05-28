@@ -9,6 +9,7 @@ function tourList(tourNo) {
 
   $.getJSON('../../app/json/tour/detail?no=' + tourNo,
       function(obj) {
+    console.log(obj);
     $('#title').html(obj.tour.title);
     $('#subHeading').html(obj.tour.subHeading);
     $('#content').html(obj.tour.content);
@@ -20,7 +21,10 @@ function tourList(tourNo) {
     $('#price').html($('#price').html() + obj.tour.price.toLocaleString() + '원');
     $('#photo').attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + obj.tour.tourPhoto[0].name +'.jpg');
     //$('#photpath').val(obj.tour.tourPhoto[0].path);
-    $('#theme').val(obj.tour.theme[0].theme);
+    
+    for(var i = 0; i < obj.tour.theme.length; i++){
+      $('#themeDiv').append($('<div class="chip mr5">' + obj.tour.theme[i].theme + '</div>'));
+    }
     
   });
 }

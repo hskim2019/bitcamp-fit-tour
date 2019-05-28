@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Theme;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourComment;
+import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourCommentService;
 import com.eomcs.lms.service.TourService;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController("json/TourController")
@@ -76,20 +77,34 @@ public class TourController {
 	//tourList
 	@GetMapping("list")
 	public Object list(
+			String continentName,
 			String countryName,
 			String cityName,
+			@RequestParam(defaultValue="0") int minPrice,
+			int maxPrice,
 			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="3") int pageSize) {
 
+		String searchContinentName = null;
 		String searchCountryName = null;
 		String searchCityName = null;
-
-		if (countryName.length() > 0) 
-			searchCountryName = countryName;
 		
-		if (cityName.length() > 0) 
+		if (continentName.length() > 0) { 
+			searchContinentName = continentName;
+		}
+		
+		if (countryName.length() > 0) {
+			searchCountryName = countryName;
+		}
+		if (cityName.length() > 0) {
 			searchCityName = cityName;
-
+		}
+		
+		int currMaxPrice = tourService.maxValue();
+		if (maxPrice == 0) {
+			maxPrice = currMaxPrice;
+		}
+		
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
 
@@ -103,8 +118,8 @@ public class TourController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Tour> tours = tourService.list(searchCountryName, searchCityName, pageNo, pageSize);
-
+		List<Tour> tours = tourService.list(searchContinentName, searchCountryName, searchCityName, minPrice, maxPrice, pageNo, pageSize);
+        
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", tours);
 		content.put("pageNo", pageNo);
@@ -114,62 +129,93 @@ public class TourController {
 		return content;
 	}
 	
-  @PostMapping("add")
-  public Object add(/* HttpServletRequest request, */Tour tour, String themeJson) throws IOException, ServletException {
-       ObjectMapper mapper = new ObjectMapper();
-       JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Theme.class);
-       ArrayList<Theme> list = mapper.readValue(themeJson, type);
-       System.out.println(list);
-       System.out.println(tour);
-       System.out.println(themeJson);
-    /*
-     * StringBuffer json = new StringBuffer(); String line = null;
-     * 
-     * try { BufferedReader reader = request.getReader(); while((line = reader.readLine()) != null)
-     * { json.append(line); }
-     * 
-     * System.out.println(json); }catch(Exception e) {
-     * System.out.println("Error reading JSON string: " + e.toString()); }
-     */
-        
-        
-        tour.setTitle("투어123");
-        tour.setSubHeading("안녕");
-        tour.setTotalHour(30);
-        tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
-        tour.setPersonnel(5);
-        tour.setTransportation("버스");
-        tour.setPrice(300000);
-        tour.setCityNo(1);
-         
-        
-	    HashMap<String,Object> content = new HashMap<String,Object>();
-	    try {
-	      tourService.add(tour);
-	      tourService.addTheme(tour.getNo(), 1);
-	      content.put("status", "success");
-	    } catch (Exception e) {
-	      content.put("status", "fail");
-	      content.put("message", e.getMessage());
-	    }
-	    return content;
-	  }
+//  @PostMapping("add")
+//  public Object add(/* HttpServletRequest request, */Tour tour, String themeJson) throws IOException, ServletException {
+//       ObjectMapper mapper = new ObjectMapper();
+//       JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Theme.class);
+//       ArrayList<Theme> list = mapper.readValue(themeJson, type);
+//       System.out.println(list);
+//       System.out.println(tour);
+//       System.out.println(themeJson);
+//    /*
+//     * StringBuffer json = new StringBuffer(); String line = null;
+//     * 
+//     * try { BufferedReader reader = request.getReader(); while((line = reader.readLine()) != null)
+//     * { json.append(line); }
+//     * 
+//     * System.out.println(json); }catch(Exception e) {
+//     * System.out.println("Error reading JSON string: " + e.toString()); }
+//     */
+//        
+//        
+//        tour.setTitle("투어123");
+//        tour.setSubHeading("안녕");
+//        tour.setTotalHour(30);
+//        tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
+//        tour.setPersonnel(5);
+//        tour.setTransportation("버스");
+//        tour.setPrice(300000);
+//        tour.setCityNo(1);
+//         
+//        
+//	    HashMap<String,Object> content = new HashMap<String,Object>();
+//	    try {
+//	      tourService.add(tour);
+//	      tourService.addTheme(tour.getNo(), 1);
+//	      content.put("status", "success");
+//	    } catch (Exception e) {
+//	      content.put("status", "fail");
+//	      content.put("message", e.getMessage());
+//	    }
+//	    return content;
+//	  }
 	
-  @PostMapping("add2")
-  public Object add2(@RequestBody String json) throws IOException, ServletException {
-       ObjectMapper mapper = new ObjectMapper();
-       Tour tour = mapper.readValue(URLDecoder.decode(json, "UTF-8"), Tour.class);
-       System.out.println(tour);
+@PostMapping("add")
+public Object add(@RequestBody String json) throws IOException, ServletException {
+     ObjectMapper mapper = new ObjectMapper();
+     Tour tour = mapper.readValue(URLDecoder.decode(json, "UTF-8"), Tour.class);
+     System.out.println(tour);
+     tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
+     
+     HashMap<String,Object> content = new HashMap<String,Object>();
+     
+     
+     try {
+       tourService.add(tour);
+       List<Theme> themes = tour.getTheme();
+       List<TourTheme> TourThemes = new ArrayList<>();
+       for(Theme theme : themes ) {
+         TourTheme tourTheme = new TourTheme();
+         tourTheme.setTourNo(tour.getNo());
+         tourTheme.setThemeNo(theme.getNo());
+         TourThemes.add(tourTheme);
+       }
        
-       return json;
-  }
+       tourService.addTheme(TourThemes);
+       content.put("status", "success");
+       content.put("tourNo", tour.getNo());
+     } catch (Exception e) {
+       content.put("status", "fail");
+       content.put("message", e.getMessage());
+     }
+     return content;
+}
   
   @GetMapping("countrylist")
   public Object countryList(String continent) {
     
-    List<Country> countryList =tourService.ListCountry(continent);
+    List<Country> countryList =tourService.listCountry(continent);
     HashMap<String,Object> content = new HashMap<String,Object>();
     content.put("countryList", countryList);
+    return content;
+  }
+  
+  @GetMapping("citylist")
+  public Object cityList(int countryNo) {
+    
+    List<City> cityList =tourService.listCity(countryNo);
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    content.put("cityList", cityList);
     return content;
   }
 

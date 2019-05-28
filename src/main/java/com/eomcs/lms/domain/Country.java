@@ -6,7 +6,6 @@ public class Country {
 	private String countryName;
 	private String continentName;
 	
-	
 
 	@Override
   public String toString() {
@@ -14,13 +13,6 @@ public class Country {
         + "]";
   }
 
-  public String getContinentName() {
-    return continentName;
-  }
-
-  public void setContinentName(String continentName) {
-    this.continentName = continentName;
-  }
 
   public int getNo() {
 		return no;
@@ -37,5 +29,17 @@ public class Country {
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
+
+
+	public String getContinentName() {
+		return continentName;
+	}
+
+
+	public void setContinentName(String continentName) {
+		this.continentName = continentName;
+	}
+	
+	
 	
 }

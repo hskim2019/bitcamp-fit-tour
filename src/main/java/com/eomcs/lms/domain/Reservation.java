@@ -22,16 +22,6 @@ public class Reservation implements Cloneable, Serializable {
   private Date reservationDate;//예약일
   private PaymentStatus paymentStatus;
   private Member member;
-
-  public void setPaymentNo(String paymentNo) {
-    this.paymentNo = paymentNo;
-  }
-  public PaymentStatus getPaymentStatus() {
-    return paymentStatus;
-  }
-  public void setPaymentStatus(PaymentStatus paymentStatus) {
-    this.paymentStatus = paymentStatus;
-  }
   public int getNo() {
     return no;
   }
@@ -80,7 +70,12 @@ public class Reservation implements Cloneable, Serializable {
   public void setRequirement(String requirement) {
     this.requirement = requirement;
   }
-
+  public String getPaymentNo() {
+    return paymentNo;
+  }
+  public void setPaymentNo(String paymentNo) {
+    this.paymentNo = paymentNo;
+  }
   public Date getPaymentDate() {
     return paymentDate;
   }
@@ -93,7 +88,12 @@ public class Reservation implements Cloneable, Serializable {
   public void setReservationDate(Date reservationDate) {
     this.reservationDate = reservationDate;
   }
-  
+  public PaymentStatus getPaymentStatus() {
+    return paymentStatus;
+  }
+  public void setPaymentStatus(PaymentStatus paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
   public Member getMember() {
     return member;
   }
@@ -108,6 +108,8 @@ public class Reservation implements Cloneable, Serializable {
         + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
         + ", paymentStatus=" + paymentStatus + ", member=" + member + "]";
   }
+
+  
   
   
   

@@ -107,8 +107,10 @@
 
                     <div class="row">
                       <div class="input-field col s10">
-                        <label id="payStatus">결제상태</label><input type="text" class="" value="결제대기"disabled="disabled">
+                        <label >결제상태</label><input id="payStatus" type="text" class="form-control" value="결제 대기"disabled>
+                      
                       </div>
+                        <input id="status" type="text" class="validate" value="" required>
                     </div>
                     
                     <div class="row">
@@ -131,7 +133,7 @@
               </div>
             </li>
             <li class="step">
-              <div class="step-title waves-effect waves-dark"  >예약 완료</div>
+              <div id="end" class="step-title waves-effect waves-dark"  >예약 완료</div>
               <div class="step-content">
                  <br>
                 <div class="row">
@@ -143,7 +145,8 @@
 
                     <div class="row">
                       <div class="input-field col s10">
-                        <p> 예약 완료 감사합니다.</p>
+                        <p> 예약 완료.</p>
+                        <p> 이용해주셔서 감사합니다.</p>
                       </div>
                     </div>
                     
@@ -191,7 +194,7 @@
   <script src="/bitcamp-fit-tour/node_modules/materialize-stepper/dist/js/mstepper.min.js"></script>
   <script src="../footer.js"></script>
   <script src="../header.js"></script>
-  <script src="test.js"></script>
+  <script src="reservation.js"></script>
 </body>
 </html>
 

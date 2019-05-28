@@ -56,6 +56,27 @@ i[class="fas fa-won-sign"] {
 	font-size: 12px;
 }
 
+.clean {
+  background: none;
+  box-shadow: none;
+  height: 50px !important;
+  clear: both;
+}
+
+.breadcrumb {
+  color: #6B7770;
+  opacity: 0.8;
+}
+
+.breadcrumb:before {
+  color: #6B7770;
+  opacity: 0.8;
+}
+
+.breadcrumb:last-child {
+  color: rgba(0,0,0,0.80  );
+}
+
 
 
 

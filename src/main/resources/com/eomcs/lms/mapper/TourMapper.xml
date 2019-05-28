@@ -148,8 +148,8 @@
   </select>
   
   <select id="findMaxPrice" resultType="int">
-    select price from tour where price=(select max(price) from tour)
-  </select> 
+    select price from tour where price=(select max(price) from tour) limit 1
+  </select>
   
 </mapper>
 

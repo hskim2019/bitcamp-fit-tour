@@ -1,13 +1,29 @@
+//ready
 $(document).ready(function() {
   $('input[type="text"]').characterCounter();
   $('select').formSelect();
-  $('.tabs').tabs({duration: 800,
-  /*swipeable: false*/});
-  $('.modal').modal();
+  $('.tabs').tabs({duration: 800,/*swipeable: false*/});
+  $('.modal').modal({opacity : 0.3,});
+
+  $('#next-swipe-1').click(function(){
+    $('.tabs').tabs('select', 'swipe-1');
+  });
+  
+  $('.next-swipe-2').click(function(){
+    $('.tabs').tabs('select', 'swipe-2');
+  });
+  $('#next-swipe-3').click(function(){
+    $('.tabs').tabs('select', 'swipe-3');
+  });
+  
+  $('.datepicker').datepicker({
+    format : 'yyyy년 mm월 dd일',
+  });
+  
 });
 
-document.addEventListener("mouseup", function(event) {
-}, false);
+
+
 
 //Initialize QuillEditer 
 (function quillEditerInit() {
@@ -40,6 +56,7 @@ document.addEventListener("mouseup", function(event) {
 $('#continent').change( function() {
   $('#country').empty();
   $('#country').removeAttr('disabled');
+  $('#country').append($('<option disabled selected>국가를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/countrylist?continent='+ $('#continent option:selected').val(), 
           function(obj){
     for(var i = 0; i < obj.countryList.length; i++){
@@ -55,6 +72,7 @@ $('#continent').change( function() {
 $('#country').change( function() {
   $('#city').empty();
   $('#city').removeAttr('disabled');
+  $('#city').append($('<option disabled selected>도시를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/citylist?countryNo='+ $('#country option:selected').val(), 
           function(obj){
     for(var i = 0; i < obj.cityList.length; i++){
@@ -65,38 +83,6 @@ $('#country').change( function() {
 
   );
 });
-
-
-//$('#tour-add-btn').click( function() {
-
-//var themeArray = new Array();
-//$('input[name=theme]:checked').each(function() {
-//Theme = new Object();
-//Theme.no = $(this).val()
-//Theme.theme = $(this).next().html();
-//themeArray.push(Theme);
-//});
-//$.post('../../app/json/tour/add',
-//encodeURIComponent(JSON.stringify({
-//title : $('#input-title').val(),
-//subHeading : $('#input-subtitle').val(),
-//content : $(".ql-editor").html(),
-//totalHour : 100,
-//personnel : 10,
-//transportation : $('input[name="transportaion"]:checked').next().html(),
-//cityNo : $('#city option:selected').val(),
-//theme : themeArray,
-//price : 100000
-//})),
-//function(obj) {
-//console.log(obj);
-//if(obj.status == 'success'){
-//$('#tourConfirm').attr('href','view.html?no='+ obj.tourNo);
-//$('#modal-button').trigger('click');
-//}
-//}
-//);
-//});
 
 
 $('#fileupload').fileupload({
@@ -112,8 +98,6 @@ $('#fileupload').fileupload({
     previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
     processalways: function(e, data) {
-      console.log('fileuploadprocessalways()...');
-      console.log(data.files);
       var imagesDiv = $('#images-div');
       imagesDiv.html("");
       for (var i = 0; i < data.files.length; i++) {
@@ -150,12 +134,12 @@ $('#fileupload').fileupload({
           title : $('#input-title').val(),
           subHeading : $('#input-subtitle').val(),
           content : $(".ql-editor").html(),
-          totalHour : 100,
-          personnel : 10,
+          totalHour : $('#input-totalHour').val(),
+          personnel : $('#input-personnel').val(),
           transportation : $('input[name="transportaion"]:checked').next().html(),
           cityNo : $('#city option:selected').val(),
           theme : themeArray,
-          price : 100000
+          price : $('#input-price').val()
         }))};
         var response = data.submit();
         response.complete(function (result){
@@ -166,5 +150,8 @@ $('#fileupload').fileupload({
     }, 
     done: function (e, data) {}
 }); 
+
+
+
 
 

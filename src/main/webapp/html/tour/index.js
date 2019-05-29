@@ -8,7 +8,6 @@ var pageNo = 1,
     themetemplateSrc = $('#tr-template-for-theme').html();
 // script 태그에서 템플릿 데이터를 꺼낸다.
 
-
 var continentName = '';
 var countryName = '';
 var cityName= '';
@@ -37,20 +36,20 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 ()안에 붙인다.
       $(trGenerator(obj)).appendTo($('#tourlistcard'));
       
+      $.ajaxSetup({async:false});
       for(listRow of $('.listRow')) {
         var tourNo = $(listRow).attr('id');
 //        var targetforTheme = $(listRow).children().eq(1).children().eq(3).children().eq(0);
 //        var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
       var targetforTheme = $(listRow).children().eq(1).children().eq(3);
       var targetforPrice = $(listRow).children().eq(1).children().eq(4);
-        $.ajaxSetup({async:false});
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
           $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
         });
-        $.ajaxSetup({async:true});
       }
+      $.ajaxSetup({async:true});
       
       
 //      // 현재 페이지의 번호를 갱신한다.
@@ -88,9 +87,27 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
       prevText:'Anterior',
       nextText:'Siguiente',
       showPrevNext:true,
-      hidePageNumbers:false,
+      hidePageNumbers:false ,
       perPage:3
     });
+    
+ // price slider-range
+    $( function() {
+      $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: currMaxPrice,
+        values: [ 0, currMaxPrice ],
+        slide: function( event, ui ) {
+          $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
+          minPrice = ui.values[ 0 ];
+          maxPrice = ui.values[ 1 ];
+        }
+      });
+      $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
+          " -" + $( "#slider-range" ).slider( "values", 1 ).toLocaleString() + "원");
+    } );
+    
   });
     
     }); // Bitcamp.getJSON()
@@ -171,23 +188,6 @@ function showBreadCrumb(continentName, countryName, cityName) {
 
 
 
-// price slider-range
-$( function() {
-  $( "#slider-range" ).slider({
-    range: true,
-    min: 0,
-    max: currMaxPrice,
-    values: [ 0, currMaxPrice ],
-    slide: function( event, ui ) {
-      $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
-      minPrice = ui.values[ 0 ];
-      maxPrice = ui.values[ 1 ];
-    }
-  });
-  $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
-      " -" + $( "#slider-range" ).slider( "values", 1 ).toLocaleString() + "원");
-} );
-
 // floating menu - search with options
 $('#searchwithOptions').click((e) => {
   e.preventDefault();
@@ -196,7 +196,7 @@ $('#searchwithOptions').click((e) => {
 });
 
 
-$(document.body).bind('loaded-list', () => {
+//$(document.body).bind('loaded-list', () => {
   $('.continent-list-btn').click((e) => {
     e.preventDefault();
     continentName = $(e.target).html();
@@ -205,9 +205,9 @@ $(document.body).bind('loaded-list', () => {
     showBreadCrumb(continentName, '', '');
     loadList(1, continentName, '', '', minPrice, maxPrice);
   });
-});
+//});
 
-$(document.body).bind('loaded-list', () => {
+//$(document.body).bind('loaded-list', () => {
   $('.country-list-btn').click((e) => {
     e.preventDefault();
     continentName = $(e.target).attr('id');
@@ -216,9 +216,9 @@ $(document.body).bind('loaded-list', () => {
     showBreadCrumb(continentName, countryName, '');
     loadList(1, '', countryName, '', minPrice, 0);
   });
-});
+//});
 
-$(document.body).bind('loaded-list', () => {
+//$(document.body).bind('loaded-list', () => {
   $('.city-list-btn').click((e) => {
     e.preventDefault();
     cityName = $(e.target).html();
@@ -227,7 +227,7 @@ $(document.body).bind('loaded-list', () => {
     showBreadCrumb(continentName, countryName, cityName);
     loadList(1, '', '', cityName, minPrice, 0);
   });
-});
+//});
 
   $('#secondcrumb').click((e) => {
     e.preventDefault();

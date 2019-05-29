@@ -14,8 +14,7 @@ public interface TourService {
 	String cityName,
 	int minPrice, 
 	int maxPrice, 
-	int pageNo
-//	, int pageSize
+	int pageNo, int pageSize
 	);
 	int add(Tour tour);
 	Tour get(int no);
@@ -27,4 +26,11 @@ public interface TourService {
 	List<Country> listCountry(String continent);
 	List<City> listCity(int countryNo);
 	int maxValue();
+	List<Tour> search(
+	String continentName,
+	String countryName,
+	String cityName,
+	int minPrice, 
+	int maxPrice
+	);
 }

@@ -115,27 +115,27 @@ public class TourController {
         if (pageSize < 3 || pageSize > 8) 
             pageSize = 3;
 
-        int rowCount = tourService.size();
+        List<Tour> list = tourService.search(searchContinentName, searchCountryName, searchCityName, minPrice, currMaxPrice);
+        int rowCount = list.size();
+        //int rowCount = tourService.size();
+        
+        
         int totalPage = rowCount / pageSize;
-        if (rowCount % pageSize > 0)
+        if (totalPage == 0 || rowCount % pageSize > 0)
             totalPage++;
 
         if (pageNo < 1) 
             pageNo = 1;
         else if (pageNo > totalPage)
             pageNo = totalPage;
-
         List<Tour> tours = tourService.list(
                 searchContinentName, searchCountryName, searchCityName, 
-                minPrice, maxPrice
-                , pageNo
-//              , pageSize
-                );
+                minPrice, maxPrice, pageNo, pageSize);
         
         HashMap<String,Object> content = new HashMap<>();
         content.put("list", tours);
         content.put("pageNo", pageNo);
-//      content.put("pageSize", pageSize);
+        content.put("pageSize", pageSize);
         content.put("totalPage", totalPage);
         content.put("currMaxPrice", currMaxPrice);
 

@@ -34,7 +34,7 @@
 }
 
 /* original card section */
-/*
+
 .card-image {
 	width: 25%;
 	height: 150px;
@@ -59,12 +59,12 @@
 }
 .price {
 	font-size: 20px !important;
-} */
+}
 
 
 
 /*tourlist table*/
-table {
+/* table {
   border-collapse: separate;
   border-spacing: 0 15px;
 }
@@ -118,9 +118,9 @@ border-top: 1px solid rgba(160,160,160,0.2);
 }
 
 .tour-theme {
-/* 	display: inline; */
+	display: inline;
 	padding: 0px 24px;
-	/* margin: 0px 350px 0px 0px; */
+	margin: 0px 350px 0px 0px;
 }
 
 .tour-price {
@@ -128,7 +128,7 @@ border-top: 1px solid rgba(160,160,160,0.2);
 	display: inline;
 	padding: 0px 24px;
 	
-}
+} */
 
 
 

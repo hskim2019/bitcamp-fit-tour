@@ -7,15 +7,6 @@
   <link type="text/css" rel="stylesheet"
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link rel="stylesheet" href="https://cdn.rawgit.com/Dogfalo/materialize/fc44c862/dist/css/materialize.min.css">
-
-
-
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
@@ -30,7 +21,6 @@
   <div class="container">
     <!-- <h1>상품 목록</h1> -->
     <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p> -->
-
 
     <!-- Nav -->
     <nav id="nav">
@@ -285,28 +275,26 @@
 
     <section>
       <!-- horizontal card => table로 변경함 -->
-<!--       <div class="col s12 m7" id="tourlistcard"></div> -->
+      <div class="col s12 m7" id="tourlistcard"></div>
       <!-- horizontal card end -->
 
-<!-- original pagination -->
-<!--        <ul class="pagination justify-content-center">
+<!-- pagination -->
+       <ul class="pagination justify-content-center">
           <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
           <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
           <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
-        </ul>  -->
+        </ul> 
 
       <!-- tourlist table -->
-        <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
+<!--         <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
           <tbody id="tourlistcard">
           </tbody>
         </table>
           <div class="col-md-12 center text-center">
 	    <span class="left" id="total_reg"></span>
             <ul class="pagination pager" id="myPager"></ul>
-          </div>
-          
+          </div> -->
       <!-- tourlist table end -->
-      
     </section>
 
 
@@ -315,8 +303,21 @@
 
   <footer class="bit-main-footer page-footer teal"></footer>
 
-<!-- horizontal card 템플릿 -->
-  <!--     <div class="card horizontal listRow" id='{{no}}'>
+<!-- tourlist table 템플릿 -->
+<!--  <tr class="listRow" id='{{no}}'>
+      <td class="tour-image"><img src="../../images/london.png"></td>
+      <td class="tour-details">
+      <p class="tour-country">{{country.countryName}} | {{city.cityName}}</p>
+      <p class="bit-view-link tour-title"><a href='#' data-no="{{no}}">{{title}}</a></p>
+      <p class="tour-detail">{{totalHour}}시간 소요 | {{transportation}}이동</p>
+      <p class="tour-theme col s9"></p> <p class="tour-price col s3">요소</p>
+      </td>
+ </tr> -->
+
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <script id="tr-template" type="text/x-handlebars-template">
+{{#each list}}
+<div class="card horizontal listRow" id='{{no}}'>
       <div class="card-image">
         <img src="../../images/london.png">
       </div>
@@ -335,21 +336,7 @@
           <p class="tour-item price col s3"></p>
          </div>
       </div>
-    </div> -->
-
-  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-  <script id="tr-template" type="text/x-handlebars-template">
-{{#each list}}
- <tr class="listRow" id='{{no}}'>
-      <td class="tour-image"><img src="../../images/london.png"></td>
-      <td class="tour-details">
-      <p class="tour-country">{{country.countryName}} | {{city.cityName}}</p>
-      <p class="bit-view-link tour-title"><a href='#' data-no="{{no}}">{{title}}</a></p>
-      <p class="tour-detail">{{totalHour}}시간 소요 | {{transportation}}이동</p>
-      <p class="tour-theme col s9"></p> <p class="tour-price col s3">요소</p>
-      </td>
- </tr>
-
+    </div>
 {{/each}}
 </script>
 
@@ -370,7 +357,6 @@
   <script src="../header.js"></script>
   <script src="index.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/pinzon1992/materialize_table_pagination/f9a8478f/js/pagination.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="../footer.js"></script>
 

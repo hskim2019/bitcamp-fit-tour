@@ -109,15 +109,15 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice) 
 
 
 
-$('#prevPage > a').click((e) => {
-  e.preventDefault();
-  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice);
-});
-
-$('#nextPage > a').click((e) => {
-  e.preventDefault();
-  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice);
-});
+//$('#prevPage > a').click((e) => {
+//  e.preventDefault();
+//  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice);
+//});
+//
+//$('#nextPage > a').click((e) => {
+//  e.preventDefault();
+//  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice);
+//});
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
 loadList(1, continentName, countryName, cityName, minPrice, maxPrice);

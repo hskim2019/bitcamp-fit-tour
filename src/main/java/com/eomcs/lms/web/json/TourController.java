@@ -1,6 +1,4 @@
 package com.eomcs.lms.web.json;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -8,16 +6,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import javax.imageio.ImageIO;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Theme;
@@ -28,6 +28,7 @@ import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourCommentService;
 import com.eomcs.lms.service.TourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 

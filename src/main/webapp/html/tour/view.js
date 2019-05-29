@@ -20,12 +20,24 @@ function tourList(tourNo) {
     addTransportaionIcon(obj.tour.transportation);
     $('#price').html($('#price').html() + obj.tour.price.toLocaleString() + '원');
     $('#photo').attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + obj.tour.tourPhoto[0].name +'.jpg');
-    //$('#photpath').val(obj.tour.tourPhoto[0].path);
+    $('#firstcrumb').html(obj.tour.country.continentName);
+    $('#secondcrumb').html(obj.tour.country.countryName);
+    $('#thirdcrumb').html(obj.tour.city.cityName);
     
     for(var i = 0; i < obj.tour.theme.length; i++){
-      $('#themeDiv').append($('<div class="chip mr5">' + obj.tour.theme[i].theme + '</div>'));
+      $('#themeDiv').append($('<div class="chip ml0 mr5">' + obj.tour.theme[i].theme + '</div>'));
     }
     
+    for(var i = 0; i < obj.tour.tourPhoto.length; i++){
+      $('#image').append($('<li><img class="img-thumbnail materialboxed" src="../../upload/tourphoto/'+obj.tour.tourPhoto[i].name+'"></li>'));
+    }
+    $('.slider').slider({
+      duration : 1000,
+      interval : 3000,
+      height : 400
+      
+    });
+    $('.materialboxed').materialbox();
   });
 }
 
@@ -74,13 +86,6 @@ $(document).ready(function() {
   $(".dropdown-trigger").dropdown();
 });
 
-$(document).ready(function(){
-  $('.slider').slider();
-});
-
-$(document).ready(function(){
-  $('.materialboxed').materialbox();
-});
 
 $('#reservation-btn').click((e) => {
   e.preventDefault();

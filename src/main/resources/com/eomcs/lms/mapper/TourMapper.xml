@@ -44,6 +44,18 @@
     <result column="transportation" property="transportation"/>
     <result column="price" property="price"/>
     
+    <association property="city" javaType="city">
+    <id column="city_id"        property="no"/>
+    <result column="country_id"  property="countryNo"/>
+    <result column="city_name"          property="cityName"/>
+    </association>
+    
+    <association property="country" javaType="country">
+    <id column="country_id"        property="no"/>
+    <result column="country_name"  property="countryName"/>
+    <result column="continent"     property="continentName"/>
+    </association>
+    
     <collection property="tourPhoto" ofType="tourGuidancePhoto">
       <id column="photo_id"    property="no"/>
       <result column="tour_id"    property="tourNo"/>
@@ -55,6 +67,7 @@
       <id column="theme_id"    property="no"/>
       <result column="theme" property="theme"/>
     </collection>
+    
   </resultMap>
   
   <!-- countryMap -->
@@ -71,6 +84,13 @@
     <result column="city_name" property="cityName"/>
   </resultMap>
   
+  <!-- tourGuidancePhoto -->
+  <resultMap type="tourGuidancePhoto" id="photoMap">
+    <id column="photo_id" property="no"/>
+    <result column="tour_id" property="tourNo"/>
+    <result column="photo_name" property="name"/>
+    <result column="photo_path" property="path"/>
+  </resultMap>
   
   <sql id="select1">
     select 
@@ -116,7 +136,9 @@
 		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
 		join tour_theme as toth on t.tour_id = toth.tour_id
 		join theme as th on toth.theme_id = th.theme_id
-		where t.tour_id = #{value};
+		join city as ci on t.city_id = ci.city_id
+		join country as co on ci.country_id = co.country_id
+   where t.tour_id = #{value};
   </select>
   
   
@@ -133,7 +155,14 @@
             (#{item.tourNo}, #{item.themeNo})
         </foreach>
  </insert>
-  
+ 
+ <insert id="insertPhoto" parameterType="map">
+        insert into tour_guidance_photo(tour_id, photo_name, photo_path)
+        values
+        <foreach collection="list" item="item" separator=" , ">
+            (#{item.tourNo}, #{item.name}, #{item.path})
+        </foreach>
+ </insert>
   
   <select id="countAll" resultType="int">
     select count(*) from tour

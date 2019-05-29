@@ -47,7 +47,6 @@
 }
 
 
-
 i {
 	font-size: 25px;
 }
@@ -56,10 +55,10 @@ i[class="fas fa-won-sign"] {
 	font-size: 12px;
 }
 
-/* #clean {
+#clean {
   background: none;
   box-shadow: none;
-  height: 300px !important;
+  height: 80px !important;
   clear: both;
 }
 
@@ -75,7 +74,7 @@ i[class="fas fa-won-sign"] {
 
 .breadcrumb:last-child {
   color: rgba(0,0,0,0.80  );
-} */
+}
 
 
 

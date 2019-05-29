@@ -118,12 +118,17 @@ public class TourController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Tour> tours = tourService.list(searchContinentName, searchCountryName, searchCityName, minPrice, maxPrice, pageNo, pageSize);
+		List<Tour> tours = tourService.list(
+				searchContinentName, searchCountryName, searchCityName, 
+				minPrice, maxPrice
+				, pageNo
+//				, pageSize
+				);
         
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", tours);
 		content.put("pageNo", pageNo);
-		content.put("pageSize", pageSize);
+//		content.put("pageSize", pageSize);
 		content.put("totalPage", totalPage);
 		content.put("currMaxPrice", currMaxPrice);
 

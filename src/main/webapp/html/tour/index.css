@@ -27,49 +27,110 @@
 	color: rgba(0,0,0,0.80	);
 }
 
-
-section:not(.tiles)  {
+ section:not(.tiles)  {
  width: 750px;
  float:right;	
-/*  border: 2px solid red; */
   min-height: 500px;
 }
 
+/* original card section */
+/*
 .card-image {
 	width: 25%;
 	height: 150px;
 }
-
 .card-content {
 	padding: 0px 24px !important;
-/* 	margin: 0px; */
+	margin: 0px;
 }
-
 .exception1 {
 	margin-top: 10px !important;
 }
-
 .card-action {
 	padding: 0px 24px 2px 24px !important;
 	font-size: 24px;
 	height: 65px;
 }
-
 .last-line {
 	margin:0px !important;
 }
-
-.last-line {
-	margin: 0px !important;
-}
-
 .tour-item{
 	padding: 0px !important;
 }
-
 .price {
 	font-size: 20px !important;
+} */
+
+
+
+/*tourlist table*/
+table {
+  border-collapse: separate;
+  border-spacing: 0 15px;
 }
+
+.listRow {
+	height: 160px;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.tour-image {
+	width: 185px;
+	height: 160px;
+	padding: 0px;
+	margin: 0px;
+}
+
+td img {
+	width: 185px;
+	height: 160px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.tour-details {
+	height: 160px !important;
+	padding: 0px;
+}
+
+td p {
+	margin: 0px;
+}
+
+.tour-country, .tour-detail {
+	margin: 2px;
+	padding: 0px 24px;
+}
+
+.tour-title {
+	font-size : 24px;
+	height: 65px;
+border-top: 1px solid rgba(160,160,160,0.2);
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgba(160, 160, 160, 0.2);
+    padding: 0px 24px;
+    width: 562px !important;
+}
+
+.last-line {
+	margin: 2px;
+	padding: 0px 24px;
+}
+
+.tour-theme {
+/* 	display: inline; */
+	padding: 0px 24px;
+	/* margin: 0px 350px 0px 0px; */
+}
+
+.tour-price {
+	font-size: 22px;
+	display: inline;
+	padding: 0px 24px;
+	
+}
+
+
 
 #followquick {
 	position: absolute;
@@ -92,7 +153,8 @@ footer {
 }
 
 
-th:nth-child(1) {
+/* */
+/* th:nth-child(1) {
   width: 50px;
 }
 
@@ -108,7 +170,7 @@ th:nth-child(4) {
 
 td:nth-child(4) {
   text-align: center;
-}
+} */
 
 
 #nav {
@@ -122,7 +184,6 @@ td:nth-child(4) {
 	}
 
 /* Nav */
-
 	#nav {
 		top: 0;
 		left: 0;
@@ -246,8 +307,7 @@ td:nth-child(4) {
 
 
 /* Tiles */
-
-  .tiles {
+ /*  .tiles {
     display: flex;
     flex-wrap: wrap;
     postiion: relative;
@@ -395,6 +455,6 @@ td:nth-child(4) {
       }
 
     * + .tiles {
-      /* margin-top: 2em; */
+      margin-top: 2em;
     }
-
+ */

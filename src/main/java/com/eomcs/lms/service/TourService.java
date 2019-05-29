@@ -13,7 +13,9 @@ public interface TourService {
 	String cityName,
 	int minPrice, 
 	int maxPrice, 
-	int pageNo, int pageSize);
+	int pageNo
+//	, int pageSize
+	);
 	int add(Tour tour);
 	Tour get(int no);
 	int update(Tour tour);

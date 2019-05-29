@@ -35,9 +35,10 @@ function tourList(tourNo) {
       duration : 1000,
       interval : 3000,
       height : 400
-      
     });
     $('.materialboxed').materialbox();
+    var instance = M.Slider.getInstance(elem);
+    instance.pause();
   });
 }
 

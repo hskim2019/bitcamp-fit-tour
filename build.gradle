@@ -16,7 +16,9 @@ dependencies {
     
     // 자바 썸네일 라이브러리
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
-
+    
+    compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+    
     // servlet-api
     // => 프로젝트를 컴파일 할 때만 사용할 라이브러리라면 providedCompile 메서드를 사용하라.
     // => 이 메서드로 지정된 라이브러리는 배포할 때 배포 파일(.war, .jar 등)에 포함되지 않는다. 

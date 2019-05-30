@@ -3,42 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <!-- <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/quill/dist/quill.snow.css">
-  <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css"> -->
   <!-- materialize -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
     media="screen,projection" />
 </head>
+
 <body>
-<!--  <div id="form-container">
-<form>
- <div class="row form-group">
-      <div id="quillEditor">
+<div class="pac-card" id="pac-card">
+      <div>
+        <div id="title">
+          Autocomplete search
+        </div>
+        <div id="type-selector" class="pac-controls">
+          <input type="radio" name="type" id="changetype-all" checked="checked">
+          <label for="changetype-all">All</label>
+
+          <input type="radio" name="type" id="changetype-establishment">
+          <label for="changetype-establishment">Establishments</label>
+
+          <input type="radio" name="type" id="changetype-address">
+          <label for="changetype-address">Addresses</label>
+
+          <input type="radio" name="type" id="changetype-geocode">
+          <label for="changetype-geocode">Geocodes</label>
+        </div>
+        <div id="strict-bounds-selector" class="pac-controls">
+          <input type="checkbox" id="use-strict-bounds" value="">
+          <label for="use-strict-bounds">Strict Bounds</label>
+        </div>
+      </div>
+      <div id="pac-container">
+        <input id="pac-input" type="text"
+            placeholder="Enter a location">
       </div>
     </div>
-    <div class="row">
-      <button type="submit">Save</button>
+    <div id="map"></div>
+    <div id="infowindow-content">
+      <img src="" width="16" height="16" id="place-icon">
+      <span id="place-name"  class="title"></span><br>
+      <span id="place-address"></span>
     </div>
-</form>
- </div> -->
- <div class="container">
- 
-<ul id="tabs-swipe-demo" class="tabs">
-    <li class="tab col s3"><a href="#test-swipe-1">Test 1</a></li>
-    <li class="tab col s3"><a class="active" href="#test-swipe-2">Test 2</a></li>
-    <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
-  </ul>
-  <div id="test-swipe-1" class="col s12 blue">Test 1</div>
-  <div id="test-swipe-2" class="col s12 red">Test 2</div>
-  <div id="test-swipe-3" class="col s12 green">Test 3</div>
-  </div>
-  
- </body>
+</body>
 
-<!-- materialize -->
+<!-- googleMap -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"
+        async defer></script>
+
+<!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+
+<!-- materialize -->
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<!-- <script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script> -->
 <script src="test.js"></script>
 </html>

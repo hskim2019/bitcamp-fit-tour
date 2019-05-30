@@ -15,20 +15,29 @@ public class Tour {
 	private String transportation;
 	private int price;
 	private int cityNo;
-
+	private String location;
+	
 	private City city;
 	private Country country;
 	private List<TourGuidancePhoto> tourPhoto;
 	private List<Theme> theme;
 	
-  
+
   @Override
   public String toString() {
     return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
         + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
         + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
-        + price + ", cityNo=" + cityNo + ", tourPhoto=" + tourPhoto + ", theme=" + theme + ", city="
-        + city + ", country=" + country + "]";
+        + price + ", cityNo=" + cityNo + ", location=" + location + ", city=" + city + ", country="
+        + country + ", tourPhoto=" + tourPhoto + ", theme=" + theme + "]";
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
   }
 
   public int getNo() {

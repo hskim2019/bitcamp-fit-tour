@@ -318,9 +318,10 @@ $(document.body).bind('addEventReCommentAddButton', () => {
     e.preventDefault();
     $(e.target).off();
     $('<div class="col-sm-12" style="font-size:15px; padding: 30px 0px 30px 0px">'+
-        '<input type="text" name="recommentContent" class="col-sm-10" >' +
+        '<input type="text" id=recommentContent name="recommentContent" class="col-sm-10" maxlength="30" data-length="30">' +
           ' <button type="button" class="btn btn-default btn-secondary recomment-save-button" disabled>답글</button></div>')
           .insertAfter($(e.target));
+    $('input#comment-add').characterCounter();
     $(document.body).trigger('addEventReCommentSaveButton');
   
     $(e.target).next().children().first().keyup(function() {

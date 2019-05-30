@@ -157,6 +157,7 @@ hash_tag       VARCHAR(255) NOT NULL COMMENT '상품 해시 태그', -- 상품 �
 personnel      INTEGER      NOT NULL COMMENT '인원', -- 인원
 transportation VARCHAR(25)  NOT NULL COMMENT '주 이동수단', -- 주 이동수단
 price          INTEGER      NOT NULL COMMENT '가격' -- 가격
+location       varchar      NULL COMMENT '만나는장소' -- 만나는 장소
 )
 COMMENT '상품';
 

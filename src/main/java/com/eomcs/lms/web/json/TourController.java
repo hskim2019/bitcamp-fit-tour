@@ -191,7 +191,7 @@ public class TourController {
 public Object add(HttpServletRequest request /*,@RequestBody String json*/) throws IOException, ServletException {
      Tour tour = new Tour();
      List<TourGuidancePhoto> photos = new ArrayList<>();
-     
+    
      Collection<Part> parts = request.getParts();
      for(Part part : parts) {
        if (part.getContentType() == null) {
@@ -207,10 +207,9 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
          String filename = UUID.randomUUID().toString();
          String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
          part.write(filepath);
-         System.out.println(filename);
-         System.out.println(filepath);
          
          try {
+          makeThumbnail(filepath);
           makeThumbnail(filepath);
         } catch (Exception e) {
           System.out.println("썸네일 이미지만드는중 에러 발생");
@@ -223,7 +222,8 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
          photos.add(tourGuidancePhoto);
        }
      }
-     
+
+     System.out.println(tour);
      HashMap<String,Object> content = new HashMap<String,Object>();
      
      try {

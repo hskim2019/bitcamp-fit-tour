@@ -1,3 +1,5 @@
+var tlocation;
+
 //ready
 $(document).ready(function() {
   $('input[type="text"]').characterCounter();
@@ -10,10 +12,19 @@ $(document).ready(function() {
   });
   
   $('.next-swipe-2').click(function(){
+    if(!$('#input-title').val())
+      return;
+    if(!$('#input-subtitle').val())
+      return;
     $('.tabs').tabs('select', 'swipe-2');
   });
-  $('#next-swipe-3').click(function(){
+  
+  $('.next-swipe-3').click(function(){
     $('.tabs').tabs('select', 'swipe-3');
+  });
+  
+  $('.next-swipe-4').click(function(){
+    $('.tabs').tabs('select', 'swipe-4');
   });
   
   $('.datepicker').datepicker({
@@ -84,7 +95,7 @@ $('#country').change( function() {
   );
 });
 
-
+// fileupload
 $('#fileupload').fileupload({
   url: '../../app/json/tour/add',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -139,7 +150,8 @@ $('#fileupload').fileupload({
           transportation : $('input[name="transportaion"]:checked').next().html(),
           cityNo : $('#city option:selected').val(),
           theme : themeArray,
-          price : $('#input-price').val()
+          price : $('#input-price').val(),
+          location : tlocation
         }))};
         var response = data.submit();
         response.complete(function (result){
@@ -152,6 +164,78 @@ $('#fileupload').fileupload({
 }); 
 
 
+// googlemap
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 37.503157, lng: 127.024318},
+    zoom: 13
+  }); 
+  
+  var card = document.getElementById('pac-card');
+  var input = document.getElementById('pac-input');
 
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.bindTo('bounds', map);
+
+  autocomplete.setFields(
+      ['address_components', 'geometry', 'icon', 'name']);
+
+  var infowindow = new google.maps.InfoWindow();
+  var infowindowContent = document.getElementById('infowindow-content');
+  infowindow.setContent(infowindowContent);
+  var marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("정확한 장소를 입력하세요!");
+      return;
+    }
+    console.log(place.geometry.location.lat);
+    console.log(place.geometry.location.lng);
+    
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17); 
+    }
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindowContent.children['place-icon'].src = place.icon;
+    infowindowContent.children['place-name'].textContent = place.name;
+    infowindowContent.children['place-address'].textContent = address;
+    infowindow.open(map, marker);
+  });
+
+  
+  google.maps.event.addListener(marker, 'dragend', function(evt){
+    window.tlocation = evt.latLng.lat().toFixed(3) + ',' + evt.latLng.lng().toFixed(3);
+    document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+});
+
+google.maps.event.addListener(marker, 'dragstart', function(evt){
+    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+});
+}
 
 

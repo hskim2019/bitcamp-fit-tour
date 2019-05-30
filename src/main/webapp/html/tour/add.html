@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <!-- materialize -->
@@ -31,9 +32,10 @@
 
         <div class="col l12 p0">
           <ul id="tabs-swipe" class="tabs bit-invisible">
-            <li class="tab col l4"><a href="#swipe-1">기본 정보</a></li>
-            <li class="tab col l4"><a href="#swipe-2">부가 정보</a></li>
-            <li class="tab col l4"><a href="#swipe-3">내용</a></li>
+            <li class="tab col l4"><a href="#swipe-1"></a></li>
+            <li class="tab col l4"><a href="#swipe-2"></a></li>
+            <li class="tab col l4"><a href="#swipe-3"></a></li>
+            <li class="tab col l4"><a href="#swipe-4"></a></li>
           </ul>
         </div>
 
@@ -277,6 +279,9 @@
               <span class="helper-text" data-error="숫자만 입력해주세요." data-success="O"></span>
             </div>
 
+          </div>
+
+          <div class="row pr40 pl40">
             <!-- totalHour -->
             <div class="input-field col l4">
               <i class="material-icons prefix">timer</i>
@@ -284,12 +289,11 @@
               <label for="input-totalHour"> 총 소요 시간을 입력하세요.</label>
               <span class="helper-text" data-error="숫자만 입력해주세요." data-success="O"></span>
             </div>
-
           </div>
-            
-            
-            
-            <!-- disabled date -->
+
+
+
+          <!--             disabled date
           <div class="row pr40 pl40">
             <div class="row">
               <div class="col mt20">
@@ -304,11 +308,11 @@
                 </div>
               </div>
             </div>
-          </div>
-            
-            
-            
-            
+          </div> -->
+
+
+
+
           <!-- imageUpload -->
           <div class="row pr40 pl40">
             <div class="file-field input-field mb0">
@@ -331,7 +335,7 @@
           <div class="row">
             <div class="col l12">
               <div class="row mr20 mt20">
-                <button id='next-swipe-3' class="waves-effect waves-light btn-large right" type='button'>다음 단계</button>
+                <button class=" next-swipe-3 waves-effect waves-light btn-large right" type='button'>다음 단계</button>
                 <button id='next-swipe-1' class="waves-effect waves-light btn-large right mr10" type='button'>이전
                   단계</button>
               </div>
@@ -363,16 +367,53 @@
           <div class="row">
             <div class="col l12">
               <div class="row mr20 mt20">
-                <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
+                <button class="next-swipe-4 waves-effect waves-light btn-large right mr10" type='button'>다음 단계</button>
                 <button class="next-swipe-2 waves-effect waves-light btn-large right mr10" type='button'>이전 단계</button>
               </div>
             </div>
           </div>
 
-        </div><!-- swipe-3 -->
+        </div><!-- swipe-4 -->
+
+        <div id="swipe-4" class="col l12">
+
+          <div class="row mt20 pr40 pl40">
+            <div class="col l12">
+              <blockquote>
+                <h5>만나는 장소를 설정해주세요!</h5>
+              </blockquote>
+            </div>
+          </div>
+          
+          <div class="row mt20 pr40 pl40">
+            <div class="col l8 center">
+          <div class="pac-card" id="pac-card">
+            <div id="pac-container">
+              <input id="pac-input" type="text" placeholder="만나는 장소를 검색하세요!">
+            </div>
+          </div>
+          <div id="map"></div>
+          <div id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name" class="title"></span><br>
+            <span id="place-address"></span>
+          </div>
+          <div id="current"></div>
+          </div>
+          </div>
 
 
-      </div>
+          <div class="row">
+            <div class="col l12">
+              <div class="row mr20 mt20">
+                <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
+                <button class="next-swipe-3 waves-effect waves-light btn-large right mr10" type='button'>이전 단계</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- form panel -->
 
 
     </form>
@@ -395,7 +436,6 @@
   <!-- footer -->
   <footer class="bit-main-footer page-footer teal"></footer>
 </body>
-
 <!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -411,6 +451,9 @@
 <script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<!-- goglemap api -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>

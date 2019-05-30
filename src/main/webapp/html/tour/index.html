@@ -205,9 +205,9 @@
     </nav> <!-- nav end-->
 
     <!-- breadcrumb -->
-    <nav class="clean">
+    <nav class="clean row">
       <div class="nav-wrapper">
-        <div class="col s12" id="breadcrumb-list">
+        <div class="col s12 offset-s3" id="breadcrumb-list">
           <a href="#" class="breadcrumb bit-invisible" id="firstcrumb">First</a>
           <a href="#" class="breadcrumb bit-invisible" id="secondcrumb">Second</a>
           <a href="#" class="breadcrumb bit-invisible" id="thirdcrumb">Third</a>
@@ -268,12 +268,20 @@
         <label for="amount">금액:</label>
         <div id="slider-range"></div>
         <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-        <a class="waves-effect waves-light btn-small" id="searchwithOptions">검색</a>
+        <button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button>
       </p>
     </div>
     <!-- followquick end -->
 
     <section>
+      
+      <div class="orderOptions row">
+      <span class="option1"><a class="grey-text text-darken-3" id="orderbyPrice" href="#">가격낮은순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      
+      <span><a class="grey-text text-darken-3" id="orderbyLikes" href="#">인기순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      <span><a class="grey-text text-darken-3" id="orderbyReviews" href="#">후기순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      </div>
+    
       <!-- horizontal card => table로 변경함 -->
       <div class="col s12 m7" id="tourlistcard"></div>
       <!-- horizontal card end -->

@@ -13,7 +13,8 @@ public interface TourService {
 	String countryName,
 	String cityName,
 	int minPrice, 
-	int maxPrice, 
+	int maxPrice,
+	String orderby,
 	int pageNo, int pageSize
 	);
 	int add(Tour tour);

@@ -65,6 +65,24 @@
 	font-size: 20px !important;
 }
 
+.option1 {
+	margin: 0 0 0 510px;
+}
+
+span > a {
+	margin: 3px;
+}
+
+.material-icons {
+	font-size : 20px;
+	vertical-align: baseline;
+}
+
+.selected {
+	    color: #343a40;
+    font-weight: 700;
+}
+
 .pagination {
 	text-align: center;
 }

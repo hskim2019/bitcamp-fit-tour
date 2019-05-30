@@ -30,7 +30,8 @@ public class TourServiceImpl implements TourService {
 		  String continentName,
 		  String countryName,
 		  String cityName,
-		  int minPrice, int maxPrice, 
+		  int minPrice, int maxPrice,
+		  String orderby,
 		  int pageNo, int pageSize
 		  ) {
     // 게시물 목록을 가져오는 경우 서비스 객체에서 특별하게 할 일이 없다.
@@ -43,6 +44,14 @@ public class TourServiceImpl implements TourService {
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("minPrice", minPrice);
     params.put("maxPrice", maxPrice);
+    
+    System.out.println("orderby;;;;;" + orderby);
+    switch (orderby) {
+    case "priceAsc" : params.put("priceAsc", orderby); break;
+    case "priceDesc" : params.put("priceDesc", orderby); break;
+    case "tourDesc" : params.put("tourDesc", orderby); break;
+    }
+    
     
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);
@@ -78,7 +87,7 @@ public class TourServiceImpl implements TourService {
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);
     } else {
-    	System.out.println("continentname: " + continentName + "countryname: " + countryName + "cityname: " + cityName);
+    	
     	if (continentName != null) {
     		params.put("continentName", continentName);
     	}

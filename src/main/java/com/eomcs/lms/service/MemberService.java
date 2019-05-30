@@ -16,6 +16,5 @@ public interface MemberService {
   int delete(int no);
   int size(String search);
   int confirm(String email,String certification);
-  void reEamil(String email) throws Exception;
   
 }

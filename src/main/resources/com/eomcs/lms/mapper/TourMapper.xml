@@ -121,8 +121,9 @@
       <if test="cityName != null">and city_name = #{cityName}</if>
       <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
      </where>
-    order by 
-      tour_id desc
+     <if test="priceAsc != null"> order by price asc</if>
+     <if test="priceDesc != null"> order by price desc</if>
+     <if test="tourDesc != null"> order by tour_id desc</if>
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>

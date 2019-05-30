@@ -89,6 +89,7 @@ public class TourController {
             String cityName,
             @RequestParam(defaultValue="0") int minPrice,
             int maxPrice,
+            String orderby,
             @RequestParam(defaultValue="1") int pageNo,
             @RequestParam(defaultValue="3") int pageSize) {
 
@@ -115,22 +116,24 @@ public class TourController {
         if (pageSize < 3 || pageSize > 8) 
             pageSize = 3;
 
-        List<Tour> list = tourService.search(searchContinentName, searchCountryName, searchCityName, minPrice, currMaxPrice);
+        List<Tour> list = tourService.search(searchContinentName, searchCountryName, searchCityName, minPrice, maxPrice);
         int rowCount = list.size();
         //int rowCount = tourService.size();
-        
+        System.out.println("rowCount: " + rowCount);
         
         int totalPage = rowCount / pageSize;
         if (totalPage == 0 || rowCount % pageSize > 0)
             totalPage++;
-
+        System.out.println("totalPage: " + totalPage);
         if (pageNo < 1) 
             pageNo = 1;
         else if (pageNo > totalPage)
             pageNo = totalPage;
         List<Tour> tours = tourService.list(
                 searchContinentName, searchCountryName, searchCityName, 
-                minPrice, maxPrice, pageNo, pageSize);
+                minPrice, maxPrice, 
+                orderby,
+                pageNo, pageSize);
 
         HashMap<String,Object> content = new HashMap<>();
         content.put("list", tours);

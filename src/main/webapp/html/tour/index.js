@@ -139,7 +139,8 @@ $(function() {
   $( "#slider-range" ).slider({
     range: true,
     min: 0,
-    max: currMaxPrice,
+    max: 300000,
+    step: 1000,
     values: [ 0, 0 ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );

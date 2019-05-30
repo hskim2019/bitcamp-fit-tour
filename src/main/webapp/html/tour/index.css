@@ -33,6 +33,10 @@
   min-height: 500px;
 }
 
+#tourlistcard {
+	min-height: 500px;
+}
+
 /* original card section */
 
 .card-image {

@@ -6,8 +6,9 @@
   <title>상품 목록</title>
   <link type="text/css" rel="stylesheet"
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
@@ -285,7 +286,7 @@
       <!-- horizontal card => table로 변경함 -->
       <div class="col s12 m7" id="tourlistcard"></div>
       <!-- horizontal card end -->
-
+      
 <!-- pagination -->
        <ul class="pagination justify-content-center">
           <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3"><i class="material-icons">chevron_left</i></a></li>
@@ -339,9 +340,12 @@
           <a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a>
         </div>
         <div class="card-content second-line">
-          <p class="tour-item">{{totalHour}}시간 소요 | {{transportation}}이동</p>
+          <span><i id="transportation-icon" class="fas fa-stopwatch"></i></span>
+          <span class="tour-item">{{totalHour}}시간 소요&nbsp;|&nbsp;</span>
+          <span><i id="transportation-icon"></i></span>
+          <span class="tour-item">{{transportation}}</span><span>이동</span>
         </div>
-        <div class="card-content last-line row">
+        <div class="card-content last-line row">	
           <p class="tour-item col s9"></p>
           <p class="tour-item price col s3"></p>
          </div>

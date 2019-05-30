@@ -45,6 +45,10 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
         var tourNo = $(listRow).attr('id');
         var targetforTheme = $(listRow).children().eq(1).children().eq(3).children().eq(0);
         var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
+        var transportation = $(listRow).children().eq(1).children().eq(2).children().eq(3).html();
+        var placeToChange = $(listRow).children().eq(1).children().eq(2).children().eq(3).prev().children().eq(0);
+        console.log(placeToChange);
+        addTransportaionIcon(placeToChange, transportation);
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
           $(themetrGenerator(data)).appendTo(targetforTheme);
@@ -252,7 +256,25 @@ function initOptionSelected() {
   });
 
 
-
+//Add TrpansportaionIcon
+  function addTransportaionIcon(placeToChange, transportation) {
+    //var transportaionIconTag = $('#transportation-icon');
+    
+    switch (transportation) {
+      case '버스' :
+        placeToChange.addClass('fas fa-bus-alt')
+        break;
+      case '지하철' :
+        placeToChange.addClass('fas fa-subway')
+        break;
+      case '도보' :
+        placeToChange.addClass('fas fa-walking')
+        break;
+      case '자전거' :
+        placeToChange.addClass('fas fa-bicycle')
+        break;
+    }
+  }
 
 
 

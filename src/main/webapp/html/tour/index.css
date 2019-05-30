@@ -43,6 +43,12 @@
 	width: 25%;
 	height: 150px;
 }
+
+.card-image > img {
+	height: 150px;
+	width: 187px !important;
+}
+
 .card-content {
 	padding: 0px 24px !important;
 	margin: 0px;
@@ -55,6 +61,11 @@
 	font-size: 24px;
 	height: 65px;
 }
+
+#transportation-icon {
+	color: #6b7770;
+}
+
 .last-line {
 	margin:0px !important;
 }

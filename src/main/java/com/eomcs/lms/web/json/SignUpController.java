@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.service.MailService;
 import com.eomcs.lms.service.MemberService;
+import com.eomcs.lms.util.TempKey;
 
 @RestController("json/SignUpController")
 @RequestMapping("/json/signup")
@@ -18,14 +20,20 @@ public class SignUpController {
   @Autowired
   MemberService memberService;
 
+  @Autowired
+  MailService mailService;
 
   @PostMapping("add")
 
   public Object add(Member member,HttpSession session) throws Exception {
     HashMap<String, Object> content = new HashMap<>();
     try {
-
+      String certification = new TempKey().getKey(50, false);
+      member.setCertification(certification);
+      
+      
       memberService.signUp(member);
+      mailService.sandSignUp(member);
 
       content.put("status", "success");
       session.setAttribute("standby", member.getEmail());
@@ -82,7 +90,7 @@ public class SignUpController {
     try {
 
 
-      memberService.reEamil(email);
+      mailService.reEamil(email);
 
       content.put("status", "success");
     } catch (Exception e) {

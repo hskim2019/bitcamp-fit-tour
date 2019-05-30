@@ -130,6 +130,21 @@ public class MemberServiceImpl implements MemberService {
    emailSend(sendMail,member.getEmail(),member.getCertification());
    
   }
+
+  @Override
+  public Member get(String email, int loginTypeNo) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+    paramMap.put("loginTypeNo", loginTypeNo);
+    
+    return memberDao.findByEmailLoginTypeNo(paramMap);
+  }
+
+  @Override
+  public int snsSignUp(Member member) {
+    System.out.println(member);
+    return memberDao.snsSignUp(member);
+  }
 }
 
 

@@ -97,6 +97,16 @@
     email = #{email}
     and password = password(#{password})
   </select>
+  <select id="findByEmailLoginTypeNo" resultMap="memberMap" parameterType="map">
+    select
+    <include refid="default-columns" />
+    , rank
+    from
+    member
+    where
+    email = #{email}
+    and login_type_id =#{loginTypeNo}
+  </select>
   
 <select id="findByEmail" resultMap="memberMap" parameterType="map">
     select
@@ -164,6 +174,35 @@
     0,
     0)
   </insert>
+<insert id="snsSignUp" parameterType="member">
+    insert into member(
+    login_type_id,
+    email,
+    certification,
+    password,
+    name,
+    nickname,
+    birth,
+    sms_check,
+    email_check,
+    tel,
+    phone_check,
+    rank)
+    values(
+    #{loginTypeNo},
+    #{email},
+     #{certification},
+    password(#{password}),
+    #{name},
+  '회원',
+    #{birth},
+    0,
+    0,
+    '0',
+    0,
+    1)
+  </insert>  
+  
   <update id="update" parameterType="member">
     update member
     <set>

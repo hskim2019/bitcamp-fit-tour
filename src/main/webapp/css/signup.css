@@ -27,6 +27,7 @@ h6{
   padding : 2% 2% 2%;  
 }
 
-
-
+.datepicker-modal{
+max-height: 347px !important;
+}
 

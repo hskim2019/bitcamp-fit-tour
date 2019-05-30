@@ -35,6 +35,25 @@ public class SignUpController {
     }
     return content;
   }
+  
+  @PostMapping("snsAdd")
+
+  public Object snsAdd(Member member,HttpSession session) throws Exception {
+    HashMap<String, Object> content = new HashMap<>();
+    try {
+      member.setPassword("naver123123");
+      member.setLoginTypeNo(6);
+      member.setCertification("sns-login");
+      memberService.snsSignUp(member);
+
+      content.put("status", "success");
+      session.setAttribute("standby", member.getEmail());
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 
 
   @GetMapping("emailoverlap")

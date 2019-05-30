@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/* 회원가입버튼 가운데정렬 */
+
+h4{
+  text-align: center;
+  
+}
+
+
+div{
+  
+  
+}
+#login-btn{
+      width: 100%;
+  
+}
+#facebook-btn{
+  background-color: #3b5999;
+      width: 100%;
+  margin-bottom: 5px;
+}
+#google-btn{
+   background-color: #da4735;
+      width: 100%;
+  margin-bottom: 5px;
+}
+#naver-btn{
+   background-color: #1cc800;
+      width: 100%;
+  margin-bottom: 5px;
+}
+
+img{
+  width:291px;
+    height: 36px;
+}
+
+
+#kakao-btn{
+   background-color: #ffeb01;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.row{
+     margin-bottom: 0px;
+ 
+}
+   
+#find-password{
+ text-align: right;
+
+}
+.button{
+   margin-bottom: 200px;
+    text-align: center;
+}
+#reservation{
+cursor:pointer
+}
+
+#find-password{
+  cursor:pointer
+}
+
+
+border: 1px solid ;
+
+

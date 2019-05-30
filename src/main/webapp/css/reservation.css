@@ -20,7 +20,7 @@ div{
   position    : relative; 
 }
 ul.stepper.horizontal {
-   min-height: 680px;
+   min-height: 650px;
 }
 
 .dropdown-content {
@@ -30,4 +30,8 @@ ul.stepper.horizontal {
 #mandatory{
   font-size: 15;
   color: red;
+}
+#sc{
+      padding-bottom: 30px;
+  
 }

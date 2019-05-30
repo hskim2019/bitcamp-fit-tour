@@ -97,8 +97,17 @@ $("#name").keyup(function(){
   }
 });
 
-$("#birth").on("mouseleave keyup",function(){
-  var birth=$(this).val();
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+     format : 'yyyy-mm-dd'
+       
+  });
+});
+
+
+$("#birth").on("mousemove propertychange change keyup paste input", function() {
+
+  var birth=$("#birth").val();
   // 생일 검증할 정규 표현식
   var reg=/^.{10,}$/;
   
@@ -109,9 +118,9 @@ $("#birth").on("mouseleave keyup",function(){
   }else{// 정규표현식을 통과하지 못하면
               $("#birthRegErr").show();
               errorState("#birth");
-             
   }
 });
+
 
 function passwordCheckup(){  // 비밀번호 같은지
   var rePwd=$("#rePwd").val();

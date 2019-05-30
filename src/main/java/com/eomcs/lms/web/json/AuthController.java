@@ -93,6 +93,33 @@ public class AuthController {
     }
     return content;
   }
+  
+  @PostMapping("snsLogin")
+  public Object snsLogin(
+      String email,
+      int loginTypeNo,
+      HttpSession session,
+      HttpServletResponse response) {
+
+    Member member = memberService.get(email, loginTypeNo);
+
+    HashMap<String,Object> content = new HashMap<>();
+    
+    if (member == null) {
+      content.put("status", "fail");
+      content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
+    } else if(member.getRank() == 0){
+      session.setAttribute("standby", email);
+      content.put("status", "stand-by");
+      
+    } else {
+      session.setAttribute("loginUser", member);
+      content.put("status", "success");
+    }
+
+    return content;
+  }
+  
 }
 
 

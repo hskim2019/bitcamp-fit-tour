@@ -1,6 +1,6 @@
 var naverLogin = new naver.LoginWithNaverId(
       {
-        clientId: "g1zszuM3r0V5AW37KxIg",
+        clientId: "{YOUR_CLIENT_ID}",
         callbackUrl: "http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/html/auth/callback.html",
         isPopup: false,
         callbackHandle: true
@@ -76,7 +76,7 @@ var naverLogin = new naver.LoginWithNaverId(
                     if (data.status == 'success') {
                       location.href = "../index.html"
                     }else{
-                      //에러처리
+                      
                     }
                   })
                   
@@ -102,7 +102,6 @@ var naverLogin = new naver.LoginWithNaverId(
           //window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/bitcamp-fit-tour/html/index.html");
         } else {
           console.log("callback 처리에 실패하였습니다.");
-          window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/bitcamp-fit-tour/html/index.html");
         }
       });
     });

@@ -5,12 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 // DispatcherServlet의 IoC 컨테이너가 준비해야 할 객체에 대한 정보.
 // => app-servlet.xml의 설정을 이 클래스가 대체한다.
 //
 
-
+@EnableAsync//회원가입시 이메일 보내기 비동기 사용
 @Configuration
 public class MailConfig {
 

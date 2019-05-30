@@ -11,8 +11,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/login.css">
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-
+ <meta charset="utf-8" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="680108572551-eeekujc7dtbhkf867hq6kmk650pf0pv7.apps.googleusercontent.com">
 </head>
 <body>
 
@@ -36,8 +37,9 @@
 
             <div id="main" class="col s12 m4 l4">
                 <div class="input-field col s12">
-                <!-- <a id="naver-btn" class="waves-effect waves-dark btn"><img src="/bitcamp-fit-tour/images/naver.png">네이버 로그인</a> -->
+               <!--   <a id="naverIdLogin" class="waves-effect waves-dark btn"><img src="/bitcamp-fit-tour/images/naver.png">네이버 로그인</a>--> 
         <div id="naverIdLogin"></div>
+         <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
@@ -97,6 +99,9 @@
   </div>
   <!-- .container -->
   <footer class="bit-main-footer page-footer teal"></footer>
+ 
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript"

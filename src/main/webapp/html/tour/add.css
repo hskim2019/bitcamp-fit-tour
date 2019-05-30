@@ -1,5 +1,5 @@
-i {
-	font-size: 23px;
+i, .material-icons {
+	font-size: 2rem !important;
 }
 
 #form-panel {
@@ -11,13 +11,15 @@ i {
 }
 
 .modal.modal-fixed-footer {
-  height: 25%;
+  height: 30%;
 	top: 30% !important;
 }
 
 .ql-editor {
-  height: 50em;
+  max-height: 600px;
+  height: 600px;
 }
+
 
 .tab > a {
 	font-size: 20px !important;
@@ -30,3 +32,11 @@ i {
 	height: 3px !important;
 }
 
+.modal-footer {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* .swipe {
+	color : teal !important;
+} */

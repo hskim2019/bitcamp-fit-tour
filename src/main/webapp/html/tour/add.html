@@ -27,10 +27,10 @@
 
   <div class="container">
     <form>
-      <div id="form-panel" class="row card-panel z-depth-5 mt50 mb50 pl0 pr0 pt0">
+      <div id="form-panel" class="row mt50 mb50 pl0 pr0 pt0">
 
         <div class="col l12 p0">
-          <ul id="tabs-swipe" class="tabs">
+          <ul id="tabs-swipe" class="tabs bit-invisible">
             <li class="tab col l4"><a href="#swipe-1">기본 정보</a></li>
             <li class="tab col l4"><a href="#swipe-2">부가 정보</a></li>
             <li class="tab col l4"><a href="#swipe-3">내용</a></li>
@@ -42,7 +42,7 @@
           <div class="row mt20 pr40 pl40">
             <div class="col l12">
               <blockquote>
-                <h5>투어 상품의 제목과 장소 이동수단 등 기본정보를 입력해주세요!</h5>
+                <h5>투어 상품의 제목 장소 이동수단 등 기본정보를 입력해주세요!</h5>
               </blockquote>
             </div>
           </div>
@@ -51,7 +51,7 @@
           <div class="row pr40 pl40">
             <div class="input-field col l12">
               <i class="material-icons prefix">create</i>
-              <input id="input-title" type="text" data-length="20">
+              <input id="input-title" type="text" maxlength="30" data-length="30">
               <label for="input-title"> 제목을 입력하세요.</label>
             </div>
           </div>
@@ -60,7 +60,7 @@
           <div class="row pr40 pl40">
             <div class="input-field col l12">
               <i class="material-icons prefix">subtitles</i>
-              <input id="input-subtitle" type="text" data-length="30">
+              <input id="input-subtitle" type="text" maxlength="30" data-length="30">
               <label for="input-subtitle"> 소제목을 입력하세요.</label>
             </div>
           </div>
@@ -75,7 +75,7 @@
 
                 <div class="col l9">
                   <select id="continent">
-                    <option value="" disabled selected>대륙을 선택하세요.</option>
+                    <option disabled selected>대륙을 선택하세요.</option>
                     <option value="유럽">유럽</option>
                     <option value="아시아">아시아</option>
                     <option value="아메리카">아메리카</option>
@@ -90,12 +90,12 @@
             <div class="country input-field col l4">
               <div class="row">
                 <div class="col l2">
-                  <i class="fas fa-flag"></i>
+                  <i class="material-icons">outlined_flag</i>
                 </div>
 
                 <div class="col l9">
                   <select id="country" disabled>
-                    <option value="" disabled selected>국가를 선택하세요.</option>
+                    <option selected>국가를 선택하세요.</option>
                   </select>
                 </div>
               </div>
@@ -110,7 +110,7 @@
 
                 <div class="col l9">
                   <select id="city" disabled>
-                    <option value="" disabled selected>도시를 선택하세요.</option>
+                    <option selected>도시를 선택하세요.</option>
                   </select>
                 </div>
               </div>
@@ -238,35 +238,107 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col l12">
+              <button class="next-swipe-2 waves-effect waves-light btn-large right mr20 mt20" type='button'>다음
+                단계</button>
+            </div>
+          </div>
 
         </div>
 
         <!-- 2***************************************************************************************** -->
 
         <div id="swipe-2" class="col l12">
-          <!-- <div class="file-field input-field">
+
+          <!-- h -->
+          <div class="row mt20 pr40 pl40">
+            <div class="col l12">
+              <blockquote>
+                <h5>투어 상품의 사진과 최대인원수 가격 등 정보를 입력해주세요!</h5>
+              </blockquote>
+            </div>
+          </div>
+
+          <div class="row pr40 pl40">
+            <!-- personnel -->
+            <div class="input-field col l4">
+              <i class="material-icons prefix">people</i>
+              <input id="input-personnel" type="number" class="validate">
+              <label for="input-personnel"> 최대인원수를 입력하세요.</label>
+              <span class="helper-text" data-error="숫자만 입력해주세요." data-success="O"></span>
+            </div>
+
+            <!-- price -->
+            <div class="input-field col l4">
+              <i class="material-icons prefix">attach_money</i>
+              <input id="input-price" type="number" class="validate">
+              <label for="input-price"> 1인당 가격을 입력하세요.</label>
+              <span class="helper-text" data-error="숫자만 입력해주세요." data-success="O"></span>
+            </div>
+
+            <!-- totalHour -->
+            <div class="input-field col l4">
+              <i class="material-icons prefix">timer</i>
+              <input id="input-totalHour" type="number" class="validate">
+              <label for="input-totalHour"> 총 소요 시간을 입력하세요.</label>
+              <span class="helper-text" data-error="숫자만 입력해주세요." data-success="O"></span>
+            </div>
+
+          </div>
+            
+            
+            
+            <!-- disabled date -->
+          <div class="row pr40 pl40">
+            <div class="row">
+              <div class="col mt20">
+                <i class="far fa-calendar-alt"></i>
+              </div>
+              <div class="col l15">
+                <div class="input-field">
+                  <div>
+                    <label>날짜 선택</label>
+                    <input type="text" class="datepicker">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+            
+            
+            
+          <!-- imageUpload -->
+          <div class="row pr40 pl40">
+            <div class="file-field input-field mb0">
               <div class="btn">
-                <span>File</span>
-                <input id="fileupload" type="file" name="files" multiple>
+                <span>파일 업로드</span>
+                <input id="fileupload" type="file" multiple>
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                <input class="file-path validate" type="text" placeholder="여기로 파일을 드래그 하거나 버튼을 눌러 추가하세요.">
               </div>
-            </div> -->
-
-          <div class="file-field input-field mb0">
-            <div class="btn">
-              <span>파일 업로드</span>
-              <input id="fileupload" type="file" multiple>
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text" placeholder="여기로 파일을 드래그 하거나 버튼을 눌러 추가하세요.">
             </div>
           </div>
-          <div id="images-div" class="row">
+
+          <div class="row pr40 pl40">
+            <div id="images-div" class="row">
+            </div>
           </div>
 
-        </div>
+
+          <div class="row">
+            <div class="col l12">
+              <div class="row mr20 mt20">
+                <button id='next-swipe-3' class="waves-effect waves-light btn-large right" type='button'>다음 단계</button>
+                <button id='next-swipe-1' class="waves-effect waves-light btn-large right mr10" type='button'>이전
+                  단계</button>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- swipe-2 -->
 
 
         <!-- 3***************************************************************************************** -->
@@ -287,16 +359,22 @@
             </div>
           </div>
 
-        </div>
+
+          <div class="row">
+            <div class="col l12">
+              <div class="row mr20 mt20">
+                <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
+                <button class="next-swipe-2 waves-effect waves-light btn-large right mr10" type='button'>이전 단계</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- swipe-3 -->
 
 
       </div>
 
-      <div class="row">
-        <div class="col l12 pr0">
-          <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
-        </div>
-      </div>
+
     </form>
 
   </div> <!-- container -->
@@ -304,18 +382,18 @@
   <!-- addSuccessModal -->
   <div id="modal" class="modal modal-fixed-footer">
     <div class="modal-content">
-      <h4>투어상품등록을 완료 하였습니다!</h4>
+      <h3>투어상품등록을 완료 하였습니다!</h3>
       <p>등록된 상품을 확인 하시겠습니까?</p>
     </div>
     <div class="modal-footer">
-      <a id="tourConfirm" class="modal-close waves-effect waves-green btn-flat">네</a>
       <a href="add.html" class="modal-close waves-effect waves-red btn-flat">아니요</a>
+      <a id="tourConfirm" class="modal-close waves-effect waves-green btn-flat">네</a>
     </div>
   </div>
   <button id="modal-button" data-target="modal" class="btn modal-trigger bit-invisible"></button>
 
   <!-- footer -->
-  <footer class="bit-main-footer page-footer teal"></footer> 
+  <footer class="bit-main-footer page-footer teal"></footer>
 </body>
 
 <!-- jquery -->

@@ -23,12 +23,11 @@ function tourList(tourNo) {
     $('#title').html(obj.tour.title);
     $('#subHeading').html(obj.tour.subHeading);
     $('#content').html(obj.tour.content);
-    $('#totalHour').html(obj.tour.totalHour + '시간 소요');
+    $('#totalHour').html('<i class="fas fa-stopwatch"></i>  ' + obj.tour.totalHour + '시간 소요');
     $('#hashTag').val(obj.tour.hashTag);
     addPersonnelOption(obj.tour.personnel, obj.tour.price);
-    $('#transportation').html(obj.tour.transportation + ' 이동');
-    addTransportaionIcon(obj.tour.transportation);
-    $('#price').html($('#price').html() + obj.tour.price.toLocaleString() + '원');
+    $('#transportation').html(getTransportaionIcon(obj.tour.transportation) + obj.tour.transportation + '이동');
+    $('#price').html('<i class="fas fa-won-sign"></i> ' + obj.tour.price.toLocaleString() + '원');
     $('#photo').attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + obj.tour.tourPhoto[0].name +'.jpg');
     $('#firstcrumb').html(obj.tour.country.continentName);
     $('#secondcrumb').html(obj.tour.country.countryName);
@@ -46,7 +45,7 @@ function tourList(tourNo) {
     $('.slider').slider({
       duration : 1000,
       interval : 3000,
-      height : 400
+      height : 440
     });
     $('.materialboxed').materialbox();
     var instance = M.Slider.getInstance(elem);
@@ -68,21 +67,20 @@ function addPersonnelOption(personnel, price) {
 
 
 // add trpansportaionIcon
-function addTransportaionIcon(transportation) {
-  var transportaionIconTag = $('#transportation-icon');
+function getTransportaionIcon(transportation) {
   
   switch (transportation) {
     case '버스' :
-      transportaionIconTag.addClass('fas fa-bus-alt')
+      return '<i id="transportation-icon" class="fas fa-bus-alt"></i>  '
       break;
     case '지하철' :
-      transportaionIconTag.addClass('fas fa-subway')
+      return '<i id="transportation-icon" class="fas fa-subway"></i>  '
       break;
     case '도보' :
-      transportaionIconTag.addClass('fas fa-walking')
+      return '<i id="transportation-icon" class="fas fa-walking"></i>  '
       break;
     case '자전거' :
-      transportaionIconTag.addClass('fas fa-bicycle')
+      return '<i id="transportation-icon" class="fas fa-bicycle"></i>  '
       break;
   }
 }

@@ -9,18 +9,57 @@ $(document).ready(function () {
 
   $('#next-swipe-1').click(function () {
     $('.tabs').tabs('select', 'swipe-1');
-  });
+  });//swipe1
 
   $('.next-swipe-2').click(function () {
-    if (!$('#input-title').val())
+    if($('#continent option:selected').val() == "대륙을 선택하세요."){
+      $('#continent').trigger('click');
+      M.toast({html: '여행 대륙을 선택하세요.'})
       return;
-    if (!$('#input-subtitle').val())
+    }
+    
+    if($('#country option:selected').val() == "국가를 선택하세요."){
+      $('#country').focus();
+      M.toast({html: '여행 국가를 선택하세요.'})
       return;
-    $('.tabs').tabs('select', 'swipe-2');
-  });
+    }
+    
+    if($('#city option:selected').val() == "도시를 선택하세요."){
+      $('#city').focus();
+      M.toast({html: '여행 도시를 선택하세요.'})
+      return;
+    }
+    
+    if (!$('#input-title').val()){
+      $('#input-title').focus();
+      M.toast({html: '여행 제목을 입력하세요.'})
+      return;
+    }
+
+    if (!$('#input-subtitle').val()){
+      $('#input-subtitle').focus();
+      M.toast({html: '여행 소제목을 입력하세요.'})
+      return;
+    }
+
+    if(!$('input:checkbox[name=theme]').is(':checked')){
+    M.toast({html: '여행테마를 선택하세요.'})
+    return;
+  }
+
+
+  $('.tabs').tabs('select', 'swipe-2');
+
+});// swipe-2
 
   $('.next-swipe-3').click(function () {
+    
     $('.tabs').tabs('select', 'swipe-3');
+//    if(!$('input:radio[name=transportaion]').is(':checked')){
+//      M.toast({html: '이동수단을 선택하세요.'})
+//      return;
+//    }
+    
   });
 
   $('.next-swipe-4').click(function () {
@@ -55,7 +94,7 @@ $(document).ready(function () {
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean']                                         // remove formatting button
-      ]
+        ]
     },
     placeholder: 'Compose an epic...',
     theme: 'snow'  // or 'bubble'
@@ -69,12 +108,12 @@ $('#continent').change(function () {
   $('#country').removeAttr('disabled');
   $('#country').append($('<option disabled selected>국가를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/countrylist?continent=' + $('#continent option:selected').val(),
-    function (obj) {
-      for (var i = 0; i < obj.countryList.length; i++) {
-        $('#country').append($('<option value="' + obj.countryList[i].no + '">' + obj.countryList[i].countryName + '</option>'));
-      }
-      $('select').formSelect();
+          function (obj) {
+    for (var i = 0; i < obj.countryList.length; i++) {
+      $('#country').append($('<option value="' + obj.countryList[i].no + '">' + obj.countryList[i].countryName + '</option>'));
     }
+    $('select').formSelect();
+  }
 
   );
 });
@@ -85,17 +124,17 @@ $('#country').change(function () {
   $('#city').removeAttr('disabled');
   $('#city').append($('<option disabled selected>도시를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/citylist?countryNo=' + $('#country option:selected').val(),
-    function (obj) {
-      for (var i = 0; i < obj.cityList.length; i++) {
-        $('#city').append($('<option value="' + obj.cityList[i].no + '">' + obj.cityList[i].cityName + '</option>'));
-      }
-      $('select').formSelect();
+          function (obj) {
+    for (var i = 0; i < obj.cityList.length; i++) {
+      $('#city').append($('<option value="' + obj.cityList[i].no + '">' + obj.cityList[i].cityName + '</option>'));
     }
+    $('select').formSelect();
+  }
 
   );
 });
 
-// fileupload
+//fileupload
 $('#fileupload').fileupload({
   url: '../../app/json/tour/add',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -104,69 +143,74 @@ $('#fileupload').fileupload({
   autoUpload: false,        // 파일을 추가할 때 자동 업로딩 하지 않도록 설정.
   disableImageResize: /Android(?!.*Chrome)|Opera/
     .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정 비활성 시키기
-  previewMaxWidth: 150,   // 미리보기 이미지 너비
-  previewMaxHeight: 150,  // 미리보기 이미지 높이 
-  previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
+    previewMaxWidth: 170,   // 미리보기 이미지 너비
+    previewMaxHeight: 150,  // 미리보기 이미지 높이 
+    previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
-  processalways: function (e, data) {
-    var imagesDiv = $('#images-div');
-    imagesDiv.html("");
-    for (var i = 0; i < data.files.length; i++) {
-      try {
-        if (data.files[i].preview.toDataURL) {
-          $('<div class="col card-panel p0 ml20"><img src="' + data.files[i].preview.toDataURL() + '"></div>').appendTo(imagesDiv);
+    processalways: function (e, data) {
+      var imagesDiv = $('#images-div');
+      imagesDiv.html("");
+      for (var i = 0; i < data.files.length; i++) {
+        
+        try {
+          if (data.files[i].preview.toDataURL) {
+            if (i == 0){
+              $('<div class="card" ><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">대표사진</span></div></div>').appendTo(imagesDiv);
+            } else {
+              $('<div class="card ml30"><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">대표사진</span></div></div>').appendTo(imagesDiv);
+            }
+          }
+        } catch (err) {}
+      }
+      
+      $('.file-path').css('border-color', '#26a69a');
+      var fileNames
+      $.each(data.files, function (index, file) {
+        if (index == 0) {
+          fileNames = file.name;
+        } else {
+          fileNames = fileNames + ', ' + file.name;
         }
-      } catch (err) {
-      }
-    }
-    $('.file-path').css('border-color', '#26a69a');
-    var fileNames
-    $.each(data.files, function (index, file) {
-      if (index == 0) {
-        fileNames = file.name;
-      } else {
-        fileNames = fileNames + ', ' + file.name;
-      }
-    });
-    $('.file-path').val(fileNames);
-
-    $('#upload-btn').off().click(function () {
-      console.log('a');
-      var themeArray = new Array();
-      $('input[name=theme]:checked').each(function () {
-        Theme = new Object();
-        Theme.no = $(this).val()
-        Theme.theme = $(this).next().html();
-        themeArray.push(Theme);
       });
+      $('.file-path').val(fileNames);
+
+      $('#upload-btn').off().click(function () {
+        console.log('a');
+        var themeArray = new Array();
+        $('input[name=theme]:checked').each(function () {
+          Theme = new Object();
+          Theme.no = $(this).val()
+          Theme.theme = $(this).next().html();
+          themeArray.push(Theme);
+        });
 
 
-      data.formData = {
-        data: encodeURIComponent(JSON.stringify({
-          title: $('#input-title').val(),
-          subHeading: $('#input-subtitle').val(),
-          content: $(".ql-editor").html(),
-          totalHour: $('#input-totalHour').val(),
-          personnel: $('#input-personnel').val(),
-          transportation: $('input[name="transportaion"]:checked').next().html(),
-          cityNo: $('#city option:selected').val(),
-          theme: themeArray,
-          price: $('#input-price').val(),
-          location: tlocation
-        }))
-      };
-      var response = data.submit();
-      response.complete(function (result) {
-        $('#tourConfirm').attr('href', 'view.html?no=' + result.tourNo);
-        $('#modal-button').trigger('click');
-      })
-    });
-  },
-  done: function (e, data) { }
+        data.formData = {
+                data: encodeURIComponent(JSON.stringify({
+                  title: $('#input-title').val(),
+                  subHeading: $('#input-subtitle').val(),
+                  content: $(".ql-editor").html(),
+                  totalHour: $('#input-totalHour').val(),
+                  personnel: $('#input-personnel').val(),
+                  transportation: $('input[name="transportaion"]:checked').next().html(),
+                  cityNo: $('#city option:selected').val(),
+                  theme: themeArray,
+                  price: $('#input-price').val(),
+                  location: tlocation
+                }))
+        };
+        var response = data.submit();
+        response.complete(function (result) {
+          $('#tourConfirm').attr('href', 'view.html?no=' + result.tourNo);
+          $('#modal-button').trigger('click');
+        })
+      });
+    },
+    done: function (e, data) { }
 });
 
 
-// googlemap
+//googlemap
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 37.503157, lng: 127.024318 },
@@ -183,7 +227,7 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.setFields(
-    ['address_components', 'geometry', 'icon', 'name']);
+          ['address_components', 'geometry', 'icon', 'name']);
 
   var infowindow = new google.maps.InfoWindow();
   var infowindowContent = document.getElementById('infowindow-content');
@@ -221,7 +265,7 @@ function initMap() {
         (place.address_components[0] && place.address_components[0].short_name || ''),
         (place.address_components[1] && place.address_components[1].short_name || ''),
         (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
+        ].join(' ');
     }
 
     infowindowContent.children['place-icon'].src = place.icon;
@@ -233,12 +277,20 @@ function initMap() {
 
   google.maps.event.addListener(marker, 'dragend', function (evt) {
     window.tlocation = evt.latLng.lat().toFixed(3) + ',' + evt.latLng.lng().toFixed(3);
-    document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+    /*document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';*/
   });
 
   google.maps.event.addListener(marker, 'dragstart', function (evt) {
-    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+    /*document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';*/
   });
 }
+
+// number validation
+$("#input-price").on("change", function(e){
+  if(e.keyCode == 69 || e.keyCode == 190 || e.keyCode == 109){
+    console.log('a')
+    return false;              
+  } 
+});
 
 

@@ -7,7 +7,6 @@
   <!-- materialize css -->
   <link type="text/css" rel="stylesheet"
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap-grid.css">
   <!-- fontawesome -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
   <!-- jquery-ui -->
@@ -28,101 +27,118 @@
   <div class="container">
 
     <!-- breadcrumb -->
-    <nav id="clean" class="mt-5">
-      <div class="nav-wrapper">
-        <div class="col l12 pl0" id="breadcrumb-list">
-          <a href="#" class="breadcrumb" id="firstcrumb"></a>
-          <a href="#" class="breadcrumb" id="secondcrumb"></a>
-          <a href="#" class="breadcrumb" id="thirdcrumb"></a>
-        </div>
+    <div class="row mb0">
+      <div class="col l12">
+        <nav id="clean" class="mt30">
+          <div class="nav-wrapper">
+            <div id="breadcrumb-list">
+              <a href="#" class="breadcrumb" id="firstcrumb"></a>
+              <a href="#" class="breadcrumb" id="secondcrumb"></a>
+              <a href="#" class="breadcrumb" id="thirdcrumb"></a>
+            </div>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
 
     <!-- title -->
-    <div class="row">
-      <div class="col-12">
-        <h1 id="title" class="mt0 mb5"></h1>
+    <div class="row mb5">
+      <div class="col l12">
+        <h1 id="title" class="mt0"></h1>
       </div>
     </div>
 
     <!-- subHeading -->
     <div class="row">
-      <div id="subHeading" class="col-12"></div>
+      <div class="col l12">
+        <div id="subHeading"></div>
+      </div>
     </div>
 
     <!-- theme -->
-    <div class="row ml5">
-      <div id="themeDiv" class="col"></div>
+    <div class="row">
+      <div class="col l12">
+        <div id="themeDiv" class="col p0"></div>
+      </div>
     </div>
 
-    <div class="row mt-1 mb-5">
+    <div class="row mt10 mb50">
+
       <!-- img -->
-      <div class="col-7 slider">
-        <ul id="image" class="slides">
-        </ul>
+      <div class="col l7">
+
+        <div class="slider">
+          <ul id="image" class="slides">
+          </ul>
+        </div>
+
       </div>
 
-      <div class="col-5">
+      <div class="col l5">
 
         <!-- date -->
-        <div class="row ml-5 mt-3">
-          <div class="col-2 pt-3">
-            <i class="far fa-calendar-alt"></i>
-          </div>
-          <div class="input-field col-10">
-            <div>
-              <label>날짜 선택</label><input type="text" class="datepicker">
+        <div class="row mt20">
+          <div class="col l6 right">
+            <div class="input-field">
+              <input type="text" class="datepicker" placeholder="날짜 선택">
             </div>
+          </div>
+          <div class="col l1 mt20 mr10 right">
+            <i class="far fa-calendar-alt"></i>
           </div>
         </div>
 
         <!-- personnel -->
-        <div class="row ml-5 mt-3">
-          <div class="col-2"><i class="fas fa-users"></i></div>
-          <div class="input-field  col s10">
-            <select id="personnel">
-            </select>
-            <label>인원 선택</label>
+        <div class="row mt20">
+          <div class="col l6 right">
+            <div class="input-field">
+              <select id="personnel">
+              </select>
+              <label>인원 선택</label>
+            </div>
           </div>
+          <div class="col l1 mr10 right">
+            <i class="fas fa-users">
+            </i></div>
         </div>
 
 
         <!-- price -->
-        <div class="row ml-5 mt-4">
-          <div class="col-6"></div>
-          <div id="price" class="col-6">
-            <i class="fas fa-won-sign"></i>
+        <div class="row mt20">
+          <div id="price" class="col6 right">
           </div>
         </div>
 
-        <div class="row ml-4 mt-4">
-          <div class="offset-4">
-            <!-- time -->
-            <span><i class="fas fa-stopwatch"></i></span>
-            <span id="totalHour" class="mr-4"></span>
-            <!-- transportaion -->
-            <span><i id="transportation-icon"></i></span>
-            <span id="transportation"></span>
+        <!-- transportation -->
+        <div class="row mt20">
+          <div id="transportation" class="col3 right"></div>
+          <div id="totalHour" class="col3 right mr30"></div>
+        </div>
+
+        <!-- wishlist -->
+        <div class="row mt20 mb10">
+          <div class="col right pr0">
+            <a id="wishlist-btn" class="waves-effect waves-light btn-large"><i
+                class="material-icons left">favorite_border</i>위시리스트에 담기</a>
+          </div>
+        </div>
+        <!-- reservation -->
+        <div class="row">
+          <div class="col right pr0">
+            <a id="reservation-btn" href="#" class="waves-effect waves-light btn-large"><i
+                class="material-icons left">import_contacts</i>예약하기</a>
           </div>
         </div>
 
-        <div class="row ml-4 mt-4">
-          <div class="col-12">
-            <a class="waves-effect waves-light btn-large "><i class="material-icons right">favorite_border</i>위시리스트에
-              담기</a>
-            <a id="reservation-btn" href="#" class="waves-effect waves-light btn-large">예약하기</a>
-          </div>
-        </div>
-
-      </div> <!-- row mt-5 mb-5 -->
-    </div> <!-- row -->
-
+      </div>
+    </div>
+    <hr>
     <div class="row mt-5 mb-5">
       <div class="col-7">
         <p id=content></p>
       </div>
     </div>
-
+    <hr>
     <div id="place-div" class="row mt-5 mb-5">
       <div class="col-12">
         <h4>만나는 장소</h4>
@@ -153,10 +169,10 @@
           id="theme">
     </div>
   </div> -->
-
+    <hr>
     <div class="row mt-5 mb-5">
 
-      <div id="comment-dive" class="col-7">
+      <div class="col-7">
         <form>
           <!-- commentAmout -->
           <div class="form-group row mt-5 mb-3">

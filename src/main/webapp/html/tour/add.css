@@ -3,7 +3,6 @@ i, .material-icons {
 }
 
 #form-panel {
-    height: 900px !important;
 }
 
 .dropdown-content {
@@ -37,6 +36,19 @@ i, .material-icons {
     font-weight: bold;
 }
 
+
+.card {
+  width : 170px;
+  height :150px;
+}
+
+#images-div {
+    display: inline-flex;
+}
+
+.card-title {
+  
+}
 
 /* google map */
 #map {
@@ -111,3 +123,5 @@ i, .material-icons {
 			  font-style: italic;
 			}
 /* google map */
+
+

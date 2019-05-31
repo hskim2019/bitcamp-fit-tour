@@ -23,14 +23,32 @@ var prevPageBtn = $('#prevPageBtn'),
     firstPage = $('#firstPage');
 var totalpage;
 var orderby = "tourDesc";
+
+var test = [];
+test.push('로컬 투어');
+test.push('맛집 투어');
+console.log(test);
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, orderby) {
-  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby, 
-    function(obj) {
+  $.get('../../app/json/tour/list',
+    //  ?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby + '&test=' + test, 
+   {
+    pageNo : pn,
+    pageSize : pageSize,
+    continentName : continentName,
+    countryName : countryName,
+    cityName : cityName,
+    minPrice : minPrice,
+    maxPrice : maxPrice,
+    orderby : orderby,
+    test : test
+   },
+      
+      function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
       currMaxPrice = obj.currMaxPrice;

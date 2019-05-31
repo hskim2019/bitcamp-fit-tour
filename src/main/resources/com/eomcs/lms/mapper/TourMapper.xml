@@ -144,6 +144,7 @@
       <if test="countryName != null">and country_name = #{countryName}</if>
       <if test="cityName != null">and city_name = #{cityName}</if>
       <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
+      <if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
       <if test="test !=null"> and th.theme in 
       <foreach collection="test" item="test" separator="," open="(" close=")">#{test}</foreach></if>
      </where>

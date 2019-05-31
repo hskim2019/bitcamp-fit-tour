@@ -31,8 +31,9 @@ public class TourServiceImpl implements TourService {
 		  String countryName,
 		  String cityName,
 		  int minPrice, int maxPrice,
+		  int minHour, int maxHour,
+		  List<String> theme,
 		  String orderby,
-		  List<String> test,
 		  int pageNo, int pageSize
 		  ) {
     // 게시물 목록을 가져오는 경우 서비스 객체에서 특별하게 할 일이 없다.
@@ -45,7 +46,9 @@ public class TourServiceImpl implements TourService {
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("minPrice", minPrice);
     params.put("maxPrice", maxPrice);
-    params.put("test", test);
+    params.put("minHour", minHour);
+    params.put("maxHour", maxHour);
+    params.put("theme", theme);
     
     System.out.println("orderby;;;;;" + orderby);
     switch (orderby) {
@@ -80,13 +83,16 @@ public class TourServiceImpl implements TourService {
 		  String countryName,
 		  String cityName,
 		  int minPrice, int maxPrice,
-		  List<String> test
+		  int minHour, int maxHour,
+		  List<String> theme
 		  ) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("minPrice", minPrice);
     params.put("maxPrice", maxPrice);
-    params.put("test", test);
+    params.put("minHour", minHour);
+    params.put("maxHour", maxHour);
+    params.put("theme", theme);
     
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);

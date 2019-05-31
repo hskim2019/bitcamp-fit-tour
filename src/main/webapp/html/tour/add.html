@@ -49,7 +49,7 @@
               * 필수항목
             </div>
           </div>
-          
+
           <!-- h -->
           <div class="row mb0 mt50">
             <div class="col l12">
@@ -58,7 +58,7 @@
               </blockquote>
             </div>
           </div>
-  
+
           <div class="row">
             <!-- continent -->
             <div class="input-field col l4">
@@ -109,10 +109,10 @@
                 </div>
               </div>
             </div>
-            
-           </div>
-           
-           <!-- h -->
+
+          </div>
+
+          <!-- h -->
           <div class="row mb0 mt30">
             <div class="col l12">
               <blockquote>
@@ -120,7 +120,7 @@
               </blockquote>
             </div>
           </div>
-          
+
           <!-- title -->
           <div class="row">
             <div class="input-field col l12">
@@ -129,8 +129,8 @@
               <label for="input-title"> • 여행 주제를 정확하고 간결하게 표현해주세요.</label>
             </div>
           </div>
-          
-           <!-- h -->
+
+          <!-- h -->
           <div class="row mb0 mt30">
             <div class="col l12">
               <blockquote>
@@ -156,7 +156,7 @@
               • 상품에 가장 잘 어울리는 특별한 태그를 선택해주세요.
             </div>
           </div>
-          
+
           <!-- theme -->
           <div class="row">
             <div class="col l3">
@@ -220,7 +220,7 @@
               </label>
             </div>
           </div>
- 
+
 
           <div class="row mt50">
             <div class="col l12">
@@ -228,8 +228,8 @@
                 단계</button>
             </div>
           </div>
-          
-          
+
+
         </div>
 
         <!-- 2***************************************************************************************** -->
@@ -250,21 +250,21 @@
             <!-- personnel -->
             <div class="input-field col l4">
               <i class="material-icons prefix">people</i>
-              <input id="input-personnel" type="number" class="validate">
+              <input id="input-personnel" type="number" class="validate" min="0">
               <label for="input-personnel"> 최대인원수를 입력하세요.</label>
-              <span class="helper-text" data-error="숫자만 입력해주세요." data-success=""></span>
+              <span class="helper-text" data-error="소수점을 제외한 1이상 숫자만 입력해주세요." data-success=""></span>
             </div>
-            
+
             <!-- price -->
             <div class="input-field col l4">
               <i class="material-icons prefix">attach_money</i>
               <input id="input-price" type="number" class="validate" min="0" step="100000 ">
               <label for="input-price"> 1인당 가격을 입력하세요.</label>
-              <span class="helper-text" data-error="숫자만 입력해주세요." data-success=""></span>
+              <span class="helper-text" data-error="소수점을 제외한 1이상 숫자만 입력해주세요." data-success=""></span>
             </div>
-            
+
           </div>
-          
+
           <!-- h -->
           <div class="row mb30 mt30">
             <div class="col l12">
@@ -279,13 +279,13 @@
             <!-- totalHour -->
             <div class="input-field col l4">
               <i class="material-icons prefix">timer</i>
-              <input id="input-totalHour" type="number" class="validate">
+              <input id="input-totalHour" type="number" class="validate" min="0">
               <label for="input-totalHour"> 총 소요 시간을 입력하세요.</label>
-              <span class="helper-text" data-error="숫자만 입력해주세요." data-success=""></span>
+              <span class="helper-text" data-error="소수점을 제외한 1이상 숫자만 입력해주세요." data-success=""></span>
             </div>
           </div>
-          
-          
+
+
           <!-- h -->
           <div class="row mb30 mt30">
             <div class="col l12">
@@ -295,7 +295,7 @@
               • 여행중 가장 많이 이용되는 주요 이동 수단을 선택하세요.
             </div>
           </div>
-          
+
           <!-- transportaion -->
           <div class="row">
             <div class="col l3">
@@ -356,7 +356,7 @@
           </div> -->
 
 
-<!-- h -->
+          <!-- h -->
           <div class="row mb30 mt30">
             <div class="col l12">
               <blockquote>
@@ -402,19 +402,18 @@
         <!-- 3***************************************************************************************** -->
         <div id="swipe-3" class="col l12">
 
-          <div class="row mt20 pr40 pl40">
+          <!-- contents -->
+          <div class="row mb30 mt30">
             <div class="col l12">
               <blockquote>
-                <h5></h5>
+                <h6>여행 소개 *</h6>
               </blockquote>
+              • 여행에 대해 풍부한 이미지와 글로 자세한 설명을 자유롭게 작성해주세요.<br>
             </div>
           </div>
 
-          <div class="row pr40 pl40">
-            <div class="form-group">
-              <div id="quillEditor">
-              </div>
-            </div>
+          <div class="form-group">
+            <div id="quillEditor"></div>
           </div>
 
 
@@ -431,19 +430,21 @@
 
         <div id="swipe-4" class="col l12">
 
-          <div class="row mt20 pr40 pl40">
+          <!-- place -->
+          <div class="row mb30 mt30">
             <div class="col l12">
               <blockquote>
-                <h5></h5>
+                <h5>만나는 장소</h5>
               </blockquote>
+              • 만남을 위한 구체적인 장소를 알려주세요.
             </div>
           </div>
 
-          <div class="row mt20 pr40 pl40">
-            <div class="col l8 center">
+          <div class="row mt20">
+            <div class="col l12">
               <div class="pac-card" id="pac-card">
                 <div id="pac-container">
-                  <input id="pac-input" type="text" placeholder="만나는 장소를 검색하세요!">
+                  <input id="pac-input" type="text" placeholder="만나는 장소 검색">
                 </div>
               </div>
               <div id="map"></div>
@@ -457,15 +458,25 @@
           </div>
 
 
+          <div class="row">
+            <div class="col l12">
+              <label class="pl10 right">
+                <input id="noplace" name="noplace" type="checkbox" />
+                <span>만나는 장소는 등록하지 않습니다.</span>
+              </label>
+            </div>
+          </div>
+
           <div class="row mt50">
             <div class="col l12">
               <div class="row">
-                <button id='upload-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
+                <button id='add-btn' class="waves-effect waves-light btn-large right" type='button'>상품 등록</button>
                 <button class="next-swipe-3 waves-effect waves-light btn-large right mr10" type='button'>이전 단계</button>
               </div>
             </div>
           </div>
-        </div>
+
+        </div> <!-- swipe-4 -->
 
       </div> <!-- form panel -->
 
@@ -491,6 +502,7 @@
   <footer class="bit-main-footer page-footer teal"></footer>
 </body>
 
+
 <!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -506,12 +518,12 @@
 <script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
 <script src="add.js"></script>
 <!-- goglemap api -->
-<script async defer
+<script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"></script>
+<!-- fittour -->
 
 </html>

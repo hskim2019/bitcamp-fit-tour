@@ -8,29 +8,58 @@ var pageNo = 1,
     themetemplateSrc = $('#tr-template-for-theme').html();
 // script 태그에서 템플릿 데이터를 꺼낸다.
 
-var continentName = '';
-var countryName = '';
-var cityName= '';
+var continentName = '',
+    countryName = '',
+    cityName= '';
 var firstcrumb = crumb.children().eq(0),
     secondcrumb = crumb.children().eq(1),
     thirdcrumb = crumb.children().eq(2);
 var temp;
-var minPrice = 0;
-var maxPrice = 0;
+var minPrice = 0,
+    maxPrice = 0;
 var currMaxPrice;
+var minHour = 1,
+    maxHour = 12;
 var prevPageBtn = $('#prevPageBtn'),
     nextPageBtn = $('#nextPageBtn'),
     firstPage = $('#firstPage');
 var totalpage;
 var orderby = "tourDesc";
+var theme = [];
+console.log(theme);
+
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
+M.AutoInit();
+$(document).ready(function(){
+  $('.collapsible').collapsible();
+});
+var elem = document.querySelector('.collapsible.expandable');
+var instance = M.Collapsible.init(elem, {
+  accordion: false
+});
+
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, orderby) {
-  $.getJSON('../../app/json/tour/list?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby, 
-    function(obj) {
+  $.get('../../app/json/tour/list',
+    //  ?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby + '&test=' + test, 
+   {
+    pageNo : pn,
+    pageSize : pageSize,
+    continentName : continentName,
+    countryName : countryName,
+    cityName : cityName,
+    minPrice : minPrice,
+    maxPrice : maxPrice,
+    minHour : minHour,
+    maxHour : maxHour,
+    orderby : orderby,
+    theme : theme
+   },
+  
+      function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
       currMaxPrice = obj.currMaxPrice;
@@ -136,26 +165,50 @@ loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
   
 // price slider-range
 $(function() {
-  $( "#slider-range" ).slider({
+  $( "#slider-range-price" ).slider({
     range: true,
     min: 0,
     max: 300000,
     step: 1000,
-    values: [ 0, 0 ],
+    values: [ 0, 300000 ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
       minPrice = ui.values[ 0 ];
       maxPrice = ui.values[ 1 ];
     }
   });
-  $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ).toLocaleString() + "원" +
-      " -" + $( "#slider-range" ).slider( "values", 1 ).toLocaleString() + "원");
+  $( "#amount" ).val( $( "#slider-range-price" ).slider( "values", 0 ).toLocaleString() + "원" +
+      " -" + $( "#slider-range-price" ).slider( "values", 1 ).toLocaleString() + "원");
 });
 
-
-$( "#slider-range" ).mouseup(function() {
+$( "#slider-range-price" ).mouseup(function() {
   $('#searchwithOptions').trigger('click');
 });
+
+
+//hour slider-range
+$(function() {
+  $( "#slider-range-hour" ).slider({
+    range: true,
+    min: 1,
+    max: 12,
+    step: 1,
+    values: [ 1, 12 ],
+    slide: function( event, ui ) {
+      $( "#tour-hour" ).val(ui.values[ 0 ] + "시간" + " - " + ui.values[ 1 ] + "시간" );
+      minHour = ui.values[ 0 ];
+      maxHour = ui.values[ 1 ];
+    }
+  });
+  $( "#tour-hour" ).val( $( "#slider-range-hour" ).slider( "values", 0 ) + "시간" +
+      " -" + $( "#slider-range-hour" ).slider( "values", 1 ) + "시간");
+});
+
+$( "#slider-range-hour" ).mouseup(function() {
+  $('#searchwithOptions').trigger('click');
+});
+
+
 
 //floating menu - search with options
 $('#searchwithOptions').click((e) => {
@@ -179,11 +232,11 @@ loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
 //follow quick menu
 $(window).scroll(function(){
 var scrollTop = $(document).scrollTop();
-if (scrollTop < 220) {
- scrollTop = 220;
+if (scrollTop < 265) {
+ scrollTop = 265;
 }
-$("#followquick").stop();
-$("#followquick").animate( { "top" : scrollTop });
+$(".collapsible").stop();
+$(".collapsible").animate( { "top" : scrollTop });
 });
 
 // BreadCrumb

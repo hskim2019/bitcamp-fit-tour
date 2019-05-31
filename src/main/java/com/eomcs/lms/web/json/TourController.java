@@ -90,6 +90,9 @@ public class TourController {
             @RequestParam(defaultValue="0") int minPrice,
             int maxPrice,
             String orderby,
+            @RequestParam(value="theme[]", required=false)List<String> theme,
+            int minHour,
+            int maxHour,
             @RequestParam(defaultValue="1") int pageNo,
             @RequestParam(defaultValue="3") int pageSize) {
 
@@ -116,7 +119,11 @@ public class TourController {
         if (pageSize < 3 || pageSize > 8) 
             pageSize = 3;
 
-        List<Tour> list = tourService.search(searchContinentName, searchCountryName, searchCityName, minPrice, maxPrice);
+        List<Tour> list = tourService.search(
+        		searchContinentName, searchCountryName, searchCityName, 
+        		minPrice, maxPrice, 
+        		minHour, maxHour,
+        		theme);
         int rowCount = list.size();
         //int rowCount = tourService.size();
         System.out.println("rowCount: " + rowCount);
@@ -132,6 +139,8 @@ public class TourController {
         List<Tour> tours = tourService.list(
                 searchContinentName, searchCountryName, searchCityName, 
                 minPrice, maxPrice, 
+                minHour, maxHour,
+                theme,
                 orderby,
                 pageNo, pageSize);
 

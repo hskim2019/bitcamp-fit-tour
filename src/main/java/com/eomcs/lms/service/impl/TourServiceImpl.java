@@ -31,6 +31,8 @@ public class TourServiceImpl implements TourService {
 		  String countryName,
 		  String cityName,
 		  int minPrice, int maxPrice,
+		  int minHour, int maxHour,
+		  List<String> theme,
 		  String orderby,
 		  int pageNo, int pageSize
 		  ) {
@@ -44,6 +46,9 @@ public class TourServiceImpl implements TourService {
     params.put("rowNo", (pageNo - 1) * pageSize);
     params.put("minPrice", minPrice);
     params.put("maxPrice", maxPrice);
+    params.put("minHour", minHour);
+    params.put("maxHour", maxHour);
+    params.put("theme", theme);
     
     System.out.println("orderby;;;;;" + orderby);
     switch (orderby) {
@@ -77,12 +82,17 @@ public class TourServiceImpl implements TourService {
 		  String continentName,
 		  String countryName,
 		  String cityName,
-		  int minPrice, int maxPrice
+		  int minPrice, int maxPrice,
+		  int minHour, int maxHour,
+		  List<String> theme
 		  ) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("minPrice", minPrice);
     params.put("maxPrice", maxPrice);
+    params.put("minHour", minHour);
+    params.put("maxHour", maxHour);
+    params.put("theme", theme);
     
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);

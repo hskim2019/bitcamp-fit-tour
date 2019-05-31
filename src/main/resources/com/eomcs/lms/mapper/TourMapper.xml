@@ -109,7 +109,7 @@
       tour
   </sql>
   
-  <select id="findAll" resultMap="tourMap" parameterType="map">
+<!--   <select id="findAll" resultMap="tourMap" parameterType="map">
     select
      *
    from tour as t
@@ -127,8 +127,34 @@
     <if test="size != null and rowNo != null">
       limit #{rowNo}, #{size}
     </if>
-  </select>
+  </select> -->
   
+    <select id="findAll" resultMap="tourMap" parameterType="map">
+    select distinct
+      t.tour_id, t.title, t.sub_heading, t.content, t.created_date, t.total_hour, 
+      t.hash_tag, t.personnel, t.transportation, t.price, t.city_id, t.location,
+      ci.city_id, ci.city_name, co.country_id, co.country_name, co.continent
+   from tour as t
+   join city as ci on t.city_id = ci.city_id
+   join country as co on ci.country_id = co.country_id
+   join tour_theme as toth on t.tour_id = toth.tour_id
+   join theme as th on toth.theme_id = th.theme_id
+       <where>
+      <if test="continentName != null">or continent = #{continentName}</if>
+      <if test="countryName != null">and country_name = #{countryName}</if>
+      <if test="cityName != null">and city_name = #{cityName}</if>
+      <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
+      <if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
+      <if test="test !=null"> and th.theme in 
+      <foreach collection="test" item="test" separator="," open="(" close=")">#{test}</foreach></if>
+     </where>
+     <if test="priceAsc != null"> order by price asc</if>
+     <if test="priceDesc != null"> order by price desc</if>
+     <if test="tourDesc != null"> order by tour_id desc</if>
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
   
    <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
    select 

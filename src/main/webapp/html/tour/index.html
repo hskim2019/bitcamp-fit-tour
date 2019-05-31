@@ -263,7 +263,7 @@
     </div> -->
 
     <!-- followquick -->
-    <div class="grey lighten-4" id="followquick">
+<!--     <div class="grey lighten-4" id="followquick">
       따라다니는 메뉴
       <p>
         <label for="amount">금액:</label>
@@ -271,8 +271,87 @@
         <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
         <button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button>
       </p>
-    </div>
+    </div> -->
     <!-- followquick end -->
+    
+    <!-- collapsible -->
+      <ul class="collapsible expandable">
+    <li class="active">
+      <div class="collapsible-header"><i class="material-icons">attach_money</i>가격</div>
+      <div class="collapsible-body">
+    <!--     <label for="amount">금액:</label> -->
+        <div id="slider-range-price"></div>
+        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+       </div>
+    </li>
+    
+    <li class="active">
+      <div class="collapsible-header"><i class="material-icons">access_time</i>소요시간</div>
+      <div class="collapsible-body"><span>
+        <div id="slider-range-hour"></div>
+        <input type="text" id="tour-hour" readonly style="border:0; color:#f6931f; font-weight:bold;">
+      </span></div>
+    </li>
+    <li class="active">
+      <div class="collapsible-header"><i class="fas fa-clipboard-list"></i>테마</div>
+      <div class="collapsible-body theme-selection">
+      <form action="#">
+    <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>자전거 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>야경 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>맛집 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>로컬 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>워킹 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>버스 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>반나절 투어</span>
+      </label>
+    </p>
+        <p>
+      <label>
+        <input id="indeterminate-checkbox" type="checkbox" />
+        <span>종일 투어</span>
+      </label>
+    </p>
+  </form>
+      </div>
+    </li>
+         <button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button>
+  </ul>
+     <!-- collapsible end -->
+    
+    
 
     <section>
       
@@ -346,7 +425,7 @@
           <span class="tour-item">{{transportation}}</span><span>이동</span>
         </div>
         <div class="card-content last-line row">	
-          <p class="tour-item col s9"></p>
+          <p class="tour-item-theme col s8"></p>
           <p class="tour-item price col s3"></p>
          </div>
       </div>

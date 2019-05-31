@@ -14,6 +14,9 @@ public interface TourService {
 	String cityName,
 	int minPrice, 
 	int maxPrice,
+	int minHour,
+	int maxHour,
+	List<String> theme,
 	String orderby,
 	int pageNo, int pageSize
 	);
@@ -32,6 +35,9 @@ public interface TourService {
 	String countryName,
 	String cityName,
 	int minPrice, 
-	int maxPrice
+	int maxPrice,
+	int minHour,
+	int maxHour,
+	List<String> theme
 	);
 }

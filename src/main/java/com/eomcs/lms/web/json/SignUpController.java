@@ -49,13 +49,28 @@ public class SignUpController {
   public Object snsAdd(Member member,HttpSession session) throws Exception {
     HashMap<String, Object> content = new HashMap<>();
     try {
-      member.setPassword("naver123123");
-      member.setLoginTypeNo(6);
-      member.setCertification("sns-login");
-      memberService.snsSignUp(member);
+      
+      if(memberService.get(member.getEmail()) ==null) {
+        System.out.println("진입");
+        member.setPassword("naver123123");
+        member.setLoginTypeNo(6);
+        member.setCertification("sns-login");
+        memberService.snsSignUp(member);
 
-      content.put("status", "success");
-      session.setAttribute("standby", member.getEmail());
+        content.put("status", "success");
+        session.setAttribute("standby", member.getEmail());
+      }
+      
+      else if(memberService.get(member.getEmail()).getEmail().equals(member.getEmail())){
+        content.put("status", "overlap");
+        content.put("message", "이미 일반회원으로 가입했습니다");
+        System.out.println("못진입");
+        return content;
+      }else {
+        content.put("status", "fail");
+        content.put("message", "오류");
+      }
+      
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());

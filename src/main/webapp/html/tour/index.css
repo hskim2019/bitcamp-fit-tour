@@ -30,11 +30,11 @@
  section:not(.tiles)  {
  width: 750px;
  float:right;	
-  min-height: 500px;
+  min-height: 600px;
 }
 
 #tourlistcard {
-	min-height: 500px;
+	min-height: 600px;
 }
 
 /* original card section */
@@ -215,6 +215,10 @@ label {
 	color: #424242 !important;
 	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 	font-weight: normal !important;
+}
+
+.theme-selection {
+	padding: 10px 20px 20px 20px !important;
 }
 
 #searchwithOptions{

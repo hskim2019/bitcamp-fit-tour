@@ -3,210 +3,223 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.eomcs.lms.dao.TourDao">
-  
-  <resultMap type="tour" id="tourMap">
-    <id column="tour_id" property="no"/>
-    <result column="title" property="title"/>
-    <result column="sub_heading" property="subHeading"/>
-    <result column="content" property="content"/>
-    <result column="created_date" property="createdDate"/>
-    <result column="total_hour" property="totalHour"/>
-    <result column="hash_tag" property="hashTag"/>
-    <result column="personnel" property="personnel"/>
-    <result column="transportation" property="transportation"/>
-    <result column="price" property="price"/>
-    <result column="city_id" property="cityNo"/>
-    
-    <association property="city" javaType="city">
-    <id column="city_id"        property="no"/>
-    <result column="country_id"  property="countryNo"/>
-    <result column="city_name"          property="cityName"/>
-    </association>
-    
-    <association property="country" javaType="country">
-    <id column="country_id"        property="no"/>
-    <result column="country_name"  property="countryName"/>
-    <result column="continent"     property="continentName"/>
-    </association>
-  </resultMap>
-  
-  <resultMap type="tour" id="tourPhotoMap">
-    <id column="tour_id" property="no"/>
-    <result column="title" property="title"/>
-    <result column="sub_heading" property="subHeading"/>
-    <result column="content" property="content"/>
-    <result column="created_date" property="createdDate"/>
-    <result column="total_hour" property="totalHour"/>
-    <result column="hash_tag" property="hashTag"/>
-    <result column="personnel" property="personnel"/>
-    <result column="transportation" property="transportation"/>
-    <result column="price" property="price"/>
-    
-    <association property="city" javaType="city">
-    <id column="city_id"        property="no"/>
-    <result column="country_id"  property="countryNo"/>
-    <result column="city_name"          property="cityName"/>
-    </association>
-    
-    <association property="country" javaType="country">
-    <id column="country_id"        property="no"/>
-    <result column="country_name"  property="countryName"/>
-    <result column="continent"     property="continentName"/>
-    </association>
-    
-    <collection property="tourPhoto" ofType="tourGuidancePhoto">
-      <id column="photo_id"    property="no"/>
-      <result column="tour_id"    property="tourNo"/>
-      <result column="photo_name" property="name"/>
-      <result column="photo_path" property="path"/>
-    </collection>
-    
-    <collection property="theme" ofType="theme">
-      <id column="theme_id"    property="no"/>
-      <result column="theme" property="theme"/>
-    </collection>
-    
-  </resultMap>
-  
-  <!-- countryMap -->
-  <resultMap type="country" id="countryMap">
-    <id column="country_id" property="no"/>
-    <result column="country_name" property="countryName"/>
-    <result column="continent" property="continentName"/>
-  </resultMap>
-  
-  <!-- cityMap -->
-  <resultMap type="city" id="cityMap">
-    <id column="city_id" property="no"/>
-    <result column="country_id" property="countryNo"/>
-    <result column="city_name" property="cityName"/>
-  </resultMap>
-  
-  <!-- tourGuidancePhoto -->
-  <resultMap type="tourGuidancePhoto" id="photoMap">
-    <id column="photo_id" property="no"/>
-    <result column="tour_id" property="tourNo"/>
-    <result column="photo_name" property="name"/>
-    <result column="photo_path" property="path"/>
-  </resultMap>
-  
-  <sql id="select1">
-    select 
-      tour_id, 
-      title, 
-      sub_heading, 
-      content, 
-      created_date, 
-      total_hour, 
-      hash_tag, 
-      personnel, 
-      transportation, 
-      price,
-      city_id 
-    from 
-      tour
-  </sql>
-  
-<!--   <select id="findAll" resultMap="tourMap" parameterType="map">
-    select
-     *
-   from tour as t
-   join city as ci on t.city_id = ci.city_id
-   join country as co on ci.country_id = co.country_id
-       <where>
-      <if test="continentName != null">or continent = #{continentName}</if>
-      <if test="countryName != null">and country_name = #{countryName}</if>
-      <if test="cityName != null">and city_name = #{cityName}</if>
-      <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
-     </where>
-     <if test="priceAsc != null"> order by price asc</if>
-     <if test="priceDesc != null"> order by price desc</if>
-     <if test="tourDesc != null"> order by tour_id desc</if>
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select> -->
-  
-    <select id="findAll" resultMap="tourMap" parameterType="map">
-    select distinct
-      t.tour_id, t.title, t.sub_heading, t.content, t.created_date, t.total_hour, 
-      t.hash_tag, t.personnel, t.transportation, t.price, t.city_id, t.location,
-      ci.city_id, ci.city_name, co.country_id, co.country_name, co.continent
-   from tour as t
-   join city as ci on t.city_id = ci.city_id
-   join country as co on ci.country_id = co.country_id
-   join tour_theme as toth on t.tour_id = toth.tour_id
-   join theme as th on toth.theme_id = th.theme_id
-       <where>
-      <if test="continentName != null">or continent = #{continentName}</if>
-      <if test="countryName != null">and country_name = #{countryName}</if>
-      <if test="cityName != null">and city_name = #{cityName}</if>
-      <if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
-      <if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
-      <if test="test !=null"> and th.theme in 
-      <foreach collection="test" item="test" separator="," open="(" close=")">#{test}</foreach></if>
-     </where>
-     <if test="priceAsc != null"> order by price asc</if>
-     <if test="priceDesc != null"> order by price desc</if>
-     <if test="tourDesc != null"> order by tour_id desc</if>
-    <if test="size != null and rowNo != null">
-      limit #{rowNo}, #{size}
-    </if>
-  </select>
-  
-   <select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
-   select 
-		* 
-		from tour as t 
-		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
-		join tour_theme as toth on t.tour_id = toth.tour_id
-		join theme as th on toth.theme_id = th.theme_id
+
+	<!-- Tour Map -->
+	<resultMap type="tour" id="tourMap">
+		<id column="tour_id" property="no" />
+		<result column="title" property="title" />
+		<result column="sub_heading" property="subHeading" />
+		<result column="content" property="content" />
+		<result column="created_date" property="createdDate" />
+		<result column="total_hour" property="totalHour" />
+		<result column="hash_tag" property="hashTag" />
+		<result column="personnel" property="personnel" />
+		<result column="transportation" property="transportation" />
+		<result column="price" property="price" />
+		<result column="city_id" property="cityNo" />
+
+		<association property="city" javaType="city">
+			<id column="city_id" property="no" />
+			<result column="country_id" property="countryNo" />
+			<result column="city_name" property="cityName" />
+		</association>
+
+		<association property="country" javaType="country">
+			<id column="country_id" property="no" />
+			<result column="country_name" property="countryName" />
+			<result column="continent" property="continentName" />
+		</association>
+	</resultMap>
+
+	<!-- tourCityCountryPhotoTheme Map -->
+	<resultMap type="tour" id="tourPhotoMap">
+		<id column="tour_id" property="no" />
+		<result column="title" property="title" />
+		<result column="sub_heading" property="subHeading" />
+		<result column="content" property="content" />
+		<result column="created_date" property="createdDate" />
+		<result column="total_hour" property="totalHour" />
+		<result column="hash_tag" property="hashTag" />
+		<result column="personnel" property="personnel" />
+		<result column="transportation" property="transportation" />
+		<result column="price" property="price" />
+		<result column="location" property="location" />
+
+		<association property="city" javaType="city">
+			<id column="city_id" property="no" />
+			<result column="country_id" property="countryNo" />
+			<result column="city_name" property="cityName" />
+		</association>
+
+		<association property="country" javaType="country">
+			<id column="country_id" property="no" />
+			<result column="country_name" property="countryName" />
+			<result column="continent" property="continentName" />
+		</association>
+
+		<collection property="tourPhoto" ofType="tourGuidancePhoto">
+			<id column="photo_id" property="no" />
+			<result column="tour_id" property="tourNo" />
+			<result column="photo_name" property="name" />
+			<result column="photo_path" property="path" />
+		</collection>
+
+		<collection property="theme" ofType="theme">
+			<id column="theme_id" property="no" />
+			<result column="theme" property="theme" />
+		</collection>
+
+	</resultMap>
+
+	<!-- country Map -->
+	<resultMap type="country" id="countryMap">
+		<id column="country_id" property="no" />
+		<result column="country_name" property="countryName" />
+		<result column="continent" property="continentName" />
+	</resultMap>
+
+	<!-- city Map -->
+	<resultMap type="city" id="cityMap">
+		<id column="city_id" property="no" />
+		<result column="country_id" property="countryNo" />
+		<result column="city_name" property="cityName" />
+	</resultMap>
+
+	<!-- tourGuidancePhoto Map -->
+	<resultMap type="tourGuidancePhoto" id="photoMap">
+		<id column="photo_id" property="no" />
+		<result column="tour_id" property="tourNo" />
+		<result column="photo_name" property="name" />
+		<result column="photo_path" property="path" />
+	</resultMap>
+
+	<sql id="select1">
+		select
+		tour_id,
+		title,
+		sub_heading,
+		content,
+		created_date,
+		total_hour,
+		hash_tag,
+		personnel,
+		transportation,
+		price,
+		city_id
+		from
+		tour
+	</sql>
+
+	<!-- <select id="findAll" resultMap="tourMap" parameterType="map"> select 
+		* from tour as t join city as ci on t.city_id = ci.city_id join country as 
+		co on ci.country_id = co.country_id <where> <if test="continentName != null">or 
+		continent = #{continentName}</if> <if test="countryName != null">and country_name 
+		= #{countryName}</if> <if test="cityName != null">and city_name = #{cityName}</if> 
+		<if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if> 
+		</where> <if test="priceAsc != null"> order by price asc</if> <if test="priceDesc 
+		!= null"> order by price desc</if> <if test="tourDesc != null"> order by 
+		tour_id desc</if> <if test="size != null and rowNo != null"> limit #{rowNo}, 
+		#{size} </if> </select> -->
+
+
+	<!-- find Tour All -->
+	<select id="findAll" resultMap="tourMap" parameterType="map">
+		select distinct
+		t.tour_id, t.title, t.sub_heading, t.content, t.created_date, t.total_hour,
+		t.hash_tag, t.personnel, t.transportation, t.price, t.city_id,
+		t.location,
+		ci.city_id, ci.city_name, co.country_id, co.country_name, co.continent
+		from tour as t
 		join city as ci on t.city_id = ci.city_id
 		join country as co on ci.country_id = co.country_id
-   where t.tour_id = #{value};
-  </select>
-  
-  
-  <insert id="insert" parameterType="tour" useGeneratedKeys="true"  keyProperty="no">
-    insert into tour(title,sub_heading,content,total_hour,hash_tag,personnel,transportation,price,city_id,location) 
-    values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo},#{location})
-  </insert>
-  
-  
-  <insert id="insertTheme" parameterType="map">
-        insert into tour_theme(tour_id, theme_id)
-        values
-        <foreach collection="list" item="item" separator=" , ">
-            (#{item.tourNo}, #{item.themeNo})
-        </foreach>
- </insert>
- 
- <insert id="insertPhoto" parameterType="map">
-        insert into tour_guidance_photo(tour_id, photo_name, photo_path)
-        values
-        <foreach collection="list" item="item" separator=" , ">
-            (#{item.tourNo}, #{item.name}, #{item.path})
-        </foreach>
- </insert>
-  
-  <select id="countAll" resultType="int">
-    select count(*) from tour
-  </select> 
-  
-  <select id="findCountryByContinent" resultMap="countryMap" parameterType="string">
-    select * from country where continent = #{continent}
-  </select>
-  
-  <select id="findCityByCountry" resultMap="cityMap" parameterType="int">
-    select * from city where country_id = #{countryNo}
-  </select>
-  
-  <select id="findMaxPrice" resultType="int">
-    select price from tour where price=(select max(price) from tour) limit 1
-  </select>
-  
+		join tour_theme as toth on t.tour_id = toth.tour_id
+		join theme as th on toth.theme_id = th.theme_id
+		<where>
+			<if test="continentName != null">or continent = #{continentName}</if>
+			<if test="countryName != null">and country_name = #{countryName}</if>
+			<if test="cityName != null">and city_name = #{cityName}</if>
+			<if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
+			<if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
+			<if test="test !=null">
+				and th.theme in
+				<foreach collection="test" item="test" separator=","
+					open="(" close=")">#{test}</foreach>
+			</if>
+		</where>
+		<if test="priceAsc != null"> order by price asc</if>
+		<if test="priceDesc != null"> order by price desc</if>
+		<if test="tourDesc != null"> order by tour_id desc</if>
+		<if test="size != null and rowNo != null">
+			limit #{rowNo}, #{size}
+		</if>
+	</select>
+
+	<!-- find Tour ByNo -->
+	<select id="findByNo" resultMap="tourPhotoMap"
+		parameterType="int">
+		select
+		*
+		from tour as t
+		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+		join
+		tour_theme as toth on t.tour_id = toth.tour_id
+		join theme as th on
+		toth.theme_id = th.theme_id
+		join city as ci on t.city_id = ci.city_id
+		join country as co on ci.country_id = co.country_id
+		where t.tour_id = #{value};
+	</select>
+
+	<!-- insert Tour -->
+	<insert id="insert" parameterType="tour" useGeneratedKeys="true"
+		keyProperty="no">
+		insert into
+		tour(title,sub_heading,content,total_hour,hash_tag,personnel,transportation,price,city_id,location)
+		values(#{title},#{subHeading},#{content},#{totalHour},#{hashTag},#{personnel},#{transportation},#{price},#{cityNo},#{location})
+	</insert>
+
+	<!-- insert Theme -->
+	<insert id="insertTheme" parameterType="map">
+		insert into tour_theme(tour_id, theme_id)
+		values
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.tourNo}, #{item.themeNo})
+		</foreach>
+	</insert>
+
+	<!-- insert Photo -->
+	<insert id="insertPhoto" parameterType="map">
+		insert into tour_guidance_photo(tour_id, photo_name, photo_path)
+		values
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.tourNo}, #{item.name}, #{item.path})
+		</foreach>
+	</insert>
+
+	<!-- countAll tour -->
+	<select id="countAll" resultType="int">
+		select count(*) from tour
+	</select>
+
+	<!-- find Country By Continent -->
+	<select id="findCountryByContinent" resultMap="countryMap"
+		parameterType="string">
+		select * from country where continent = #{continent}
+	</select>
+
+	<!-- find City By Country -->
+	<select id="findCityByCountry" resultMap="cityMap"
+		parameterType="int">
+		select * from city where country_id = #{countryNo}
+	</select>
+
+	<!-- find MaxPrice -->
+	<select id="findMaxPrice" resultType="int">
+		select price from tour where price=(select max(price) from tour) limit 1
+	</select>
+
 </mapper>
 
 

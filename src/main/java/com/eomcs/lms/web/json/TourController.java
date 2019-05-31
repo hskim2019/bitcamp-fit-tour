@@ -23,7 +23,6 @@ import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Theme;
 import com.eomcs.lms.domain.Tour;
-import com.eomcs.lms.domain.TourComment;
 import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
 import com.eomcs.lms.service.TourCommentService;
@@ -34,267 +33,193 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/json/tour")
 public class TourController {
 
-    @Autowired TourService tourService;
-    @Autowired TourCommentService tourCommentService;
+  @Autowired TourService tourService;
+  @Autowired TourCommentService tourCommentService;
 
-    //tourDetail
-    @GetMapping("detail")
-    public Object detail(int no,
-            @RequestParam(defaultValue="1") int pageNo,
-            @RequestParam(defaultValue="3") int pageSize,
-            @RequestParam(defaultValue="0") int addDeleteCount) {
-
-        if (pageSize < 3 || pageSize > 8) 
-            pageSize = 3;
-
-        int rowCount = tourCommentService.countCommentbyTourNo(no, 0);
-        int totalPage;
-
-        if(rowCount == 0) {
-            totalPage = 0;
-            pageSize = 0;
-        } else {
-
-            totalPage = rowCount / pageSize;
-            if (rowCount % pageSize > 0)
-                totalPage++;
-        }
-
-        //    if (pageNo < 1) 
-        //      pageNo = 1;
-        //    else if (pageNo > totalPage)
-        //      pageNo = totalPage;
+  //Tour Detail
+  @GetMapping("detail")
+  public Object detail(int no) {
+    HashMap<String, Object> map = new HashMap<>();
+    Tour tour = tourService.get(no);
+    map.put("tour", tour);
+    return map;
+  }
 
 
-        HashMap<String, Object> map = new HashMap<>();
-        Tour tour = tourService.get(no);
-        List<TourComment> tourComments = tourCommentService.get(no, pageNo, pageSize, addDeleteCount, 0);
-        int commentAmount = tourCommentService.countCommentbyTourNo(no, 0);
+  //tourList
+  @GetMapping("list")
+  public Object list(
+      String continentName,
+      String countryName,
+      String cityName,
+      @RequestParam(defaultValue="0") int minPrice,
+      int maxPrice,
+      String orderby,
+      @RequestParam(value="theme[]", required=false)List<String> theme,
+      int minHour,
+      int maxHour,
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="3") int pageSize) {
 
-        map.put("pageNo", pageNo);
-        map.put("pageSize", pageSize);
-        map.put("totalPage", totalPage);
-        map.put("tour", tour);
-        map.put("commentAmount", commentAmount);
-        map.put("tourComment", tourComments);
+    String searchContinentName = null;
+    String searchCountryName = null;
+    String searchCityName = null;
 
-        return map;
+    if (continentName.length() > 0) { 
+      searchContinentName = continentName;
     }
 
-    //tourList
-    @GetMapping("list")
-    public Object list(
-            String continentName,
-            String countryName,
-            String cityName,
-            @RequestParam(defaultValue="0") int minPrice,
-            int maxPrice,
-            String orderby,
-            @RequestParam(value="theme[]", required=false)List<String> theme,
-            int minHour,
-            int maxHour,
-            @RequestParam(defaultValue="1") int pageNo,
-            @RequestParam(defaultValue="3") int pageSize) {
-
-        String searchContinentName = null;
-        String searchCountryName = null;
-        String searchCityName = null;
-        
-        if (continentName.length() > 0) { 
-            searchContinentName = continentName;
-        }
-        
-        if (countryName.length() > 0) {
-            searchCountryName = countryName;
-        }
-        if (cityName.length() > 0) {
-            searchCityName = cityName;
-        }
-        
-        int currMaxPrice = tourService.maxValue();
-        if (maxPrice == 0) {
-            maxPrice = currMaxPrice;
-        }
-        
-        if (pageSize < 3 || pageSize > 8) 
-            pageSize = 3;
-
-        List<Tour> list = tourService.search(
-        		searchContinentName, searchCountryName, searchCityName, 
-        		minPrice, maxPrice, 
-        		minHour, maxHour,
-        		theme);
-        int rowCount = list.size();
-        //int rowCount = tourService.size();
-        System.out.println("rowCount: " + rowCount);
-        
-        int totalPage = rowCount / pageSize;
-        if (totalPage == 0 || rowCount % pageSize > 0)
-            totalPage++;
-        System.out.println("totalPage: " + totalPage);
-        if (pageNo < 1) 
-            pageNo = 1;
-        else if (pageNo > totalPage)
-            pageNo = totalPage;
-        List<Tour> tours = tourService.list(
-                searchContinentName, searchCountryName, searchCityName, 
-                minPrice, maxPrice, 
-                minHour, maxHour,
-                theme,
-                orderby,
-                pageNo, pageSize);
-
-        HashMap<String,Object> content = new HashMap<>();
-        content.put("list", tours);
-        content.put("pageNo", pageNo);
-        content.put("pageSize", pageSize);
-        content.put("totalPage", totalPage);
-        content.put("rowCount", rowCount);
-        content.put("currMaxPrice", currMaxPrice);
-
-        return content;
+    if (countryName.length() > 0) {
+      searchCountryName = countryName;
     }
-    
-//  @PostMapping("add")
-//  public Object add(/* HttpServletRequest request, */Tour tour, String themeJson) throws IOException, ServletException {
-//       ObjectMapper mapper = new ObjectMapper();
-//       JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, Theme.class);
-//       ArrayList<Theme> list = mapper.readValue(themeJson, type);
-//       System.out.println(list);
-//       System.out.println(tour);
-//       System.out.println(themeJson);
-//    /*
-//     * StringBuffer json = new StringBuffer(); String line = null;
-//     * 
-//     * try { BufferedReader reader = request.getReader(); while((line = reader.readLine()) != null)
-//     * { json.append(line); }
-//     * 
-//     * System.out.println(json); }catch(Exception e) {
-//     * System.out.println("Error reading JSON string: " + e.toString()); }
-//     */
-//        
-//        
-//        tour.setTitle("투어123");
-//        tour.setSubHeading("안녕");
-//        tour.setTotalHour(30);
-//        tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
-//        tour.setPersonnel(5);
-//        tour.setTransportation("버스");
-//        tour.setPrice(300000);
-//        tour.setCityNo(1);
-//         
-//        
-//      HashMap<String,Object> content = new HashMap<String,Object>();
-//      try {
-//        tourService.add(tour);
-//        tourService.addTheme(tour.getNo(), 1);
-//        content.put("status", "success");
-//      } catch (Exception e) {
-//        content.put("status", "fail");
-//        content.put("message", e.getMessage());
-//      }
-//      return content;
-//    }
-    
-@PostMapping("add")
-public Object add(HttpServletRequest request /*,@RequestBody String json*/) throws IOException, ServletException {
-     Tour tour = new Tour();
-     List<TourGuidancePhoto> photos = new ArrayList<>();
-    
-     Collection<Part> parts = request.getParts();
-     for(Part part : parts) {
-       if (part.getContentType() == null) {
-         ObjectMapper mapper = new ObjectMapper();
-         tour = mapper.readValue(URLDecoder.decode(request.getParameter(part.getName()), "UTF-8"), Tour.class);
-         tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
-         System.out.println(tour);
-         
-       } else if (part.getSize() > 0) {
-         
-         
-         
-         String filename = UUID.randomUUID().toString();
-         String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
-         part.write(filepath);
-         
-         try {
+    if (cityName.length() > 0) {
+      searchCityName = cityName;
+    }
+
+    int currMaxPrice = tourService.maxValue();
+    if (maxPrice == 0) {
+      maxPrice = currMaxPrice;
+    }
+
+    if (pageSize < 3 || pageSize > 8) 
+      pageSize = 3;
+
+    List<Tour> list = tourService.search(
+        searchContinentName, searchCountryName, searchCityName, 
+        minPrice, maxPrice, 
+        minHour, maxHour,
+        theme);
+    int rowCount = list.size();
+    //int rowCount = tourService.size();
+    System.out.println("rowCount: " + rowCount);
+
+    int totalPage = rowCount / pageSize;
+    if (totalPage == 0 || rowCount % pageSize > 0)
+      totalPage++;
+    System.out.println("totalPage: " + totalPage);
+    if (pageNo < 1) 
+      pageNo = 1;
+    else if (pageNo > totalPage)
+      pageNo = totalPage;
+    List<Tour> tours = tourService.list(
+        searchContinentName, searchCountryName, searchCityName, 
+        minPrice, maxPrice, 
+        minHour, maxHour,
+        theme,
+        orderby,
+        pageNo, pageSize);
+
+    HashMap<String,Object> content = new HashMap<>();
+    content.put("list", tours);
+    content.put("pageNo", pageNo);
+    content.put("pageSize", pageSize);
+    content.put("totalPage", totalPage);
+    content.put("rowCount", rowCount);
+    content.put("currMaxPrice", currMaxPrice);
+
+    return content;
+  }
+
+
+  //Tour Add
+  @PostMapping("add")
+  public Object add(HttpServletRequest request /*,@RequestBody String json*/) throws IOException, ServletException {
+    Tour tour = new Tour();
+    List<TourGuidancePhoto> photos = new ArrayList<>();
+
+    Collection<Part> parts = request.getParts();
+    for(Part part : parts) {
+      if (part.getContentType() == null) {
+        ObjectMapper mapper = new ObjectMapper();
+        tour = mapper.readValue(URLDecoder.decode(request.getParameter(part.getName()), "UTF-8"), Tour.class);
+        tour.setHashTag(UUID.randomUUID().toString().substring(0, 5));
+        System.out.println(tour);
+
+      } else if (part.getSize() > 0) {
+
+        String filename = UUID.randomUUID().toString();
+        String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
+        System.out.println(filepath);
+        part.write(filepath);
+
+        try {
           makeThumbnail(filepath);
           makeThumbnail(filepath);
         } catch (Exception e) {
           System.out.println("썸네일 이미지만드는중 에러 발생");
           e.printStackTrace();
         }
-         
-         TourGuidancePhoto tourGuidancePhoto = new TourGuidancePhoto();
-         tourGuidancePhoto.setName(filename + "THUMB");
-         tourGuidancePhoto.setPath(filepath + "THUMB");
-         photos.add(tourGuidancePhoto);
-       }
-     }
 
-     System.out.println(tour);
-     HashMap<String,Object> content = new HashMap<String,Object>();
-     
-     try {
-       tourService.add(tour);
-       List<Theme> themes = tour.getTheme();
-       List<TourTheme> TourThemes = new ArrayList<>();
-       for(Theme theme : themes ) {
-         TourTheme tourTheme = new TourTheme();
-         tourTheme.setTourNo(tour.getNo());
-         tourTheme.setThemeNo(theme.getNo());
-         TourThemes.add(tourTheme);
-       }
-       tourService.addTheme(TourThemes);
-       
-       for(TourGuidancePhoto tourGuidance : photos) {
-         tourGuidance.setTourNo(tour.getNo());
-       }
-       tourService.addPhoto(photos);
-       
-       content.put("status", "success");
-       content.put("tourNo", tour.getNo());
-     } catch (Exception e) {
-       content.put("status", "fail");
-       content.put("message", e.getMessage());
-     }
-     return content;
-}
-  
+        TourGuidancePhoto tourGuidancePhoto = new TourGuidancePhoto();
+        tourGuidancePhoto.setName(filename + "THUMB");
+        tourGuidancePhoto.setPath(filepath + "THUMB");
+        photos.add(tourGuidancePhoto);
+      }
+    }
+
+    System.out.println(tour);
+    HashMap<String,Object> content = new HashMap<String,Object>();
+
+    try {
+      tourService.add(tour);
+      List<Theme> themes = tour.getTheme();
+      List<TourTheme> TourThemes = new ArrayList<>();
+      for(Theme theme : themes ) {
+        TourTheme tourTheme = new TourTheme();
+        tourTheme.setTourNo(tour.getNo());
+        tourTheme.setThemeNo(theme.getNo());
+        TourThemes.add(tourTheme);
+      }
+      tourService.addTheme(TourThemes);
+
+      for(TourGuidancePhoto tourGuidance : photos) {
+        tourGuidance.setTourNo(tour.getNo());
+      }
+      tourService.addPhoto(photos);
+
+      content.put("status", "success");
+      content.put("tourNo", tour.getNo());
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  //Country List
   @GetMapping("countrylist")
   public Object countryList(String continent) {
-    
+
     List<Country> countryList =tourService.listCountry(continent);
     HashMap<String,Object> content = new HashMap<String,Object>();
     content.put("countryList", countryList);
     return content;
   }
-  
+
   @GetMapping("citylist")
   public Object cityList(int countryNo) {
-    
+
     List<City> cityList =tourService.listCity(countryNo);
     HashMap<String,Object> content = new HashMap<String,Object>();
     content.put("cityList", cityList);
     return content;
   }
 
-    //  tourUpdate
-    //  @PostMapping("update")
-    //  public Object update(Tour tour) {
-    //    HashMap<String,Object> content = new HashMap<>();
-    //    try {
-    //      if (tourService.update(tour) == 0) 
-    //        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-    //      content.put("status", "success");
-    //      
-    //    } catch (Exception e) {
-    //      content.put("status", "fail");
-    //      content.put("message", e.getMessage());
-    //    }
-    //    return content;
-    //  }
-  
+  //  tourUpdate
+  //  @PostMapping("update")
+  //  public Object update(Tour tour) {
+  //    HashMap<String,Object> content = new HashMap<>();
+  //    try {
+  //      if (tourService.update(tour) == 0) 
+  //        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+  //      content.put("status", "success");
+  //      
+  //    } catch (Exception e) {
+  //      content.put("status", "fail");
+  //      content.put("message", e.getMessage());
+  //    }
+  //    return content;
+  //  }
+
   //  @GetMapping("delete")
   //  public Object delete(int no) {
   //  
@@ -311,23 +236,21 @@ public Object add(HttpServletRequest request /*,@RequestBody String json*/) thro
   //    return content;
   //  }
   //  
-  
-  
+
+
   private void makeThumbnail(String filePath) throws Exception {
-    // 저장된 원본파일로부터 BufferedImage 객체를 생성합니다. 
     BufferedImage srcImg = ImageIO.read(new File(filePath)); 
-    // 썸네일의 너비와 높이 입니다. 
     int dw = 580, dh = 400;  
-    int ow = srcImg.getWidth(); // 원본 이미지의 너비와 높이 입니다. 
-    int oh = srcImg.getHeight(); // 원본 너비를 기준으로 하여 썸네일의 비율로 높이를 계산합니다.
+    int ow = srcImg.getWidth(); 
+    int oh = srcImg.getHeight();
     int nw = ow; 
-    int nh = (ow * dh) / dw; // 계산된 높이가 원본보다 높다면 crop이 안되므로 // 원본 높이를 기준으로 썸네일의 비율로 너비를 계산합니다. 
-    if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } // 계산된 크기로 원본이미지를 가운데에서 crop 합니다.
-    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh); // crop된 이미지로 썸네일을 생성합니다.
+    int nh = (ow * dh) / dw; 
+    if(nh > oh) { nw = (oh * dw) / dh; nh = oh; } 
+    BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh); 
     BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
     File thumbFile = new File(filePath + "THUMB"); 
     ImageIO.write(destImg, "jpg", thumbFile);
-    }
-  
+  }
+
 
 }

@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
-  <title>Insert title here</title>
+  <title>FITTOUR - 투어상품추가</title>
   <!-- materialize -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
     media="screen,projection" />
@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="add.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
-
 </head>
 
 <body>
@@ -384,22 +383,22 @@
               </blockquote>
             </div>
           </div>
-          
+
           <div class="row mt20 pr40 pl40">
             <div class="col l8 center">
-          <div class="pac-card" id="pac-card">
-            <div id="pac-container">
-              <input id="pac-input" type="text" placeholder="만나는 장소를 검색하세요!">
+              <div class="pac-card" id="pac-card">
+                <div id="pac-container">
+                  <input id="pac-input" type="text" placeholder="만나는 장소를 검색하세요!">
+                </div>
+              </div>
+              <div id="map"></div>
+              <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+              </div>
+              <div id="current"></div>
             </div>
-          </div>
-          <div id="map"></div>
-          <div id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name" class="title"></span><br>
-            <span id="place-address"></span>
-          </div>
-          <div id="current"></div>
-          </div>
           </div>
 
 
@@ -436,6 +435,7 @@
   <!-- footer -->
   <footer class="bit-main-footer page-footer teal"></footer>
 </body>
+
 <!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -451,12 +451,12 @@
 <script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<!-- goglemap api -->
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
 <script src="add.js"></script>
+<!-- goglemap api -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"></script>
 
 </html>

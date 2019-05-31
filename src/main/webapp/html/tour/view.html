@@ -1,124 +1,136 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
-  <title>게시물</title>
-  <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+  <title>FITTOUR - 투어상품</title>
+  <!-- materialize css -->
+  <link type="text/css" rel="stylesheet"
+    href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap-grid.css">
+  <!-- fontawesome -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <!-- jquery-ui -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
+  <!-- materialize font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- fittour css -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="stylesheet" href="view.css">
+  <!-- head icon -->
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
-<body>
-<header class="bit-main-header"></header>
 
-<div class="container">
-  
-  <!-- breadcrumb -->
-  <nav id="clean" class="mt-5">
+<body>
+  <!-- header -->
+  <header class="bit-main-header"></header>
+
+  <div class="container">
+
+    <!-- breadcrumb -->
+    <nav id="clean" class="mt-5">
       <div class="nav-wrapper">
         <div class="col l12 pl0" id="breadcrumb-list">
-          <a href="#" class="breadcrumb" id="firstcrumb"></a> 
-          <a href="#" class="breadcrumb" id="secondcrumb"></a> 
+          <a href="#" class="breadcrumb" id="firstcrumb"></a>
+          <a href="#" class="breadcrumb" id="secondcrumb"></a>
           <a href="#" class="breadcrumb" id="thirdcrumb"></a>
         </div>
       </div>
     </nav>
-  
-  <!-- title -->
-  <div class="row">
-    <div class="col-12">
-      <h1 id="title" class="mt0 mb5"></h1>
+
+    <!-- title -->
+    <div class="row">
+      <div class="col-12">
+        <h1 id="title" class="mt0 mb5"></h1>
+      </div>
     </div>
-  </div>
-  
-  <!-- subHeading -->
-  <div class="row">
-  <div id="subHeading" class="col-12"></div>
-  </div>
 
-  <!-- theme -->
-  <div class="row ml5">
-    <div id="themeDiv" class="col"></div>
-  </div>
-  
-  <div class="row mt-1 mb-5">
-    <!-- img -->
-    <div class="col-7 slider">
-    <ul id="image" class="slides">
-    </ul>
-  </div>
+    <!-- subHeading -->
+    <div class="row">
+      <div id="subHeading" class="col-12"></div>
+    </div>
 
-    <div class="col-5">
+    <!-- theme -->
+    <div class="row ml5">
+      <div id="themeDiv" class="col"></div>
+    </div>
 
-      <!-- date -->
-      <div class="row ml-5 mt-3">
-        <div class="col-2 pt-3">
-          <i class="far fa-calendar-alt"></i>
-        </div>
-        <div class="input-field col-10">
-          <div>
-            <label>날짜 선택</label><input type="text" class="datepicker">
+    <div class="row mt-1 mb-5">
+      <!-- img -->
+      <div class="col-7 slider">
+        <ul id="image" class="slides">
+        </ul>
+      </div>
+
+      <div class="col-5">
+
+        <!-- date -->
+        <div class="row ml-5 mt-3">
+          <div class="col-2 pt-3">
+            <i class="far fa-calendar-alt"></i>
+          </div>
+          <div class="input-field col-10">
+            <div>
+              <label>날짜 선택</label><input type="text" class="datepicker">
+            </div>
           </div>
         </div>
-      </div>
-        
-     <!-- personnel -->
-     <div class="row ml-5 mt-3">
-       <div class="col-2"><i class="fas fa-users"></i></div>
-         <div class="input-field  col s10">
-           <select id="personnel">
-           </select>
-           <label>인원 선택</label>
-         </div>
-       </div>
-        
-       
-      <!-- price -->
-      <div class="row ml-5 mt-4">
-        <div class="col-6"></div>
-        <div id="price" class="col-6">
-        <i class="fas fa-won-sign"></i>
-        </div>
-      </div>
-      
-      <div class="row ml-4 mt-4">
-        <div class="offset-4">
-        <!-- time -->
-        <span><i class="fas fa-stopwatch"></i></span>
-        <span id="totalHour" class="mr-4"></span>
-        <!-- transportaion -->
-        <span><i id="transportation-icon"></i></span>
-        <span id="transportation"></span>
-        </div>
-      </div>
-      
-      <div class="row ml-4 mt-4">
-        <div class="col-12">
-        <a class="waves-effect waves-light btn-large "><i class="material-icons right">favorite_border</i>위시리스트에 담기</a>
-        <a id="reservation-btn" href="#" class="waves-effect waves-light btn-large">예약하기</a>
-        </div>
-      </div>
-      
-    </div> <!-- row mt-5 mb-5 -->
-  </div> <!-- row -->
-  
-<div class= "row mt-5 mb-5">
-  <div class="col-7">
-  <p id=content></p>
-  </div>
-</div>
 
-<div class= "row mt-5 mb-5">
-  <div class="col-12">
-    <h4>만나는 장소</h4>
-  </div>
-</div>
+        <!-- personnel -->
+        <div class="row ml-5 mt-3">
+          <div class="col-2"><i class="fas fa-users"></i></div>
+          <div class="input-field  col s10">
+            <select id="personnel">
+            </select>
+            <label>인원 선택</label>
+          </div>
+        </div>
 
-<!--   <div class="form-group row bit-view-item">
+
+        <!-- price -->
+        <div class="row ml-5 mt-4">
+          <div class="col-6"></div>
+          <div id="price" class="col-6">
+            <i class="fas fa-won-sign"></i>
+          </div>
+        </div>
+
+        <div class="row ml-4 mt-4">
+          <div class="offset-4">
+            <!-- time -->
+            <span><i class="fas fa-stopwatch"></i></span>
+            <span id="totalHour" class="mr-4"></span>
+            <!-- transportaion -->
+            <span><i id="transportation-icon"></i></span>
+            <span id="transportation"></span>
+          </div>
+        </div>
+
+        <div class="row ml-4 mt-4">
+          <div class="col-12">
+            <a class="waves-effect waves-light btn-large "><i class="material-icons right">favorite_border</i>위시리스트에
+              담기</a>
+            <a id="reservation-btn" href="#" class="waves-effect waves-light btn-large">예약하기</a>
+          </div>
+        </div>
+
+      </div> <!-- row mt-5 mb-5 -->
+    </div> <!-- row -->
+
+    <div class="row mt-5 mb-5">
+      <div class="col-7">
+        <p id=content></p>
+      </div>
+    </div>
+
+    <div id="place-div" class="row mt-5 mb-5">
+      <div class="col-12">
+        <h4>만나는 장소</h4>
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <!--   <div class="form-group row bit-view-item">
     <label for="personnel" class="col-2 col-form-label">인원</label>
     <div class="col-10">
       <input type="text" readonly class="form-control-plaintext"
@@ -141,54 +153,56 @@
           id="theme">
     </div>
   </div> -->
-  
-<div class= "row mt-5 mb-5">
-  
-  <div id="comment-dive" class="col-7">
-<form>
-  <!-- commentAmout -->
-  <div class="form-group row mt-5 mb-3">
-    <div class="col-12">
-    <h4 id=commentAmount></h4>
-    </div>
-  </div>
+
+    <div class="row mt-5 mb-5">
+
+      <div id="comment-dive" class="col-7">
+        <form>
+          <!-- commentAmout -->
+          <div class="form-group row mt-5 mb-3">
+            <div class="col-12">
+              <h4 id=commentAmount></h4>
+            </div>
+          </div>
 
 
-  <div class="form-group row bit-invisible " id="comment-textarea" >
-  <div class="col-12 p0">
-    <div class="input-field" id="comment-inputfield">
-       <i class="material-icons prefix">mode_edit</i>
-      <textarea id="comment-add" class="materialize-textarea" maxlength="30" data-length="30" name="content" ></textarea>
-      <label for="comment-add">Messeage</label>
+          <div class="form-group row bit-invisible " id="comment-textarea">
+            <div class="col-12 p0">
+              <div class="input-field" id="comment-inputfield">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="comment-add" class="materialize-textarea" maxlength="30" data-length="30"
+                  name="content"></textarea>
+                <label for="comment-add">Messeage</label>
+              </div>
+              <button type="button" id="comment-add-button" class="btn-large disabled">등록</button>
+            </div>
+          </div>
+
+
+          <!-- comment -->
+          <div id=comment class="form-group"></div>
+
+
+          <!-- next-comment-btn -->
+          <div class="form-group row mt-3">
+            <a href="#" id="more-comment-btn" class="col-12">댓글 더보기</a>
+          </div>
+
+
+          <div class="form-group row">
+            <div class="col-10">
+              <a class="btn btn-primary" href='index.html'>목록</a>
+            </div>
+          </div>
+
+        </form>
       </div>
-      <button type="button" id="comment-add-button" class="btn-large disabled">등록</button>
-      </div>
-  </div>
-
-    
-  <!-- comment -->
-  <div id=comment class="form-group"></div>
-
-
-  <!-- next-comment-btn -->
-  <div class="form-group row mt-3">
-  <a href="#" id="more-comment-btn" class="col-12">댓글 더보기</a>
-  </div>
-
-
-  <div class="form-group row">
-    <div class="col-10">
-      <a class="btn btn-primary" href='index.html'>목록</a>
     </div>
-  </div>
-  
-</form>
-</div>
-</div>
-</div><!-- .container -->
-<footer class="bit-main-footer page-footer teal"></footer>
+  </div><!-- .container -->
+  <!-- footer -->
+  <footer class="bit-main-footer page-footer teal"></footer>
 
-<script id="comment-template" type="text/x-handlebars-template">
+  <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
 
 <div class="commentRow row mt-5" id="{{no}}">
@@ -218,7 +232,7 @@
 {{/each}}
 </script>
 
-<script id="reComment-template" type="text/x-handlebars-template">
+  <script id="reComment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
 <div class="reCommentRow row ml-5 mt-5 mb-5" style="font-size:15px;" id="{{no}}">
 
@@ -245,16 +259,24 @@
 </div>
 {{/each}}
 </script>
-
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/ulg/popper.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
-<script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-<script src="../header.js"></script>
-<script src="../footer.js"></script>
-<script src="comment.js"></script>
-<script src="view.js"></script>
+  <!-- jquery -->
+  <!-- fittour css -->
+  <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/ulg/popper.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <!-- materialize css -->
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- handlebars -->
+  <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="../header.js"></script>
+  <script src="../footer.js"></script>
+  <script src="comment.js"></script>
+  <script src="view.js"></script>
+  <!-- google map -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8"></script>
 </body>
+
 </html>

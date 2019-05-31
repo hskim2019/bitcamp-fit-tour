@@ -1,10 +1,20 @@
 var param = location.href.split('?')[1],
-    tourNo = param.split('=')[1];
-    
+    tourNo = param.split('=')[1],
+	tlocation;
+
 tourList(tourNo);
 commentList(tourNo, pageNo, addDeleteCount, 0);
 
-//TourList
+//ready
+$(document).ready(function(){
+	  $('.datepicker').datepicker({
+	    format : 'yyyy년 mm월 dd일',
+	  });
+	  $('textarea#comment-add').characterCounter();
+	  $(".dropdown-trigger").dropdown();
+	});
+
+//load tourList
 function tourList(tourNo) {
 
   $.getJSON('../../app/json/tour/detail?no=' + tourNo,
@@ -23,6 +33,8 @@ function tourList(tourNo) {
     $('#firstcrumb').html(obj.tour.country.continentName);
     $('#secondcrumb').html(obj.tour.country.countryName);
     $('#thirdcrumb').html(obj.tour.city.cityName);
+    tlocation = obj.tour.location;
+    initMap(tlocation);
     
     for(var i = 0; i < obj.tour.theme.length; i++){
       $('#themeDiv').append($('<div class="chip ml0 mr5">' + obj.tour.theme[i].theme + '</div>'));
@@ -42,7 +54,7 @@ function tourList(tourNo) {
   });
 }
 
-// Add PersonnelOption
+// add personnelOption
 function addPersonnelOption(personnel, price) {
   for(var i=1; i <= personnel; i++){
     $('<option value="'+ i +'">' + i +'명</option>').appendTo($('#personnel'));
@@ -55,7 +67,7 @@ function addPersonnelOption(personnel, price) {
 }
 
 
-// Add TrpansportaionIcon
+// add trpansportaionIcon
 function addTransportaionIcon(transportation) {
   var transportaionIconTag = $('#transportation-icon');
   
@@ -76,18 +88,7 @@ function addTransportaionIcon(transportation) {
 }
 
 
-$(document).ready(function(){
-  $('.datepicker').datepicker({
-    format : 'yyyy년 mm월 dd일',
-  });
-});
-
-$(document).ready(function() {
-  $('textarea#comment-add').characterCounter();
-  $(".dropdown-trigger").dropdown();
-});
-
-
+// add click event reservation button
 $('#reservation-btn').click((e) => {
   e.preventDefault();
   console.log(tourNo);
@@ -95,3 +96,21 @@ $('#reservation-btn').click((e) => {
   var personnel = ($('.selected').children().first().html().replace(/[^0-9]/g,""));
   location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
 });
+
+// google map
+function initMap(tlocation) {
+	  var latLag = {lat : (Number)(tlocation.split(',')[0]), lng : (Number)(tlocation.split(',')[1])};
+	  
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: latLag,
+    disableDefaultUI: true
+  });
+  
+  var marker = new google.maps.Marker({
+      position: latLag,
+      animation: google.maps.Animation.DROP,
+      map: map,
+      title: '여기서 만나요!'
+    });
+}

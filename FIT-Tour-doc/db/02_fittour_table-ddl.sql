@@ -156,8 +156,8 @@ total_hour     INTEGER      NOT NULL COMMENT '총소요시간', -- 총소요시�
 hash_tag       VARCHAR(255) NOT NULL COMMENT '상품 해시 태그', -- 상품 해시 태그
 personnel      INTEGER      NOT NULL COMMENT '인원', -- 인원
 transportation VARCHAR(25)  NOT NULL COMMENT '주 이동수단', -- 주 이동수단
-price          INTEGER      NOT NULL COMMENT '가격' -- 가격
-location       varchar      NULL COMMENT '만나는장소' -- 만나는 장소
+price          INTEGER      NOT NULL COMMENT '가격', -- 가격
+location       VARCHAR(255) NULL COMMENT '만나는장소' -- 만나는 장소
 )
 COMMENT '상품';
 

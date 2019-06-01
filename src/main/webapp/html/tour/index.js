@@ -331,5 +331,19 @@ function initOptionSelected() {
   }
 
 
-
+  $('input[name="theme"]').change(function() {
+	    var value = $(this).val();              // value
+	    var checked = $(this).prop('checked');  // checked 상태 (true, false)
+	    var $label = $(this).next();            // find a label element
+	 
+	    // checked ? $label.css('background-color', value) : $label.css('background-color', 'white');
+	    if(checked) {
+	    	console.log('checked');
+	       theme.push($(e.target).html());
+	    }    
+	         else {
+	    	console.log('unchecked');
+	        $label.css('background-color', 'white');    // label의 배경색을 초기화 한다.
+	         }
+	});
 

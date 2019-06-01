@@ -5,8 +5,12 @@ var fileNames;
 $(document).ready(function () {
   $('input[type="text"]').characterCounter();
   $('select').formSelect();
-  $('.tabs').tabs({ duration: 800,/*swipeable: false*/ });
+  $('.tabs').tabs({ duration: 800, /*swipeable: true*/});
   $('.modal').modal({ opacity: 0.3, });
+  $('.datepicker').datepicker({
+    format: 'yyyy년 mm월 dd일',
+  });
+
 
   $('#next-swipe-1').click(function () {
     $('.tabs').tabs('select', 'swipe-1');
@@ -112,13 +116,11 @@ $(document).ready(function () {
     $('.tabs').tabs('select', 'swipe-4');
   });
 
-  $('.datepicker').datepicker({
-    format: 'yyyy년 mm월 dd일',
-  });
 
-});
+}); // ready
 
 
+// check noplace
 $("#noplace").change(function () {
 
   if ($("#noplace").is(":checked")) {

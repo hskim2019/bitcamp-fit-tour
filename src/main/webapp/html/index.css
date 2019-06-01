@@ -1,0 +1,75 @@
+nav {z-index: 3;}
+#main {z-index: 2;}
+#nav-bg {z-index: 1;}
+
+nav {
+  background-color: transparent !important;
+  position: fixed !important;
+}
+
+/* img header */
+#main {
+  position: relative;
+  background-image: url("../images/main.jpg");
+  padding: 1em;
+  height: 40vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+#main h1 {
+    font-size: 2em;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight:800;
+    padding-top: 10vh;
+}
+
+/* body */
+body {
+  background: #eee;
+}
+
+#about {
+  background: #eee;
+  height: 70em;
+  padding: 5em 0;
+}
+
+
+/* searchBar */
+input[type="search"] {
+  margin-left: 270px !important;
+  padding: 20px !important;
+  border: white 1px solid !important;
+  font-size: 1em !important;
+  width: 40% !important;
+  height: 0 !important;
+  outline: none !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, .7) !important;
+  transition: background .25s, color .25s, box-shadow .25s !important;
+  border-radius: 4px !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.03) !important;
+  font-weight: 200 !important;
+}
+
+input[type="search"]::placeholder {
+  color: white !important;
+  font-weight: 200 !important;
+}
+input[type="search"]:focus::placeholder {
+  color: rgba(59, 61, 77, 0.63) !important;
+}
+
+input[type="search"]:hover {
+  background: rgba(255, 255, 255, .27) !important;
+}
+
+input[type="search"]:focus {
+  color: #3a3c4c !important;
+  background: #fff !important;
+}
+

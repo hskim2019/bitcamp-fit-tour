@@ -1,107 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>FitTour</title>
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- jquery-ui -->
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
+  <!-- materialize -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet"
+    href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
+  <!-- fittour -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/index.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css"> 
+  <link rel="stylesheet" href="index.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 </head>
+
 <body>
 
-<div class="bit-index-bg">
-<!-- navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark ">
+<!-- navbar header -->
+<header class="bit-main-header"></header>
+<div id='nav-bg'></div>
 
-  <!-- logo -->
-  <a class="navbar-brand bit-logo" href="/bitcamp-fit-tour/html/index.html"></a>
-  
-  <!-- navbar button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <!-- navbar list -->
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/notice/index.html">공지사항</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/member/index.html">회원관리</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/index.html">투어</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/tour/add.html">투어등록</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/bitcamp-fit-tour/html/reservation/index.html">예약</a>
-      </li>
-    </ul>
-    
-    <!-- not login state -->
-    <div id="bit-not-login-state" class="bit-invisible">
-      <a id="login-menu" class="btn btn-success btn-sm" href='/bitcamp-fit-tour/html/auth/login.html'>로그인</a>
-      <a id="login-menu" class="btn btn-danger btn-sm" href='/bitcamp-fit-tour/html/auth/signup.html'>회원가입</a>
-    </div>
-    
-    <!-- login state -->
-    <div id="bit-login-state" class="bit-invisible">
-      <img id="login-userphoto" class="img-rounded mr-sm-2" src='/bitcamp-fit-tour/images/default.jpg'>
-      <span id="login-username" class="mr-sm-2"></span>
-      <a id="logout-menu" class="btn btn-dark btn-sm" href='#'>로그아웃</a> 
-    </div>
+<!-- img header -->
+<div id="main" class="white-text">
+  <h1>어디로 떠나세요?</h1>
+  <div class="container">
+  <input type="search" id="search" placeholder="여행지나 상품을 검색해보세요!">
   </div>
-</nav>
+</div>
 
-<!-- Search -->
-<form class="form-inline col-sm-5 offset-sm-4 mt-5" style="opacity: 0.8;">
-  <i class="fas fa-search" aria-hidden="true"></i>
-  <input class="form-control form-control ml-3 w-75" type="text" placeholder="여행지나 상품을 검색해보세요!" >
-</form>
 
-</div> <!-- bit-index-bg -->
-
-<!-- container -->
-<div class="container">
-
-<!-- card group -->
-  <div class="card-group mt-sm-5">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">미서부</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">유럽</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">일본/아시아/그외지역</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
+<section id='about'>
+  <div class='container'>
     
-  </div><!-- card group -->
-</div> <!-- container -->
+  </div>
+</section>
 
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.slim.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- footer -->
+<footer class="bit-main-footer page-footer grey"></footer>
+  
+  
+<!----- script ----->
+<!-- jquery -->
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/ulg/popper.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+<!-- materialize -->
+<script type="text/javascript"
+  src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<!-- fittour -->
+<script src="/bitcamp-fit-tour/html/header.js"></script>
+<script src="/bitcamp-fit-tour/html/footer.js"></script>
 <script src="index.js"></script>
 </body>
+
 </html>

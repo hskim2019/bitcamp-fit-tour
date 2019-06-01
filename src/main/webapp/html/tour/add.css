@@ -3,7 +3,7 @@ i, .material-icons {
 }
 
 #form-panel {
-  
+  /* pointer-events: none;  */
 }
 
 .dropdown-content {

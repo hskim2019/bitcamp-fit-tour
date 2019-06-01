@@ -1,16 +1,17 @@
 @charset "UTF-8";
 
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* div {
 	border:1px solid red;
 } */
 
-body {
-  
-}
+/* body {
+  background: #eee;
+} */
 
-body > header {
-  min-height: 60px;
-}
     
 .container > h1 {
   height: 40px;
@@ -506,6 +507,10 @@ div.container {
 
 .ml110 {
   margin-left: 110px!important
+}
+
+.ml180 {
+  margin-left: 180px!important
 }
 
 

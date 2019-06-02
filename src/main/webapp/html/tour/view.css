@@ -36,7 +36,7 @@
 	
 }
 
-.commentRow img {
+.comment-row img {
   height: 35px;
   background-position: center;
   border-radius: 10px;
@@ -95,3 +95,51 @@ hr {
 .indicators .indicator-item.active {
     background-color: #26a69a !important;
 }
+
+h5 {
+  display: inline-block;
+}
+
+/* floating button */
+.fixed-action-btn {
+  position: relative;
+  height: 0;
+}
+
+.btn-floating i {
+  color: black;
+  background-color: white;
+}
+
+.btn-floating {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn-floating:hover {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.fixed-action-btn.direction-bottom ul {
+  top: 40px;
+}
+.btn-floating-icon {
+  font-size: 30px !important;
+}
+/*     */
+
+/* comment */
+.bit-member {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.bit-created-date {
+  font-size: 0.9rem;
+  color: #757575;
+}
+}
+
+/*     */
+

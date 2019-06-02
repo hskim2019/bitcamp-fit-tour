@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="view.css">
   <!-- head icon -->
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <body>
   <!-- header -->
@@ -64,7 +66,7 @@
 
     <div class="row mt10 mb50">
 
-      <!-- img -->
+      <!-- image -->
       <div class="col l7">
 
         <div class="slider">
@@ -130,90 +132,78 @@
           </div>
         </div>
 
-      </div>
-    </div>
-    <hr>
-    <div class="row mt-5 mb-5">
-      <div class="col-7">
-        <p id=content></p>
-      </div>
-    </div>
-    <hr>
-    <div id="place-div" class="row mt-5 mb-5">
-      <div class="col-12">
-        <h4>만나는 장소</h4>
-        <div id="map"></div>
-      </div>
-    </div>
-
-    <!--   <div class="form-group row bit-view-item">
-    <label for="personnel" class="col-2 col-form-label">인원</label>
-    <div class="col-10">
-      <input type="text" readonly class="form-control-plaintext"
-          id="personnel">
-    </div>
-  </div>
-  
-  <div class="form-group row">
+        <!--   <div class="form-group row">
     <label for="hashTag" class="col-2 col-form-label">상품 해시 태그</label>
     <div class="col-10">
       <input type="text" readonly class="form-control-plaintext"
           id="hashTag">
     </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="theme" class="col-2 col-form-label">테마</label>
-    <div class="col-10">
-      <input type="text" readonly class="form-control-plaintext"
-          id="theme">
-    </div>
   </div> -->
-    <hr>
-    <div class="row mt-5 mb-5">
 
-      <div class="col-7">
-        <form>
-          <!-- commentAmout -->
-          <div class="form-group row mt-5 mb-3">
-            <div class="col-12">
-              <h4 id=commentAmount></h4>
+      </div>
+    </div>
+    
+    <!--*** content section ***-->
+    <hr>
+    <!-- contetent -->
+    <div class="row mt30">
+      <div class="col l12">
+        <p id=content></p>
+      </div>
+    </div>
+    
+    <!--*** place section ***-->
+    <hr>
+    <!-- h -->
+    <div class="row mt30">
+      <div class="col-12">
+        <i class="fas fa-map-marked-alt fa-2x"></i>
+        <h5 class="ml15">만나는 장소</h5>
+      </div>
+    </div>
+    <!-- place -->
+    <div id="place-div" class="row mt30 mb30">
+      <div class="col-12">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <!--*** comment section ***-->
+    <hr>
+          <!-- h comment amount -->
+          <div class="row mt50">
+            <div class="co l12">
+              <i class="fas fa-comments fa-2x"></i>
+              <h5 class="ml15" id=commentAmount></h5>
             </div>
           </div>
-
-
-          <div class="form-group row bit-invisible " id="comment-textarea">
-            <div class="col-12 p0">
+         
+         <!-- commnet add -->
+        <div id="comment-add-div" class="row mt30 mb0 bit-invisible">
+            <div class="col-12">
+          <div class="form-group">
               <div class="input-field" id="comment-inputfield">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="comment-add" class="materialize-textarea" maxlength="30" data-length="30"
+                <textarea id="comment-add" class="materialize-textarea" maxlength="50" data-length="50"
                   name="content"></textarea>
-                <label for="comment-add">Messeage</label>
+                <label for="comment-add">공개 댓글 추가..</label>
               </div>
-              <button type="button" id="comment-add-button" class="btn-large disabled">등록</button>
+              <button type="button" id="comment-add-button" class="waves-effect waves-light btn-large disabled">댓글</button>
             </div>
           </div>
-
-
+        </div>
+        
+        
           <!-- comment -->
-          <div id=comment class="form-group"></div>
+          <div id="comment"></div>
 
 
           <!-- next-comment-btn -->
-          <div class="form-group row mt-3">
-            <a href="#" id="more-comment-btn" class="col-12">댓글 더보기</a>
+          <div class="form-group row mt30">
+            <a href="#" id="more-comment-btn" class="col-12"></a>
           </div>
 
 
-          <div class="form-group row">
-            <div class="col-10">
-              <a class="btn btn-primary" href='index.html'>목록</a>
-            </div>
-          </div>
-
-        </form>
-      </div>
-    </div>
   </div><!-- .container -->
   <!-- footer -->
   <footer class="bit-main-footer page-footer grey"></footer>
@@ -221,29 +211,52 @@
   <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
 
-<div class="commentRow row mt-5" id="{{no}}">
-
-    <div class="col-10">
-      <img class="img-rounded mr-2" src='/bitcamp-fit-tour/upload/member/{{member.photo}}'>
-      <span class="bit-member mr-2" id="{{member.no}}">{{member.name}}</span>{{createdDate}}
+<div class="comment-row row mt50" id="{{no}}">
+    
+    <div class="col">
+      <img class="img-rounded" src='/bitcamp-fit-tour/upload/member/{{member.photo}}'>
     </div>
 
-    <div class="col-2">
-      <a href="#" class="bit-comment-update-btn bit-invisible">수정</a>
-      <a href="#" class="bit-comment-delete-btn bit-invisible">삭제</a>
+    <div class ="col l11 bit-comment-name-date-content">
+      <div class="row">
+
+        <div class="col left pl5">
+          <span class="bit-member" id="{{member.no}}">{{member.name}}</span>
+          <span class="bit-created-date ml10">{{createdDate}}</span>
+        </div>
+
+        <div id="bit-action-btn"class="col right bit-invisible">
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large">
+              <i class="material-icons btn-floating-icon">more_horiz</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating bit-comment-delete-btn"><i class="material-icons">delete</i>삭제</a></li>
+              <li><a class="btn-floating bit-comment-update-btn"><i class="material-icons">mode_edit</i>수정</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col l12">
+          <input type="text" class="form-control-plaintext ml-5 recomment-add" value="{{content}}" readonly>
+        </div>
+      </div>
+
     </div>
 
-    <div class="col-12">
-      <input type="text" class="form-control-plaintext ml-5 recomment-add" value="{{content}}" readonly>
+    <div class="col l12">
+      <button type="button" class="btn-small bit-recomment-add-btn bit-invisible">답글</a>
+      <button type="button" class="btn-small bit-invisible right mr20">취소</button>
+      <button type="button" class="btn-small bit-invisible right mr5">저장</button>
     </div>
 
-    <div class="col-12 mt-3 mb-3">
-      <button type="button" class="bit-recomment-add-btn bit-invisible btn btn-info btn" style="size:10px">답글</a>
-    </div>
 
-    <div class="col-12">
-      <a href="#" class="bit-recomment-list-btn bit-invisible">답글보기 </a>
+    <div class="col l12">
+      <a href="#" class="bit-recomment-list-btn bit-invisible"></a>
     </div>
+    
 </div>
 {{/each}}
 </script>

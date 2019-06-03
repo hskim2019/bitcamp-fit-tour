@@ -83,7 +83,7 @@ function signup(email,name,birthday){
       alert('계정생성오류')
       location.href = '../index.html'
     }else if (data.status == 'overlap') {
-      alert('이미 있는 계정입니다.')
+     // alert('이미 있는 계정입니다.')
       location.href = '../index.html'
     } else if (data.status == 'success') {
       login(email,name,birthday)

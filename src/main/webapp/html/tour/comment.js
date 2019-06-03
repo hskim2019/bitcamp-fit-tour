@@ -210,7 +210,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
 //CheckMoreComment
 function checkMoreComment() {
   
-  var currentPageCommentAmount = $('.comment-row').length,
+  var currentPageCommentAmount = $('.comment-origin').length,
       allCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,""));
       
       if(allCommentAmount > currentPageCommentAmount){
@@ -303,6 +303,7 @@ $(document.body).bind('addEventReCommentListButton', () => {
           e.target);
     storage['pageNo' + originCommentNo] = storage['pageNo' + originCommentNo] + 1
     checkMoreReComment(e.target, allReCommentAmount);
+    console.log(addDeleteCount);
   });
 });
 
@@ -393,8 +394,9 @@ $(document.body).bind('addEventReCommentAddButton', () => {
                   'member' : {name: user.name, no: user.no, photo:user.photo}
                 }]
             };
-            console.log($(e.target).parent().next().next().next())
+            console.log($(e.target).parent().parent().next().children().first())
             $(reCommentGenerator(newReComment)).insertAfter($(e.target).parent().next().next().next());
+            $(e.target).parent().parent().next().children().first().css('padding','30px 30px 30px 50px')
             showUpdateDeleteButton();
             $(document.body).trigger('addEventUpdateDeleteButton');
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] -1;
@@ -408,8 +410,8 @@ $(document.body).bind('addEventReCommentAddButton', () => {
   });
   
   $('.recomment-cancel-button').off().click((e)=>{
-    console.log('a');
-    
+    $(e.target).parent().next().show();
+    $(e.target).parent().remove();
   });
   
 });

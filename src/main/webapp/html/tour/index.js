@@ -185,9 +185,18 @@ $(function () {
 });
 });
 
-$( "#slider-range-price" ).mouseup(function() {
+//$( "#slider-range-price" ).mouseup(function() {
+//  $('#searchwithOptions').trigger('click');
+//});
+/*$( "#slider-range-price" ).on("mouseup change propertychange paste input", function() {
   $('#searchwithOptions').trigger('click');
-});
+});*/
+
+//$( "#slider-range-price" ).update(function() {
+//  alert('a')
+// $('#searchwithOptions').trigger('click');
+//});
+
 
 
 //hour slider-range
@@ -208,7 +217,12 @@ $(function() {
       " -" + $( "#slider-range-hour" ).slider( "values", 1 ) + "시간");
 });
 
-$( "#slider-range-hour" ).mouseup(function() {
+$( ".collapsible" ).mouseup(function() {
+  $('#searchwithOptions').trigger('click');
+});
+
+$('filter-reset').click((e) => {
+  initOptionSelected();
   $('#searchwithOptions').trigger('click');
 });
 

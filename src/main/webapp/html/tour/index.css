@@ -202,14 +202,6 @@ border-top: 1px solid rgba(160,160,160,0.2);
 
 
 
-#followquick {
-	position: absolute;
-	width: 240px;
-/* 	border: 2px solid blue; */
-	border-radius: 4px;
-	padding: 15px;
-	}
-
 .collapsible {
 	top: 196px;
 	position: absolute;
@@ -224,6 +216,12 @@ border-top: 1px solid rgba(160,160,160,0.2);
 }
 .collapsible-body {
 	padding: 20px !important;
+}
+
+.filter-reset {
+	    color: #26a69a !important;
+	    font-weight: 700;
+	    cursor: pointer;
 }
 
 label {
@@ -244,7 +242,7 @@ form > p {
 }
 
 .theme-selection {
-	padding: 10px 20px 20px 20px !important;
+	padding: 10px 20px !important;
 }
 
 #theme-name {

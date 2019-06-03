@@ -16,7 +16,7 @@ var firstcrumb = crumb.children().eq(0),
     thirdcrumb = crumb.children().eq(2);
 var temp;
 var minPrice = 0,
-    maxPrice = 0;
+    maxPrice = 300000;
 var currMaxPrice;
 var minHour = 1,
     maxHour = 12;
@@ -26,23 +26,22 @@ var prevPageBtn = $('#prevPageBtn'),
 var totalpage;
 var orderby = "tourDesc";
 var theme = [];
-console.log(theme);
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 M.AutoInit();
-$(document).ready(function(){
+/*$(document).ready(function(){
   $('.collapsible').collapsible();
-});
+});*/
 var elem = document.querySelector('.collapsible.expandable');
 var instance = M.Collapsible.init(elem, {
   accordion: false
 });
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, orderby) {
+function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby) {
   $.get('../../app/json/tour/list',
     //  ?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby + '&test=' + test, 
    {
@@ -55,8 +54,8 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
     maxPrice : maxPrice,
     minHour : minHour,
     maxHour : maxHour,
-    orderby : orderby,
-    theme : theme
+    theme : theme,
+    orderby : orderby
    },
   
       function(obj) {
@@ -76,7 +75,6 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
         var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
         var transportation = $(listRow).children().eq(1).children().eq(2).children().eq(3).html();
         var placeToChange = $(listRow).children().eq(1).children().eq(2).children().eq(3).prev().children().eq(0);
-        console.log(placeToChange);
         addTransportaionIcon(placeToChange, transportation);
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
@@ -129,18 +127,18 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
+  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
+  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
 $('#orderbyPrice').click((e) => {
   e.preventDefault();
   orderby = 'priceAsc';
-  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   initOptionSelected();
   $(e.target).addClass('selected');
 });
@@ -161,16 +159,17 @@ $('#orderbyReviews').click((e) => {
   alert('준비중');
 });
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
+loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   
 // price slider-range
-$(function() {
+$(document.body).bind('loaded-list', () => {
+$(function () {
   $( "#slider-range-price" ).slider({
     range: true,
     min: 0,
-    max: 300000,
+    max: currMaxPrice,
     step: 1000,
-    values: [ 0, 300000 ],
+    values: [ 0, currMaxPrice ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
       minPrice = ui.values[ 0 ];
@@ -179,6 +178,7 @@ $(function() {
   });
   $( "#amount" ).val( $( "#slider-range-price" ).slider( "values", 0 ).toLocaleString() + "원" +
       " -" + $( "#slider-range-price" ).slider( "values", 1 ).toLocaleString() + "원");
+});
 });
 
 $( "#slider-range-price" ).mouseup(function() {
@@ -208,15 +208,27 @@ $( "#slider-range-hour" ).mouseup(function() {
   $('#searchwithOptions').trigger('click');
 });
 
+function resetSlider() {
+  minHour = 1;
+  maxHour = 12;
+  minPrice = 0;
+  maxPrice = currMaxPrice;
+  $("#slider-range-hour").slider("values", 0, 1);  
+  $("#slider-range-hour").slider("values", 1, 12 ); 
+  $( "#tour-hour" ).val( 1 + "시간" + " -" + 12 + "시간" );
 
+  $("#slider-range-price").slider("values", 0, 0);  
+  $("#slider-range-price").slider("values", 1, currMaxPrice); 
+  $( "#amount" ).val( 0 + "원" + " -" + maxPrice.toLocaleString() + "원" );
+}
 
 //floating menu - search with options
 $('#searchwithOptions').click((e) => {
 //$('#searchwithOptions').on('click', function() {
 e.preventDefault();
 //console.log(continentName, countryName, cityName, minPrice, maxPrice);
-console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice);
-loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
+console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme);
+loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
 // Dropdowns.
@@ -232,8 +244,8 @@ loadList(1, continentName, countryName, cityName, minPrice, maxPrice, orderby);
 //follow quick menu
 $(window).scroll(function(){
 var scrollTop = $(document).scrollTop();
-if (scrollTop < 265) {
- scrollTop = 265;
+if (scrollTop < 235) {
+ scrollTop = 235;
 }
 $(".collapsible").stop();
 $(".collapsible").animate( { "top" : scrollTop });
@@ -258,6 +270,9 @@ function initOptionSelected() {
   $('#orderbyPrice').removeClass('selected');
   $('#orderbyLikes').removeClass('selected');
   $('#orderbyReviews').removeClass('selected');
+  theme = [];
+  $("input[type=checkbox]").prop("checked",false);
+  resetSlider();
 };
 
 
@@ -269,7 +284,7 @@ function initOptionSelected() {
     showBreadCrumb(continentName, '', '');
     orderby = 'tourDesc';
     initOptionSelected();
-    loadList(1, continentName, '', '', minPrice, maxPrice, orderby);
+    loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
   });
 
   $('.country-list-btn').click((e) => {
@@ -280,7 +295,7 @@ function initOptionSelected() {
     showBreadCrumb(continentName, countryName, '');
     orderby = 'tourDesc';
     initOptionSelected();
-    loadList(1, '', countryName, '', minPrice, maxPrice, orderby);
+    loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
   });
 
   $('.city-list-btn').click((e) => {
@@ -291,14 +306,14 @@ function initOptionSelected() {
     showBreadCrumb(continentName, countryName, cityName);
     orderby = 'tourDesc';
     initOptionSelected();
-    loadList(1, '', '', cityName, minPrice, maxPrice, orderby);
+    loadList(1, '', '', cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   });
 
   $('#secondcrumb').click((e) => {
     e.preventDefault();
     cityName = '';
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, '', countryName, '', minPrice, maxPrice, orderby);
+    loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
   });
   
   $('#firstcrumb').click((e) => {
@@ -306,7 +321,7 @@ function initOptionSelected() {
     cityName = '';
     countryName = '';
     showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, continentName, '', '', minPrice, maxPrice, orderby);
+    loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
   });
 
 
@@ -335,15 +350,20 @@ function initOptionSelected() {
 	    var value = $(this).val();              // value
 	    var checked = $(this).prop('checked');  // checked 상태 (true, false)
 	    var $label = $(this).next();            // find a label element
-	 
+	    var checkedtheme = $label.html();
 	    // checked ? $label.css('background-color', value) : $label.css('background-color', 'white');
 	    if(checked) {
-	    	console.log('checked');
-	       theme.push($(e.target).html());
-	    }    
-	         else {
+	       theme.push(checkedtheme);
+	       console.log(theme);
+	       loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+	       console.log('checked');
+	    } else {
+	      theme = $.grep(theme, function(value) {
+	        return value != checkedtheme;
+	      });
+	    	console.log(theme);
+	    	loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 	    	console.log('unchecked');
-	        $label.css('background-color', 'white');    // label의 배경색을 초기화 한다.
 	         }
 	});
 

@@ -75,11 +75,15 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
         var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
         var transportation = $(listRow).children().eq(1).children().eq(2).children().eq(3).html();
         var placeToChange = $(listRow).children().eq(1).children().eq(2).children().eq(3).prev().children().eq(0);
+        var targetforPhoto = $(listRow).children().eq(0).children().eq(0);
         addTransportaionIcon(placeToChange, transportation);
         $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
             function(data) {
           $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
+          $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
+          
+          
         });
         $.ajaxSetup({async:true});
       }
@@ -242,14 +246,14 @@ loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, m
 })();
 
 //follow quick menu
-$(window).scroll(function(){
-var scrollTop = $(document).scrollTop();
-if (scrollTop < 235) {
- scrollTop = 235;
-}
-$(".collapsible").stop();
-$(".collapsible").animate( { "top" : scrollTop });
-});
+//$(window).scroll(function(){
+//var scrollTop = $(document).scrollTop();
+//if (scrollTop < 235) {
+// scrollTop = 235;
+//}
+//$(".collapsible").stop();
+//$(".collapsible").animate( { "top" : scrollTop });
+//});
 
 // BreadCrumb
 function showBreadCrumb(continentName, countryName, cityName) {

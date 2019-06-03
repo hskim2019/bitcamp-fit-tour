@@ -66,9 +66,6 @@ public class SignUpController {
         content.put("message", "이미 일반회원으로 가입했습니다");
         System.out.println("못진입");
         return content;
-      }else {
-        content.put("status", "fail");
-        content.put("message", "오류");
       }
       
     } catch (Exception e) {

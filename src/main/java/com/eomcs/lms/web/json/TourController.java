@@ -54,18 +54,17 @@ public class TourController {
       String cityName,
       @RequestParam(defaultValue="0") int minPrice,
       int maxPrice,
+      String orderby,
+      @RequestParam(value="theme[]", required=false)List<String> theme,
       int minHour,
       int maxHour,
-      @RequestParam(value="theme[]", required=false, 
-      defaultValue="자전거 투어, 야경 투어, 맛집 투어, 로컬 투어, 워킹 투어, 버스 투어, 반나절 투어, 종일 투어")List<String> theme,
-      String orderby,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize) {
 
     String searchContinentName = null;
     String searchCountryName = null;
     String searchCityName = null;
-    
+
     if (continentName.length() > 0) { 
       searchContinentName = continentName;
     }
@@ -77,10 +76,6 @@ public class TourController {
       searchCityName = cityName;
     }
 
-        for (String a : theme) {
-        	System.out.println(a);
-        }
-    
     int currMaxPrice = tourService.maxValue();
     if (maxPrice == 0) {
       maxPrice = currMaxPrice;
@@ -102,8 +97,6 @@ public class TourController {
     if (totalPage == 0 || rowCount % pageSize > 0)
       totalPage++;
     System.out.println("totalPage: " + totalPage);
-
-    
     if (pageNo < 1) 
       pageNo = 1;
     else if (pageNo > totalPage)

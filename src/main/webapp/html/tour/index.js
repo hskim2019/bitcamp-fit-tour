@@ -81,7 +81,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
             function(data) {
           $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
-          $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
+          //$(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name + '.jpg');
           
           
         });
@@ -351,23 +351,23 @@ function initOptionSelected() {
 
 
   $('input[name="theme"]').change(function() {
-	    var value = $(this).val();              // value
-	    var checked = $(this).prop('checked');  // checked 상태 (true, false)
-	    var $label = $(this).next();            // find a label element
-	    var checkedtheme = $label.html();
-	    // checked ? $label.css('background-color', value) : $label.css('background-color', 'white');
-	    if(checked) {
-	       theme.push(checkedtheme);
-	       console.log(theme);
-	       loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
-	       console.log('checked');
-	    } else {
-	      theme = $.grep(theme, function(value) {
-	        return value != checkedtheme;
-	      });
-	    	console.log(theme);
-	    	loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
-	    	console.log('unchecked');
-	         }
-	});
+      var value = $(this).val();              // value
+      var checked = $(this).prop('checked');  // checked 상태 (true, false)
+      var $label = $(this).next();            // find a label element
+      var checkedtheme = $label.html();
+      // checked ? $label.css('background-color', value) : $label.css('background-color', 'white');
+      if(checked) {
+         theme.push(checkedtheme);
+         console.log(theme);
+         loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+         console.log('checked');
+      } else {
+        theme = $.grep(theme, function(value) {
+          return value != checkedtheme;
+        });
+        console.log(theme);
+        loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+        console.log('unchecked');
+           }
+  });
 

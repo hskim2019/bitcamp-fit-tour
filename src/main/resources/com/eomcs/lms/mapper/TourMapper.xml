@@ -142,10 +142,10 @@
 			<if test="cityName != null">and city_name = #{cityName}</if>
 			<if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
 			<if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
-			<if test="theme !=null">
+			<if test="test !=null">
 				and th.theme in
-				<foreach collection="theme" item="theme" separator=","
-					open="(" close=")">#{theme}</foreach>
+				<foreach collection="test" item="test" separator=","
+					open="(" close=")">#{test}</foreach>
 			</if>
 		</where>
 		<if test="priceAsc != null"> order by price asc</if>

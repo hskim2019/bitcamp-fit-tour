@@ -1,4 +1,5 @@
 var token = location.href.split('#')[1].split('=')[1].split('&')[0]
+
 var naverLogin = new naver.LoginWithNaverId(
 {
   clientId: "g1zszuM3r0V5AW37KxIg",
@@ -83,7 +84,7 @@ function signup(email,name,birthday){
       alert('계정생성오류')
       location.href = '../index.html'
     }else if (data.status == 'overlap') {
-      alert('이미 있는 계정입니다.')
+    alert('이미 있는 계정입니다.')
       location.href = '../index.html'
     } else if (data.status == 'success') {
       login(email,name,birthday)

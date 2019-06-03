@@ -1,3 +1,9 @@
+//ready
+$(document).ready(function(){
+    var sideNav = $('.sidenav').sidenav({
+    });
+});
+
 //load header
 (function () {
   $('.bit-main-header').load('/bitcamp-fit-tour/html/header.html', function(){
@@ -37,6 +43,10 @@ function loadLoginUser() {
       //set login user name
       $('#login-user-name').html(data.user.name);
       
+      //set side nav
+      $('#nav-user-name').html(data.user.name);
+      $('#nav-user-email').html(data.user.email);
+      
       //set login user photo
       if(data.user.photo) {
         $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/' + data.user.photo + ')');
@@ -52,7 +62,6 @@ function loadLoginUser() {
     }
   });
 }
-
 
 
 

@@ -4,15 +4,20 @@
       <div class="col s12">
         <!-- logo -->
         <a class="navbar-brand brand-logo" href="/bitcamp-fit-tour/html/index.html">FitTour</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <!-- right -->
         <ul class="right hide-on-med-and-down">
-          <li class="bit-invisible bit-not-login-state"><a href="/bitcamp-fit-tour/html/auth/login.html">로그인</a></li>
-          <li class="bit-invisible bit-not-login-state"><a href="/bitcamp-fit-tour/html/auth/signup.html">회원가입</a></li>
-          <li class="bit-invisible bit-login-state"><div id="login-user-photo" class="thumbnail round"></div></li>
-          <li class="bit-invisible bit-login-state"><div id="login-user-name"></div></li>
-          <li class="bit-invisible bit-login-state"><a href='#' id="logout-menu" class="btn btn-dark btn-sm pink lighten-2" >로그아웃</a></li>
-          
+          <li class="bit-invisible bit-not-login-state"><a class="waves-effect waves-light btn btn-small green mr0"
+              href="/bitcamp-fit-tour/html/auth/signup.html">회원가입</a></li>
+          <li class="bit-not-login-state bit-invisible"><a class="waves-effect waves-light btn btn-small pink lighten-2"
+              href="/bitcamp-fit-tour/html/auth/login.html">로그인</a></li>
+          <li class="bit-invisible bit-login-state">
+            <a href="#" id="login-user-photo" data-target="slide-out" class="sidenav-trigger thumbnail round"></a>
+          </li>
+          <li class="bit-invisible bit-login-state">
+            <div id="login-user-name"></div>
+          </li>
+          <li class="bit-invisible bit-login-state"><a href='#' id="logout-menu"
+              class="waves-effect waves-light btn btn-dark btn-sm pink lighten-2">로그아웃</a></li>
         </ul>
         <!-- left -->
         <ul class="left hide-on-med-and-down ml180">
@@ -26,3 +31,38 @@
     </div>
   </div>
 </nav>
+
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="/bitcamp-fit-tour/images/navbg3.jpg">
+      </div>
+      <a href="#user">
+        <img class="circle" src="/bitcamp-fit-tour/upload/member/default.jpg">
+      </a>
+      <a href="#name">
+        <span id="nav-user-name" class="white-text"></span>
+      </a>
+      <a href="#email">
+        <span id="nav-user-email" class="white-text"></span>
+      </a>
+    </div>
+  </li>
+  <li>
+    <a href="#!">
+      <i class="material-icons">cloud</i>First Link With Icon</a>
+  </li>
+  <li>
+    <a href="#!">Second Link</a>
+  </li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a class="subheader">Subheader</a>
+  </li>
+  <li>
+    <a class="waves-effect" href="#!">Third Link With Waves</a>
+  </li>
+</ul>

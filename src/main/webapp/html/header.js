@@ -39,7 +39,6 @@ function loadLoginUser() {
       
       //set login user photo
       if(data.user.photo) {
-        console.log(data.user.photo);
         $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/' + data.user.photo + ')');
       } else {
         $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/default.jpg)');

@@ -9,7 +9,17 @@
 }
 
 #comment-inputfield {
-    width: 485px;
+    width: 890px;
+    display: inline-block;
+}
+
+#comment-inputfield {
+    width: 820px;
+    display: inline-block;
+}
+
+.recomment-inputfield {
+    width: 770px;
     display: inline-block;
 }
 

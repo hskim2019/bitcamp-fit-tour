@@ -211,7 +211,7 @@
   <script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
 
-<div class="comment-row row mt50" id="{{no}}">
+<div class="comment-row comment-origin row mt50" id="{{no}}">
     
     <div class="col">
       <img class="img-rounded" src='/bitcamp-fit-tour/upload/member/{{member.photo}}'>
@@ -225,10 +225,10 @@
           <span class="bit-created-date ml10">{{createdDate}}</span>
         </div>
 
-        <div id="bit-action-btn"class="col right bit-invisible">
+        <div class="bit-action-btn col right bit-invisible">
           <div class="fixed-action-btn">
             <a class="btn-floating btn-large">
-              <i class="material-icons btn-floating-icon">more_horiz</i>
+              <i class="material-icons btn-floating-icon">more_vert</i>
             </a>
             <ul>
               <li><a class="btn-floating bit-comment-delete-btn"><i class="material-icons">delete</i>삭제</a></li>
@@ -252,35 +252,60 @@
       <button type="button" class="btn-small bit-invisible right mr5">저장</button>
     </div>
 
-
-    <div class="col l12">
+    <div class="col l12 mt20">
       <a href="#" class="bit-recomment-list-btn bit-invisible"></a>
     </div>
+
     
 </div>
 {{/each}}
 </script>
 
-  <script id="reComment-template" type="text/x-handlebars-template">
+<script id="reComment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
-<div class="reCommentRow row ml-5 mt-5 mb-5" style="font-size:15px;" id="{{no}}">
-
-    <div class="col-9">
-      <img class="img-rounded mr-2" src='/bitcamp-fit-tour/upload/member/{{member.photo}}'>
-      <span class="bit-member" id="{{member.no}}">{{member.name}}</span> {{createdDate}}
+<div class="comment-row row ml50 mt50" id="{{no}}">
+    
+    <div class="col">
+      <img class="img-rounded" src='/bitcamp-fit-tour/upload/member/{{member.photo}}'>
     </div>
 
-    <div class="col-3">
-      <a href="#" class="bit-comment-update-btn bit-invisible">수정</a>
-      <a href="#" class="bit-comment-delete-btn bit-invisible">삭제</a>
+    <div class ="col l11 bit-comment-name-date-content">
+      <div class="row">
+
+        <div class="col left pl5">
+          <span class="bit-member" id="{{member.no}}">{{member.name}}</span>
+          <span class="bit-created-date ml10">{{createdDate}}</span>
+        </div>
+
+        <div class="bit-action-btn col right bit-invisible">
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large">
+              <i class="material-icons btn-floating-icon">more_vert</i>
+            </a>
+            <ul>
+              <li><a class="btn-floating bit-comment-delete-btn"><i class="material-icons">delete</i>삭제</a></li>
+              <li><a class="btn-floating bit-comment-update-btn"><i class="material-icons">mode_edit</i>수정</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col l12">
+          <input type="text" class="form-control-plaintext ml-5 recomment-add" value="{{content}}" readonly>
+        </div>
+      </div>
+
     </div>
 
-    <div class="col-12">
-      <input type="text" readonly class="form-control-plaintext ml-5 recomment-add" value={{content}}>
+    <div class="col l12">
+      <button type="button" class="btn-small bit-recomment-add-btn bit-invisible">답글</a>
+      <button type="button" class="btn-small bit-invisible right mr20">취소</button>
+      <button type="button" class="btn-small bit-invisible right mr5">저장</button>
     </div>
 
     {{!-- 대댓글 임시 미구현
-    <div class="col-12">
+    <div class="co l12">
       <button type="button" class="bit-recomment-add-btn bit-invisible">답글</a>
     </div>
     --}}
@@ -291,8 +316,8 @@
 
   <!-- jquery -->
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/ulg/popper.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/ulg/popper.min.js"></script>
   <!-- materialize css -->
   <script type="text/javascript"
     src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>

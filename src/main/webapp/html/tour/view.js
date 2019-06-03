@@ -48,8 +48,6 @@ function tourList(tourNo) {
       height : 440
     });
     $('.materialboxed').materialbox();
-    var instance = M.Slider.getInstance(elem);
-    instance.pause();
   });
 }
 

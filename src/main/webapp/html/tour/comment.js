@@ -29,10 +29,6 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
       $(document.body).trigger('addEventAddButton');
       $(document.body).trigger('addEventUpdateDeleteButton');
     }
-    $('.fixed-action-btn').floatingActionButton({
-      direction: 'bottom',
-      hoverEnabled: false
-    });
     checkMoreComment();
   });
 }
@@ -125,15 +121,20 @@ $(document.body).bind('addEventAddButton', () => {
 //AddEvent Comment Update,Delete Button
 $(document.body).bind('addEventUpdateDeleteButton', () => {
   
+  $('.fixed-action-btn').floatingActionButton({
+    direction: 'bottom',
+    hoverEnabled: false
+  });
+  
   //AddEvent Comment Delete Button
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
     var commentNo = $(e.target).parents('div .comment-row').attr('id');
-    var originCommentNo = $(e.target).parent().parent().parent().parent().attr('id');
+    var originCommentNo = $(e.target).parents('div .comment-origin').attr('id');
     $.getJSON('../../app/json/tourcomment/delete?no=' + commentNo,
         function(obj) {
           if (obj.status == 'success') {
-            $(e.target).parents('div .comment-row').remove();
+            $(e.target).parents('div .comment-row')[0].remove();
             commentAmountUpdate(-1);
             addDeleteCount++;
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] +1;
@@ -150,7 +151,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
     e.preventDefault();
     var content = $($(e.target).parents('div .row')[0]).next().find('input'),
     preContentValue = content.val(),
-    actionBtn = $(e.target).parents('div #bit-action-btn'),
+    actionBtn = $(e.target).parents('div .bit-action-btn'),
     recommentBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(0),
     cancelBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(1),
     saveBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(2),
@@ -272,7 +273,7 @@ function showReCommentListButton() {
          if(obj.commentAmount != 0){
            var reCommentListBtn = $(commentRow).children().eq(3).children().first();
              $(reCommentListBtn).removeClass('bit-invisible');
-             $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기 ' + '<i class="fas fa-angle-down"></i>');
+             $(reCommentListBtn).html('답글' + obj.commentAmount + '개 보기'/* + '<i class="fas fa-angle-down"></i>'*/);
              
              storage['pageNo' + originCommentNo] = 1;
              storage['addDeleteCount' + originCommentNo] = 0;
@@ -311,7 +312,7 @@ function checkMoreReComment(reCommentListButton, allReCommentAmount) {
       
       if(allReCommentAmount > currentPageReCommentAmount){
         $(reCommentListButton).show();
-        $(reCommentListButton).html('답글 '+(allReCommentAmount-currentPageReCommentAmount) +'개 더보기 ' + '<i class="fas fa-angle-down"></i>')
+        $(reCommentListButton).html('답글'+(allReCommentAmount-currentPageReCommentAmount) +'개 더보기'/* + '<i class="fas fa-angle-down"></i>'*/)
         $(reCommentListButton).addClass('bit-recomment-list-button');
       } else {
         $(reCommentListButton).hide();
@@ -330,49 +331,56 @@ function showReCommentAddButton() {
 //AddEvnet ReCommentAddButton and AddEventReCommentSaveButton
 $(document.body).bind('addEventReCommentAddButton', () => {
   
+
   //AddEvent ReCommentAddButton
   $('.bit-recomment-add-btn').off().click((e)=>{
     
     e.preventDefault();
-    $(e.target).off();
-    $('<div class="col-sm-12" style="font-size:15px; padding: 30px 0px 30px 0px">'+
-        '<input type="text" id=recommentContent name="recommentContent" class="col-sm-10" maxlength="30" data-length="30">' +
-          ' <button type="button" class="btn btn-default btn-secondary recomment-save-button" disabled>답글</button></div>')
-          .insertAfter($(e.target));
-    $('input#comment-add').characterCounter();
-    $(document.body).trigger('addEventReCommentSaveButton');
-  
-    $(e.target).next().children().first().keyup(function() {
+    $('<div class="form-group">' +
+      '<div class="input-field recomment-inputfield">' +
+      '<i class="material-icons prefix">mode_edit</i>' +
+      '<textarea class="recomment-add materialize-textarea" maxlength="50" data-length="50" name="recomment-content"></textarea>' +
+      '<label for="">공개 답글 추가..</label>'+
+      '</div>' +
+      '<button type="button" class="waves-effect waves-light disabled btn recomment-save-button ml5 mb40">답글</button>' +
+      '<button type="button" class="waves-effect waves-light btn recomment-cancel-button ml5 mb40">취소</button>' +
+      '</div>').prependTo($(e.target).parent());
+    $(e.target).parent().find('textarea').focus();
+    $(e.target).hide();
+    
+    $('textarea.recomment-add').characterCounter();
+    $(document.body).trigger('addEventReCommentSaveCancelButton');
+    
+    $(e.target).prev().find('textarea').keyup(function() {
       
-      var noBlacnkComment = $(e.target).next().children().first().val().replace(/\s/gi, ""); // remove blanck comment
-  
+      var noBlacnkComment = $(this).val().replace(/\s/gi, ""); // remove blanck comment
+      
       if (noBlacnkComment == null || noBlacnkComment ==''){
-        $(e.target).next().children().first().next().attr("disabled", true);
-        $(e.target).next().children().first().next().addClass("btn-secondary");
+        $(this).parent().next().addClass("disabled");
+        $(this).parent().next().removeClass("pulse");
         return;
       }
       
-      $(e.target).next().children().first().next().removeClass("btn-secondary",);
-      $(e.target).next().children().first().next().addClass("btn-primary",);
-      $(e.target).next().children().first().next().removeAttr("disabled");
+      $(this).parent().next().removeClass('disabled');
+      $(this).parent().next().addClass('pulse');
       
     });
   });
   
   
   //AddEventReCommentSaveButton
-  $(document.body).bind('addEventReCommentSaveButton', () => {
+  $(document.body).bind('addEventReCommentSaveCancelButton', () => {
     
   $('.recomment-save-button').off().click((e)=>{
     
-    var originCommentNo = ($(e.target).parent().parent().parent().attr('id'));
+    var originCommentNo = ($(e.target).parents('div .comment-origin').attr('id'));
     $.post('../../app/json/tourcomment/add',
         {
           tourNo : tourNo,
           memberNo : user.no,
           originCommentNo : originCommentNo,
           level : 2,
-          content : $(e.target).prev().val()
+          content : $(e.target).parent().find('textarea').val()
         }, 
         
         function(obj) {
@@ -380,25 +388,30 @@ $(document.body).bind('addEventReCommentAddButton', () => {
             var newReComment ={
                 'tourComment' : [{
                   'no': obj.no,
-                  'content': $(e.target).prev().val(),
+                  'content': $(e.target).parent().find('textarea').val(),
                   'createdDate' : now_yyyy_mm_dd_hh_mm(),
                   'member' : {name: user.name, no: user.no, photo:user.photo}
                 }]
             };
-            
-            $(reCommentGenerator(newReComment)).insertAfter($(e.target).parent());
+            console.log($(e.target).parent().next().next().next())
+            $(reCommentGenerator(newReComment)).insertAfter($(e.target).parent().next().next().next());
             showUpdateDeleteButton();
             $(document.body).trigger('addEventUpdateDeleteButton');
-            $(e.target).prev().val('');
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] -1;
-            $(e.target).attr("disabled", true);
-            $(e.target).addClass("btn-secondary");
             console.log(storage['addDeleteCount' + originCommentNo]);
+            $(e.target).parent().next().show();
+            $(e.target).parent().remove();
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
         });
   });
+  
+  $('.recomment-cancel-button').off().click((e)=>{
+    console.log('a');
+    
+  });
+  
 });
 });
 

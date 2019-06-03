@@ -461,12 +461,16 @@ div.container {
   margin-left: 0!important;
 }
 
-.ml15 {
+.ml5 {
   margin-left: 5px!important
 }
 
 .ml10 {
   margin-left: 10px!important
+}
+
+.ml15 {
+  margin-left: 15px!important
 }
 
 .ml20 {

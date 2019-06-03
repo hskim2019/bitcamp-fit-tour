@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
 <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 <link type="text/css" rel="stylesheet"
   href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
   media="screen,projection" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/login.css">
- <meta charset="utf-8" />
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="680108572551-eeekujc7dtbhkf867hq6kmk650pf0pv7.apps.googleusercontent.com">
+   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
 </head>
 <body>
 
@@ -38,8 +38,12 @@
             <div id="main" class="col s12 m4 l4">
                 <div class="input-field col s12">
                <!--   <a id="naverIdLogin" class="waves-effect waves-dark btn"><img src="/bitcamp-fit-tour/images/naver.png">네이버 로그인</a>--> 
-        <div id="naverIdLogin"></div>
-         <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+      <div id="naverIdLogin"></div>
+      <div id="fb-root">
+      <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+      
+      
+      </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
@@ -98,16 +102,17 @@
 
   </div>
   <!-- .container -->
-  <footer class="bit-main-footer page-footer teal"></footer>
- 
+  
+ <footer class="bit-main-footer page-footer grey"></footer> 
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v3.3&appId=815103412179816&autoLogAppEvents=1"></script>
   <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript"
     src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-  <script src="../footer.js"></script>
-  <script src="../header.js"></script>
+  <script src="/bitcamp-fit-tour/html/footer.js"></script>
+  <script src="/bitcamp-fit-tour/html/header.js"></script>
   <script src="login.js"></script>
 </body>
 </html>

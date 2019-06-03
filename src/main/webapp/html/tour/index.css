@@ -6,14 +6,28 @@
       margin: 0.5em 0 0 2.5em;
 }
 
+.breadcrumb-order-option {
+	margin-top : 15px;
+	margin-bottom: 0px;
+	
+}
+
 .clean {
 	background: none;
 	box-shadow: none;
-	height: 50px !important;
+	height: 40px !important;
 	clear: both;
+	padding: 0px !important;
+}
+
+#breadcrumb-list {
+	margin: 0px;
+	height:50px;
+	padding: 0px !important;
 }
 
 .breadcrumb {
+	font-size: 14px;
 	color: #6B7770;
 	opacity: 0.8;
 }
@@ -71,13 +85,15 @@
 }
 .tour-item{
 	padding: 0px !important;
+	font-size : 13px !important;
 }
 
 .tour-item-theme {
 	padding: 0px !important;
 	margin: 0 90px 10px 0 !important;
-	width: 290px !important;
+	width: 255px !important;
 	height: 42px;
+	font-size : 13px !important;
 }
 
 .price {
@@ -85,8 +101,13 @@
 	text-align: right;
 }
 
+.orderOptions {
+	height: 50px;
+	padding: 0px;
+}
+
 .option1 {
-	margin: 0 0 0 510px;
+	margin: 0 0 0 120px;
 }
 
 span > a {
@@ -190,7 +211,7 @@ border-top: 1px solid rgba(160,160,160,0.2);
 	}
 
 .collapsible {
-	top: 265px;
+	top: 196px;
 	position: absolute;
 	width: 240px;
 /* 	border: 2px solid blue; */
@@ -207,7 +228,7 @@ border-top: 1px solid rgba(160,160,160,0.2);
 
 label {
 	font-size: 14px;
-	font-weight: 700;
+		color: rgba(0,0,0,0.87) !important;
 }
 
 #amount, #tour-hour {
@@ -217,8 +238,17 @@ label {
 	font-weight: normal !important;
 }
 
+form > p {
+	margin: 5px;
+	color: rgba(0,0,0,0.87) !important;
+}
+
 .theme-selection {
 	padding: 10px 20px 20px 20px !important;
+}
+
+#theme-name {
+	font-size: 13px;
 }
 
 #searchwithOptions{
@@ -259,7 +289,7 @@ td:nth-child(4) {
 	box-shadow: none;
 	margin: 3px;
 	}
-
+	
 /* Nav */
 	#nav {
 		top: 0;

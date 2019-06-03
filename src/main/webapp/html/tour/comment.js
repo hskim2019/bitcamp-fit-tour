@@ -25,10 +25,14 @@ function commentList(tourNo, pageNo, addDeleteCount, originCommentNo) {
     showReCommentListButton();
     showReCommentAddButton();
     if(user){
-      $('#comment-textarea').removeClass('bit-invisible');
+      $('#comment-add-div').removeClass('bit-invisible');
       $(document.body).trigger('addEventAddButton');
       $(document.body).trigger('addEventUpdateDeleteButton');
     }
+    $('.fixed-action-btn').floatingActionButton({
+      direction: 'bottom',
+      hoverEnabled: false
+    });
     checkMoreComment();
   });
 }
@@ -40,10 +44,10 @@ function showUpdateDeleteButton() {
 
   var memberNodes = $('.bit-member');
   for (memberNode of memberNodes) {
-    
-  if(user.no ==  $(memberNode).attr('id')) {
-    $(memberNode).parent().next().children().show();
-    }
+  if($(memberNode).parents('.comment-row').hasClass('bit-update-state'))
+    continue;
+  if(user.no ==  $(memberNode).attr('id'))
+    $(memberNode).parent().next().show(); 
   }
 };
 
@@ -92,6 +96,8 @@ $(document.body).bind('addEventAddButton', () => {
           $('#comment-add').val('');
           addDeleteCount--;
           showReCommentAddButton();
+          $('#comment-add-button').addClass("disabled");
+          $('#comment-add-button').removeClass("pulse");
           } else {
             alert('등록 실패입니다!\n' + obj.message)
           }
@@ -105,11 +111,12 @@ $(document.body).bind('addEventAddButton', () => {
 
     if (noBlacnkComment == null || noBlacnkComment ==''){
       $('#comment-add-button').addClass("disabled");
+      $('#comment-add-button').removeClass("pulse");
       return;
     }
     
     $('#comment-add-button').removeClass("disabled");
-    
+    $('#comment-add-button').addClass("pulse");
   });
 
   
@@ -121,12 +128,12 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
   //AddEvent Comment Delete Button
   $('.bit-comment-delete-btn').off().click((e) => {
     e.preventDefault();
-    var commentNo = $(e.target).parent().parent().attr('id');
+    var commentNo = $(e.target).parents('div .comment-row').attr('id');
     var originCommentNo = $(e.target).parent().parent().parent().parent().attr('id');
     $.getJSON('../../app/json/tourcomment/delete?no=' + commentNo,
         function(obj) {
           if (obj.status == 'success') {
-            $(e.target).parent().parent().remove();
+            $(e.target).parents('div .comment-row').remove();
             commentAmountUpdate(-1);
             addDeleteCount++;
             storage['addDeleteCount' + originCommentNo] = storage['addDeleteCount' + originCommentNo] +1;
@@ -141,48 +148,60 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
   $('.bit-comment-update-btn').off().click((e) => {
     
     e.preventDefault();
-    var contentNode = $(e.target).parent().next().children(),
-    preContentValue = contentNode.val();
-    contentNode.removeAttr("readonly")
-    contentNode.focus();
-    $(e.target).hide();
-    $(e.target).next().hide();
-    $(e.target).parent().append('<a href="#" >저장</a>');
-    $(e.target).parent().append(' <a href="#" >취소</a>');
-
+    var content = $($(e.target).parents('div .row')[0]).next().find('input'),
+    preContentValue = content.val(),
+    actionBtn = $(e.target).parents('div #bit-action-btn'),
+    recommentBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(0),
+    cancelBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(1),
+    saveBtn =  $(e.target).parents('div .bit-comment-name-date-content').next().children().eq(2),
+    btnNode = $(e.target).parents('div .bit-comment-name-date-content').next(),
+    commentRow = $(e.target).parents('div .comment-row');
+    commentRow.addClass('bit-update-state');
+    
+    content.removeAttr("readonly")
+    content.focus();
+    actionBtn.hide();
+    recommentBtn.hide();
+    cancelBtn.show();
+    saveBtn.show();
+    
     //AddEvent Comment Update Cancle
-    $($(e.target).next().next().next()).off().click((e)=>{
-      
+    cancelBtn.click((e)=>{ 
       e.preventDefault();
-      $(e.target).prev().prev().show();
-      $(e.target).prev().prev().prev().show();
-      $(e.target).prev().remove()
-      $(e.target).remove();
-      contentNode.attr("readonly",'true')
-      contentNode.val(preContentValue);
-    })
+      content.val(preContentValue);
+      content.attr('readonly','true');
+      content.css('color','black');
+      actionBtn.show();
+      recommentBtn.eq(0).show();
+      saveBtn.hide();
+      cancelBtn.hide();
+      commentRow.removeClass('bit-update-state');
+    }) 
 
     //AddEvent Comment Update Save
-    $($(e.target).next().next()).off().click((e)=>{
+    saveBtn.click((e)=>{
       
       e.preventDefault();
       $.post('../../app/json/tourcomment/update',
           {
-            no : $(e.target).parent().parent().attr('id'),
-            content : contentNode.val()
+            no : commentRow.attr('id'),
+            content : content.val()
           }, 
           function(obj) {
             if (obj.status == 'success') {
-              contentNode.attr("readonly",'true')
-              $(e.target).prev().prev().show();
-              $(e.target).prev().show();
-              $(e.target).next().remove();
-              $(e.target).remove();
+              content.attr("readonly",'true')
+              content.css('color','black');
+              actionBtn.show();
+              recommentBtn.eq(0).show();
+              saveBtn.hide();
+              cancelBtn.hide();
+              commentRow.removeClass('bit-update-state');
             } else {
               alert('수정 실패입니다!\n' + obj.message)
             }
           });
     });
+    
   })
 });
 
@@ -190,7 +209,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
 //CheckMoreComment
 function checkMoreComment() {
   
-  var currentPageCommentAmount = $('.commentRow').length,
+  var currentPageCommentAmount = $('.comment-row').length,
       allCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,""));
       
       if(allCommentAmount > currentPageCommentAmount){
@@ -210,7 +229,6 @@ $(document.body).bind('addEventMoreCommentButton', () => {
     e.preventDefault();
     pageNo++;
     commentList(tourNo, pageNo, addDeleteCount, 0);
-    $('#more-comment-btn').html()
   });
 });
 
@@ -245,14 +263,14 @@ function reCommentList(tourNo, pageNo, addDeleteCount, originCommentNo, ReCommne
 //Show ReCommentListButton
 function showReCommentListButton() {
   
-  for(commentRow of $('.commentRow')){
+  for(commentRow of $('.comment-row')){
     
     var originCommentNo = $(commentRow).attr('id');
     $.ajaxSetup({async:false});
     $.getJSON('../../app/json/tourcomment/count?tourNo=' + tourNo +'&originCommentNo=' + originCommentNo,
        function(obj) {
          if(obj.commentAmount != 0){
-           var reCommentListBtn = $(commentRow).children().eq(4).children().first();
+           var reCommentListBtn = $(commentRow).children().eq(3).children().first();
              $(reCommentListBtn).removeClass('bit-invisible');
              $(reCommentListBtn).html('답글 ' + obj.commentAmount + '개 보기 ' + '<i class="fas fa-angle-down"></i>');
              

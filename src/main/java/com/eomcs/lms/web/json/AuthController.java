@@ -1,6 +1,4 @@
 package com.eomcs.lms.web.json;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
+import com.eomcs.lms.util.AccessToken;
 
 @RestController("json/AuthController")
 @RequestMapping("/json/auth")
@@ -106,7 +105,7 @@ public class AuthController {
     HashMap<String,Object> content = new HashMap<>();
 
    
-    if (accessToken(token) == false) {
+    if (new AccessToken().accessToken(token) == false) {
       content.put("status", "accessTokenFail");
       content.put("message", "올바르지 않는 토큰입니다.");
       return content;
@@ -131,31 +130,7 @@ public class AuthController {
   }
   
   
-  public boolean accessToken(String token) {
-    
-    String header = "Bearer " + token; // Bearer 다음에 공백 추가
-    try {
-        String apiURL = "https://openapi.naver.com/v1/nid/me";
-        URL url = new URL(apiURL);
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Authorization", header);
-        int responseCode = con.getResponseCode();
-        if(responseCode==200) { //토큰 정상 호출
-            return true;
-        } else {  // 토큰 비정상           
-            return false;
-        }
-       
-    } catch (Exception e) {
-        System.out.println(e);// 예외 호출
-        return false;
-    }
-    
-   
-    
-    
-  }
+  
   
 }
 

@@ -81,7 +81,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
             function(data) {
           $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
-          //$(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name + '.jpg');
+          $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
           
           
         });

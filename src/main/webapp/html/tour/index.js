@@ -58,7 +58,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
       function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
-      currMaxPrice = obj.currMaxPrice;
+      //currMaxPrice = obj.currMaxPrice;
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       // 이전에 출력한 내용을 제거한다.
       $('#tourlistcard').html('');
@@ -115,6 +115,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
 
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
+getMaxPrice();
 loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 
 $('#prevPage > a').click((e) => {
@@ -209,15 +210,21 @@ $('#firstcrumb').click((e) => {
   loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
-
+function getMaxPrice() {
+  $.get('../../app/json/tour/maxPrice',
+      function(obj) {
+    currMaxPrice = obj.currMaxPrice;
+   
+  })};
+  
 // price slider-range
 $(function () {
   $( "#slider-range-price" ).slider({
     range: true,
     min: 0,
-    max: 250000,
+    max: currMaxPrice,
     step: 1000,
-    values: [ 0, 250000 ],
+    values: [ 0, currMaxPrice ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
       minPrice = ui.values[ 0 ];
@@ -251,7 +258,7 @@ function resetSlider() {
   minHour = 1;
   maxHour = 12;
   minPrice = 0;
-  maxPrice = 250000;
+  maxPrice = currMaxPrice;
   $("#slider-range-hour").slider("values", 0, 1);  
   $("#slider-range-hour").slider("values", 1, 12 ); 
   $( "#tour-hour" ).val( 1 + "시간" + " -" + 12 + "시간" );
@@ -358,3 +365,10 @@ function initOptionSelected() {
            }
   });
 
+  
+  function getMaxPrice() {
+    $.get('../../app/json/tour/maxPrice',
+        function(obj) {
+      currMaxPrice = obj.currMaxPrice;
+     
+    })};

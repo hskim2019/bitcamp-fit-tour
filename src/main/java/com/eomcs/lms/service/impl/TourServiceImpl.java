@@ -2,7 +2,9 @@ package com.eomcs.lms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.eomcs.lms.dao.TourDao;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
@@ -171,6 +173,10 @@ public class TourServiceImpl implements TourService {
 		return tourDao.findMaxPrice();
 	}
 
+  @Override
+	public List<Tour> registeredcountrylist() {
+		return tourDao.findRegisteredCountryCity();
+	}
 }
 
 

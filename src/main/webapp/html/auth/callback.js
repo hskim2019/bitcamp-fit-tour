@@ -3,7 +3,7 @@ var token = location.href.split('#')[1].split('=')[1].split('&')[0]
 var naverLogin = new naver.LoginWithNaverId(
 {
   clientId: "g1zszuM3r0V5AW37KxIg",
-  callbackUrl: "http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/html/auth/callback.html",
+  callbackUrl: "http://localhost:8080/bitcamp-fit-tour/html/auth/callback.html",
   isPopup: false,
   callbackHandle: true
 });
@@ -39,7 +39,7 @@ window.addEventListener('load', function () {
         naverLogin.reprompt(); // 필수정보를 얻지 못 했을 때 다시 정보제공 동의 화면으로 이동
         return; 
       } else {
-        login(email,name,birthday)
+        login(6)
       }
       //console.log("callback 처리에 실패하였습니다.");
     }
@@ -48,11 +48,10 @@ window.addEventListener('load', function () {
 });
 
 
-function login(email,name,birthday){
+function login(loginTypeNo){
   $.post('../../app/json/auth/snsLogin', {
     token:token,
-    email: email,
-    loginTypeNo : 6
+    loginTypeNo : loginTypeNo
     
   },
   
@@ -65,34 +64,14 @@ function login(email,name,birthday){
       alert('올바르지 않는 접근이다')
       location.href = '../index.html'
     } else {
-      signup(email,name,birthday);
+      
     }
     
 
   })
 }
   
-function signup(email,name,birthday){
-  $.post('../../app/json/signup/snsAdd', {      
-    email: email,  
-    name: name,
-    birth: birthday
-    },
-    function(data) {
-    
-    if (data.status == 'fail') {
-      alert('계정생성오류')
-      location.href = '../index.html'
-    }else if (data.status == 'overlap') {
-    alert('이미 있는 계정입니다.')
-      location.href = '../index.html'
-    } else if (data.status == 'success') {
-      login(email,name,birthday)
-    }
-    
 
-  })
-}
 
       
       

@@ -1,5 +1,7 @@
 package com.eomcs.lms.web.json;
+
 import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,52 +14,57 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.service.FacebookService;
 import com.eomcs.lms.service.MemberService;
-import com.eomcs.lms.util.AccessToken;
+import com.eomcs.lms.service.NaverService;
 
 @RestController("json/AuthController")
 @RequestMapping("/json/auth")
 public class AuthController {
 
   final static Logger logger = LogManager.getLogger(AuthController.class);
-  
+
   static final String REFERER_URL = "refererUrl";
 
-  @Autowired MemberService memberService;
-  @Autowired ServletContext servletContext;
-  
+  @Autowired
+  MemberService memberService;
+  @Autowired
+  ServletContext servletContext;
+  @Autowired
+  FacebookService facebookService;
+  @Autowired
+  NaverService naverService;
+
   @GetMapping("form")
-  public void form(
-      @RequestHeader(value="Referer",required=false) String refererUrl,
+  public void form(@RequestHeader(value = "Referer", required = false) String refererUrl,
       HttpSession session) {
-    
+
     logger.debug("refererUrl: " + refererUrl);
-    
+
     if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
       session.setAttribute(REFERER_URL, refererUrl);
     } else {
       session.removeAttribute(REFERER_URL);
     }
   }
-  
+
   @PostMapping("login")
-  public Object login(
-      String email,
-      String password,
-      HttpSession session,
+  public Object login(String email, String password, HttpSession session,
       HttpServletResponse response) {
 
     Member member = memberService.get(email, password);
 
-    HashMap<String,Object> content = new HashMap<>();
-    
+
+
+    HashMap<String, Object> content = new HashMap<>();
+
     if (member == null) {
       content.put("status", "fail");
       content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
-    } else if(member.getRank() == 0){
+    } else if (member.getRank() == 0) {
       session.setAttribute("standby", email);
       content.put("status", "stand-by");
-      
+
     } else {
       session.setAttribute("loginUser", member);
       content.put("status", "success");
@@ -65,26 +72,26 @@ public class AuthController {
 
     return content;
   }
-  
+
   @GetMapping("logout")
   public Object logout(HttpSession session) throws Exception {
-    
+
     logger.debug("세션 무효화시킴!");
     logger.debug("loginUser: " + session.getAttribute("loginUser"));
     session.invalidate();
-    
-    HashMap<String,Object> content = new HashMap<>();
+
+    HashMap<String, Object> content = new HashMap<>();
     content.put("status", "success");
-    
+
     return content;
   }
-  
+
   @GetMapping("user")
   public Object user(HttpSession session) throws Exception {
-    
-    Member loginUser = (Member)session.getAttribute("loginUser");
-    
-    HashMap<String,Object> content = new HashMap<>();
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    HashMap<String, Object> content = new HashMap<>();
 
     if (loginUser != null) {
       content.put("status", "success");
@@ -94,52 +101,47 @@ public class AuthController {
     }
     return content;
   }
-  
+
+  @SuppressWarnings("rawtypes")
   @PostMapping("snsLogin")
-  public Object snsLogin(
-      String email,
-      int loginTypeNo,
-      String token,
-      HttpSession session,
+  public Object snsLogin(int loginTypeNo, String token, HttpSession session,
       HttpServletResponse response) {
-    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String, Object> content = new HashMap<>();
 
-   
-    if (new AccessToken().accessToken(token) == false) {
-      content.put("status", "accessTokenFail");
-      content.put("message", "올바르지 않는 토큰입니다.");
-      return content;
-    } 
-    
-    Member member = memberService.get(email, loginTypeNo);
+    Map LoginUser = null;
 
-    
-    if (member == null) {
-      content.put("status", "fail");
-      content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
-    } else if(member.getRank() == 0){
-      session.setAttribute("standby", email);
-      content.put("status", "stand-by");
-      
-    } else {
-      session.setAttribute("loginUser", member);
-      content.put("status", "success");
+    if (loginTypeNo == 2) {
+      LoginUser = facebookService.getLoginUser(token);
+    } else if (loginTypeNo == 6) {
+      LoginUser = naverService.getLoginUser(token);
     }
 
+    String email = (String) LoginUser.get("email");
+    System.out.println(email);
+    Member member = memberService.get(email);
+
+    if (member == null) {
+      member = new Member();
+      member.setEmail(email);
+      member.setPassword("snspassword");
+      member.setLoginTypeNo(loginTypeNo);
+      member.setCertification("sns-login");
+      memberService.snsSignUp(member);
+
+    }else {
+      content.put("status", "success");
+      content.put("member", member);
+      return content;
+      
+    }
+    session.setAttribute("loginUser", member);
+    content.put("status", "success");
+    content.put("member", member);
     return content;
   }
-  
-  
-  
-  
+
+
+
 }
-
-
-
-
-
-
-
-
 
 

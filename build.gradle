@@ -14,6 +14,10 @@ repositories {
 // 프로젝트에서 사용할 외부 라이브러리 정보 
 dependencies {
     
+    //JSON  MAP 으로 변환 
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
+    
+    
     // 자바 썸네일 라이브러리
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
     

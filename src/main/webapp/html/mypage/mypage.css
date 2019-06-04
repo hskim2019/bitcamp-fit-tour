@@ -69,9 +69,9 @@ button:focus{
 
 .header{
   width:100%;
-  background-image : url('/bitcamp-fit-tour/images/profilebg3.jpg');
-  background-size: 100%;
-  /* background-color:#e57272; */
+  /* background-image : url('/bitcamp-fit-tour/images/profilebg3.jpg');
+  background-size: 100%; */
+  background-color : #9e9e9e;
   height:45%;
   display:flex;
   flex-direction:column;
@@ -89,16 +89,16 @@ button:focus{
 }
 
 .fab{
-  background-color:#EA4335;
-  font-weight:300;
-  color:white;
-  font-size:18px;
-  border-radius:50%;
-  height:50px;
-  width:50px;
-  border:none;
-  box-shadow:0px 1px 2px rgba(0,0,0,0.5);
-  transform:translateY(-25px);
+  background-color : teal;
+  font-weight : 300;
+  color : white;
+  font-size : 18px;
+  border-radius : 50%;
+  height : 60px;
+  width : 60px;
+  border : none;
+  box-shadow : 0px 1px 2px rgba(0,0,0,0.5);
+  transform : translateY(-30px);
 }
 
 .fab:hover,.fab:focus{
@@ -115,7 +115,7 @@ button:focus{
   font-size:16px;
   font-family: 'Roboto', sans-serif;
   line-height:1.6em;
-  text-shadow:0px 2px 4px rgba(0,0,0,0.3); looks better on colored backgrounds
+  text-shadow:0px 2px 4px rgba(0,0,0,0.3);
 }
 
 
@@ -144,32 +144,6 @@ button:focus{
   margin-left:auto;
 }
 
-.info-input{
-  font-size:16px;
-  font-family: 'Roboto', sans-serif;
-  line-height:1.6em;
-  text-align:right;
-  color:#383838;
-  
-  border:0;
-  border-bottom:1px solid rgba(0,0,0,0.4);
-  
-  padding:0;
-  margin-left:auto;
-  
-  width:auto;
-}
-
-.info-input:focus{
-  outline:none;
-}
-
-.info-input:valid{
-  border-bottom:1px solid green;
-}
-.info-input:invalid{
-  border-bottom:1px solid red;
-}
 
 #social-media{
   display:flex;

@@ -11,6 +11,9 @@ $("#profile-picture-full").attr('src','/bitcamp-fit-tour/upload/member/'+user.ph
 $("#info-name").html(user.name);
 $("#info-email").html(user.email);
 $("#info-phone").html(user.tel);
+var birth = user.birth.split('-');
+console.log(birth);
+$("#info-birth").html(birth[0] + '년' + birth[1] + '월' + birth[2] + '일');
 
 $("#profile-picture-overlay").click(function(){
   $("#grey-overlay").show();
@@ -57,7 +60,7 @@ function isEditMode(){
   
   var $icon=$("#edit-info > span");
   
-  if($icon.hasClass("fa-pencil"))
+  if($icon.hasClass("fa-edit"))
   {
     return false;    
   }
@@ -70,7 +73,7 @@ function changeMode(isEdit){
   $icon.removeClass();
   
   if(isEdit){
-    $icon.addClass("fa fa-pencil");
+    $icon.addClass("fa fa-edit");
   }else{
     $icon.addClass("fa fa-check")
   }
@@ -91,3 +94,5 @@ function getPattern($element){
       break;
   }
 }
+
+

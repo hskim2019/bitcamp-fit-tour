@@ -26,9 +26,9 @@
 <div class="container">
   <div class="profile">
   <div class="header">
-    <img id="profile-picture" src="https://gyazo.com/db9f7075f60979081a9da8ec47453bec.png"/>
-    <div id="profile-picture-overlay"><h6>Full Size</h6></div>
-    <p class="header-text">John Smith, 20 Y/O</p>
+    <img id="profile-picture"/>
+    <div id="profile-picture-overlay"><h6>크게 보기</h6></div>
+    <p id="info-name" class="header-text"></p>
   </div>
   <button id="edit-info" class="fab">
     <span class="fa fa-pencil"></span>
@@ -36,15 +36,11 @@
   <div class="content">
     <div class="info">
       <h6 class="info-type">Email</h6>
-      <h6 id="info-email" class="info-data">john.smith@gmail.com</h6>
+      <h6 id="info-email" class="info-data"></h6>
     </div>
     <div class="info">
       <h6 class="info-type">Phone</h6>
-      <h6 id="info-phone" class="info-data">+1 234 567 890</h6>
-    </div>
-    <div class="info">
-      <h6 class="info-type" class="info-data">Address</h6>
-      <h6 id="info-address" class="info-data">123 6th St. Melbourne</h6>
+      <h6 id="info-phone" class="info-data"></h6>
     </div>
     <div id="social-media">
       <h6> 소셜계정 <span class="fa fa-hand-o-left"></span></h6>
@@ -65,7 +61,7 @@
 </div> <!-- container -->
 
 <div id="grey-overlay" style="display:none;">
-  <img id="profile-picture-full" src="https://gyazo.com/db9f7075f60979081a9da8ec47453bec.png"/>
+  <img id="profile-picture-full"/>
 </div>
 
 <!-- footer -->

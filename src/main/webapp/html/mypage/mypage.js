@@ -1,3 +1,17 @@
+//load user
+if(sessionStorage.getItem('loginUser')){
+  var user = JSON.parse(sessionStorage.getItem('loginUser'))
+}
+
+console.log(user);
+
+//set profile
+$("#profile-picture").attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
+$("#profile-picture-full").attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
+$("#info-name").html(user.name);
+$("#info-email").html(user.email);
+$("#info-phone").html(user.tel);
+
 $("#profile-picture-overlay").click(function(){
   $("#grey-overlay").show();
 });

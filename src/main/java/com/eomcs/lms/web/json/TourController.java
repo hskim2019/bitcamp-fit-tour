@@ -257,6 +257,7 @@ public class TourController {
     BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh); 
     BufferedImage destImg = Scalr.resize(cropImg, dw, dh); 
     File thumbFile = new File(filePath + "THUMB"); 
+    System.out.println(thumbFile);
     ImageIO.write(destImg, "jpg", thumbFile);
   }
 

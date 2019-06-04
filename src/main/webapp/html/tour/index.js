@@ -32,9 +32,6 @@ var trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 M.AutoInit();
-/*$(document).ready(function(){
-  $('.collapsible').collapsible();
-});*/
 var elem = document.querySelector('.collapsible.expandable');
 var instance = M.Collapsible.init(elem, {
   accordion: false
@@ -82,8 +79,6 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
           $(themetrGenerator(data)).appendTo(targetforTheme);
           $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
           $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
-          
-          
         });
         $.ajaxSetup({async:true});
       }
@@ -118,16 +113,9 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
   
 } // loadList()
 
-//테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
-//$(document.body).bind('loaded-list', () => {
-//  // 제목을 클릭했을 때 view.html로 전환시키기
-//  $('.bit-view-link').click((e) => {
-//    e.preventDefault();
-//    window.location.href = 'view.html?no=' + 
-//      $(e.target).attr('data-no');
-//  });
-//});
 
+//페이지를 출력한 후 1페이지 목록을 로딩한다.
+loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
@@ -162,18 +150,74 @@ $('#orderbyReviews').click((e) => {
   $(e.target).addClass('selected');
   alert('준비중');
 });
-//페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+
+$( ".collapsible" ).mouseup(function() {
+  $('#searchwithOptions').trigger('click');
+});
+
+$('#filter-reset').click((e) => {
+  initOptionSelected();
+  $('#searchwithOptions').trigger('click');
+});
+
   
+$('.continent-list-btn').click((e) => {
+  e.preventDefault();
+  continentName = $(e.target).html();
+  countryName = '';
+  cityName = '';
+  showBreadCrumb(continentName, '', '');
+  orderby = 'tourDesc';
+  initOptionSelected();
+  loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
+
+$('.country-list-btn').click((e) => {
+  e.preventDefault();
+  continentName = $(e.target).attr('id');
+  countryName = $(e.target).html();
+  cityName = '';
+  showBreadCrumb(continentName, countryName, '');
+  orderby = 'tourDesc';
+  initOptionSelected();
+  loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
+
+$('.city-list-btn').click((e) => {
+  e.preventDefault();
+  cityName = $(e.target).html();
+  continentName = $(e.target).attr('id').split(',')[0];
+  countryName = $(e.target).attr('id').split(',')[1];
+  showBreadCrumb(continentName, countryName, cityName);
+  orderby = 'tourDesc';
+  initOptionSelected();
+  loadList(1, '', '', cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
+
+$('#secondcrumb').click((e) => {
+  e.preventDefault();
+  cityName = '';
+  showBreadCrumb(continentName, countryName, cityName);
+  loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
+
+$('#firstcrumb').click((e) => {
+  e.preventDefault();
+  cityName = '';
+  countryName = '';
+  showBreadCrumb(continentName, countryName, cityName);
+  loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
+
+
 // price slider-range
-$(document.body).bind('loaded-list', () => {
 $(function () {
   $( "#slider-range-price" ).slider({
     range: true,
     min: 0,
-    max: currMaxPrice,
+    max: 250000,
     step: 1000,
-    values: [ 0, currMaxPrice ],
+    values: [ 0, 250000 ],
     slide: function( event, ui ) {
       $( "#amount" ).val(ui.values[ 0 ].toLocaleString() + "원" + " - " + ui.values[ 1 ].toLocaleString() + "원" );
       minPrice = ui.values[ 0 ];
@@ -183,21 +227,6 @@ $(function () {
   $( "#amount" ).val( $( "#slider-range-price" ).slider( "values", 0 ).toLocaleString() + "원" +
       " -" + $( "#slider-range-price" ).slider( "values", 1 ).toLocaleString() + "원");
 });
-});
-
-//$( "#slider-range-price" ).mouseup(function() {
-//  $('#searchwithOptions').trigger('click');
-//});
-/*$( "#slider-range-price" ).on("mouseup change propertychange paste input", function() {
-  $('#searchwithOptions').trigger('click');
-});*/
-
-//$( "#slider-range-price" ).update(function() {
-//  alert('a')
-// $('#searchwithOptions').trigger('click');
-//});
-
-
 
 //hour slider-range
 $(function() {
@@ -217,32 +246,23 @@ $(function() {
       " -" + $( "#slider-range-hour" ).slider( "values", 1 ) + "시간");
 });
 
-$( ".collapsible" ).mouseup(function() {
-  $('#searchwithOptions').trigger('click');
-});
-
-$('filter-reset').click((e) => {
-  initOptionSelected();
-  $('#searchwithOptions').trigger('click');
-});
 
 function resetSlider() {
   minHour = 1;
   maxHour = 12;
   minPrice = 0;
-  maxPrice = currMaxPrice;
+  maxPrice = 250000;
   $("#slider-range-hour").slider("values", 0, 1);  
   $("#slider-range-hour").slider("values", 1, 12 ); 
   $( "#tour-hour" ).val( 1 + "시간" + " -" + 12 + "시간" );
 
   $("#slider-range-price").slider("values", 0, 0);  
-  $("#slider-range-price").slider("values", 1, currMaxPrice); 
+  $("#slider-range-price").slider("values", 1, 250000); 
   $( "#amount" ).val( 0 + "원" + " -" + maxPrice.toLocaleString() + "원" );
 }
 
 //floating menu - search with options
 $('#searchwithOptions').click((e) => {
-//$('#searchwithOptions').on('click', function() {
 e.preventDefault();
 //console.log(continentName, countryName, cityName, minPrice, maxPrice);
 console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme);
@@ -294,53 +314,6 @@ function initOptionSelected() {
 };
 
 
-  $('.continent-list-btn').click((e) => {
-    e.preventDefault();
-    continentName = $(e.target).html();
-    countryName = '';
-    cityName = '';
-    showBreadCrumb(continentName, '', '');
-    orderby = 'tourDesc';
-    initOptionSelected();
-    loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
-  });
-
-  $('.country-list-btn').click((e) => {
-    e.preventDefault();
-    continentName = $(e.target).attr('id');
-    countryName = $(e.target).html();
-    cityName = '';
-    showBreadCrumb(continentName, countryName, '');
-    orderby = 'tourDesc';
-    initOptionSelected();
-    loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
-  });
-
-  $('.city-list-btn').click((e) => {
-    e.preventDefault();
-    cityName = $(e.target).html();
-    continentName = $(e.target).attr('id').split(',')[0];
-    countryName = $(e.target).attr('id').split(',')[1];
-    showBreadCrumb(continentName, countryName, cityName);
-    orderby = 'tourDesc';
-    initOptionSelected();
-    loadList(1, '', '', cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
-  });
-
-  $('#secondcrumb').click((e) => {
-    e.preventDefault();
-    cityName = '';
-    showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
-  });
-  
-  $('#firstcrumb').click((e) => {
-    e.preventDefault();
-    cityName = '';
-    countryName = '';
-    showBreadCrumb(continentName, countryName, cityName);
-    loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
-  });
 
 
 //Add TrpansportaionIcon

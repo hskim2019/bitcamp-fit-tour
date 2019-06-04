@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <title>FitTour - 내 정보</title>
+  <!-- materialize -->
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
+    media="screen,projection" />
+  <!-- fontawesome -->
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <!-- materizlize font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
+  <!-- fittour css -->
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+  <link rel="stylesheet" href="mypage.css">
+</head>
+
+<body>
+<!-- navbar header -->
+<header class="bit-main-header"></header>
+<!-- container -->
+<div class="container">
+  <div class="profile">
+  <div class="header">
+    <img id="profile-picture" src="https://gyazo.com/db9f7075f60979081a9da8ec47453bec.png"/>
+    <div id="profile-picture-overlay"><h6>Full Size</h6></div>
+    <p class="header-text">John Smith, 20 Y/O</p>
+  </div>
+  <button id="edit-info" class="fab">
+    <span class="fa fa-pencil"></span>
+  </button>
+  <div class="content">
+    <div class="info">
+      <h6 class="info-type">Email</h6>
+      <h6 id="info-email" class="info-data">john.smith@gmail.com</h6>
+    </div>
+    <div class="info">
+      <h6 class="info-type">Phone</h6>
+      <h6 id="info-phone" class="info-data">+1 234 567 890</h6>
+    </div>
+    <div class="info">
+      <h6 class="info-type" class="info-data">Address</h6>
+      <h6 id="info-address" class="info-data">123 6th St. Melbourne</h6>
+    </div>
+    <div id="social-media">
+      <h6> 소셜계정 <span class="fa fa-hand-o-left"></span></h6>
+      <div id="social-media-links">
+        <button id="facebook" class="social-media-btn" title="Facebook">
+          <span class="fa fa-facebook-official"></span>
+        </button>
+        <button id="instagram" class="social-media-btn" title="Instagram">
+          <span class="fa fa-instagram"></span>
+        </button>
+        <button id="twitter" class="social-media-btn" title="Twitter">
+          <span class="fa fa-twitter"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> <!-- container -->
+
+<div id="grey-overlay" style="display:none;">
+  <img id="profile-picture-full" src="https://gyazo.com/db9f7075f60979081a9da8ec47453bec.png"/>
+</div>
+
+<!-- footer -->
+<footer class="bit-main-footer page-footer grey"></footer>
+</body>
+
+
+<!-- jquery -->
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<!-- materialize -->
+<script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<!-- quill -->
+<script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
+<!-- fileupload -->
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<!-- fittour -->
+<script src="../header.js"></script>
+<script src="../footer.js"></script>
+<script src="mypage.js"></script>
+
+</html>

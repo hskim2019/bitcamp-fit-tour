@@ -149,9 +149,9 @@ public class TourController {
         String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
         System.out.println(filepath);
         part.write(filepath);
-
+        
+        System.out.println(filepath);
         try {
-          makeThumbnail(filepath);
           makeThumbnail(filepath);
         } catch (Exception e) {
           System.out.println("썸네일 이미지만드는중 에러 발생");

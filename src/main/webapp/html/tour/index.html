@@ -254,8 +254,9 @@
 
     <!-- collapsible -->
       <ul class="collapsible expandable">
-    <li class="reset-btn">
-      <div class="collapsible-header"><i class="material-icons">replay</i><span class="filter-reset">필터 모두 초기화</span></div>
+    <li>
+      <div class="collapsible-header" id="filter-reset">
+      <i class="material-icons">replay</i><span class="filter-reset">필터 모두 초기화</span></div>
     </li>
     <li class="active">
       <div class="collapsible-header"><i class="material-icons">attach_money</i>가격</div>
@@ -330,7 +331,7 @@
   </form>
       </div>
     </li>
-         <button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button>
+    <li><button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button></li>
   </ul>
      <!-- collapsible end -->
     
@@ -350,9 +351,9 @@
         </div>
       </div>
       <div class="orderOptions col s6">
-      <span class="option1"><a class="grey-text text-darken-3" id="orderbyPrice" href="#">가격낮은순<sub class="material-icons">arrow_drop_down</sub></a></span>
-      <span><a class="grey-text text-darken-3" id="orderbyLikes" href="#">인기순<sub class="material-icons">arrow_drop_down</sub></a></span>
-      <span><a class="grey-text text-darken-3" id="orderbyReviews" href="#">후기순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      <span class="orderOption1"><a class="grey-text text-darken-3" id="orderbyPrice" href="#">가격낮은순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyLikes" href="#">인기순<sub class="material-icons">arrow_drop_down</sub></a></span>
+      <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyReviews" href="#">후기순<sub class="material-icons">arrow_drop_down</sub></a></span>
       </div>
     </nav> <!-- breadcrumb end -->
    
@@ -406,7 +407,7 @@
 {{#each list}}
 <div class="card horizontal listRow" id='{{no}}'>
       <div class="card-image">
-        <img src="../../london.jsp">
+        <img src="../../london.jpg">
       </div>
       <div class="card-stacked">
         <div class="card-content exception1">

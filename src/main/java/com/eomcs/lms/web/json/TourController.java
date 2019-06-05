@@ -246,13 +246,13 @@ public class TourController {
 	//  
 
 	// 투어 상품이 등록 된 국가, 도시 list
-	@GetMapping("countrycitylist")
-	public Object countrycitylist() {
+	@GetMapping("registeredCountry")
+	public Object registeredCountry() {
 
-		List<Tour> countrycitylist = tourService.registeredcountrylist();
+		List<Tour> registeredCountryList = tourService.registeredcountry();
 
 		HashMap<String,Object> content = new HashMap<>();
-		content.put("countrycitylist", countrycitylist);
+		content.put("registeredCountryList", registeredCountryList);
 
 		return content;
 	}

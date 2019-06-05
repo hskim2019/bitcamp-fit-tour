@@ -4,6 +4,8 @@ var pageNo = 1,
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
     crumb = $('#breadcrumb-list'),
+    countrytemplateSrc = $('#tr-template-for-country').html(),
+    citytemplateSrc = $('#tr-template-for-city').html(),
     templateSrc = $('#tr-template').html(),
     themetemplateSrc = $('#tr-template-for-theme').html();
 // script 태그에서 템플릿 데이터를 꺼낸다.
@@ -28,7 +30,9 @@ var orderby = "tourDesc";
 var theme = [];
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator = Handlebars.compile(templateSrc),
+var countrytrGenerator = Handlebars.compile(countrytemplateSrc),
+citytrGenerator = Handlebars.compile(citytemplateSrc),
+trGenerator = Handlebars.compile(templateSrc),
 themetrGenerator = Handlebars.compile(themetemplateSrc);
 
 M.AutoInit();
@@ -365,10 +369,33 @@ function initOptionSelected() {
            }
   });
 
-  
-  function getMaxPrice() {
-    $.get('../../app/json/tour/maxPrice',
+  NavList();
+  function NavList() {
+    $.getJSON('../../app/json/tour/countrycitylist/',
         function(obj) {
-      currMaxPrice = obj.currMaxPrice;
-     
+      //console.log(obj.countrycitylist[0].country.continentName);
+  
+      for(list of obj.countrycitylist) {
+        console.log(list.city.cityName);
+      }
+//      for(listRow of $('.listRow')) {
+//        $.ajaxSetup({async:false});
+//        var tourNo = $(listRow).attr('id');
+//        var targetforTheme = $(listRow).children().eq(1).children().eq(3).children().eq(0);
+//        var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
+//        var transportation = $(listRow).children().eq(1).children().eq(2).children().eq(3).html();
+//        var placeToChange = $(listRow).children().eq(1).children().eq(2).children().eq(3).prev().children().eq(0);
+//        var targetforPhoto = $(listRow).children().eq(0).children().eq(0);
+//        addTransportaionIcon(placeToChange, transportation);
+//        $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
+//            function(data) {
+//          $(themetrGenerator(data)).appendTo(targetforTheme);
+//          $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
+//          $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
+//        });
+//        $.ajaxSetup({async:true});
+//      }
+      
+      
+      
     })};

@@ -229,13 +229,6 @@
       </ul>
     </nav> nav end
 
-  test 템플릿
-   <li><a href="#" class="country-list-btn" id="{{continent}}">{{country}}</a>
-         <ul>
-           <li><a href="#" class="city-list-btn" id="{{continent}}, {{country}}">{{city}}</a></li>
-          </ul>
-   </li> -->
-
 
     <!--나중에 다른 곳으로 옮길 것 -->
     <!--     <div id="main">
@@ -467,6 +460,22 @@
 <span>{{theme}}&nbsp;&nbsp;</span>
 {{/each}}
 </script>
+
+<script id="tr-template-for-country" type="text/x-handlebars-template">
+{{#each countrycitylist}}
+   <li><a href="#" class="country-list-btn" id="{{country.continentName}}">{{country.countryName}}</a>
+         <ul>
+         </ul>
+   </li>
+{{/each}}
+</script>
+
+<script id="tr-template-for-city" type="text/x-handlebars-template">
+{{#each countrycitylist}}
+     <li><a href="#" class="city-list-btn" id="{{country.continentName}}, {{country.countryName}}">{{city.cityName}}</a></li>
+{{/each}}
+</script>
+
 
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>

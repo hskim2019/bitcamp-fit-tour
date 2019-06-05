@@ -221,8 +221,8 @@
 	</select>
 
     <!-- find registered country, city list -->
-    <select id="findRegisteredCountryCity" resultMap="tourMap">
-    select distinct co.continent, co.country_name, ci.city_name 
+    <select id="findRegisteredCountry" resultMap="tourMap">
+    select distinct co.continent, co.country_name 
     from tour as t 
     join city as ci on t.city_id = ci.city_id 
     join country as co on ci.country_id = co.country_id 

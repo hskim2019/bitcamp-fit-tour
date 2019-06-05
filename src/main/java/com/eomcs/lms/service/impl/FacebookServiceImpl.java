@@ -25,15 +25,18 @@ public class FacebookServiceImpl implements FacebookService {
     HashMap<String,String> values = new HashMap<>();
     values.put("v1", accessToken);
     values.put("v2", "name,email");
+    try {
+      Map response = restTemplate.getForObject(
+          "https://graph.facebook.com/v3.3/me?access_token={v1}&fields={v2}", 
+          Map.class,
+          //accessToken,
+          //"id,name,email");
+          values); // 값을 개별적으로 넘기지 않고 맵에 담아 넘길 수도 있다.
+      return response;
+    } catch (Exception e) {
+      return null;
+    }
     
-    Map response = restTemplate.getForObject(
-        "https://graph.facebook.com/v3.3/me?access_token={v1}&fields={v2}", 
-        Map.class,
-        //accessToken,
-        //"id,name,email");
-        values); // 값을 개별적으로 넘기지 않고 맵에 담아 넘길 수도 있다.
-    System.out.println(response.toString());
-    return response;
   }
 }
 

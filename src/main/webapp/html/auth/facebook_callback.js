@@ -14,11 +14,15 @@ function login(loginTypeNo){
     
     if (data.status == 'success') {
       location.href = '../index.html'
-    }else if (data.status == 'accessTokenFail') {
-      alert('올바르지 않는 접근이다')
+    }else if (data.status == 'overlap') {
+      alert(data.message)
+      location.href = '../index.html'
+    }else if (data.status == 'tokenerr') {
+      alert(data.message)
       location.href = '../index.html'
     } else {
-      
+      alert("알수없는 에러")
+      location.href = '../index.html'
     }
     
 

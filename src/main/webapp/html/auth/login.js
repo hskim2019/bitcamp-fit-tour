@@ -2,12 +2,12 @@ if (window.localStorage.getItem('email')) {
   // document.querySelector('#email').value = localStorage.getItem('email')
   $('#email').val(localStorage.email)
 }
-
+//$('#naverIdLogin').hide();
 $('#login-btn').click(() => {
   if (document.querySelector('#saveEmail:checked') != null) {
     // 웹브라우저의 로컬 스토리지에 이메일을 저장한다.
     // window.localStorage.setItem("email", email);
-    window.localStorage.email = email;
+    window.localStorage.email = $('#email').val();
   } else {
     window.localStorage.removeItem("email");
   }
@@ -114,16 +114,4 @@ js.src = "https://connect.facebook.net/en_US/sdk.js";
 fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function getUserInfo(accessToken) {
-  // 자바스크립트에서 페이스북에 서비스를 요청할 때는 
-  // accessToken을 따로 지정하지 않아도 된다.
-  // 왜? 
-  // => 서비스를 요청할 때 내부에 보관된 accessToken을 사용할 것이다.
-  
-  // FB.api('서비스 URL', 서비스 결과를 받았을 때 호출될 함수);
-  // => '/me' : 현재 로그인 한 사용자의 정보를 가져오는 서비스이다.
-  FB.api('/me?fields=name,email', function(response) {
-      console.log(response);
-  });
-}
 

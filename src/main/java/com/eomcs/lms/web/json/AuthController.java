@@ -116,29 +116,44 @@ public class AuthController {
     } else if (loginTypeNo == 6) {
       LoginUser = naverService.getLoginUser(token);
     }
+    
+    if (LoginUser == null) {
+      content.put("status", "tokenerr");
+      content.put("message", "잘못된 토큰입니다.");
+      return content;
+    }
 
     String email = (String) LoginUser.get("email");
-    System.out.println(email);
-    Member member = memberService.get(email);
+    String name = (String) LoginUser.get("name");
 
+
+    Member member = memberService.get(email);
     if (member == null) {
       member = new Member();
       member.setEmail(email);
+      member.setName(name);
       member.setPassword("snspassword");
       member.setLoginTypeNo(loginTypeNo);
       member.setCertification("sns-login");
       memberService.snsSignUp(member);
-
-    }else {
+      session.setAttribute("loginUser", member);
       content.put("status", "success");
       content.put("member", member);
       return content;
-      
+    }else {
+      if(memberService.get(email,loginTypeNo) == null) {
+        content.put("status", "overlap");
+        content.put("message", "일반회원이나 페이스북으로 가입되어있습니다.");
+        return content;
+      }else {
+        session.setAttribute("loginUser", member);
+        content.put("status", "success");
+        content.put("member", member);
+        return content;
+      }
     }
-    session.setAttribute("loginUser", member);
-    content.put("status", "success");
-    content.put("member", member);
-    return content;
+
+
   }
 
 

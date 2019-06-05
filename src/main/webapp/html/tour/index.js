@@ -376,7 +376,7 @@ function initOptionSelected() {
       //console.log(obj.countrycitylist[0].country.continentName);
   
       for(list of obj.countrycitylist) {
-        console.log(list.city.cityName);
+        console.log(list.country.countryName);
       }
 //      for(listRow of $('.listRow')) {
 //        $.ajaxSetup({async:false});

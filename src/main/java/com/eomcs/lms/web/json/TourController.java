@@ -246,13 +246,13 @@ public class TourController {
 	//  
 
 	// 투어 상품이 등록 된 국가, 도시 list
-	@GetMapping("registeredCountry")
-	public Object registeredCountry() {
+	@GetMapping("countrycitylist")
+	public Object countrycitylist() {
 
-		List<Tour> registeredCountryList = tourService.registeredcountry();
+		List<Tour> countrycitylist = tourService.registeredcountry();
 
 		HashMap<String,Object> content = new HashMap<>();
-		content.put("registeredCountryList", registeredCountryList);
+		content.put("countrycitylist", countrycitylist);
 
 		return content;
 	}
@@ -282,5 +282,6 @@ public class TourController {
 		File thumbFile = new File(filePath + "THUMB"); 
 		ImageIO.write(destImg, "jpg", thumbFile);
 	}
+
 
 }

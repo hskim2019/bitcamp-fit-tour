@@ -67,6 +67,7 @@ public class AuthController {
 
     } else {
       session.setAttribute("loginUser", member);
+      System.out.println(member);
       content.put("status", "success");
     }
 

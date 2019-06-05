@@ -283,5 +283,4 @@ public class TourController {
 		ImageIO.write(destImg, "jpg", thumbFile);
 	}
 
-
 }

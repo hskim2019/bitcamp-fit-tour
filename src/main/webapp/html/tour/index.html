@@ -25,7 +25,7 @@
     <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 글</a></p> -->
 
     <!-- Nav -->
-    <nav id="nav">
+<!--     <nav id="nav">
       <ul>
         <li class="current"><a href="index.html">전체보기</a></li>
         <li><a href="#" class="continent-list-btn">유럽</a>
@@ -204,7 +204,7 @@
         </li>
 
       </ul>
-    </nav> <!-- nav end-->
+    </nav> nav end -->
 
 
   <!--   <nav id="nav">
@@ -228,6 +228,34 @@
         </li>
       </ul>
     </nav>  -->
+
+
+<div class="navigation">
+    <ul>
+      <li><a href="index.html">전체보기</a></li>
+      
+      <li class="has-menu"><a href="#" class="continent-list-btn">유럽</a>
+       <ul class="sub-menu" id="countryWithContinentforEU"></ul>
+      </li>
+      
+       <li class="has-menu"><a href="#" class="continent-list-btn">아시아</a>
+       <ul class="sub-menu" id="countryWithContinentforAsia"></ul>
+      </li>
+      
+      <li class="has-menu"><a href="#" class="continent-list-btn">아메리카</a>
+       <ul class="sub-menu" id="countryWithContinentAmerica"></ul>
+      </li>
+      
+      <li class="has-menu"><a href="#" class="continent-list-btn">오세아니아</a>
+       <ul class="sub-menu" id="countryWithContinentOceania"></ul>
+      </li>
+      
+      <li class="has-menu"><a href="#" class="continent-list-btn">아프리카</a>
+       <ul class="sub-menu" id="countryWithContinentAfrica"></ul>
+      </li>
+      
+    </ul>
+  </div>
 
 
     <!--나중에 다른 곳으로 옮길 것 -->
@@ -463,19 +491,18 @@
 
 <script id="tr-template-for-country" type="text/x-handlebars-template">
 {{#each registeredCountryList}}
-   <li><a href="#" class="country-list-btn" id="{{country.continentName}}">{{country.countryName}}</a>
-         <ul>
-         </ul>
-   </li>
+     <li class="has-menu countryRow" id="{{country.countryName}}">
+        <a href="#" class="country-list-btn" id="{{country.continentName}}">{{country.countryName}}</a>
+        <ul class="sub-menu"></ul>
+     </li>
 {{/each}}
 </script>
 
 <script id="tr-template-for-city" type="text/x-handlebars-template">
 {{#each registeredCityList}}
-     <li><a href="#" class="city-list-btn" id="{{country.continentName}}, {{country.countryName}}">{{city.cityName}}</a></li>
+  <li><a href="#" class="city-list-btn" id="{{country.continentName}},{{country.countryName}}">{{city.cityName}}</a></li>
 {{/each}}
 </script>
-
 
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>

@@ -220,13 +220,24 @@
 		select price from tour where price=(select max(price) from tour) limit 1
 	</select>
 
-    <!-- find registered country, city list -->
-    <select id="findRegisteredCountry" resultMap="tourMap">
+    <!-- find registered country list -->
+    <select id="findRegisteredCountry" resultMap="tourMap" parameterType="string">
     select distinct co.continent, co.country_name 
     from tour as t 
     join city as ci on t.city_id = ci.city_id 
+    join country as co on ci.country_id = co.country_id
+    where co.continent = #{continent}
+    order by co.continent desc
+    </select>
+    
+    <!-- find registered country list -->
+    <select id="findRegisteredCity" resultMap="tourMap" parameterType="string">
+    select distinct co.continent, co.country_name, ci.city_name
+    from tour as t 
+    join city as ci on t.city_id = ci.city_id 
     join country as co on ci.country_id = co.country_id 
-    order by co.continent desc;
+    where co.country_name = #{country}
+    order by co.continent desc
     </select>
 </mapper>
 

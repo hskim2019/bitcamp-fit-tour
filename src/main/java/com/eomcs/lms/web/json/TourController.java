@@ -245,18 +245,28 @@ public class TourController {
 	//  }
 	//  
 
-	// 투어 상품이 등록 된 국가, 도시 list
-	@GetMapping("countrycitylist")
-	public Object countrycitylist() {
-
-		List<Tour> countrycitylist = tourService.registeredcountry();
+	// 투어 상품이 등록 된 국가, 도시 list만 불러오기
+	@GetMapping("regCountry")
+	public Object regCountry(String continent) {
+        System.out.println(continent);
+		List<Tour> registeredCountryList = tourService.registeredcountry(continent);
 
 		HashMap<String,Object> content = new HashMap<>();
-		content.put("countrycitylist", countrycitylist);
+		content.put("registeredCountryList", registeredCountryList);
 
 		return content;
 	}
+	
+	@GetMapping("regCity")
+	public Object regCity(String country) {
+		 System.out.println(country);
+		List<Tour> registeredCityList = tourService.registeredcity(country);
 
+		HashMap<String,Object> content = new HashMap<>();
+		content.put("registeredCityList", registeredCityList);
+
+		return content;
+	}
 
 	@GetMapping("maxPrice")
 	public Object maxPrice() {

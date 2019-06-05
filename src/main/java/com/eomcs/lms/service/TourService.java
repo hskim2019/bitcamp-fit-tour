@@ -40,5 +40,7 @@ public interface TourService {
 	int maxHour,
 	List<String> theme
 	);
-	List<Tour> registeredcountry();
+	List<Tour> registeredcountry(String continent);
+	List<Tour> registeredcity(String country);
+	
 }

@@ -371,13 +371,13 @@ function initOptionSelected() {
 
   NavList();
   function NavList() {
-    $.getJSON('../../app/json/tour/countrycitylist/',
+    
+    
+    $.getJSON('../../app/json/tour/regCountry?continent=유럽',
         function(obj) {
-      //console.log(obj.countrycitylist[0].country.continentName);
-  
-      for(list of obj.countrycitylist) {
-        console.log(list.country.countryName);
-      }
+      var targetCountry = $('')
+      $(countrytrGenerator(obj)).appendTo('country');
+      //$.ajaxSetup({async:true});
 //      for(listRow of $('.listRow')) {
 //        $.ajaxSetup({async:false});
 //        var tourNo = $(listRow).attr('id');
@@ -396,6 +396,6 @@ function initOptionSelected() {
 //        $.ajaxSetup({async:true});
 //      }
       
-      
-      
-    })};
+    }
+    
+    )};

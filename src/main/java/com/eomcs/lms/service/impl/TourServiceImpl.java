@@ -174,8 +174,13 @@ public class TourServiceImpl implements TourService {
 	}
 
   @Override
-	public List<Tour> registeredcountry() {
-		return tourDao.findRegisteredCountry();
+	public List<Tour> registeredcountry(String continent) {
+		return tourDao.findRegisteredCountry(continent);
+	}
+  
+  @Override
+	public List<Tour> registeredcity(String country) {
+		return tourDao.findRegisteredCity(country);
 	}
 }
 

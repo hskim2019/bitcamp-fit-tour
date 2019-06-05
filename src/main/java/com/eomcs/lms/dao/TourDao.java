@@ -23,7 +23,8 @@ public interface TourDao {
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);
   int findMaxPrice();
-  List<Tour> findRegisteredCountry();
+  List<Tour> findRegisteredCountry(String continent);
+  List<Tour> findRegisteredCity(String country);
 }
 
 

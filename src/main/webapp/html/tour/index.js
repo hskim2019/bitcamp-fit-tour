@@ -69,6 +69,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 ()안에 붙인다.
       $(trGenerator(obj)).appendTo($('#tourlistcard'));
       
+  
       for(listRow of $('.listRow')) {
         $.ajaxSetup({async:false});
         var tourNo = $(listRow).attr('id');
@@ -177,6 +178,8 @@ $('.continent-list-btn').click((e) => {
   loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
+
+$(document.body).bind('nav-list', () => {
 $('.country-list-btn').click((e) => {
   e.preventDefault();
   continentName = $(e.target).attr('id');
@@ -187,7 +190,9 @@ $('.country-list-btn').click((e) => {
   initOptionSelected();
   loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
+});
 
+$(document.body).bind('nav-list', () => {
 $('.city-list-btn').click((e) => {
   e.preventDefault();
   cityName = $(e.target).html();
@@ -197,6 +202,7 @@ $('.city-list-btn').click((e) => {
   orderby = 'tourDesc';
   initOptionSelected();
   loadList(1, '', '', cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+});
 });
 
 $('#secondcrumb').click((e) => {
@@ -369,33 +375,35 @@ function initOptionSelected() {
            }
   });
 
-  NavList();
-  function NavList() {
-    
-    
-    $.getJSON('../../app/json/tour/regCountry?continent=유럽',
+  var arrays = ['유럽', '아시아', '아메리카', '오세아니아', '아프리카'];
+  var arrays2 = ['#countryWithContinentforEU', '#countryWithContinentforAsia', '#countryWithContinentAmerica', '#countryWithContinentOceania', '#countryWithContinentAfrica'];
+  NavList(arrays, arrays2);
+  var i = 0;
+  function NavList(arrays, arrays2) {
+    console.log(arrays, arrays2);
+    for (var i = 0; i < arrays.length; i++){
+      $.ajaxSetup({async:false});
+      console.log(arrays, arrays2);
+    $.getJSON('../../app/json/tour/regCountry?continent=' + arrays[i],
         function(obj) {
-      var targetCountry = $('')
-      $(countrytrGenerator(obj)).appendTo('country');
-      //$.ajaxSetup({async:true});
-//      for(listRow of $('.listRow')) {
-//        $.ajaxSetup({async:false});
-//        var tourNo = $(listRow).attr('id');
-//        var targetforTheme = $(listRow).children().eq(1).children().eq(3).children().eq(0);
-//        var targetforPrice = $(listRow).children().eq(1).children().eq(3).children().eq(1);
-//        var transportation = $(listRow).children().eq(1).children().eq(2).children().eq(3).html();
-//        var placeToChange = $(listRow).children().eq(1).children().eq(2).children().eq(3).prev().children().eq(0);
-//        var targetforPhoto = $(listRow).children().eq(0).children().eq(0);
-//        addTransportaionIcon(placeToChange, transportation);
-//        $.getJSON('../../app/json/tour/detail?no=' + tourNo + '&pageSize=' + 8,
-//            function(data) {
-//          $(themetrGenerator(data)).appendTo(targetforTheme);
-//          $(targetforPrice).html(data.tour.price.toLocaleString() + '원');
-//          $(targetforPhoto).attr('src', '/bitcamp-fit-tour/upload/tourphoto/' + data.tour.tourPhoto[0].name);
-//        });
-//        $.ajaxSetup({async:true});
-//      }
       
-    }
+      $(countrytrGenerator(obj)).appendTo($(arrays2[i]));
+      
+      for(countryRow of $(arrays2[i] + ' .countryRow')) {
+        
+        var targetCityRow = $(countryRow).children().eq(1);
+        var countryNameforRow = $(countryRow).attr('id');
+        $.getJSON('../../app/json/tour/regCity?country=' + countryNameforRow, 
+            function(data) {
+          $(citytrGenerator(data)).appendTo($(targetCityRow));
+        });
+      }
+      
+      $(document.body).trigger('nav-list');
+      });
     
-    )};
+    } 
+    
+  };
+  
+ 

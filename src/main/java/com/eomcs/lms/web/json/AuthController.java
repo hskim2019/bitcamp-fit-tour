@@ -143,7 +143,7 @@ public class AuthController {
     }else {
       if(memberService.get(email,loginTypeNo) == null) {
         content.put("status", "overlap");
-        content.put("message", "일반회원이나 페이스북으로 가입되어있습니다.");
+        content.put("message", "일반회원이나 다른 SNS로 가입되어있습니다.");
         return content;
       }else {
         session.setAttribute("loginUser", member);

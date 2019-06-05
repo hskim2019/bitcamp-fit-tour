@@ -207,12 +207,12 @@
     </nav> <!-- nav end-->
 
 
-<!--    <nav id="nav">
+  <!--   <nav id="nav">
       <ul>
         <li class="current"><a href="index.html">전체보기</a></li>
         
         <li><a href="#" class="continent-list-btn">유럽</a>
-          <ul class="countrylistforEU">  </ul>
+          <ul coutry="countrylistforEU"></ul>
         </li>
         <li><a href="#" class="continent-list-btn">아시아</a>
           <ul class="countrylistforAsia">  </ul>
@@ -227,7 +227,7 @@
          <ul class="countrylistforAfrica">  </ul>
         </li>
       </ul>
-    </nav> nav end
+    </nav>  -->
 
 
     <!--나중에 다른 곳으로 옮길 것 -->
@@ -462,7 +462,7 @@
 </script>
 
 <script id="tr-template-for-country" type="text/x-handlebars-template">
-{{#each countrycitylist}}
+{{#each registeredCountryList}}
    <li><a href="#" class="country-list-btn" id="{{country.continentName}}">{{country.countryName}}</a>
          <ul>
          </ul>
@@ -471,7 +471,7 @@
 </script>
 
 <script id="tr-template-for-city" type="text/x-handlebars-template">
-{{#each countrycitylist}}
+{{#each registeredCityList}}
      <li><a href="#" class="city-list-btn" id="{{country.continentName}}, {{country.countryName}}">{{city.cityName}}</a></li>
 {{/each}}
 </script>

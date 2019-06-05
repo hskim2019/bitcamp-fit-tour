@@ -203,4 +203,14 @@ button:focus{
   to {
     box-shadow: 0 0 0 10px transparent; 
   }
-} 
+}
+
+div[class="error"] {
+	color : red;
+	font-size: 13px;
+}
+
+
+
+
+

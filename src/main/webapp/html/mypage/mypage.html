@@ -40,7 +40,7 @@
     </div>
     <div class="info">
       <p class="info-type">비밀번호</p>
-      <p id="info-password" class="info-data"></p>
+      <p id="info-password" class="info-data"> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">변경</a></p>
     </div>
     <div class="info">
       <p class="info-type">생년월일</p>
@@ -72,6 +72,40 @@
   <img id="profile-picture-full"/>
 </div>
 
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="row">
+      <form id="form-password">
+        <div class="modal-content">
+          <div class="row">
+            <div class="input-field col s12">
+              <label for="originPassword">기존 비밀번호</label>
+              <input id="originPassword" name="originPassword" type="password" data-error=".errorTxt1">
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="newPassword" type="password" name="newPassword" data-error=".errorTxt2">
+              <label for="newPassword">새 비밀번호</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="newPasswordConfirm" type="password" name="newPasswordConfirm" data-error=".errorTxt1">
+              <label for="newPasswordConfirm">새 비밀번호 확인</label>
+            </div>
+          </div>
+        </div>
+      
+      <div class="modal-footer">
+        <a href="" id="password-modfiy-btn" class="<!-- modal-close --> waves-effect waves-green btn">변경</a>
+      </div>
+    </form>
+  </div>
+  </div>
+          
+
 <!-- footer -->
 <footer class="bit-main-footer page-footer grey"></footer>
 </body>
@@ -80,10 +114,10 @@
 <!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/additional-methods.js"></script>
 <!-- materialize -->
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<!-- quill -->
-<script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
 <!-- fileupload -->
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>

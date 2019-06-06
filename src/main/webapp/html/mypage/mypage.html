@@ -30,46 +30,64 @@
     <div id="profile-picture-overlay"><p>크게 보기</p></div>
     <p id="info-name" class="header-text"></p>
   </div>
-  <button id="edit-info" class="fab">
-    <span class="fa fa-edit"></span>
+  <button id="edit-info" class="fab waves-effect waves-light btn">
+    <i class="material-icons">edit</i>
   </button>
   
   <div class="content">
   <div class="row">
-    <div class="col l8">
+    <div class="col l9">
       <p class="info-type">이메일</p>
     </div>
-    <div class="col l4 right-align">
+    <div class="col l3 right-align">
       <p id="info-email" class="info-data"></p>
     </div>
     </div>
     
       <div class="row">
-        <div class="col l8">
+        <div class="col l9">
           <p class="info-type">비밀번호</p>
         </div>
-        <div class="col l4 right-align">
-          <p id="info-password" class="info-data"> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">변경</a></p>
+        <div class="col l3 right-align">
+          <p id="info-password" class="info-data"> <a class="waves-effect waves-light btn modal-trigger" href="#password-modal">변경</a></p>
         </div>
       </div>
       
     <div class="row">
-      <div class="col l8">
+      <div class="col l9">
       <p class="info-type">생년월일</p>
       </div>
-      <div class="col l4 right-align">
-      <input type="text" class="datepicker" disabled>
+      <div class="col l3">
+      <input id="info-birth" type="text" class="datepicker right-align" disabled>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col l9">
+      <p class="info-type">전화번호</p>
+      </div>
+      <div class="col l3">
+      <input id="info-phone" type="text" class="info-data right-align" disabled>
       </div>
     </div>
     
     <div class="row">
       <div class="col l8">
-      <p class="info-type">전화번호</p>
+      <p class="info-type">추천 상품, 이벤트 및 마케팅 정보 수신 동의</p>
       </div>
-      <div class="col l4 right-align">
-      <p id="info-phone" class="info-data"></p>
+      <div class="col l2 mt15">
+        <label class="right">
+          <input  id="info-email-agree" type="checkbox" class="right" disabled/>
+          <span>Email</span>
+        </label>
       </div>
+      <div class="col l2 mt15">
+        <label class="right">
+          <input id="info-sms-agree" type="checkbox" disabled/>
+          <span>SMS</span>
+        </label>
       </div>
+    </div>
     <!-- <div id="social-media">
       <p> 소셜계정 <span class="fa fa-hand-o-left"></span></p>
       <div id="social-media-links">
@@ -93,7 +111,7 @@
 </div>
 
 <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+  <div id="password-modal" class="modal">
     <div class="row">
       <form id="form-password">
         <div class="modal-content">
@@ -121,11 +139,13 @@
               <label for="newPassword">새 비밀번호</label>
             </div>
           </div>
+          
           <div class="row">
             <div class="input-field col l12">
               <i class="material-icons prefix">lock_outline</i>
-              <input id="newPasswordConfirm" type="password" name="newPasswordConfirm" data-error=".errorTxt1">
+              <input id="newPasswordConfirm" type="password" name="newPasswordConfirm" data-error=".errorTxt3">
               <label for="newPasswordConfirm">새 비밀번호 확인</label>
+              <div class='errorTxt1'></div>
             </div>
           </div>
         </div>

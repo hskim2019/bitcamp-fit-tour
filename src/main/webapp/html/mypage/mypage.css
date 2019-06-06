@@ -190,7 +190,7 @@ div[class="error"] {
 
 /* modal */
 #password-modal {
-  width : 33%;
+  width : 470px;
   max-height: none;
 }
 
@@ -216,5 +216,11 @@ input[type=text]:not(.browser-default) {
   font-size: 16px;
   color: black;
   font-family: 'Noto Sans KR', sans-serif;
+}
+
+[type="checkbox"]:not(:checked):disabled+span:not(.lever):before {
+  border: 2px solid #5a5a5a;; 
+  background-color: white; 
+}
 }
 

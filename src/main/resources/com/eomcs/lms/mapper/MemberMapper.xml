@@ -107,18 +107,15 @@
     and login_type_id =#{loginTypeNo}
   </select>
   
-<select id="findByEmail" resultMap="memberMap" parameterType="map">
+  <select id="findByEmail" resultMap="memberMap" parameterType="map">
     select
-    email,
-    certification,
-    member_id,
-    name
+    *
     from
     member
     where
     email = #{email}
-   
   </select>
+  
   <insert id="insert" parameterType="member">
     insert into member(
     login_type_id,
@@ -213,7 +210,6 @@
       <if test="smsCheck != null">sms_check = #{smsCheck},</if>
       <if test="emailCheck != null">email_check = #{emailCheck},</if>
       <if test="tel != null">tel = #{tel},</if>
-      <if test="rank != null">rank = #{rank},</if>
       <if test="phoneCheck != null">phone_check = #{phoneCheck},</if>
       <if test="photo != null">photo = #{photo}</if>
     </set>

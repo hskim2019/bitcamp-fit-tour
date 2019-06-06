@@ -54,8 +54,6 @@ public class AuthController {
 
     Member member = memberService.get(email, password);
 
-
-
     HashMap<String, Object> content = new HashMap<>();
 
     if (member == null) {
@@ -153,7 +151,29 @@ public class AuthController {
       }
     }
 
+  }
+  
+  @PostMapping("relogin")
+  public Object reLogin(HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    Member member = memberService.get(loginUser.getEmail());
+    System.out.println("!!" +member);
+    HashMap<String, Object> content = new HashMap<>();
 
+    if (member == null) {
+      content.put("status", "fail");
+      content.put("message", "이메일이 없거나 암호가 맞지 않습니다.");
+    } else if (member.getRank() == 0) {
+      session.setAttribute("standby", loginUser.getEmail());
+      content.put("status", "stand-by");
+
+    } else {
+      session.setAttribute("loginUser", member);
+      System.out.println(member);
+      content.put("status", "success");
+    }
+
+    return content;
   }
 
 

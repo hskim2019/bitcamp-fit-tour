@@ -112,8 +112,6 @@ public class MemberServiceImpl implements MemberService {
 
   @Override
   public int updatePassWord(Map<String, Object> paramMap) {
-    System.out.println(paramMap);
-    System.out.println("------------");
     return memberDao.updatePassWord(paramMap);
   }
 }

@@ -60,11 +60,16 @@ public class Member implements Cloneable, Serializable {
   public void setNickname(String nickname) {
     this.nickname = nickname;
   }
+  
+  
   public String getBirth() {
     return birth;
   }
   public void setBirth(String birth) {
     this.birth = birth;
+  }
+  public static long getSerialversionuid() {
+    return serialVersionUID;
   }
   public boolean isSmsCheck() {
     return smsCheck;

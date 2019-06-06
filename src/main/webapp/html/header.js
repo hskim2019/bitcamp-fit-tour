@@ -31,7 +31,6 @@ $(document.body).bind('loaded.header', () => {
 function loadLoginUser() {
 
   $.get('/bitcamp-fit-tour/app/json/auth/user', function(data){
-
     if (data.status == 'success') {
       sessionStorage.setItem('loginUser',JSON.stringify(data.user));
 
@@ -53,7 +52,8 @@ function loadLoginUser() {
       } else {
         $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/default.jpg)');
       }
-
+      
+      $(document.body).trigger('loadHeader');
     } else {
       var notLoginStateTags = $('.bit-not-login-state');
       for(notLoginStateTag of notLoginStateTags){

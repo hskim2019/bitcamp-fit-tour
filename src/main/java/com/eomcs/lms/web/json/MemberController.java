@@ -85,11 +85,13 @@ public class MemberController {
   }
   
   @PostMapping("update")
-  public Object update(Member member) {
+  public Object update(Member member, HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    member.setNo(loginUser.getNo());
     HashMap<String,Object> content = new HashMap<>();
     try {
       if (memberService.update(member) == 0) 
-        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+        throw new RuntimeException("해당 번호의 회원이 없습니다.");
       content.put("status", "success");
       
     } catch (Exception e) {
@@ -102,7 +104,6 @@ public class MemberController {
   @PostMapping("updatePassword")
   public Object updatePassword(String password, String newPassword, HttpSession session) {
     Member loginUser = (Member) session.getAttribute("loginUser");
-    System.out.println("----------------------");
     HashMap<String,Object> content = new HashMap<>();
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("password", password);

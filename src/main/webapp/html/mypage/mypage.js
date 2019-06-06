@@ -1,46 +1,73 @@
-//load user
-if(sessionStorage.getItem('loginUser')){
-  var user = JSON.parse(sessionStorage.getItem('loginUser'))
-  var birthArray = user.birth.split('-');
-  var birth = new Date(birthArray[0],birthArray[1],birthArray[2]);
-  console.log(user);
-}
+$(document.body).bind('loadHeader', () => {
+  //load user
+  if(sessionStorage.getItem('loginUser')){
+    var user = JSON.parse(sessionStorage.getItem('loginUser'))
+    var birthArray = user.birth.split('-');
+    var birth = new Date(birthArray[0],birthArray[1],birthArray[2]);
+    console.log(user);
+    loadProfile();
+    }
+  
+  //load profile
+  function loadProfile(){
+    
+    $('#profile-picture').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
+    $('#profile-picture-full').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
+    $('#info-name').html(user.name);
+    $('#info-email').html(user.email);
+    $('#info-tel').val(user.tel);
+    $('#info-birth').val(birthArray[0] + '년 ' + birthArray[1] +'월 ' + birthArray[2] + '일');
+    if(user.emailCheck)
+      $('#info-email-agree').attr('checked',true);
+    if(user.smsCheck)
+      $('#info-sms-agree').attr('checked',true);
+  }
+  
+  $('.datepicker').datepicker({
+    format : 'yyyy년 mm월 dd일',
+    defaultDate : birth
+  });
+});
 
 $('#password-modal').modal({
   onCloseEnd : resetModal
 });
   
-$('.datepicker').datepicker({
-  format : 'yyyy년 mm월 dd일',
-  defaultDate : birth
-});
-  
-
-//set profile
-$('#profile-picture').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
-$('#profile-picture-full').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
-$('#info-name').html(user.name);
-$('#info-email').html(user.email);
-$('#info-phone').val(user.tel);
-$('#info-birth').val(birthArray[0] + '년 ' + birthArray[1] +'월 ' + birthArray[2] + '일');
-if(user.emailCheck)
-  $('#info-email-agree').attr('checked',true);
-if(user.smsCheck)
-  $('#info-sms-agree').attr('checked',true);
-
 
 // profile edit
 $('#edit-info').click(function(e){
   editIconTag = $(this).find('i')
   if(editIconTag.html() == 'edit') {
     $('#info-birth').attr('disabled',false);
-    $('#info-phone').attr('disabled',false);
+    $('#info-tel').attr('disabled',false);
     $('#info-email-agree').attr('disabled',false);
     $('#info-sms-agree').attr('disabled',false);
     editIconTag.html('check');
   } else {
+    
+    var newBirthArray = $('#info-birth').val().split(' ')
+    var newBirth = newBirthArray[0].substring(0, 4) + '-' +
+                   newBirthArray[1].substring(0, 2) + '-' +
+                   newBirthArray[2].substring(0, 2);
+    $.post('../../app/json/member/update',
+            {
+              birth: newBirth,
+              smsCheck: $('#info-sms-agree').is(':checked'),
+              emailCheck: $('#info-email-agree').is(':checked'),
+              tel: $('#info-tel').val(),
+            }, 
+            function(obj) {
+              if(obj.status == 'success'){
+                sessionStorage.clear();
+                $.post('../../app/json/auth/relogin');
+                M.toast({ html: '변경되었습니다.' });
+              } else {
+                M.toast({ html: '새 비밀번호를 입력하세요.' });
+              }
+            });
+    
     $('#info-birth').attr('disabled',true);
-    $('#info-phone').attr('disabled',true);
+    $('#info-tel').attr('disabled',true);
     $('#info-email-agree').attr('disabled',true);
     $('#info-sms-agree').attr('disabled',true);
     editIconTag.html('check');
@@ -163,5 +190,4 @@ $("#form-password").validate({
   errorElement : 'div',
   
 });
-
 

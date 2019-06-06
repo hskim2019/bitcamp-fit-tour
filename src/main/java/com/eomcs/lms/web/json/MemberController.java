@@ -1,6 +1,7 @@
 package com.eomcs.lms.web.json;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,6 +90,27 @@ public class MemberController {
     try {
       if (memberService.update(member) == 0) 
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  @PostMapping("updatePassword")
+  public Object updatePassword(String password, String newPassword, HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    System.out.println("----------------------");
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("password", password);
+    paramMap.put("newPassword", newPassword);
+    paramMap.put("no", loginUser.getNo());
+    try {
+      if (memberService.updatePassWord(paramMap) == 0) 
+        throw new RuntimeException("비밀번호를 정확하게 입력해 주세요.");
       content.put("status", "success");
       
     } catch (Exception e) {

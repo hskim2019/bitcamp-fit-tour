@@ -1,6 +1,7 @@
 package com.eomcs.lms.service;
 
 import java.util.List;
+import java.util.Map;
 import com.eomcs.lms.domain.Member;
 
 public interface MemberService {
@@ -16,5 +17,5 @@ public interface MemberService {
   int delete(int no);
   int size(String search);
   int confirm(String email,String certification);
-  
+  int updatePassWord(Map<String,Object> paramMap);
 }

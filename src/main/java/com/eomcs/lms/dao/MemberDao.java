@@ -19,6 +19,7 @@ public interface MemberDao {
   int delete(int no);
   int countAll(String search);
   int confirm(Map<String,Object> paramMap);
+  int updatePassWord(Map<String,Object> paramMap);
 }
 
 

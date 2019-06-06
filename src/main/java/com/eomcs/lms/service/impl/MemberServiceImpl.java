@@ -2,6 +2,7 @@ package com.eomcs.lms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
@@ -107,6 +108,13 @@ public class MemberServiceImpl implements MemberService {
   public int snsSignUp(Member member) {
     System.out.println(member);
     return memberDao.snsSignUp(member);
+  }
+
+  @Override
+  public int updatePassWord(Map<String, Object> paramMap) {
+    System.out.println(paramMap);
+    System.out.println("------------");
+    return memberDao.updatePassWord(paramMap);
   }
 }
 

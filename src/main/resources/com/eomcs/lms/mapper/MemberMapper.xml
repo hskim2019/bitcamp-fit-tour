@@ -250,6 +250,16 @@
       </if>
     </where>
   </select>
+  
+  <update id="updatePassWord" parameterType="map">
+    update member
+    <set>
+      <if test="password != null">password = password(#{newPassword}),</if>
+    </set>
+    where
+    member_id = #{no} and password = password(#{password})
+  </update>
+  
 </mapper>
 
 

@@ -33,23 +33,43 @@
   <button id="edit-info" class="fab">
     <span class="fa fa-edit"></span>
   </button>
+  
   <div class="content">
-    <div class="info">
+  <div class="row">
+    <div class="col l8">
       <p class="info-type">이메일</p>
+    </div>
+    <div class="col l4 right-align">
       <p id="info-email" class="info-data"></p>
     </div>
-    <div class="info">
-      <p class="info-type">비밀번호</p>
-      <p id="info-password" class="info-data"> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">변경</a></p>
     </div>
-    <div class="info">
+    
+      <div class="row">
+        <div class="col l8">
+          <p class="info-type">비밀번호</p>
+        </div>
+        <div class="col l4 right-align">
+          <p id="info-password" class="info-data"> <a class="waves-effect waves-light btn modal-trigger" href="#modal1">변경</a></p>
+        </div>
+      </div>
+      
+    <div class="row">
+      <div class="col l8">
       <p class="info-type">생년월일</p>
-      <p id="info-birth" class="info-data"></p>
+      </div>
+      <div class="col l4 right-align">
+      <input type="text" class="datepicker" disabled>
+      </div>
     </div>
-    <div class="info">
+    
+    <div class="row">
+      <div class="col l8">
       <p class="info-type">전화번호</p>
+      </div>
+      <div class="col l4 right-align">
       <p id="info-phone" class="info-data"></p>
-    </div>
+      </div>
+      </div>
     <!-- <div id="social-media">
       <p> 소셜계정 <span class="fa fa-hand-o-left"></span></p>
       <div id="social-media-links">
@@ -64,7 +84,7 @@
         </button>
       </div>
     </div> -->
-  </div>
+    </div>
 </div>
 </div> <!-- container -->
 
@@ -77,30 +97,45 @@
     <div class="row">
       <form id="form-password">
         <div class="modal-content">
-          <div class="row">
-            <div class="input-field col s12">
-              <label for="originPassword">기존 비밀번호</label>
-              <input id="originPassword" name="originPassword" type="password" data-error=".errorTxt1">
+        <div class="row">
+            <div class="col l12">
+              <blockquote>
+                <h4>비밀번호 변경</h4>
+              </blockquote>
+              • 안전한 비밀번호로 내정보를 보호하세요.<br>
+              • 이전에 사용한 적 없는 비밀번호가 안전합니다.
             </div>
+          </div>
+          <div class="row">
+              <div class="input-field col l12">
+                <i class="material-icons prefix">lock_outline</i>
+                <label for="originPassword">현재 비밀번호</label>
+                <input id="originPassword" name="originPassword" type="password" data-error=".errorTxt1">
+              </div>
           </div>
           
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col l12">
+             <i class="material-icons prefix">lock_outline</i>
               <input id="newPassword" type="password" name="newPassword" data-error=".errorTxt2">
               <label for="newPassword">새 비밀번호</label>
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col l12">
+              <i class="material-icons prefix">lock_outline</i>
               <input id="newPasswordConfirm" type="password" name="newPasswordConfirm" data-error=".errorTxt1">
               <label for="newPasswordConfirm">새 비밀번호 확인</label>
             </div>
           </div>
         </div>
-      
-      <div class="modal-footer">
-        <a href="" id="password-modfiy-btn" class="<!-- modal-close --> waves-effect waves-green btn">변경</a>
-      </div>
+        
+        <div class="row center-align mb10">
+          <a href="#" id="password-update-btn" class="waves-effect waves-white btn">변경</a>
+        </div>
+        <div class="row center-align">
+          <a href="#" id="password-update-cancel-btn" class="waves-effect waves-white btn red lighten-2">취소</a>
+        </div>
     </form>
   </div>
   </div>

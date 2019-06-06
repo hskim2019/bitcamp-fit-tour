@@ -330,9 +330,9 @@ div.container {
 
 /* Margin Auto */
 
-.mr-auto {
-  margin: auto;
-  float: none;
+.m-auto {
+  margin: auto !important;
+  float: none !important;
 }
 
 

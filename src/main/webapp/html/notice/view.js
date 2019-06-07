@@ -117,12 +117,17 @@ var quill = new Quill('#editor', {
       unit: 'word'
     },
     toolbar: [
-      [{ header: [1, 2, false] }],
+      [{ 'font': [] }],
+      [{ 'size': ['small', false, 'large', 'huge'] }], 
       ['bold', 'italic', 'underline'],
-      ['image', 'code-block']
+      [{ 'color': [] }, { 'background': [] }],  
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'indent': '-1' }, { 'indent': '+1' }],      
+      [{ 'align': [] }],
+      ['image', 'link', 'video']
       ]
   },
-  placeholder: 'Compose an epic...',
+  placeholder: '내용을 입력해 주세요',
 
   theme: 'snow'  // or 'bubble'
 

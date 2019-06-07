@@ -1,13 +1,18 @@
 package com.eomcs.lms.web.json;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.eomcs.lms.domain.Notice;
 import com.eomcs.lms.service.NoticeService;
 
@@ -18,18 +23,19 @@ public class NoticeController {
   
   @Autowired NoticeService noticeService;
   
-  @PostMapping("add")
-  public Object add(Notice notice) {
-    HashMap<String,Object> content = new HashMap<>();
-    try {
-      noticeService.add(notice);
-      content.put("status", "success");
-    } catch (Exception e) {
-      content.put("status", "fail");
-      content.put("message", e.getMessage());
-    }
-    return content;
-  }
+//  @PostMapping("add")
+//  public Object add(Notice notice) {
+//	  System.out.println(notice);
+//    HashMap<String,Object> content = new HashMap<>();
+//    try {
+//      noticeService.add(notice);
+//      content.put("status", "success");
+//    } catch (Exception e) {
+//      content.put("status", "fail");
+//      content.put("message", e.getMessage());
+//    }
+//    return content;
+//  }
   
   @GetMapping("delete")
   public Object delete(int no) {
@@ -96,11 +102,30 @@ public class NoticeController {
     }
     return content;
   }
+
+
+
+
+@PostMapping("add")
+public Object add(Notice notice) throws IOException, ServletException {
+//	Notice notice = new Notice();
+//	
+//	Collection<Part> parts = request.getParts();
+//	for(Part part : parts) {
+//	ObjectMapper mapper = new ObjectMapper();
+//	notice = mapper.readValue(URLDecoder.decode(request.getParameter(part.getName()), "UTF-8"), Notice.class);
+//	System.out.println(notice);
+//	}
+  HashMap<String,Object> content = new HashMap<>();
+  try {
+    noticeService.add(notice);
+    content.put("status", "success");
+  } catch (Exception e) {
+    content.put("status", "fail");
+    content.put("message", e.getMessage());
+  }
+  return content;
 }
 
-
-
-
-
-
+}
 

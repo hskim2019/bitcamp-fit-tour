@@ -11,7 +11,6 @@ $(document).ready(function(){
   });
 })();
 
-
 //load
 $(document.body).bind('loaded.header', () => {
 
@@ -21,7 +20,7 @@ $(document.body).bind('loaded.header', () => {
   $('#logout-menu').click( (e) => {
     e.preventDefault();
     $.get('/bitcamp-fit-tour/app/json/auth/logout', function(obj){
-      sessionStorage.clear();
+      sessionStorage.removeItem('loginUser');
       location.href = '/bitcamp-fit-tour/html/index.html';
     });
   });

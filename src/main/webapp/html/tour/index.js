@@ -286,15 +286,24 @@ console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHou
 loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
 });
 
+$('.mouseOverLeave').hover((e) => {
+  $('.showAll').css("color", "#d6e5e3");
+});
+
+$('.mouseOverLeave').mouseleave((e) => {
+ $('.showAll').css("color", "#24313C");
+});
+
+
 // Dropdowns.
-(function() {
-    $('#nav > ul').dropotron({
-      mode: 'fade',
-      noOpenerFade: true,
-      speed: 300,
-      alignment: 'center'
-    });
-})();
+//(function() {
+//    $('#nav > ul').dropotron({
+//      mode: 'fade',
+//      noOpenerFade: true,
+//      speed: 300,
+//      alignment: 'center'
+//    });
+//})();
 
 //follow quick menu
 //$(window).scroll(function(){
@@ -380,10 +389,8 @@ function initOptionSelected() {
   NavList(arrays, arrays2);
   var i = 0;
   function NavList(arrays, arrays2) {
-    console.log(arrays, arrays2);
     for (var i = 0; i < arrays.length; i++){
       $.ajaxSetup({async:false});
-      console.log(arrays, arrays2);
     $.getJSON('../../app/json/tour/regCountry?continent=' + arrays[i],
         function(obj) {
       
@@ -401,9 +408,6 @@ function initOptionSelected() {
       
       $(document.body).trigger('nav-list');
       });
-    
+    $.ajaxSetup({async:true});
     } 
-    
   };
-  
- 

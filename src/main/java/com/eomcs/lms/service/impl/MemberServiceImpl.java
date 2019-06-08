@@ -114,6 +114,11 @@ public class MemberServiceImpl implements MemberService {
   public int updatePassWord(Map<String, Object> paramMap) {
     return memberDao.updatePassWord(paramMap);
   }
+
+  @Override
+  public int updatePhoto(Map<String, Object> paramMap) {
+    return memberDao.updatePhoto(paramMap);
+  }
 }
 
 

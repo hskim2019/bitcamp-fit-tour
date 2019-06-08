@@ -256,6 +256,15 @@
     member_id = #{no} and password = password(#{password})
   </update>
   
+  <update id="updatePhoto" parameterType="map">
+    update member
+    <set>
+      <if test="photo != null">photo = #{photo},</if>
+    </set>
+    where
+    member_id = #{no}
+  </update>
+  
 </mapper>
 
 

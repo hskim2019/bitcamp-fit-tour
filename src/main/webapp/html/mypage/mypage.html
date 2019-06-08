@@ -29,7 +29,7 @@
   <div class="profile">
   <div class="header">
     <img id="profile-picture"/>
-    <div id="profile-picture-overlay"><p>크게 보기</p></div>
+    <div id="profile-picture-overlay"><p>사진 수정</p></div>
     <p id="info-name" class="header-text"></p>
   </div>
   <button id="edit-info" class="fab waves-effect waves-light btn">
@@ -37,6 +37,8 @@
   </button>
   
   <div class="content">
+  
+  <!-- email -->
   <div class="row">
     <div class="col l9">
       <p class="info-type">이메일</p>
@@ -46,6 +48,7 @@
     </div>
     </div>
     
+      <!-- password -->
       <div class="row">
         <div class="col l9">
           <p class="info-type">비밀번호</p>
@@ -55,6 +58,7 @@
         </div>
       </div>
       
+     <!-- birth -->
     <div class="row">
       <div class="col l9">
       <p class="info-type">생년월일</p>
@@ -64,6 +68,7 @@
       </div>
     </div>
     
+    <!-- tel -->
     <div class="row">
       <div class="col l9">
       <p class="info-type">전화번호</p>
@@ -77,12 +82,14 @@
       <div class="col l8">
       <p class="info-type">추천 상품, 이벤트 및 마케팅 정보 수신 동의</p>
       </div>
+      <!-- email agree -->
       <div class="col l2 mt15">
         <label class="right">
           <input  id="info-email-agree" type="checkbox" class="right" disabled/>
           <span>Email</span>
         </label>
       </div>
+      <!-- sms agree -->
       <div class="col l2 mt15">
         <label class="right">
           <input id="info-sms-agree" type="checkbox" disabled/>
@@ -108,16 +115,14 @@
 </div>
 </div> <!-- container -->
 
-<div id="grey-overlay" style="display:none;">
-  <img id="profile-picture-full"/>
-</div>
 
-<!-- Modal Structure -->
+<!-- password update -->
   <div id="password-modal" class="modal">
     <div class="row">
       <form id="form-password">
         <div class="modal-content">
         <div class="row">
+            <!-- h -->
             <div class="col l12">
               <blockquote>
                 <h4>비밀번호 변경</h4>
@@ -126,6 +131,8 @@
               • 이전에 사용한 적 없는 비밀번호가 안전합니다.
             </div>
           </div>
+          
+          <!-- origin password -->
           <div class="row">
               <div class="input-field col l12">
                 <i class="material-icons prefix">lock_outline</i>
@@ -134,6 +141,7 @@
               </div>
           </div>
           
+          <!-- new password -->
           <div class="row">
             <div class="input-field col l12">
              <i class="material-icons prefix">lock_outline</i>
@@ -142,6 +150,7 @@
             </div>
           </div>
           
+          <!-- new password confirm -->
           <div class="row">
             <div class="input-field col l12">
               <i class="material-icons prefix">lock_outline</i>
@@ -152,16 +161,65 @@
           </div>
         </div>
         
+        <!-- udpate button -->
         <div class="row center-align mb10">
           <a href="#" id="password-update-btn" class="waves-effect waves-white btn">변경</a>
         </div>
+        <!-- cancel button -->
         <div class="row center-align">
           <a href="#" id="password-update-cancel-btn" class="waves-effect waves-white btn red lighten-2">취소</a>
         </div>
     </form>
   </div>
   </div>
+  
+  <!-- profile photo update-->
+  <div id="photo-modal" class="modal">
+    <div class="row">
+      <form id="form-photo">
+        <div class="modal-content">
+        <!-- h -->
+        <div class="row">
+            <div class="col l12">
+              <blockquote>
+                <h4>프로필 사진 변경</h4>
+              </blockquote>
+              • 나를 대표하는 프로필 사진을 수정 하실 수 있습니다.<br>
+            </div>
+          </div>
+         
+          <div class="row mb0 center-align">
+          <!-- photo -->
+          <img id="profile-picture-update"/>
           
+          <!-- photo upload button -->
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>사진 업로드</span>
+              <input id="fileupload" type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          <!-- photo delete -->
+            <a href="#" id="photo-delete-btn" class="waves-effect waves-white btn">사진 삭제</a>
+          </div>
+          
+          
+          </div>
+        </div>
+        
+        <!-- update button -->
+        <div class="row center-align mb10">
+          <a href="#" id="photo-update-btn" class="waves-effect waves-white btn">변경</a>
+        </div>
+        <!-- cancel button -->
+        <div class="row center-align">
+          <a href="#" id="photo-update-cancel-btn" class="waves-effect waves-white btn red lighten-2">취소</a>
+        </div>
+    </form>
+  </div>
+  </div>
 
 <!-- footer -->
 <footer class="bit-main-footer page-footer grey"></footer>

@@ -1,6 +1,5 @@
+//load user
 $(document.body).bind('loadHeader', () => {
-  
-  //load user
   if(!sessionStorage.getItem('loginUser')){
     alert('로그인 후 이용 가능합니다.')
     location.href = '/bitcamp-fit-tour/html/auth/login.html'
@@ -18,6 +17,7 @@ $(document.body).bind('loadHeader', () => {
   function loadProfile(){
     
     $('#profile-picture').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
+    $('#profile-picture-update').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
     $('#profile-picture-full').attr('src','/bitcamp-fit-tour/upload/member/'+user.photo);
     $('#info-name').html(user.name);
     $('#info-email').html(user.email);
@@ -37,6 +37,9 @@ $(document.body).bind('loadHeader', () => {
 
 $('#password-modal').modal({
   onCloseEnd : resetModal
+});
+
+$('#photo-modal').modal({
 });
   
 
@@ -66,9 +69,9 @@ $('#edit-info').click(function(e){
               if(obj.status == 'success'){
                 sessionStorage.clear();
                 $.post('../../app/json/auth/relogin');
-                M.toast({ html: '변경되었습니다.' });
+                M.toast({ html: '프로필이 변경되었습니다.' });
               } else {
-                M.toast({ html: '새 비밀번호를 입력하세요.' });
+                M.toast({ html: '' });
               }
             });
     
@@ -85,12 +88,9 @@ $('#edit-info').click(function(e){
 
 //profile overlay
 $('#profile-picture-overlay').click(function(){
-  $('#grey-overlay').show();
+  $('#photo-modal').modal('open');
 });
 
-$('#grey-overlay').click(function(){
-  $('#grey-overlay').hide();
-});
 
 //password update
 $('#password-update-btn').click(function(e){
@@ -197,3 +197,78 @@ $("#form-password").validate({
   
 });
 
+//photo update
+$('#photo-update-btn').off().click(function(e) {
+  e.preventDefault();
+    M.toast({ html: '사진을 업로드 하세요.' });
+});
+
+//photo delete
+$('#photo-delete-btn').click(function(e) {
+  e.preventDefault();
+  $('#profile-picture-update').attr('src', '/bitcamp-fit-tour/upload/member/default.jpg');
+  $('#photo-update-btn').off().click(function(e) {
+    $.post('../../app/json/member/photoupdate',{
+      photo : 'default.jpg'
+    },
+    function(data){
+      if(data.status == 'success'){
+        $('#photo-modal').modal('close');
+        sessionStorage.clear();
+        $.post('../../app/json/auth/relogin');
+        $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/upload/member/' + data.photo + ')');
+        $('#sidnav-user-photo').attr('src','/bitcamp-fit-tour/upload/member/' + data.photo);
+        $('#profile-picture').attr('src','/bitcamp-fit-tour/upload/member/' + data.photo);
+        M.toast({ html: '프로필 사진이 변경되었습니다.' });
+        $('#photo-update-btn').off().click(function(e) {
+          e.preventDefault();
+          M.toast({ html: '사진을 업로드 하세요.' });
+        });
+      }
+    });
+  });
+  
+});
+
+//photo update cancel
+$('#photo-update-cancel-btn').click(function(e){
+  e.preventDefault();
+  $('#photo-modal').modal('close');
+});
+
+$('#fileupload').fileupload({
+  url: '../../app/json/member/photoupdate',        // 서버에 요청할 URL
+  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+  sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기.
+  singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.
+  autoUpload: false,        // 파일을 추가할 때 자동 업로딩 하지 않도록 설정.
+  disableImageResize: /Android(?!.*Chrome)|Opera/
+    .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정 비활성 시키기
+  previewMaxWidth: 170,   // 미리보기 이미지 너비
+  previewMaxHeight: 150,  // 미리보기 이미지 높이 
+  previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
+
+  processalways: function (e, data) {
+      $('#profile-picture-update').attr('src', data.files[0].preview.toDataURL());
+      $('#photo-update-btn').off().click(function(e) {
+        console.log('a');
+        e.preventDefault();
+        data.submit();
+      });
+      
+  },
+  done: function (e, data) {
+    $('#photo-modal').modal('close');
+    sessionStorage.clear();
+    $.post('../../app/json/auth/relogin');
+    $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/upload/member/' + data.result.photo + ')');
+    $('#sidnav-user-photo').attr('src','/bitcamp-fit-tour/upload/member/' + data.result.photo);
+    $('#profile-picture').attr('src','/bitcamp-fit-tour/upload/member/' + data.result.photo);
+    M.toast({ html: '프로필 사진이 변경되었습니다.' });
+    $('#photo-update-btn').off().click(function(e) {
+      e.preventDefault();
+      M.toast({ html: '사진을 업로드 하세요.' });
+    });
+
+  }
+});

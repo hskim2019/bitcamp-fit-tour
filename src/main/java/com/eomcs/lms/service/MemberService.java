@@ -18,4 +18,5 @@ public interface MemberService {
   int size(String search);
   int confirm(String email,String certification);
   int updatePassWord(Map<String,Object> paramMap);
+  int updatePhoto(Map<String,Object> paramMap);
 }

@@ -20,6 +20,7 @@ public interface MemberDao {
   int countAll(String search);
   int confirm(Map<String,Object> paramMap);
   int updatePassWord(Map<String,Object> paramMap);
+  int updatePhoto(Map<String,Object> paramMap);
 }
 
 

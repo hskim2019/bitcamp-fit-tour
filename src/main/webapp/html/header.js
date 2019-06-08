@@ -47,18 +47,20 @@ function loadLoginUser() {
       
       //set login user photo
       if(data.user.photo) {
-        $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/' + data.user.photo + ')');
+        $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/upload/member/' + data.user.photo + ')');
+        $('#sidnav-user-photo').attr('src','/bitcamp-fit-tour/upload/member/' + data.user.photo);
       } else {
-        $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/images/default.jpg)');
+        $('#login-user-photo').css('background-image','url(/bitcamp-fit-tour/upload/member/default.jpg)');
+        $('#sidnav-user-photo').attr('src','/bitcamp-fit-tour/upload/member/default.jpg');
       }
       
-      $(document.body).trigger('loadHeader');
     } else {
       var notLoginStateTags = $('.bit-not-login-state');
       for(notLoginStateTag of notLoginStateTags){
         $(notLoginStateTag).removeClass('bit-invisible');
       }
     }
+    $(document.body).trigger('loadHeader');
   });
 }
 

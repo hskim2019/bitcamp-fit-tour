@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.eomcs.lms.dao.FaqDao">
+  
+  <resultMap type="faq" id="faqMap">
+    <id column="faq_id" property="no"/>
+    <result column="category" property="category"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="created_date" property="createdDate"/>
+  </resultMap>
+  
+  <sql id="select1">
+    select 
+      faq_id,
+      category,
+      title, 
+      content, 
+       created_date 
+    from 
+      faq
+  </sql>
+  
+  <select id="findAll" resultMap="faqMap" parameterType="map">
+    <include refid="select1"/>
+    order by 
+      faq_id desc
+    <if test="size != null and rowNo != null">
+      limit #{rowNo}, #{size}
+    </if>
+  </select>
+  
+  <select id="findByNo" resultMap="faqMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      faq_id = #{value}
+  </select>
+  
+  <insert id="insert" parameterType="faq">
+    insert into faq(category,title,content) 
+    values(#{category},#{title},#{content})
+  </insert>
+  
+  <update id="update" parameterType="faq">
+    update faq
+    <set>
+    <if test="category != null">category = #{category},</if>
+    <if test="title != null">title = #{title},</if>
+     <if test="content != null">content = #{content}</if>
+    </set> 
+      
+    where faq_id = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from faq 
+    where faq_id = #{no}
+  </delete>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from faq
+  </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+  

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>공지사항</title>
+  <title>공지사항-FAQ</title>
  <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
-
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
@@ -15,45 +15,92 @@
 
 <header class="bit-main-header"></header>
 
-<div class="container">
-<h1>공지사항</h1>
-<p><a href='add.html' class="btn btn-primary btn-sm">새 글</a></p>
+<div class="container row">
+   <div class="side col s3">
+    <h2 class="titl">고객센터</h2>
+    <ul class="collapsible">
+    <li>
+      <div class="collapsible-header collapsible-notice checked">공지사항<i class="material-icons col s1 offset-11">chevron_right</i></div>
+    </li>
+    <li>
+      <div class="collapsible-header collapsible-faq">자주묻는질문<i class="material-icons col s1 offset-11">chevron_right</i></div>
+    </li>
+  </ul>
+  </div>
+  
+<div class="notice col s9">
+<h2 class="notice-titl col s10">공지사항</h2>
+<p class="add-notice col s2"><a href='add.html' class="waves-effect waves-light btn-small">새 글</a></p>
 
-<div class="bit-list">
-<table class="table table-hover">
+<table class="highlight">
 <thead>
   <tr> 
-    <th scope="col">번호</th>
-    <th scope="col">제목</th>
-    <th scope="col">등록일</th>
-    <th scope="col">조회수</th>
+    <th class="center">분류</th>
+    <th class="center">제목</th>
+    <th class="center">등록일</th>
+    <th class="center">조회</th>
   </tr>
 </thead>
-<tbody></tbody>
+<tbody class="tbody-notice"></tbody>
 </table>
-</div><!-- .bit-list -->
 
-<nav aria-label="목록 페이지 이동">
   <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
+    <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="currPage-notice" class="page-item active"><span class="page-link">1</span></li>
+    <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
-</nav>
+</div>
+
+<div class="faq col s9 bit-invisible">
+<h2 class="faq-titl col s10">자주묻는질문</h2>
+<p class="add-faq col s2"><a href='#' class="waves-effect waves-light btn-small">새 글</a></p>
+
+<table class="highlight">
+<thead>
+  <tr> 
+    <th>카테고리</th>
+    <th>제목</th>
+    <th>내용</th>
+  </tr>
+</thead>
+<tbody class="tbody-faq"></tbody>
+</table>
+
+  <ul class="pagination justify-content-center">
+    <li id="prevPage-faq" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="currPage-faq" class="page-item active"><span class="page-link">1</span></li>
+    <li id="nextPage-faq" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+  </ul>
+  
+</div>
+
+
 </div><!-- .container -->
+   <div class="parallax-container">
+      <div class="parallax"><img src="../../images/main.jpg"></div>
+    </div>
+<footer class="bit-main-footer page-footer grey"></footer>
+
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+<script id="tr-template-notice" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th scope='row'>{{no}}</th>
+  <th class="center">공지</th>
   <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{createdDate}}</td>
+  <td class="center">{{createdDate}}</td>
   <td>{{viewCount}}</td>
+</tr>
+{{/each}}
+</script>
+
+
+<script id="tr-template-faq" type="text/x-handlebars-template">
+{{#each faqlist}}
+<tr>
+  <th class="center">{{category}}</th>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td class="center">{{content}}</td>
 </tr>
 {{/each}}
 </script>
@@ -65,7 +112,8 @@
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../header.js"></script>
 <script src="index.js"></script>
-
+<script src="faq.js"></script>
+<script src="../footer.js"></script>
 </body>
 </html>
 

@@ -231,6 +231,13 @@ span > a {
 	width: 20px;
 }
 
+.currpage-link, .page-link {
+  font-size: 12px !important;
+  color: #514859 !important; 
+  line-height: 18px !important;
+  font-weight: normal;
+}
+
 /*tourlist table(card 대신 table 사용하는 경우)*/
 /* table {
   border-collapse: separate;

@@ -43,6 +43,9 @@ DROP TABLE IF EXISTS tour_comment RESTRICT;
 -- 공지사항
 DROP TABLE IF EXISTS notice RESTRICT;
 
+-- 자주묻는질문
+DROP TABLE IF EXISTS faq RESTRICT;
+
 -- 판매불가 날짜
 DROP TABLE IF EXISTS imposibility_date RESTRICT;
 
@@ -423,6 +426,26 @@ notice_id -- 공지사항 번호
 
 ALTER TABLE notice
 MODIFY COLUMN notice_id INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항 번호';
+
+-- 자주묻는질문
+CREATE TABLE faq (
+faq_id    INTEGER      NOT NULL COMMENT 'FAQ 번호', -- FAQ 번호
+category VARCHAR(50)   NOT NULL COMMENT 'FAQ 분류', -- FAQ 분류
+title        VARCHAR(255) NOT NULL COMMENT 'FAQ 제목', -- FAQ 제목
+content      TEXT         NOT NULL COMMENT 'FAQ 내용', -- FAQ 내용
+created_date DATETIME     NOT NULL DEFAULT now() COMMENT 'FAQ 작성일' -- FAQ작성일
+)
+COMMENT 'FAQ';
+
+-- 자주묻는질문
+ALTER TABLE faq
+ADD CONSTRAINT PK_faq -- 자주묻는질문 기본키
+PRIMARY KEY (
+faq_id -- FAQ 번호
+);
+
+ALTER TABLE faq
+MODIFY COLUMN faq_id INTEGER NOT NULL AUTO_INCREMENT COMMENT 'FAQ 번호';
 
 -- 판매불가 날짜
 CREATE TABLE imposibility_date (

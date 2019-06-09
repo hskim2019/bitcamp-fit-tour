@@ -1,29 +1,27 @@
 var pageNo = 1,
     pageSize = 3,
-    tbodyNotic = $('.tbody-notice'),
-    prevPageLi = $('#prevPage'),
-    nextPageLi = $('#nextPage'),
-    currSpan = $('#currPage-notice > span'),
-    templateSrc = $('#tr-template-notice').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+    tbodyFaq = $('.tbody-faq'),
+    prevPageLi = $('#prevPage-faq'),
+    nextPageLi = $('#nextPage-faq'),
+    currSpan = $('#currPage-faq > span'),
+    FAQtemplateSrc = $('#tr-template-faq').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator = Handlebars.compile(templateSrc);
-//$(document).ready(function(){
-//    $('.parallax').parallax();
-//  });
+var FAQtrGenerator = Handlebars.compile(FAQtemplateSrc);
+
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
   
-  $.getJSON('../../app/json/notice/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../../app/json/faq/list?pageNo=' + pn + '&pageSize=' + pageSize, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
       
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
-      tbodyNotic.html(''); // 이전에 출력한 내용을 제거한다.
+      tbodyFaq.html(''); // 이전에 출력한 내용을 제거한다.
       
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
-      $(trGenerator(obj)).appendTo(tbodyNotic);
+      $(FAQtrGenerator(obj)).appendTo(tbodyFaq);
       
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
@@ -49,17 +47,12 @@ function loadList(pn) {
   
 } // loadList()
 
-$(document).ready(function(){
-    $('.parallax').parallax();
-  });
-       
-
-$('#prevPage > a').click((e) => {
+$('#prevPage-faq > a').click((e) => {
   e.preventDefault();
   loadList(pageNo - 1);
 });
 
-$('#nextPage > a').click((e) => {
+$('#nextPage-faq > a').click((e) => {
   e.preventDefault();
   loadList(pageNo + 1);
 });
@@ -78,21 +71,21 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
-$('.collapsible-notice').click((e) => {
-	$('.collapsible-notice').addClass('checked');
-	$('.collapsible-faq').removeClass('checked');
-	$('.faq').addClass('bit-invisible');
-	$('.notice').removeClass('bit-invisible');
-	loadList(1);
-});
-
-$('.collapsible-faq').click((e) => {
-	$('.collapsible-faq').addClass('checked');
-	$('.collapsible-notice').removeClass('checked');
-	$('.notice').addClass('bit-invisible');
-	$('.faq').removeClass('bit-invisible');
-	loadList(1);
-});
+//$('.collapsible-notice').click((e) => {
+//	$('.collapsible-notice').addClass('checked');
+//	$('.collapsible-faq').removeClass('checked');
+//	$('.faq').addClass('bit-invisible');
+//	$('.notice').removeClass('bit-invisible');
+//	loadList(1);
+//});
+//
+//$('.collapsible-faq').click((e) => {
+//	$('.collapsible-faq').addClass('checked');
+//	$('.collapsible-notice').removeClass('checked');
+//	$('.notice').addClass('bit-invisible');
+//	$('.faq').removeClass('bit-invisible');
+//	loadList(1);
+//});
 
 
 

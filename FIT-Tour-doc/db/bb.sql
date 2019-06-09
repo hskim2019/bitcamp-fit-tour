@@ -25,3 +25,23 @@ update country set continent = '아프리카' where country_id between 86 and 90
 
 
 ALTER TABLE reservation CHANGE payment_id payment_id VARCHAR(100);
+
+-- 자주묻는질문
+CREATE TABLE faq (
+faq_id    INTEGER      NOT NULL COMMENT 'FAQ 번호', -- FAQ 번호
+category VARCHAR(50)   NOT NULL COMMENT 'FAQ 분류', -- FAQ 분류
+title        VARCHAR(255) NOT NULL COMMENT 'FAQ 제목', -- FAQ 제목
+content      TEXT         NOT NULL COMMENT 'FAQ 내용', -- FAQ 내용
+created_date DATETIME     NOT NULL DEFAULT now() COMMENT 'FAQ 작성일' -- FAQ작성일
+)
+COMMENT 'FAQ';
+
+-- 자주묻는질문
+ALTER TABLE faq
+ADD CONSTRAINT PK_faq -- 자주묻는질문 기본키
+PRIMARY KEY (
+faq_id -- FAQ 번호
+);
+
+ALTER TABLE faq
+MODIFY COLUMN faq_id INTEGER NOT NULL AUTO_INCREMENT COMMENT 'FAQ 번호';

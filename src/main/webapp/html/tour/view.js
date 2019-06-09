@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
     tourNo = param.split('=')[1],
-	tlocation;
+    tlocation;
 
 tourList(tourNo);
 commentList(tourNo, pageNo, addDeleteCount, 0);
@@ -92,6 +92,21 @@ $('#reservation-btn').click((e) => {
   var personnel = ($('.selected').children().first().html().replace(/[^0-9]/g,""));
   location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
 });
+
+
+$('#wishlist-btn').click((e) => {
+  e.preventDefault();
+  $(e.target).html('<i class="material-icons left">favorite</i>위시리스트에 추가됨</a>');
+  $(e.target).addClass('wishlist-status');
+  $.get('../../app/json/wishlist/add?tourNo=' + tourNo,
+          function(obj) {
+            if (obj.status == 'success') {
+              M.toast({ html: '위시리스트에 추가 하였습니다.' })
+            } else {
+            }
+          });
+});
+
 
 // google map
 function initMap(tlocation) {

@@ -247,6 +247,7 @@
     </where>
   </select>
   
+  <!-- update password -->
   <update id="updatePassWord" parameterType="map">
     update member
     <set>
@@ -256,6 +257,7 @@
     member_id = #{no} and password = password(#{password})
   </update>
   
+  <!-- update photo -->
   <update id="updatePhoto" parameterType="map">
     update member
     <set>

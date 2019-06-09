@@ -42,7 +42,6 @@ $('#password-modal').modal({
 $('#photo-modal').modal({
 });
   
-
 // profile edit
 $('#edit-info').click(function(e){
   editIconTag = $(this).find('i')
@@ -50,7 +49,11 @@ $('#edit-info').click(function(e){
     $('#info-birth').attr('disabled',false);
     $('#info-tel').attr('disabled',false);
     $('#info-email-agree').attr('disabled',false);
+    $('#info-email-agree').parent().css('box-shadow','0 1px 0 0 #26a69a');
+    $('#info-email-agree').parent().css('border-bottom','1px solid #26a69a');
     $('#info-sms-agree').attr('disabled',false);
+    $('#info-sms-agree').parent().css('box-shadow','0 1px 0 0 #26a69a');
+    $('#info-sms-agree').parent().css('border-bottom','1px solid #26a69a');
     editIconTag.html('check');
   } else {
     
@@ -79,7 +82,10 @@ $('#edit-info').click(function(e){
     $('#info-tel').attr('disabled',true);
     $('#info-email-agree').attr('disabled',true);
     $('#info-sms-agree').attr('disabled',true);
-    editIconTag.html('check');
+    $('#info-email-agree').parent().css('box-shadow','');
+    $('#info-email-agree').parent().css('border-bottom','');
+    $('#info-sms-agree').parent().css('box-shadow','');
+    $('#info-sms-agree').parent().css('border-bottom','');
     editIconTag.html('edit');
   }
   

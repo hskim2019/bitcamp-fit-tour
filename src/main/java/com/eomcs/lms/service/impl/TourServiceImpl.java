@@ -2,7 +2,7 @@ package com.eomcs.lms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.eomcs.lms.dao.TourDao;
@@ -121,27 +121,28 @@ public class TourServiceImpl implements TourService {
   }
   
   @Override
-  public void addTheme(List<TourTheme> theme) {
-    tourDao.insertTheme(theme);
+  public int addTheme(List<TourTheme> theme) {
+    return tourDao.insertTheme(theme);
   }
   
   @Override
-  public void addPhoto(List<TourGuidancePhoto> photo) {
-    tourDao.insertPhoto(photo);
+  public int addPhoto(List<TourGuidancePhoto> photo) {
+    return tourDao.insertPhoto(photo);
+  }
+  
+  @Override
+  public int addWishlist(Map<String, Object> paramMap) {
+    return tourDao.insertWishlist(paramMap);
   }
   
   @Override
   public Tour get(int no) {
-    // 이제 조금 서비스 객체가 뭔가를 하는 구만.
-    // Command 객체는 데이터를 조회한 후 조회수를 높이는 것에 대해 신경 쓸 필요가 없어졌다.
     Tour tour = tourDao.findByNo(no);
     return tour;
   }
   
   @Override
   public int update(Tour tour) {
-    // 이 메서드도 별로 할 일이 없다.
-    // 그냥 DAO를 실행시키고 리턴 값을 그대로 전달한다.
     return tourDao.update(tour);
   }
   
@@ -182,6 +183,7 @@ public class TourServiceImpl implements TourService {
 	public List<Tour> registeredcity(String country) {
 		return tourDao.findRegisteredCity(country);
 	}
+
 }
 
 

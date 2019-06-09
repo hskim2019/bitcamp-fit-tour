@@ -6,6 +6,7 @@
   
 <mapper namespace="com.eomcs.lms.dao.TourCommentDao">
   
+  <!-- tour comment map -->
   <resultMap type="tourComment" id="commentMap">
     <id column="tour_comment_id" property="no"/>
     <result column="member_id" property="memberNo"/>

@@ -175,6 +175,11 @@ input[type=text]:not(.browser-default) {
   background-color: white; 
 }
 
+/*  {
+  box-shadow: 0 1px 0 0 #26a69a;
+  border-bottom: 1px solid #26a69a;
+} */
+
 /* profile picture */
 #profile-picture{
   height:170px;

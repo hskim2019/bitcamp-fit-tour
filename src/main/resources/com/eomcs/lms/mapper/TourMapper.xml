@@ -112,18 +112,6 @@
 		tour
 	</sql>
 
-	<!-- <select id="findAll" resultMap="tourMap" parameterType="map"> select 
-		* from tour as t join city as ci on t.city_id = ci.city_id join country as 
-		co on ci.country_id = co.country_id <where> <if test="continentName != null">or 
-		continent = #{continentName}</if> <if test="countryName != null">and country_name 
-		= #{countryName}</if> <if test="cityName != null">and city_name = #{cityName}</if> 
-		<if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if> 
-		</where> <if test="priceAsc != null"> order by price asc</if> <if test="priceDesc 
-		!= null"> order by price desc</if> <if test="tourDesc != null"> order by 
-		tour_id desc</if> <if test="size != null and rowNo != null"> limit #{rowNo}, 
-		#{size} </if> </select> -->
-
-
 	<!-- find Tour All -->
 	<select id="findAll" resultMap="tourMap" parameterType="map">
 		select distinct
@@ -197,6 +185,12 @@
 			(#{item.tourNo}, #{item.name}, #{item.path})
 		</foreach>
 	</insert>
+  
+  <!-- insert Photo -->
+  <insert id="insertWishlist" parameterType="map">
+    insert into member_tour_wishlist(tour_id, member_id)
+    values(#{tourNo}, #{memberNo})
+  </insert>
 
 	<!-- countAll tour -->
 	<select id="countAll" resultType="int">
@@ -207,6 +201,12 @@
 	<select id="findCountryByContinent" resultMap="countryMap"
 		parameterType="string">
 		select * from country where continent = #{continent}
+	</select>
+
+	<!-- find Country By Continent -->
+	<select id="findWishlist" resultMap="countryMap"
+		parameterType="map">
+		select * from member_tour_wishlist where member_id = #{memberNo} and tour_id = #{tourNo}
 	</select>
 
 	<!-- find City By Country -->

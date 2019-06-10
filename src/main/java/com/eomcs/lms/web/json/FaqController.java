@@ -49,11 +49,11 @@ public class FaqController {
 //    return content;
 //  }
 //  
-//  @GetMapping("detail")
-//  public Object detail(int no) {
-//    Faq faq = faqService.get(no);
-//    return faq;
-//  }
+  @GetMapping("detail")
+  public Object detail(int no) {
+    Faq faq = faqService.get(no);
+    return faq;
+  }
   
   @GetMapping("list")
   public Object list(

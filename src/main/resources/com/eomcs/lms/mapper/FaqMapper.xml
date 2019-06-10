@@ -20,7 +20,7 @@
       category,
       title, 
       content, 
-       created_date 
+      created_date 
     from 
       faq
   </sql>

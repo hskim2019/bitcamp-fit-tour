@@ -47,9 +47,9 @@ th {
 	padding: 20px 5px 20px 5px;
 }
 
-th:nth-child(1) {
+/* th:nth-child(1) {
   width: 60px;
-}
+} 
 
 th:nth-child(3) {
   width: 120px;
@@ -59,6 +59,27 @@ td:nth-child(4) {
   text-align: center;
   width: 60px;
 }
+*/
+
+#noticeCategory {
+ width: 60px;	
+}
+
+#noticeCreatedDate {
+	width: 120px;
+}
+
+#noticeViewCount {
+	text-align: center;
+	width: 60px;
+}
+
+
+
+#FaqCategory {
+	width: 100px;
+}
+
 
 /*pagination*/
 .pagination {
@@ -76,3 +97,7 @@ td:nth-child(4) {
   line-height: 18px !important;
   font-weight: normal;
 }
+
+
+
+

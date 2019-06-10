@@ -58,13 +58,14 @@
 <table class="highlight">
 <thead>
   <tr> 
-    <th>카테고리</th>
+    <th class="center" id="FaqCategory">카테고리</th>
     <th>제목</th>
-    <th>내용</th>
   </tr>
 </thead>
 <tbody class="tbodyFAQ"></tbody>
+
 </table>
+
 
   <ul class="pagination justify-content-center">
     <li id="prevPageFaq" class="page-item"><a class="page-link FAQprevPageLink" href="?pageNo=0&pageSize=3">이전</a></li>
@@ -86,10 +87,10 @@
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th class="center">공지</th>
+  <th class="center" id="noticeCategory">공지</th>
   <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td class="center">{{createdDate}}</td>
-  <td>{{viewCount}}</td>
+  <td class="center" id="noticeCreatedDate">{{createdDate}}</td>
+  <td id="noticeViewCount">{{viewCount}}</td>
 </tr>
 {{/each}}
 </script>
@@ -98,9 +99,8 @@
 <script id="tr-template-faq" type="text/x-handlebars-template">
 {{#each faqlist}}
 <tr>
-  <th class="center">{{category}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td class="center">{{content}}</td>
+  <th class="center" id="FaqCategory">{{category}}</th>
+  <td><a class='bit-faq-link' id='fold' href='#' faq-no='{{no}}'>{{title}}</a></td>
 </tr>
 {{/each}}
 </script>

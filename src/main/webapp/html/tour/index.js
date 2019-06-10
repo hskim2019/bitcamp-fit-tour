@@ -368,7 +368,6 @@ function initOptionSelected() {
       var checked = $(this).prop('checked');  // checked 상태 (true, false)
       var $label = $(this).next();            // find a label element
       var checkedtheme = $label.html();
-      // checked ? $label.css('background-color', value) : $label.css('background-color', 'white');
       if(checked) {
          theme.push(checkedtheme);
          console.log(theme);

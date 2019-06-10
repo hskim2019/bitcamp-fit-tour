@@ -9,6 +9,7 @@ var FAQpageNo = 1,
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var FAQtrGenerator = Handlebars.compile(FAQtemplateSrc);
 
+
 // JSON 형식의 데이터 목록 가져오기
 function FAQList(pn) {
   
@@ -71,21 +72,23 @@ FAQList(1);
 //  });
 //});
 
-//$('.collapsible-notice').click((e) => {
-//	$('.collapsible-notice').addClass('checked');
-//	$('.collapsible-faq').removeClass('checked');
-//	$('.faq').addClass('bit-invisible');
-//	$('.notice').removeClass('bit-invisible');
-//	loadList(1);
-//});
-//
-//$('.collapsible-faq').click((e) => {
-//	$('.collapsible-faq').addClass('checked');
-//	$('.collapsible-notice').removeClass('checked');
-//	$('.notice').addClass('bit-invisible');
-//	$('.faq').removeClass('bit-invisible');
-//	loadList(1);
-//});
+$(document.body).bind('FAQ-list', () => {
+  $('.bit-faq-link').click((e) => {
+    e.preventDefault();
+    if($(e.target).attr('id') == 'fold') {
+      $(e.target).attr('id', 'open');
+      $.getJSON('../../app/json/faq/detail?no=' + $(e.target).attr('faq-no'),
+          function(data2) {
+        $(e.target).parent().parent().after('<tr><td></td><td>' + data2.content + '</td></tr>');
+      });
+      
+    } else {
+      $(e.target).attr('id', 'fold');
+      $(e.target).parent().parent().next().remove();
+    }
+  });
+  
+})
 
 
 

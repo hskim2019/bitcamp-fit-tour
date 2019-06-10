@@ -84,7 +84,7 @@ $('.collapsible-faq').click((e) => {
 	$('.collapsible-notice').removeClass('checked');
 	$('.notice').addClass('bit-invisible');
 	$('.faq').removeClass('bit-invisible');
-	noticeList(1);
+	FAQList(1);
 });
 
 

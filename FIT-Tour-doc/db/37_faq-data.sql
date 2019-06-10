@@ -1,4 +1,4 @@
-insert into faq(faq_id, category, title, content, viewcount)
+insert into faq(faq_id, category, title, content)
 values(1, '예약/변경', '예약하려는 날짜가 선택되지 않습니다. 예약 불가한가요?', '선택이 안 되는 날짜는 예약이 불가합니다.');
 
 insert into faq(faq_id, category, title, content)

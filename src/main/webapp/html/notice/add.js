@@ -9,7 +9,7 @@ var quill = new Quill('#editor', {
       [{ 'indent': '-1' }, { 'indent': '+1' }],      
       [{ 'align': [] }],
       ['image', 'link', 'video']
-      ]
+      ],imageResize: {},
   },
   placeholder: '내용을 입력해 주세요',
 

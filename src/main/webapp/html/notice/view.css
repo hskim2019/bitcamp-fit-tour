@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+h2 {
+	padding: 0;
+    color: #808080;
+    font-size: 20px !important;
+    font-weight: 700;
+    margin-top: 50px;
+}
+
+table {
+    border-top: 2px solid teal;
+}
+
+#titleTh, #createdDateTh, #countViewTh  {
+	width: 80px;
+	font-size: 13px;
+	font-weight: 600;
+	background-color: #f7f5f8;
+}
+
+#titleTd, #createdDateTd, #countViewTd {
+	font-size: 13px;
+	padding: 15px;
+}
+
+
+#content {
+	padding: 25px;
+}
+
+.buttons {
+	margin: 20px 0px 20px 720px;
+}
+
+#backToList {
+	width: 150px;
+}

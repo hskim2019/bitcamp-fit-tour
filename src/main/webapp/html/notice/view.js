@@ -1,28 +1,30 @@
-var param = location.href.split('?')[1];
+var param = location.href.split('?')[1],
+    noticeNo = param.split('=')[1];
 
-if (param) {
-  $('h1').html('게시물 보기');
-  loadData(param.split('=')[1]);
-  var el =  $('.bit-new-item');
-  for (e of el) {
-    e.style.display = 'none';
-  }
-} else {
-  $('h1').html('새글');
-  var el = $('.bit-view-item');
-
-  for (e of el) {
-    e.style.display = 'none';
-  }
-}
+//if (param) {
+//  $('h1').html('게시물 보기');
+//  loadData(param.split('=')[1]);
+//  var el =  $('.bit-new-item');
+//  for (e of el) {
+//    e.style.display = 'none';
+//  }
+//} else {
+//  $('h1').html('새글');
+//  var el = $('.bit-view-item');
+//
+//  for (e of el) {
+//    e.style.display = 'none';
+//  }
+//}
+loadData(noticeNo);
 
 function loadData(no) {
-  $.getJSON('../../app/json/notice/detail?no=' + param.split('=')[1], function(data) {
-    $('#no').val(data.no);
-    $('#content').val(data.content);
-    $('#title').val(data.title);
-    $('#createdDate').val(data.createdDate);
-    $('#viewCount').val(data.viewCount);
+  $.getJSON('../../app/json/notice/detail?no=' + noticeNo, 
+      function(data) {
+    $('#titleTd').html(data.title);
+    $('#createdDateTd').html(data.createdDate);
+    $('#countViewTd').html(data.viewCount);
+    $('#content').html(data.content);
   });
 };
 

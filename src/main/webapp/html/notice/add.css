@@ -1,6 +1,26 @@
 @charset "UTF-8";
 
+h2 {
+	padding: 0 0 24px 2px;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 41px;
+    color: #4a4a4a;
+    margin-top: 120px;
+    margin-bottom: 0px;
+}
+
+.buttons {
+	padding: 15px 0px 20px 780px;
+}
+
+#backToList, #add-btn, #update-btn{
+	width: 100px;
+	margin: 0px 0px 0px 5px;
+}
+
 .ql-editor {
 	max-height: 400px;
 	height: 400px;
 }
+

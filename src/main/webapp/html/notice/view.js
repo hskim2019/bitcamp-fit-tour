@@ -25,6 +25,8 @@ function loadData(no) {
     $('#createdDateTd').html(data.createdDate);
     $('#countViewTd').html(data.viewCount);
     $('#content').html(data.content);
+    
+    $(document.body).trigger('loaded-list');
   });
 };
 
@@ -40,19 +42,26 @@ $('#delete-btn').click(() => {
   });
 });
 
-$('#update-btn').click (() => {
+//$('#update-btn').click (() => {
+//
+//  $.post('../../app/json/notice/update?no=' + param.split('=')[1],{
+//    title: $('#title').val(),
+//    content: $('#content').val()
+//  },
+//  function(data) {
+//
+//    if(data.status == 'success') {
+//      location.href = "index.html";  
+//    } else {
+//      alert('수정 실패 입니다.\n' + data.message);
+//    }
+//  });
+//});
 
-  $.post('../../app/json/notice/update?no=' + param.split('=')[1],{
-    title: $('#title').val(),
-    content: $('#content').val()
-  },
-  function(data) {
-
-    if(data.status == 'success') {
-      location.href = "index.html";  
-    } else {
-      alert('수정 실패 입니다.\n' + data.message);
-    }
+$(document.body).bind('loaded-list', () => {
+  $('#update-btn').click((e) => {
+    e.preventDefault();
+    window.location.href = 'add.html?no=' + noticeNo;
   });
 });
 

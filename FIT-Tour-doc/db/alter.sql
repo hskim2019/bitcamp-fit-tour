@@ -4,3 +4,5 @@ alter table tour_comment change ranking parent_id INT(11) NULL;
 alter table tour modify content MEDIUMTEXT;
 alter table country add continent varchar(50) not null;
 alter table tour add location varchar(255);
+
+alter table free_review modify content MEDIUMTEXT;

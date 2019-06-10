@@ -27,6 +27,7 @@
   
   <select id="findAll" resultMap="faqMap" parameterType="map">
     <include refid="select1"/>
+    <if test="category != null">where category = #{category}</if>
     order by 
       faq_id desc
     <if test="size != null and rowNo != null">

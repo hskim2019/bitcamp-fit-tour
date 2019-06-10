@@ -1,4 +1,5 @@
-var FAQpageNo = 1,
+var category = '',
+    FAQpageNo = 1,
     FAQpageSize = 3,
     tbodyFaq = $('.tbodyFAQ'),
     FAQprevPageLi = $('#prevPageFaq'),
@@ -9,11 +10,10 @@ var FAQpageNo = 1,
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var FAQtrGenerator = Handlebars.compile(FAQtemplateSrc);
 
-
 // JSON 형식의 데이터 목록 가져오기
-function FAQList(pn) {
+function FAQList(category, pn) {
   
-  $.getJSON('../../app/json/faq/list?pageNo=' + pn + '&pageSize=' + FAQpageSize, 
+  $.getJSON('../../app/json/faq/list?category=' + category + '&pageNo=' + pn + '&pageSize=' + FAQpageSize, 
     function(data) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       FAQpageNo = data.faqpageNo;
@@ -48,19 +48,39 @@ function FAQList(pn) {
   
 } // FAQList()
 
+//페이지를 출력한 후 1페이지 목록을 로딩한다.
+//FAQList('', 1);
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+
+$('#faq-categories').change(function () {
+  category = $('#faq-categories option:selected').html();
+ console.log($('#faq-categories option:selected').html());
+ if(category == '전체') {
+   category = '';
+   FAQList(category, 1);
+ } else {
+// $.getJSON('../../app/json/faq/list?category=' + $('#faq-categories option:selected').html(),
+//     function(obj) {
+     FAQList(category, 1);
+// });
+ }
+});
+
 $('.FAQprevPageLink').click((e) => {
   e.preventDefault();
-  FAQList(FAQpageNo - 1);
+  FAQList(category, FAQpageNo - 1);
 });
 
 $('.FAQnextpageLink').click((e) => {
   e.preventDefault();
-  FAQList(FAQpageNo + 1);
+  FAQList(category, FAQpageNo + 1);
 });
 
 
-//페이지를 출력한 후 1페이지 목록을 로딩한다.
-FAQList(1);
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 //$(document.body).bind('loaded-list', () => {

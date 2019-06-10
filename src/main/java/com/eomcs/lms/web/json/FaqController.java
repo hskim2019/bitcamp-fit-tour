@@ -57,15 +57,23 @@ public class FaqController {
   
   @GetMapping("list")
   public Object list(
+	  String category,	  
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize) {
     
+	  String searchCategory = null;
+	  
+	  if (category.length() > 0) 
+		  searchCategory = category;
+	  
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
     
-    int rowCount = faqService.size();
+    List<Faq> list = faqService.search(searchCategory);
+    int rowCount = list.size();
+  //  int rowCount = faqService.size();
     int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
+    if (totalPage == 0 || rowCount % pageSize > 0)
       totalPage++;
     
     if (pageNo < 1) 
@@ -73,7 +81,7 @@ public class FaqController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Faq> faqs = faqService.list(pageNo, pageSize);
+    List<Faq> faqs = faqService.list(searchCategory, pageNo, pageSize);
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("faqlist", faqs);

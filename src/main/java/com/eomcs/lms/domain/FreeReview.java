@@ -1,17 +1,16 @@
 package com.eomcs.lms.domain;
 
 import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class freereview {
+public class FreeReview {
 	private int no;
 	private int memberNo;
 	private int reservationNo;
 	private String title;
 	private String content;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-	  private String createdDate;//여행일	
+	  private Date createdDate;//여행일	
 	public int getNo() {
 		return no;
 	}
@@ -42,12 +41,17 @@ public class freereview {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
-	}
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
+  }
+  @Override
+  public String toString() {
+    return "FreeReview [no=" + no + ", memberNo=" + memberNo + ", reservationNo=" + reservationNo
+        + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + "]";
+  }
 	
 	
 }

@@ -55,7 +55,15 @@
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
-
+{{#each list}}
+<tr>
+  <th scope='row'>{{no}}</th>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{memberNo}}</a></td>
+  <td>{{reservationNo}}</td>
+  <td>{{title}}</td>
+  <td>{{createdDate}}</td>
+</tr>
+{{/each}}
 </script>
 
 

@@ -1,18 +1,18 @@
 var param = location.href.split('?')[1],
-    tourNo = param.split('=')[1],
-    tlocation;
+tourNo = param.split('=')[1],
+tlocation;
 
 tourList(tourNo);
 commentList(tourNo, pageNo, addDeleteCount, 0);
 
 //ready
 $(document).ready(function(){
-	  $('.datepicker').datepicker({
-	    format : 'yyyy년 mm월 dd일',
-	  });
-	  $('textarea#comment-add').characterCounter();
-	  $(".dropdown-trigger").dropdown();
-	});
+  $('.datepicker').datepicker({
+    format : 'yyyy년 mm월 dd일',
+  });
+  $('textarea#comment-add').characterCounter();
+  $(".dropdown-trigger").dropdown();
+});
 
 //load tourList
 function tourList(tourNo) {
@@ -34,11 +34,11 @@ function tourList(tourNo) {
     $('#thirdcrumb').html(obj.tour.city.cityName);
     tlocation = obj.tour.location;
     initMap(tlocation);
-    
+
     for(var i = 0; i < obj.tour.theme.length; i++){
       $('#themeDiv').append($('<div class="chip ml0 mr5">' + obj.tour.theme[i].theme + '</div>'));
     }
-    
+
     for(var i = 0; i < obj.tour.tourPhoto.length; i++){
       $('#image').append($('<li><img class="img-thumbnail materialboxed" src="../../upload/tourphoto/'+obj.tour.tourPhoto[i].name+'"></li>'));
     }
@@ -51,7 +51,7 @@ function tourList(tourNo) {
   });
 }
 
-// add personnelOption
+//add personnelOption
 function addPersonnelOption(personnel, price) {
   for(var i=1; i <= personnel; i++){
     $('<option value="'+ i +'">' + i +'명</option>').appendTo($('#personnel'));
@@ -64,27 +64,27 @@ function addPersonnelOption(personnel, price) {
 }
 
 
-// add trpansportaionIcon
+//add trpansportaionIcon
 function getTransportaionIcon(transportation) {
-  
+
   switch (transportation) {
-    case '버스' :
-      return '<i id="transportation-icon" class="fas fa-bus-alt"></i>  '
-      break;
-    case '지하철' :
-      return '<i id="transportation-icon" class="fas fa-subway"></i>  '
-      break;
-    case '도보' :
-      return '<i id="transportation-icon" class="fas fa-walking"></i>  '
-      break;
-    case '자전거' :
-      return '<i id="transportation-icon" class="fas fa-bicycle"></i>  '
-      break;
+  case '버스' :
+    return '<i id="transportation-icon" class="fas fa-bus-alt"></i>  '
+    break;
+  case '지하철' :
+    return '<i id="transportation-icon" class="fas fa-subway"></i>  '
+    break;
+  case '도보' :
+    return '<i id="transportation-icon" class="fas fa-walking"></i>  '
+    break;
+  case '자전거' :
+    return '<i id="transportation-icon" class="fas fa-bicycle"></i>  '
+    break;
   }
 }
 
 
-// add click event reservation button
+//add click event reservation button
 $('#reservation-btn').click((e) => {
   e.preventDefault();
   console.log(tourNo);
@@ -93,36 +93,72 @@ $('#reservation-btn').click((e) => {
   location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
 });
 
+//load wishlist
+(function loadWishlist() {
+  $.getJSON('../../app/json/wishlist/count?tourNo=' + tourNo,
+      function(obj) {
+    console.log(obj);
+    if (obj.status == 'notlogin')
+      $('#wishlist-btn').addClass('not-login');
+    if(obj.status == 'success' && obj.count == 1){
+      $('#wishlist-btn').addClass('wishlist-status');
+      $('#wishlist-btn').html('<i class="material-icons left">favorite</i>위시리스트에 추가됨</a>');
+    }
+    $(document.body).trigger('addEventWishlistButton');
+  });
+})();
 
-$('#wishlist-btn').click((e) => {
-  e.preventDefault();
-  $(e.target).html('<i class="material-icons left">favorite</i>위시리스트에 추가됨</a>');
-  $(e.target).addClass('wishlist-status');
-  $.get('../../app/json/wishlist/add?tourNo=' + tourNo,
+// add event wishlist button
+$(document.body).bind('addEventWishlistButton', () => {
+  $('#wishlist-btn').click((e) => {
+    e.preventDefault();
+  
+    if($(e.target).hasClass('not-login')){
+      
+      M.toast({ html: '로그인 후 이용 해주세요.' })
+    } else if ($(e.target).hasClass('wishlist-status')){
+      $.get('../../app/json/wishlist/delete?tourNo=' + tourNo,
           function(obj) {
-            if (obj.status == 'success') {
-              M.toast({ html: '위시리스트에 추가 하였습니다.' })
-            } else {
-            }
-          });
+        console.log(obj);
+        $('#wishlist-btn').removeClass('wishlist-status');
+        $('#wishlist-btn').html('<i class="material-icons left">favorite_border</i>위시리스트에 담기</a>');
+        if (obj.status == 'success') {
+          M.toast({ html: '위시리스트에서 삭제 하였습니다.' })
+        } else {
+          M.toast({ html: '위시리스트에서 삭제 실패 하였습니다.' })
+        }
+      });
+    } else {
+      
+      $(e.target).html('<i class="material-icons left">favorite</i>위시리스트에 추가됨</a>');
+      $(e.target).addClass('wishlist-status');
+      $.get('../../app/json/wishlist/add?tourNo=' + tourNo,
+          function(obj) {
+        if (obj.status == 'success') {
+          M.toast({ html: '위시리스트에 추가 하였습니다.' })
+        } else {
+          M.toast({ html: '위시리스트에 추가 실패 하였습니다.' })
+        }
+      });
+    }
+  });
 });
 
-
-// google map
+//google map
 function initMap(tlocation) {
-	  var latLag = {lat : (Number)(tlocation.split(',')[0]), lng : (Number)(tlocation.split(',')[1])};
-	  
+  var latLag = {lat : (Number)(tlocation.split(',')[0]), lng : (Number)(tlocation.split(',')[1])};
+
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
     center: latLag,
     disableDefaultUI: true
   });
-  
+
   var marker = new google.maps.Marker({
-      position: latLag,
-      animation: google.maps.Animation.DROP,
-      map: map,
-      title: '여기서 만나요!'
-    });
+    position: latLag,
+    animation: google.maps.Animation.DROP,
+    map: map,
+    title: '여기서 만나요!'
+  });
 }
 

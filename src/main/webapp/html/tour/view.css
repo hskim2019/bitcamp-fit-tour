@@ -149,7 +149,11 @@ h5 {
   font-size: 0.9rem;
   color: #757575;
 }
-}
 
 /*     */
+
+
+input::placeholder {
+	color : black !important;
+}
 

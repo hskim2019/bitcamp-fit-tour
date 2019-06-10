@@ -1,0 +1,15 @@
+h4 {
+	font-weight: 600;
+	margin-top: 48px;
+}
+
+.tab a {
+	padding-left : 0px !important;
+	padding-right : 0px !important;
+	font-size: 17px !important;
+  font-weight: 600 !important;
+}
+
+.tab {
+	margin-right : 20px !important;
+}

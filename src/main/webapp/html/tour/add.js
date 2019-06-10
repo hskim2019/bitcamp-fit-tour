@@ -1,11 +1,11 @@
 var tlocation;
 var fileNames;
 
-//ready
+// ready
 $(document).ready(function () {
   $('input[type="text"]').characterCounter();
   $('select').formSelect();
-  $('.tabs').tabs({ duration: 800, /*swipeable: true*/});
+  $('.tabs').tabs({ duration: 800, /* swipeable: true */});
   $('.modal').modal({ opacity: 0.3, });
   $('.datepicker').datepicker({
     format: 'yyyy년 mm월 dd일',
@@ -14,7 +14,7 @@ $(document).ready(function () {
 
   $('#next-swipe-1').click(function () {
     $('.tabs').tabs('select', 'swipe-1');
-  });//swipe1
+  });// swipe1
 
   $('.next-swipe-2').click(function () {
     if ($('#continent option:selected').val() == "대륙을 선택하세요.") {
@@ -139,7 +139,7 @@ $("#noplace").change(function () {
 
 
 
-//Initialize QuillEditer 
+// Initialize QuillEditer
 (function quillEditerInit() {
   var quill = new Quill('#quillEditor', {
     modules: {
@@ -147,18 +147,21 @@ $("#noplace").change(function () {
         ['image', 'code-block'],
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button
+                                                          // values
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
         [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
         [{ 'direction': 'rtl' }],                         // text direction
         [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with
+                                                          // defaults from theme
         [{ 'font': [] }],
         [{ 'align': [] }],
-        ['clean']                                         // remove formatting button
-      ]
+        ['clean']                                         // remove formatting
+                                                          // button
+      ],imageResize: {},
     },
     placeholder: 'Compose an epic...',
     theme: 'snow'  // or 'bubble'
@@ -166,7 +169,7 @@ $("#noplace").change(function () {
   $('.ql-picker').next().remove();
 })();
 
-//Load CountryList
+// Load CountryList
 $('#continent').change(function () {
   $('#country').empty();
   $('#country').removeAttr('disabled');
@@ -182,7 +185,7 @@ $('#continent').change(function () {
   );
 });
 
-//Load CityList
+// Load CityList
 $('#country').change(function () {
   $('#city').empty();
   $('#city').removeAttr('disabled');
@@ -198,7 +201,7 @@ $('#country').change(function () {
   );
 });
 
-//fileupload
+// fileupload
 $('#fileupload').fileupload({
   url: '../../app/json/tour/add',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -206,9 +209,10 @@ $('#fileupload').fileupload({
   singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기.
   autoUpload: false,        // 파일을 추가할 때 자동 업로딩 하지 않도록 설정.
   disableImageResize: /Android(?!.*Chrome)|Opera/
-    .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정 비활성 시키기
+    .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정
+                                                    // 비활성 시키기
   previewMaxWidth: 170,   // 미리보기 이미지 너비
-  previewMaxHeight: 150,  // 미리보기 이미지 높이 
+  previewMaxHeight: 150,  // 미리보기 이미지 높이
   previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
   processalways: function (e, data) {
@@ -278,7 +282,7 @@ $('#fileupload').fileupload({
 });
 
 
-//googlemap
+// googlemap
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -347,11 +351,18 @@ function initMap() {
   google.maps.event.addListener(marker, 'dragend', function (evt) {
     window.tlocation = evt.latLng.lat().toFixed(3) + ',' + evt.latLng.lng().toFixed(3);
     $('#add-btn').addClass('pulse');
-    /*document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';*/
+    /*
+     * document.getElementById('current').innerHTML = '<p>Marker dropped:
+     * Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' +
+     * evt.latLng.lng().toFixed(3) + '</p>';
+     */
   });
 
   google.maps.event.addListener(marker, 'dragstart', function (evt) {
-    /*document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';*/
+    /*
+     * document.getElementById('current').innerHTML = '<p>Currently dragging
+     * marker...</p>';
+     */
   });
 }
 

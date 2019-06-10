@@ -23,8 +23,9 @@ div.bit-list {
   min-height: 200px;
 }
 
-div.container {
+body > div.container {
   width: 1000px;
+  min-height:450px;
 }
 
 .bit-invisible {

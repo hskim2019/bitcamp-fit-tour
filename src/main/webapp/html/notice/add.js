@@ -1,3 +1,12 @@
+var param = location.href.split('?')[1];
+if(param) {
+  $('#update-btn').removeClass('bit-invisible');
+  $('h2').html("공지사항 변경");
+} else {
+  $('#add-btn').removeClass('bit-invisible');
+  $('h2').html("새 글");
+}
+
 var quill = new Quill('#editor', {
   modules: {
     toolbar: [
@@ -9,7 +18,7 @@ var quill = new Quill('#editor', {
       [{ 'indent': '-1' }, { 'indent': '+1' }],      
       [{ 'align': [] }],
       ['image', 'link', 'video']
-      ]
+      ],imageResize: {},
   },
   placeholder: '내용을 입력해 주세요',
 

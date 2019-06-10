@@ -71,8 +71,8 @@ td:nth-child(4) {
 }
 
 .page-link {
-	font-size: 12px !important;
-  color: #514859 !important; 
+  font-size: 13px !important;
+  color: #514859; 
   line-height: 18px !important;
   font-weight: normal;
 }

@@ -41,12 +41,12 @@
     <th class="center">조회</th>
   </tr>
 </thead>
-<tbody class="tbody-notice"></tbody>
+<tbody class="tbodyNotice"></tbody>
 </table>
 
   <ul class="pagination justify-content-center">
     <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage-notice" class="page-item active"><span class="page-link">1</span></li>
+    <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
     <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
 </div>
@@ -63,13 +63,13 @@
     <th>내용</th>
   </tr>
 </thead>
-<tbody class="tbody-faq"></tbody>
+<tbody class="tbodyFAQ"></tbody>
 </table>
 
   <ul class="pagination justify-content-center">
-    <li id="prevPage-faq" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage-faq" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage-faq" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+    <li id="prevPageFaq" class="page-item"><a class="page-link FAQprevPageLink" href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="currPage" class="page-item active"><span class="page-link" id="FAQcurrSpan">1</span></li>
+    <li id="nextPageFaq" class="page-item "><a class="page-link FAQnextpageLink" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
   
 </div>
@@ -83,7 +83,7 @@
 
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template-notice" type="text/x-handlebars-template">
+<script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th class="center">공지</th>

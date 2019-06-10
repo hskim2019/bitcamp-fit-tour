@@ -32,6 +32,7 @@
 <h2 class="notice-titl col s10">공지사항</h2>
 <p class="add-notice col s2"><a href='add.html' class="waves-effect waves-light btn-small">새 글</a></p>
 
+<div id="NoticeTable">
 <table class="highlight">
 <thead>
   <tr> 
@@ -43,7 +44,7 @@
 </thead>
 <tbody class="tbodyNotice"></tbody>
 </table>
-
+</div>
   <ul class="pagination justify-content-center">
     <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
     <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
@@ -66,6 +67,7 @@
 
 <p class="add-faq col s2 offset-s5"><a href='#' class="waves-effect waves-light btn-small">새 글</a></p>
 
+<div id="FAQTable">
 <table class="highlight">
 <thead>
   <tr> 
@@ -74,10 +76,8 @@
   </tr>
 </thead>
 <tbody class="tbodyFAQ"></tbody>
-
 </table>
-
-
+</div>
   <ul class="pagination justify-content-center">
     <li id="prevPageFaq" class="page-item"><a class="page-link FAQprevPageLink" href="?pageNo=0&pageSize=3">이전</a></li>
     <li id="currPage" class="page-item active"><span class="page-link" id="FAQcurrSpan">1</span></li>

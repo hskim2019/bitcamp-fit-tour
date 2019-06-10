@@ -19,6 +19,10 @@
     font-weight: normal;
 }
 
+#NoticeTable, #FAQTable {
+	min-height: 430px;
+}
+
 .notice-titl {
 	padding: 0px 0px 24px 0px !important;
     font-weight: 700;

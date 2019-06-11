@@ -9,6 +9,7 @@ public interface ReservationDao {
   int insert(Reservation reservation);
   List<Reservation> findAll(Map<String,Object> paramMap);
   Reservation findByNo(int no);
+  List<Reservation> myReservation(int no);
   int update(Reservation reservation);
   int delete(int no);
   int countAll(String search);

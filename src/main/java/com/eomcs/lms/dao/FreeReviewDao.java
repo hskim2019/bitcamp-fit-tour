@@ -11,6 +11,14 @@ public interface FreeReviewDao {
   List<FreeReview> findAll(HashMap<String, Object> params);
 
   int countAll(String search);
+
+  int delete(int no);
+
+  FreeReview findByNo(int no);
+
+  void increaseCount(int no);
+
+  
  
 }
 

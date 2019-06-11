@@ -19,16 +19,36 @@
  <insert id="insert" parameterType="freereview">
     insert into free_review(
     member_id,
-    reservation_id,
+    <if test="reservationNo != 0">reservation_id,</if>
+    
     title,
     content
    )
     values(
     #{memberNo},
-    #{reservationNo},
+     <if test="reservationNo != 0"> #{reservationNo},</if>
+   
     #{title},
     #{content})
   </insert>
+  <delete id="delete" parameterType="int">
+    delete from free_review 
+    where free_review_id = #{no}
+  </delete>
+  <select id="findByNo" resultMap="noticeMap" parameterType="int">
+    select * from
+    free_review
+    where 
+      free_review_id = #{value}
+  </select>
+  
+  <update id="increaseCount" parameterType="int">
+    update free_review
+    set 
+      viewcount = viewcount + 1 
+    where free_review_id = #{value}
+  </update>
+  
  <select id="countAll" resultType="int" parameterType="string">
     select count(*)
     from free_review

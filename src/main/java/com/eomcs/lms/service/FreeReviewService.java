@@ -11,5 +11,10 @@ public interface FreeReviewService {
   List<FreeReview> list(int pageNo, int pageSize, String search);
 
   int size(String search);
+
+  int delete(int no);
+
+  FreeReview get(int no);
+
 	
 }

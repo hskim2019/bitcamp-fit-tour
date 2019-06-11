@@ -22,6 +22,13 @@ public class Reservation implements Cloneable, Serializable {
   private Date reservationDate;//예약일
   private PaymentStatus paymentStatus;
   private Member member;
+  private Tour tour;
+  public Tour getTour() {
+    return tour;
+  }
+  public void setTour(Tour tour) {
+    this.tour = tour;
+  }
   public int getNo() {
     return no;
   }
@@ -106,7 +113,7 @@ public class Reservation implements Cloneable, Serializable {
         + statusNo + ", tourDate=" + tourDate + ", personnel=" + personnel + ", touristTel="
         + touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo
         + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
-        + ", paymentStatus=" + paymentStatus + ", member=" + member + "]";
+        + ", paymentStatus=" + paymentStatus + ", member=" + member + ", tour=" + tour + "]";
   }
 
   

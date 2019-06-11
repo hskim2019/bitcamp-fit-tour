@@ -1,23 +1,3 @@
-$('#add-btn').click(() => {
-  $.post('../../app/json/freereview/add', {
-
-    memberNo: 128,
-    reservationNo: 1005,
-    title: $("#title").val(),
-    content: $(".ql-editor").html()
-  
-   
-    
-  },
-  function(data) {
-    
-    if(data.status == 'success') {
-      location.href = "index.html";  
-    } else {
-      alert('등록 실패 입니다.\n' + data.message);
-    }
-  });
-});
 
 
 
@@ -45,8 +25,72 @@ $('#add-btn').click(() => {
       ],imageResize: {},
       
     },
-    placeholder: 'Compose an epic...',
+    placeholder: '내용을 적으세요...',
     theme: 'snow'  // or 'bubble'
   });
   $('.ql-picker').next().remove();
 })();
+
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+
+
+
+(function loadList() {
+  $.getJSON('../../app/json/reservation/myreservation',
+       function (obj) {
+    if(obj.status){
+      $('#selectOption').html('로그인 해주세요');
+      return;
+    }
+      
+    
+   if(obj.list.length == 0){
+     
+     $('#selectOption').html('다녀온 투어가 없습니다');
+   }else{
+     for (var i = 0; i < obj.list.length; i++) {
+       $('#reservation').append($('<option value="' + obj.list[i].no + '">' + obj.list[i].tour.title + '</option>'));
+       //alert()
+      }
+   }
+    
+   
+    $('select').formSelect();
+  })
+ 
+})();
+
+
+$('#add-btn').click(function () {
+
+  if (!$('#title').val()) {
+    $('#title').focus();
+    M.toast({ html: '제목을 적으세요..' })
+    return;
+  }else if($(".ql-editor").html()=='<p><br></p>'){
+    
+    $('.ql-editor').focus();
+    M.toast({ html: '내용을 적으세요..' })
+    return;
+    
+  }else{
+    $.post('../../app/json/freereview/add', {
+      
+      reservationNo: $('#reservation').val(),
+      title: $("#title").val(),
+      content: $(".ql-editor").html()
+    },
+    function(data) {
+      
+      if(data.status == 'success') {
+        location.href = "index.html";  
+      } else {
+        alert('등록 실패 입니다.\n' + data.message);
+      }
+    });
+    
+    }
+});

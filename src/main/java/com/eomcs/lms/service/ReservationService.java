@@ -7,6 +7,7 @@ public interface ReservationService {
   List<Reservation> list(int pageNo, int pageSize, String search);
   int add(Reservation reservation);
   Reservation get(int no);
+  List<Reservation> getMyReservation(int no);
   int update(Reservation member);
   int delete(int no);
   int size(String search);

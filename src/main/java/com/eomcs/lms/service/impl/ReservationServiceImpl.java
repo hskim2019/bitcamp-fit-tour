@@ -58,6 +58,12 @@ public class ReservationServiceImpl implements ReservationService {
   public int size(String search) {
     return reservationDao.countAll(search);
   }
+
+  @Override
+  public List<Reservation> getMyReservation(int no) {
+    // TODO Auto-generated method stub
+    return reservationDao.myReservation(no);
+  }
 }
 
 

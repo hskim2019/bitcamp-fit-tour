@@ -14,6 +14,7 @@ import com.eomcs.lms.service.FreeReviewService;
 @Service
 public class FreeReviewServiceImpl implements FreeReviewService {
   
+  
   FreeReviewDao freeReviewDao;
 
   
@@ -40,6 +41,22 @@ public class FreeReviewServiceImpl implements FreeReviewService {
   public int size(String search) {
     return freeReviewDao.countAll(search);
   }
+
+  @Override
+  public int delete(int no) {
+    return freeReviewDao.delete(no);
+  }
+
+  @Override
+  public FreeReview get(int no) {
+    FreeReview freeReview = freeReviewDao.findByNo(no);
+    if (freeReview != null) {
+      freeReviewDao.increaseCount(no);
+    }
+    return freeReview;
+  }
+
+  
   
 }
 

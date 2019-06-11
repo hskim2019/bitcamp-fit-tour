@@ -23,7 +23,10 @@
    
   
    
-
+ <association property="tour" javaType="tour">
+    <id column="tour_id" property="no" />
+    <result column="title" property="title" />
+ </association>
 
   <association property="paymentStatus" javaType="paymentStatus">
     <id column="status_id" property="no" />
@@ -63,7 +66,16 @@ and r.status_id = s.status_id
    
   </select>
 
+<select id="myReservation" resultMap="reservationMap" parameterType="int">
+    select t.title,r.reservation_id
+     from 
+     reservation r, tour t 
+     where 
+     r.tour_id = t.tour_id 
+     and  
+     r.member_id =  #{value}
 
+  </select>
 
   <select id="findByNo" resultMap="reservationMap" parameterType="int">
     select

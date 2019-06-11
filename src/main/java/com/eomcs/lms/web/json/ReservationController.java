@@ -50,6 +50,23 @@ public class ReservationController {
     
   
   }
+  @GetMapping("myreservation")
+  public Object myReservation(HttpSession session) {
+    HashMap<String,Object> content = new HashMap<>();
+   
+    try {
+      Member loginUser = (Member)session.getAttribute("loginUser");
+      List<Reservation> reservations  = reservationService.getMyReservation(loginUser.getNo());
+      content.put("list", reservations);
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+      return content;
+    }
+    
+    return content;
+  }
   
   @GetMapping("detail")
   public Object detail(int no) {

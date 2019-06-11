@@ -1,9 +1,14 @@
 var param = location.href.split('?')[1];
+var noticeNo;    
+
 if(param) {
   $('#update-btn').removeClass('bit-invisible');
+  noticeNo = param.split('=')[1];
+  loadDate(noticeNo);
 } else {
   $('#add-btn').removeClass('bit-invisible');
 }
+
 
 var quill = new Quill('#editor', {
   modules: {
@@ -37,21 +42,19 @@ $('#add-btn').click((e) => {
   if(!$('#input-title').val()) {
     $('#input-title').focus();
     $('.titleLabel').addClass('warning');
+    M.toast({html: '제목을 입력 해 주세요'})
   } else if($('.ql-editor').html() == '<p><br></p>') {
     $('.ql-editor').focus();
+    M.toast({html: '내용을 입력 해 주세요'})
   } 
   
   else {
   $.post('../../app/json/notice/add', {
-
-   
      title: $('#input-title').val(),
      content: $('.ql-editor').html()
-
   },
 
   function(data) {
-
     if(data.status == 'success') {
       location.href = "index.html";  
     } else {
@@ -64,3 +67,29 @@ $('#add-btn').click((e) => {
 $('.ql-editor').click((e) => {
   $('.titleLabel').removeClass('warning');
 });
+
+$('#update-btn').click(() => {
+  $.post('../../app/json/notice/update?no=' + noticeNo,
+      {
+      title: $('#input-title').val(),
+      content: $('.ql-editor').html()
+      
+      },
+  function(data) {
+        if(data.status == 'success') {
+        location.href = "index.html";  
+      } else {
+        alert('수정 실패 입니다.\n' + data.message);
+      }
+      })
+});
+
+function loadDate(noticeNo) {
+  $.getJSON('../../app/json/notice/detail?no=' + noticeNo,
+   function(data) {
+    $('#input-title').val(data.title);
+    $('.ql-editor').html(data.content);
+  })
+  $('#input-title').focus();
+};
+  

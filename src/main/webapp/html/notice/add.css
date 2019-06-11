@@ -27,3 +27,16 @@ h2 {
 .warning {
 	color: red !important;
 }
+
+#toast-container {
+	left: 77%;
+	top: 80%;
+}
+
+.toast {
+	width: 180px;
+	background-color: #ffccbc;
+	color: #514859;
+	font-size: 14px;
+	font-weight: 700;
+}

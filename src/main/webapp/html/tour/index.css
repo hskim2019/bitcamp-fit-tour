@@ -26,7 +26,7 @@
 	font-weight: 500;
 }
 
-ul li a {
+.has-menu ul li a {
 	/* color: #A0B3B0; */
 	color: #d6e5e3; 
 	font-weight: 500px;
@@ -63,7 +63,7 @@ ul li a {
 	min-width: 150px;
 }
 
-a:hover{
+.continent-list-btn:hover{
  	color: #d6e5e3;
 	text-decoration: none;
 	font-weight: 500;

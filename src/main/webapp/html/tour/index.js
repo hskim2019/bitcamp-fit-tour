@@ -166,7 +166,7 @@ $('#filter-reset').click((e) => {
   $('#searchwithOptions').trigger('click');
 });
 
-  
+
 $('.continent-list-btn').click((e) => {
   e.preventDefault();
   continentName = $(e.target).html();

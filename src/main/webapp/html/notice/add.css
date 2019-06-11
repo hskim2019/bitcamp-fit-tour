@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 h2 {
-	padding: 0 0 24px 2px;
+	padding: 0 0 2px 2px;
     font-weight: 700;
     font-size: 28px;
     line-height: 41px;
@@ -24,3 +24,6 @@ h2 {
 	height: 400px;
 }
 
+.warning {
+	color: red !important;
+}

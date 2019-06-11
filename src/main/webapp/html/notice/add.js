@@ -1,10 +1,8 @@
 var param = location.href.split('?')[1];
 if(param) {
   $('#update-btn').removeClass('bit-invisible');
-  $('h2').html("공지사항 변경");
 } else {
   $('#add-btn').removeClass('bit-invisible');
-  $('h2').html("새 글");
 }
 
 var quill = new Quill('#editor', {
@@ -18,7 +16,7 @@ var quill = new Quill('#editor', {
       [{ 'indent': '-1' }, { 'indent': '+1' }],      
       [{ 'align': [] }],
       ['image', 'link', 'video']
-      ],imageResize: {},
+      ],imageResize: {}, 
   },
   placeholder: '내용을 입력해 주세요',
 
@@ -35,11 +33,19 @@ var quill = new Quill('#editor', {
 
 
 
-$('#add-btn').click(() => {
+$('#add-btn').click((e) => {
+  if(!$('#input-title').val()) {
+    $('#input-title').focus();
+    $('.titleLabel').addClass('warning');
+  } else if($('.ql-editor').html() == '<p><br></p>') {
+    $('.ql-editor').focus();
+  } 
+  
+  else {
   $.post('../../app/json/notice/add', {
 
    
-     title: $('#title').val(),
+     title: $('#input-title').val(),
      content: $('.ql-editor').html()
 
   },
@@ -52,4 +58,9 @@ $('#add-btn').click(() => {
       alert('등록 실패 입니다.\n' + data.message);
     }
   });
+  } 
+});
+
+$('.ql-editor').click((e) => {
+  $('.titleLabel').removeClass('warning');
 });

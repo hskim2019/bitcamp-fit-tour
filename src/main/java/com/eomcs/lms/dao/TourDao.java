@@ -22,6 +22,8 @@ public interface TourDao {
   int insertPhoto (List<TourGuidancePhoto> photo);
   int insertWishlist (Map<String, Object> paramMap);
   int countWishlist (Map<String, Object> paramMap);
+  List<String> findWishlistCityName (int memberNo);
+  List<Tour> findTourByCityname(Map<String, Object> paramMap);
   int deleteWishlist (Map<String, Object> paramMap);
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);

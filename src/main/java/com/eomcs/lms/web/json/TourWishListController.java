@@ -1,11 +1,13 @@
 package com.eomcs.lms.web.json;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.service.TourService;
 
 @RestController("json/TourWishListController")
@@ -33,7 +35,7 @@ public class TourWishListController {
     return content;
   }
   
-//add Wish list
+  //add Wish list
   @GetMapping("delete")
   public Object delete(String tourNo, HttpSession session) {
     
@@ -52,6 +54,30 @@ public class TourWishListController {
     try {
       tourService.deleteWishlist(paramMap);
       content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  //add Wish list
+  @GetMapping("findcityname")
+  public Object findCityname(HttpSession session) {
+    
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    
+    if(session.getAttribute("loginUser") == null) {
+      content.put("status", "notlogin");
+      return content;
+    }
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    
+    try {
+      List<String> citynames = tourService.findWishlistCityName(loginUser.getNo());
+      content.put("status", "success");
+      content.put("citynames", citynames);
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
@@ -80,6 +106,27 @@ public class TourWishListController {
       int count = tourService.countWishlist(paramMap);
       content.put("status", "success");
       content.put("count", count);
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  //wish list
+  @GetMapping("list")
+  public Object list(String cityName, HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    HashMap<String,Object> paramMap = new HashMap<String,Object>();
+
+    paramMap.put("cityName", cityName);
+    paramMap.put("memberNo", loginUser.getNo());
+    try {
+      List<Tour> tours = tourService.findTourByCityname(paramMap);
+      System.out.println(tours);
+      content.put("status", "success");
+      content.put("tours", tours);
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());

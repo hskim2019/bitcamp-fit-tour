@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-
 import com.eomcs.lms.dao.TourDao;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
@@ -192,6 +191,16 @@ public class TourServiceImpl implements TourService {
   @Override
   public int deleteWishlist(Map<String, Object> paramMap) {
     return tourDao.deleteWishlist(paramMap);
+  }
+  
+  @Override
+  public List<String> findWishlistCityName(int memberNo) {
+    return tourDao.findWishlistCityName(memberNo);
+  }
+  
+  @Override
+  public List<Tour> findTourByCityname(Map<String, Object> paramMap) {
+    return tourDao.findTourByCityname(paramMap);
   }
 
 }

@@ -33,29 +33,65 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row tab-row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab"><a href="#test1">Test 1</a></li>
-        <li class="tab"><a href="#test2">Test 2</a></li>
+      <li class="tab"><a href="#test">test1</a></li>
       </ul>
+      <div id="test" class="col s12">
+        <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img src="/bitcamp-fit-tour/images/navbg.png">
+          <span class="card-title">Card Title</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
     </div>
-    <div id="test1" class="col s12">Test 1</div>
-    <div id="test2" class="col s12">Test 2</div>
-  </div>
-  
+      </div>
+    </div>
 </div>
-
+</div>
 </body>
 <!-- footer -->
 <footer class="bit-main-footer page-footer grey"></footer>
 
+<!-- wish handlebars -->
+<script id="wish-template" type="text/x-handlebars-template">
+{{#each tours}}
+<div class="row">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img src="/bitcamp-fit-tour/upload/tourPhoto/{{tourPhoto[0].name}}">
+          <span class="card-title"></span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">{{subHeading}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}
+</script>
 
 <!-- jquery -->
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <!-- materialize -->
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+<!-- handlebars -->
+  <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>

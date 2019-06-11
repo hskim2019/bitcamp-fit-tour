@@ -29,6 +29,8 @@ public interface TourService {
 	int addTheme(List<TourTheme> theme);
 	int addPhoto(List<TourGuidancePhoto> photo);
 	int addWishlist (Map<String, Object> paramMap);
+	int countWishlist (Map<String, Object> paramMap);
+	int deleteWishlist (Map<String, Object> paramMap);
 	List<Country> listCountry(String continent);
 	List<City> listCity(int countryNo);
 	int maxValue();

@@ -21,6 +21,8 @@ public interface TourDao {
   int insertTheme (List<TourTheme> theme);
   int insertPhoto (List<TourGuidancePhoto> photo);
   int insertWishlist (Map<String, Object> paramMap);
+  int countWishlist (Map<String, Object> paramMap);
+  int deleteWishlist (Map<String, Object> paramMap);
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);
   int findMaxPrice();

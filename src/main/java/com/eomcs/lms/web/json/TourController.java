@@ -147,10 +147,8 @@ public class TourController {
 
         String filename = UUID.randomUUID().toString();
         String filepath = request.getServletContext().getRealPath(("/upload/tourphoto/" + filename));
-        System.out.println(filepath);
         part.write(filepath);
 
-        System.out.println(filepath);
         try {
           makeThumbnail(filepath);
         } catch (Exception e) {
@@ -249,7 +247,6 @@ public class TourController {
   // 투어 상품이 등록 된 국가, 도시 list만 불러오기
   @GetMapping("regCountry")
   public Object regCountry(String continent) {
-    System.out.println(continent);
     List<Tour> registeredCountryList = tourService.registeredcountry(continent);
 
     HashMap<String,Object> content = new HashMap<>();
@@ -260,7 +257,6 @@ public class TourController {
 
   @GetMapping("regCity")
   public Object regCity(String country) {
-    System.out.println(country);
     List<Tour> registeredCityList = tourService.registeredcity(country);
 
     HashMap<String,Object> content = new HashMap<>();

@@ -115,14 +115,20 @@
 	<!-- find Tour All -->
 	<select id="findAll" resultMap="tourMap" parameterType="map">
 		select distinct
-		t.tour_id, t.title, t.sub_heading, t.content, t.created_date, t.total_hour,
-		t.hash_tag, t.personnel, t.transportation, t.price, t.city_id,
+		t.tour_id, t.title, t.sub_heading, t.content,
+		t.created_date, t.total_hour,
+		t.hash_tag, t.personnel,
+		t.transportation, t.price, t.city_id,
 		t.location,
-		ci.city_id, ci.city_name, co.country_id, co.country_name, co.continent
-		from tour as t
+		ci.city_id,
+		ci.city_name, co.country_id, co.country_name, co.continent
+		from tour as
+		t
 		join city as ci on t.city_id = ci.city_id
-		join country as co on ci.country_id = co.country_id
-		join tour_theme as toth on t.tour_id = toth.tour_id
+		join country as co on
+		ci.country_id = co.country_id
+		join tour_theme as toth on t.tour_id =
+		toth.tour_id
 		join theme as th on toth.theme_id = th.theme_id
 		<where>
 			<if test="continentName != null">or continent = #{continentName}</if>
@@ -150,13 +156,17 @@
 		select
 		*
 		from tour as t
-		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+		left outer join tour_guidance_photo
+		p on t.tour_id = p.tour_id
 		join
-		tour_theme as toth on t.tour_id = toth.tour_id
+		tour_theme as toth on t.tour_id =
+		toth.tour_id
 		join theme as th on
 		toth.theme_id = th.theme_id
-		join city as ci on t.city_id = ci.city_id
-		join country as co on ci.country_id = co.country_id
+		join city as
+		ci on t.city_id = ci.city_id
+		join country as co on ci.country_id =
+		co.country_id
 		where t.tour_id = #{value};
 	</select>
 
@@ -185,12 +195,12 @@
 			(#{item.tourNo}, #{item.name}, #{item.path})
 		</foreach>
 	</insert>
-  
-  <!-- insert Photo -->
-  <insert id="insertWishlist" parameterType="map">
-    insert into member_tour_wishlist(tour_id, member_id)
-    values(#{tourNo}, #{memberNo})
-  </insert>
+
+	<!-- insert Photo -->
+	<insert id="insertWishlist" parameterType="map">
+		insert into member_tour_wishlist(tour_id, member_id)
+		values(#{tourNo}, #{memberNo})
+	</insert>
 
 	<!-- countAll tour -->
 	<select id="countAll" resultType="int">
@@ -203,11 +213,15 @@
 		select * from country where continent = #{continent}
 	</select>
 
-	<!-- find Country By Continent -->
-	<select id="findWishlist" resultMap="countryMap"
-		parameterType="map">
-		select * from member_tour_wishlist where member_id = #{memberNo} and tour_id = #{tourNo}
+	<!-- count wish list -->
+	<select id="countWishlist" resultType="int" parameterType="map">
+		select count(*) from member_tour_wishlist where member_id = #{memberNo} and tour_id = #{tourNo}
 	</select>
+	
+	<!-- dlete wish list -->
+	<delete id="deleteWishlist" parameterType="map">
+		delete from member_tour_wishlist where member_id = #{memberNo} and tour_id = #{tourNo}
+	</delete>
 
 	<!-- find City By Country -->
 	<select id="findCityByCountry" resultMap="cityMap"
@@ -217,28 +231,31 @@
 
 	<!-- find MaxPrice -->
 	<select id="findMaxPrice" resultType="int">
-		select price from tour where price=(select max(price) from tour) limit 1
+		select price from tour
+		where price=(select max(price) from tour) limit 1
 	</select>
 
-    <!-- find registered country list -->
-    <select id="findRegisteredCountry" resultMap="tourMap" parameterType="string">
-    select distinct co.continent, co.country_name 
-    from tour as t 
-    join city as ci on t.city_id = ci.city_id 
-    join country as co on ci.country_id = co.country_id
-    where co.continent = #{continent}
-    order by co.continent desc
-    </select>
-    
-    <!-- find registered country list -->
-    <select id="findRegisteredCity" resultMap="tourMap" parameterType="string">
-    select distinct co.continent, co.country_name, ci.city_name
-    from tour as t 
-    join city as ci on t.city_id = ci.city_id 
-    join country as co on ci.country_id = co.country_id 
-    where co.country_name = #{country}
-    order by co.continent desc
-    </select>
+	<!-- find registered country list -->
+	<select id="findRegisteredCountry" resultMap="tourMap"
+		parameterType="string">
+		select distinct co.continent, co.country_name
+		from tour as t
+		join city as ci on t.city_id = ci.city_id
+		join country as co on ci.country_id = co.country_id
+		where co.continent = #{continent}
+		order by co.continent desc
+	</select>
+
+	<!-- find registered country list -->
+	<select id="findRegisteredCity" resultMap="tourMap"
+		parameterType="string">
+		select distinct co.continent, co.country_name, ci.city_name
+		from tour as t
+		join city as ci on t.city_id = ci.city_id
+		join country as co on ci.country_id = co.country_id
+		where co.country_name = #{country}
+		order by co.continent desc
+	</select>
 </mapper>
 
 

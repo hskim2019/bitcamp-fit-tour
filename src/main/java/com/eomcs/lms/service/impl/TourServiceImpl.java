@@ -184,6 +184,16 @@ public class TourServiceImpl implements TourService {
 		return tourDao.findRegisteredCity(country);
 	}
 
+  @Override
+  public int countWishlist(Map<String, Object> paramMap) {
+    return tourDao.countWishlist(paramMap);
+  }
+  
+  @Override
+  public int deleteWishlist(Map<String, Object> paramMap) {
+    return tourDao.deleteWishlist(paramMap);
+  }
+
 }
 
 

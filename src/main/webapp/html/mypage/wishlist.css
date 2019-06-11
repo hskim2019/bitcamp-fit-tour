@@ -1,6 +1,16 @@
+/* head */
 h4 {
 	font-weight: 600;
 	margin-top: 48px;
+}
+
+/* tab */
+.tabs {
+  border-bottom: 1px solid #ee6e732b;
+}
+
+.tab {
+	margin-right : 20px !important;
 }
 
 .tab a {
@@ -10,6 +20,32 @@ h4 {
   font-weight: 600 !important;
 }
 
-.tab {
-	margin-right : 20px !important;
+.tab a:focus {
+  background-color: transparent !important;
 }
+
+/* card */
+.card{
+  cursor: pointer;
+}
+
+.card:hover{
+  transform : translateY(-0.2em);
+}
+
+/* wish */
+.wish-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.wish-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: gray;
+}
+
+.wish-hour-trans {
+  color: gray;
+}
+

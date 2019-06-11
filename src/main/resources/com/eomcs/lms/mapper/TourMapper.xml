@@ -233,6 +233,8 @@
 	    join tour as t on m.tour_id = t.tour_id
 	    join city as c on t.city_id = c.city_id 
 	    join tour_guidance_photo as tg on tg.tour_id = t.tour_id
+      join tour_theme as toth on t.tour_id = toth.tour_id
+      join theme as th on toth.theme_id = th.theme_id
       where member_id = #{memberNo} and city_name = #{cityName}
   </select>
 

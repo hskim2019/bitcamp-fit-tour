@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
@@ -22,42 +23,25 @@
 </head>
 
 <body>
-<!-- navbar header -->
-<header class="bit-main-header"></header>
-<!-- container -->
-<div class="container">
+  <!-- navbar header -->
+  <header class="bit-main-header"></header>
+  <!-- container -->
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <blockquote>
+          <h4>위시리스트</h4>
+        </blockquote>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col s12">
-  <h4>위시리스트</h4>
+    <div class="row tab-row">
+      <div class="col s12 mb30">
+        <ul class="tabs">
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="row tab-row">
-    <div class="col s12">
-      <ul class="tabs">
-      <li class="tab"><a href="#test">test1</a></li>
-      </ul>
-      <div id="test" class="col s12">
-        <div class="col s12 m7">
-      <div class="card">
-        <div class="card-image">
-          <img src="/bitcamp-fit-tour/images/navbg.png">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
-</div>
-</div>
 </body>
 <!-- footer -->
 <footer class="bit-main-footer page-footer grey"></footer>
@@ -65,23 +49,35 @@
 <!-- wish handlebars -->
 <script id="wish-template" type="text/x-handlebars-template">
 {{#each tours}}
-<div class="row">
-    <div class="col s12 m7">
-      <div class="card">
+    <div class="col l4 m6">
+      <div class="card" id="{{no}}">
         <div class="card-image">
-          <img src="/bitcamp-fit-tour/upload/tourPhoto/{{tourPhoto[0].name}}">
+          <img src="/bitcamp-fit-tour/upload/tourphoto/{{tourPhoto}}">
           <span class="card-title"></span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+
+        <div class="row">
+          <div class="col l12 wish-title">
+            {{title}}
+          </div>
         </div>
-        <div class="card-action">
-          <a href="#">{{subHeading}}</a>
+        
+        <div class="row mb10">
+          <div class="col l12 wish-hour-trans">
+            <i class="fas fa-stopwatch"></i> {{totalHour}}시간 소요<span class="transportation ml10">{{transportation}}</span>
+          </div>
+        </div>
+
+        <div class="row mb0">
+          <div class="col l12 wish-price">
+            <i class="fas fa-won-sign"></i> {{price}}원 / 1인
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
-  </div>
 {{/each}}
 </script>
 
@@ -91,7 +87,7 @@
 <!-- materialize -->
 <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <!-- handlebars -->
-  <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>

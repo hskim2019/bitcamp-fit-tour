@@ -64,7 +64,7 @@ function addPersonnelOption(personnel, price) {
 }
 
 
-//add trpansportaionIcon
+//get trpansportaionIcon
 function getTransportaionIcon(transportation) {
 
   switch (transportation) {

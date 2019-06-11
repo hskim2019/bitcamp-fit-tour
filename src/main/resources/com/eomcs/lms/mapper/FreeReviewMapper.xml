@@ -35,12 +35,12 @@
     delete from free_review 
     where free_review_id = #{no}
   </delete>
-  <select id="findByNo" resultMap="noticeMap" parameterType="int">
+<!--   <select id="findByNo" resultMap="noticeMap" parameterType="int">
     select * from
     free_review
     where 
       free_review_id = #{value}
-  </select>
+  </select> -->
   
   <update id="increaseCount" parameterType="int">
     update free_review

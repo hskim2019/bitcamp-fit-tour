@@ -28,7 +28,7 @@ $.get('../../app/json/wishlist/findcityname',
   });
 
 $(document.body).bind('addEventAndLoadTab', () => {
-  //first tab load
+  //load first tab
   $($('.tab')[0]).addClass('first-tab');
   $.getJSON('../../app/json/wishlist/list?cityName=' + $($('.tab')[0]).children().html(),
     function (obj) {
@@ -46,11 +46,35 @@ $(document.body).bind('addEventAndLoadTab', () => {
       
       //add click event card
       $('.card').click(function(e){
+        if($(e.target).hasClass('material-icons')) {
+          if($(e.target).hasClass('wish-status')){
+            $.get('../../app/json/wishlist/delete?tourNo=' + $(e.target).parents('.card').attr('id'),
+                function(obj) {
+              if (obj.status == 'success') {
+                $(e.target).parent().html('<i class="material-icons">favorite_border</i>');
+                M.toast({ html: '위시리스트에서 삭제 하였습니다.' })
+              } else {
+                M.toast({ html: '위시리스트에서 삭제 실패 하였습니다.' })
+              }
+            });
+          } else {
+            $.get('../../app/json/wishlist/add?tourNo=' + $(e.target).parents('.card').attr('id'),
+                function(obj) {
+              if (obj.status == 'success') {
+                $(e.target).parent().html('<i class="material-icons wish-status">favorite</i>');
+                M.toast({ html: '위시리스트에 추가 하였습니다.' })
+              } else {
+                M.toast({ html: '위시리스트에 추가 실패 하였습니다.' })
+              }
+            });
+          }
+          return;
+        }
         location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).attr('id'); 
       })
       
     });
-  // not first tab add click event
+  // add click event not first tab
   $('.tab').not('.first-tab').click(function(e) {
     $.getJSON('../../app/json/wishlist/list?cityName=' + $(e.target).html(),
       function (obj) {
@@ -67,10 +91,35 @@ $(document.body).bind('addEventAndLoadTab', () => {
         for(transportation of transportations){
           $(transportation).html(getTransportaionIcon($(transportation).html()) + $(transportation).html() + '이동');
         }
-        
+        //add click event card
         $('#' + tabClass).find('.card').click(function(e){
+          if($(e.target).hasClass('material-icons')) {
+            if($(e.target).hasClass('wish-status')){
+              $.get('../../app/json/wishlist/delete?tourNo=' + $(e.target).parents('.card').attr('id'),
+                  function(obj) {
+                if (obj.status == 'success') {
+                  $(e.target).parent().html('<i class="material-icons">favorite_border</i>');
+                  M.toast({ html: '위시리스트에서 삭제 하였습니다.' })
+                } else {
+                  M.toast({ html: '위시리스트에서 삭제 실패 하였습니다.' })
+                }
+              });
+            } else {
+              $.get('../../app/json/wishlist/add?tourNo=' + $(e.target).parents('.card').attr('id'),
+                  function(obj) {
+                if (obj.status == 'success') {
+                  $(e.target).parent().html('<i class="material-icons wish-status">favorite</i>');
+                  M.toast({ html: '위시리스트에 추가 하였습니다.' })
+                } else {
+                  M.toast({ html: '위시리스트에 추가 실패 하였습니다.' })
+                }
+              });
+            }
+            return;
+          }
           location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).attr('id'); 
         })
+        
         
       });
     //click event off

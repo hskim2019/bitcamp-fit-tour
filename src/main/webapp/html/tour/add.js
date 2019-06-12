@@ -1,6 +1,5 @@
-var tlocation;
+var tlocation = 0 + ',' + 0;
 var fileNames;
-
 // ready
 $(document).ready(function () {
   $('input[type="text"]').characterCounter();
@@ -120,7 +119,7 @@ $(document).ready(function () {
 }); // ready
 
 
-// check noplace
+//check noplace
 $("#noplace").change(function () {
 
   if ($("#noplace").is(":checked")) {
@@ -136,6 +135,7 @@ $("#noplace").change(function () {
       $('#add-btn').removeClass('pulse')
   }
 });
+
 
 
 
@@ -215,11 +215,16 @@ $('#fileupload').fileupload({
   previewMaxHeight: 150,  // 미리보기 이미지 높이
   previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
-  processalways: function (e, data) {
+  processalways : function (e, data) {
+    if(data.files.length > 5){
+      if(data.files.length)
+      M.toast({ html: '사진 등록은 최대 5장까지 가능합니다.' })
+      return;
+    }
+    console.log(data);
     var imagesDiv = $('#images-div');
     imagesDiv.html("");
     for (var i = 0; i < data.files.length; i++) {
-
       try {
         if (data.files[i].preview.toDataURL) {
           if (i == 0) {
@@ -244,10 +249,6 @@ $('#fileupload').fileupload({
 
     $('#add-btn').off().click(function () {
 
-      if (!tlocation && !$("#noplace").is(":checked")) {
-        M.toast({ html: '만나는 장소를 지정하거나 등록하지 않음을 선택하세요.' })
-        return;
-      }
       var themeArray = new Array();
       $('input[name=theme]:checked').each(function () {
         Theme = new Object();
@@ -255,8 +256,11 @@ $('#fileupload').fileupload({
         Theme.theme = $(this).next().html();
         themeArray.push(Theme);
       });
-
-
+      
+      if($("input:checkbox[id='noplace']").is(":checked")){
+        tlocation = 0;
+      }
+      
       data.formData = {
         data: encodeURIComponent(JSON.stringify({
           title: $('#input-title').val(),
@@ -278,7 +282,7 @@ $('#fileupload').fileupload({
       })
     });
   },
-  done: function (e, data) { }
+  done: function (e, data) {}
 });
 
 
@@ -286,7 +290,7 @@ $('#fileupload').fileupload({
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 37.503157, lng: 127.024318 },
+    center: { lat: 0, lng: 0 },
     zoom: 13
   });
 
@@ -309,6 +313,7 @@ function initMap() {
     map: map,
     draggable: true,
     animation: google.maps.Animation.DROP,
+    position : { lat: 0, lng: 0 },
     anchorPoint: new google.maps.Point(0, -29)
   });
 
@@ -320,8 +325,7 @@ function initMap() {
       M.toast({ html: '올바른 장소를 다시 입력해주세요.' })
       return;
     }
-    console.log(place.geometry.location.lat);
-    console.log(place.geometry.location.lng);
+    tlocation = place.geometry.location.lat() + ',' + place.geometry.location.lng()
 
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
@@ -349,22 +353,18 @@ function initMap() {
 
 
   google.maps.event.addListener(marker, 'dragend', function (evt) {
-    window.tlocation = evt.latLng.lat().toFixed(3) + ',' + evt.latLng.lng().toFixed(3);
+    window.tlocation = evt.latLng.lat() + ',' + evt.latLng.lng();
     $('#add-btn').addClass('pulse');
-    /*
-     * document.getElementById('current').innerHTML = '<p>Marker dropped:
-     * Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' +
-     * evt.latLng.lng().toFixed(3) + '</p>';
-     */
+     document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+     
   });
 
   google.maps.event.addListener(marker, 'dragstart', function (evt) {
-    /*
-     * document.getElementById('current').innerHTML = '<p>Currently dragging
-     * marker...</p>';
-     */
+    
+     document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+    
   });
 }
 
-
+console.log(tlocation)
 

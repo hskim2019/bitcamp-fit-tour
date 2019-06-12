@@ -33,7 +33,12 @@ function tourList(tourNo) {
     $('#secondcrumb').html(obj.tour.country.countryName);
     $('#thirdcrumb').html(obj.tour.city.cityName);
     tlocation = obj.tour.location;
-    initMap(tlocation);
+    
+    console.log(tlocation);
+    if(tlocation != "0"){
+      initMap(tlocation);
+      $('#place-section').show();
+    }
 
     for(var i = 0; i < obj.tour.theme.length; i++){
       $('#themeDiv').append($('<div class="chip ml0 mr5">' + obj.tour.theme[i].theme + '</div>'));

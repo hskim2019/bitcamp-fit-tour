@@ -33,6 +33,23 @@ h4 {
   transform : translateY(-0.2em);
 }
 
+/* card title */
+.card .card-title {
+    bottom: 70% !important;
+    left: 80% !important;
+    color: #e57272 !important;
+}
+
+.card .card-title i{
+    font-weight: 600;
+    font-size: 27px;
+}
+
+.card-content {
+  min-height: 180px;
+}
+
+
 /* wish */
 .wish-title {
   font-size: 18px;

@@ -63,7 +63,7 @@ function addPersonnelOption(personnel, price) {
   }
   $('#personnel').change((e)=> {
     $('#price').html((price * $(e.target).val()).toLocaleString() +'원');
-    $('#perPrice').html('/' + $(e.target).val() + '인')
+    $('#perPrice').html(' / ' + $(e.target).val() + '인')
   });
   $('select').formSelect();
 }
@@ -92,7 +92,22 @@ function getTransportaionIcon(transportation) {
 //add click event reservation button
 $('#reservation-btn').click((e) => {
   e.preventDefault();
-  console.log(tourNo);
+  
+  if (!sessionStorage.getItem('loginUser')) {
+    location.href = '/bitcamp-fit-tour/html/auth/login.html'
+    return;
+  }
+  
+  if(!$('#tour-date').val()){
+    M.toast({ html: '날짜를 선택하세요.' })
+    return;
+  }
+  
+  if($('.selected').children().first().html() == "인원 선택"){
+    M.toast({ html: '인원을 선택하세요.' })
+    return;
+  }
+    
   var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
   var personnel = ($('.selected').children().first().html().replace(/[^0-9]/g,""));
   location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel

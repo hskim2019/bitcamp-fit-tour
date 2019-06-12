@@ -18,36 +18,36 @@ $(document).ready(function () {
   $('.next-swipe-2').click(function () {
     if ($('#continent option:selected').val() == "대륙을 선택하세요.") {
       $('#continent').trigger('click');
-      M.toast({ html: '여행 대륙을 선택하세요.' })
+      M.toast({ html: '여행 대륙을 선택하세요.' });
       return;
     }
 
     if ($('#country option:selected').val() == "국가를 선택하세요.") {
       $('#country').focus();
-      M.toast({ html: '여행 국가를 선택하세요.' })
+      M.toast({ html: '여행 국가를 선택하세요.' });
       return;
     }
 
     if ($('#city option:selected').val() == "도시를 선택하세요.") {
       $('#city').focus();
-      M.toast({ html: '여행 도시를 선택하세요.' })
+      M.toast({ html: '여행 도시를 선택하세요.' });
       return;
     }
 
     if (!$('#input-title').val()) {
       $('#input-title').focus();
-      M.toast({ html: '여행 제목을 입력하세요.' })
+      M.toast({ html: '여행 제목을 입력하세요.' });
       return;
     }
 
     if (!$('#input-subtitle').val()) {
       $('#input-subtitle').focus();
-      M.toast({ html: '여행 소제목을 입력하세요.' })
+      M.toast({ html: '여행 소제목을 입력하세요.' });
       return;
     }
 
     if (!$('input:checkbox[name=theme]').is(':checked')) {
-      M.toast({ html: '여행 테마를 선택하세요.' })
+      M.toast({ html: '여행 테마를 선택하세요.' });
       return;
     }
 
@@ -60,45 +60,31 @@ $(document).ready(function () {
 
     if (!$('#input-personnel').val()) {
       $('#input-personnel').focus();
-      M.toast({ html: '여행 최대인원수를 입력하세요..' })
+      M.toast({ html: '여행 최대인원수를 입력하세요..' });
       return;
     }
 
     if (!$('#input-price').val()) {
       $('#input-price').focus();
-      M.toast({ html: '여행 가격을 입력하세요.' })
+      M.toast({ html: '여행 가격을 입력하세요.' });
       return;
     }
 
     if (!$('#input-totalHour').val()) {
       $('#input-totalHour').focus();
-      M.toast({ html: '여행 총 소요 시간을 입력하세요.' })
+      M.toast({ html: '여행 총 소요 시간을 입력하세요.' });
       return;
     }
 
     if (!$('input:radio[name=transportaion]').is(':checked')) {
-      M.toast({ html: '이동수단을 선택하세요.' })
+      M.toast({ html: '이동수단을 선택하세요.' });
       return;
     }
 
     if (!fileNames) {
-      M.toast({ html: '여행 사진을  1개 이상 업로드 하세요.' })
+      M.toast({ html: '여행 사진을  1개 이상 업로드 하세요.' });
       return;
     }
-
-    if (fileNames) {
-      var fileNameArr = fileNames.split(',');
-      for (fileName of fileNameArr) {
-        var ext = fileName.split('.').pop().toLowerCase();
-        console.log(ext)
-        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-          M.toast({ html: '여행사진은 gif, png, jpg, jpeg 파일만 업로드 할수 있습니다.' })
-          return;
-        }
-      }
-
-    } 
-
 
     $('.tabs').tabs('select', 'swipe-3');
 
@@ -202,6 +188,12 @@ $('#country').change(function () {
 });
 
 // fileupload
+var cnt = 0;
+
+$('#fileupload').click(function() {
+  cnt = 0;
+});
+
 $('#fileupload').fileupload({
   url: '../../app/json/tour/add',        // 서버에 요청할 URL
   dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
@@ -216,9 +208,24 @@ $('#fileupload').fileupload({
   previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
   processalways : function (e, data) {
+    cnt++;
+    $('.card').remove();
+    var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+    for(file of data.originalFiles){
+      if (file['type'].length && !acceptFileTypes.test(file['type'])){
+        if (cnt == data.originalFiles.length){
+          $('.file-path').val('');
+          M.toast({ html: '여행사진은 gif, png, jpg, jpeg 파일만 업로드 할수 있습니다.' })
+        }
+        return;
+      }
+    }
+    
     if(data.files.length > 5){
-      if(data.files.length)
+      if (cnt == data.originalFiles.length){
       M.toast({ html: '사진 등록은 최대 5장까지 가능합니다.' })
+      $('.file-path').val('');
+      }
       return;
     }
     console.log(data);
@@ -235,7 +242,7 @@ $('#fileupload').fileupload({
         }
       } catch (err) { }
     }
-
+    
     $('#fileupload').prev().html('다시 업로드');
     $('.file-path').css('border-color', '#26a69a');
     $.each(data.files, function (index, file) {
@@ -365,6 +372,4 @@ function initMap() {
     
   });
 }
-
-console.log(tlocation)
 

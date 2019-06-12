@@ -79,40 +79,43 @@
       <div class="col l5">
 
         <!-- date -->
-        <div class="row mt20">
-          <div class="col l6 right">
+        <div class="row mt10">
+          <div class="col l5 right">
             <div class="input-field">
               <input type="text" id="tour-date" class="datepicker" placeholder="날짜 선택">
             </div>
           </div>
-          <div class="col l1 mt20 mr10 right">
+          <div class="col l1 mt30 mr5 right">
             <i class="far fa-calendar-alt"></i>
           </div>
         </div>
 
         <!-- personnel -->
         <div class="row mt20">
-          <div class="col l6 right">
+          <div class="col l5 right">
             <div class="input-field">
               <select id="personnel">
+              <option value="default">인원 선택</option>
               </select>
-              <label>인원 선택</label>
             </div>
           </div>
-          <div class="col l1 mr10 right">
+          <div class="col l1 mt30 mr8 right">
             <i class="fas fa-users">
             </i></div>
         </div>
 
 
         <!-- price -->
-        <div class="row mt20">
+        <div class="row mt20 mb30">
+          <div id="perPrice" class="col6 right mt5">
+          / 1인
+          </div>
           <div id="price" class="col6 right">
           </div>
         </div>
 
         <!-- transportation -->
-        <div class="row mt20">
+        <div class="row mt20 mb30">
           <div id="transportation" class="col3 right"></div>
           <div id="totalHour" class="col3 right mr30"></div>
         </div>

@@ -92,6 +92,7 @@ i[class="fas fa-won-sign"] {
 
 .dropdown-content {
   max-height : 200px !important;
+  top : 10px !important;
 }
 
 #wishlist-btn, #reservation-btn {
@@ -155,5 +156,6 @@ h5 {
 
 input::placeholder {
 	color : black !important;
+	transform:translate(0%, 0%);
 }
 

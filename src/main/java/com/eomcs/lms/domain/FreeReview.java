@@ -9,9 +9,26 @@ public class FreeReview {
 	private int reservationNo;
 	private String title;
 	private String content;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private int viewCount;
+	public int getViewCount() {
+    return viewCount;
+  }
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	  private Date createdDate;//여행일	
-	public int getNo() {
+	
+	private Member member;
+	
+	
+	public Member getMember() {
+    return member;
+  }
+  public void setMember(Member member) {
+    this.member = member;
+  }
+  public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
@@ -50,7 +67,8 @@ public class FreeReview {
   @Override
   public String toString() {
     return "FreeReview [no=" + no + ", memberNo=" + memberNo + ", reservationNo=" + reservationNo
-        + ", title=" + title + ", content=" + content + ", createdDate=" + createdDate + "]";
+        + ", title=" + title + ", content=" + content + ", viewCount=" + viewCount
+        + ", createdDate=" + createdDate + ", member=" + member + "]";
   }
 	
 	

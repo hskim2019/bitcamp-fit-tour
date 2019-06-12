@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>후기목록</title>
+ <!-- materialize -->
+<link rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
+  media="screen,projection" />
+<!-- fontawesome -->
+<link rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<!-- materizlize font -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- quill -->
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/quill/dist/quill.snow.css">
+<!-- google font -->
+<link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap"
+  rel="stylesheet">
+<!-- favicon -->
+<link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+<!-- fittour css -->
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="stylesheet" href="view.css">
+</head>
+
+<body>
+
+<header class="bit-main-header"></header>
+<div class="container">
+ <div class="row">
+      <blockquote>
+        <h3>여행 후기</h3>
+      </blockquote>
+      • 다녀온 여행후기<br>
+    </div>
+
+<table>
+  <tbody>
+   <tr>
+     <th class="center" id="titleTh">제목</th>
+     <td colspan="12" id="titleTd"></td>
+   </tr>
+   <tr>
+    <th class="center" id="nameTh">작성자</th>
+     <td id="nameTd"></td>
+     <th class="center" id="createdDateTh">작성일</th>
+     <td id="createdDateTd"></td>
+     <th class="center" id="countViewTh">조회수</th>
+     <td id="countViewTd"></td>
+   </tr>
+    <tr>
+     <th class="center" id="tourTh">투어</th>
+     <td colspan="12" id="tourTd"></td>
+   </tr>
+   <tr id="contentRow">
+    <td colspan="12" id="content"></td>
+   </tr>
+  </tbody>
+</table>
+
+    <div class="buttons">
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
+      <button type="button" id="update-btn" class="btn btn-primary bit-view-item">변경</button>
+      <a class="btn btn-primary" id="backToList" href='index.html'>목록</a> 
+    </div>
+
+
+</div><!-- .container -->
+<footer class="bit-main-footer page-footer grey"></footer>
+<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+
+<script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
+<script src="../header.js"></script>
+<script src="../footer.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
+
+ 
+
+
+
+

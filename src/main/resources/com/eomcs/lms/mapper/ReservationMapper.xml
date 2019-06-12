@@ -79,23 +79,9 @@ and r.status_id = s.status_id
 
   <select id="findByNo" resultMap="reservationMap" parameterType="int">
     select
-
-    r.reservation_id,
-    r.tour_id,
-    m.name,
-    s.status,
-    r.tour_date,
-    r.personnel,
-    r.tourist_tel,
-    r.requirement,
-    r.payment_id,
-    r.payment_date,
-    r.reservation_date
-    
-    
-  
+    *
    
-    from reservation r, payment_status s , member m
+    from reservation r, payment_status s, member m, tour t
     where
     r.reservation_id = #{value}
     and r.member_id = m.member_id

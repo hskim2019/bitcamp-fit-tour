@@ -41,13 +41,9 @@ $(document).ready(function(){
 (function loadList() {
   $.getJSON('../../app/json/reservation/myreservation',
        function (obj) {
-    if(obj.status){
+    if(obj.status == 'fail'){
       $('#selectOption').html('로그인 해주세요');
-      return;
-    }
-      
-    
-   if(obj.list.length == 0){
+    } else if(obj.list.length == 0){
      
      $('#selectOption').html('다녀온 투어가 없습니다');
    }else{

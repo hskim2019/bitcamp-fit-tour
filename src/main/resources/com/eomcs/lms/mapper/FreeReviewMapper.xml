@@ -14,20 +14,26 @@
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="created_date" property="createdDate" />
+  <result column="viewcount" property="viewCount" />
+
+<association property="member" javaType="member">
+    <id column="member_id" property="no" />
+    <result column="name" property="name" />
+ </association>
 
 	</resultMap>
  <insert id="insert" parameterType="freereview">
     insert into free_review(
     member_id,
     <if test="reservationNo != 0">reservation_id,</if>
-    
+    viewcount,
     title,
     content
    )
     values(
     #{memberNo},
      <if test="reservationNo != 0"> #{reservationNo},</if>
-   
+   0,
     #{title},
     #{content})
   </insert>
@@ -35,12 +41,7 @@
     delete from free_review 
     where free_review_id = #{no}
   </delete>
-<!--   <select id="findByNo" resultMap="noticeMap" parameterType="int">
-    select * from
-    free_review
-    where 
-      free_review_id = #{value}
-  </select> -->
+
   
   <update id="increaseCount" parameterType="int">
     update free_review
@@ -61,6 +62,18 @@
       </if>
     </where>
   </select>
+  
+<select id="findByNo" resultMap="freeReviewMap" parameterType="int">
+   select
+     *
+    from member m, free_review fv
+    where
+   fv.member_id = m.member_id
+    and  fv.free_review_id = #{no}
+  </select>
+
+
+
 
  <select id="findAll" resultMap="freeReviewMap" parameterType="map">
     select

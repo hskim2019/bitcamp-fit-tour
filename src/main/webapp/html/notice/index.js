@@ -5,6 +5,7 @@ var pageNo = 1,
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+var noticeNo;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
@@ -66,29 +67,90 @@ $(document.body).bind('notice-list', () => {
   // 제목을 클릭했을 때 view.html로 전환시키기
   $('.bit-view-link').click((e) => {
     e.preventDefault();
-    window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
+//    window.location.href = 'view.html?no=' + 
+//      $(e.target).attr('data-no');
+    
+        $('.notice').addClass('bit-invisible');
+        $('.faq').addClass('bit-invisible');
+       
+        $('.view').removeClass('bit-invisible');
+        noticeNo = $(e.target).attr('data-no');
+        loadData(noticeNo);
+        
   });
 });
 
 $('.collapsible-notice').click((e) => {
 	$('.collapsible-notice').addClass('checked');
 	$('.collapsible-faq').removeClass('checked');
+
 	$('.faq').addClass('bit-invisible');
+	$('.view').addClass('bit-invisible');
+
+
 	$('.notice').removeClass('bit-invisible');
 	noticeList(1);
+
+
 });
 
 $('.collapsible-faq').click((e) => {
 	$('.collapsible-faq').addClass('checked');
 	$('.collapsible-notice').removeClass('checked');
 	$('.notice').addClass('bit-invisible');
+
 	$('.faq').removeClass('bit-invisible');
 	FAQList('', 1);
+	
+	$('.view').addClass('bit-invisible');
+	
 });
 
 
 
+function loadData(noticeNo) {
+  $.getJSON('../../app/json/notice/detail?no=' + noticeNo, 
+      function(data) {
+    
+    $('#titleTd').html(data.title);
+    $('#createdDateTd').html(data.createdDate);
+    $('#countViewTd').html(data.viewCount);
+    $('#content').html(data.content);
+    
+    $(document.body).trigger('loaded-list');
+  });
+  
+};
+
+$('#delete-btn').click(() => {
+  $.getJSON('../../app/json/notice/delete?no=' + noticeNo, 
+      function(data) {
+
+    if(data.status == 'success') {
+      location.href = "index.html";  
+    } else {
+      alert('삭제 실패 입니다.\n' + data.message);
+    }
+  });
+});
 
 
+$(document.body).bind('loaded-list', () => {
+  $('#update-btn').click((e) => {
+    e.preventDefault();
+    window.location.href = 'add.html?no=' + noticeNo;
+  });
+});
+
+$(document.body).bind('loaded-list', () => {
+  $('#backToList').click((e) => {
+    e.preventDefault();
+    $('#titleTd').html('');
+    $('#createdDateTd').html('');
+    $('#countViewTd').html('');
+    $('#content').html('');
+    $('.view').addClass('bit-invisible');
+    $('.notice').removeClass('bit-invisible');
+  });
+});
 

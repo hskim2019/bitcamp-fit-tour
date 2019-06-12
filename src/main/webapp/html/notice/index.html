@@ -16,6 +16,7 @@
 <header class="bit-main-header"></header>
 
 <div class="container row">
+
    <div class="side col s3">
     <h2 class="titl">고객센터</h2>
     <ul class="collapsible">
@@ -27,7 +28,8 @@
     </li>
   </ul>
   </div>
-  
+
+<!-- 공지사항 리스트 -->
 <div class="notice col s9">
 <h2 class="notice-titl col s10">공지사항</h2>
 <p class="add-notice col s2"><a href='add.html' class="waves-effect waves-light btn-small">새 글</a></p>
@@ -52,6 +54,7 @@
   </ul>
 </div>
 
+<!-- 자주묻는질문  리스트 -->
 <div class="faq col s9 bit-invisible">
 <h2 class="faq-titl col s3">자주묻는질문</h2>
 
@@ -86,6 +89,35 @@
   
 </div>
 
+<!-- 공지사항 detail -->
+<div class="view col s9 bit-invisible">
+<h2 class="notice-titl col s10">공지사항</h2>
+<div id="DetailTable">
+<table>
+  <tbody>
+   <tr>
+     <th class="center" id="titleTh">제목</th>
+     <td colspan="4" id="titleTd"></td>
+   </tr>
+   <tr>
+     <th class="center" id="createdDateTh">작성일</th>
+     <td id="createdDateTd"></td>
+     <th class="center" id="countViewTh">조회수</th>
+     <td id="countViewTd"></td>
+   </tr>
+   <tr id="contentRow">
+    <td colspan="4" id="content"></td>
+   </tr>
+  </tbody>
+</table>
+ </div>
+    <div class="buttons">
+      <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
+      <button type="button" id="update-btn" class="btn btn-primary bit-view-item">수정</button>
+      <a class="btn btn-primary" id="backToList" href='index.html'>목록</a> 
+    </div>
+</div>
+
 
 </div><!-- .container -->
 
@@ -117,7 +149,6 @@
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../header.js"></script>
 <script src="index.js"></script>

@@ -1,16 +1,13 @@
 @charset "UTF-8";
 
-h2 {
+/* h2 {
 	padding: 0;
     color: #808080;
     font-size: 20px !important;
     font-weight: 700;
-    margin-top: 50px;
-}
+    margin-top: 120px;
+} */
 
-table {
-    border-top: 2px solid teal;
-}
 
 #titleTh, #createdDateTh, #countViewTh  {
 	width: 80px;
@@ -30,7 +27,7 @@ table {
 }
 
 .buttons {
-	margin: 20px 0px 20px 720px;
+	margin: 20px 0px 20px 450px;
 }
 
 #backToList {

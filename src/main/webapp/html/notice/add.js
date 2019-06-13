@@ -39,7 +39,7 @@ var quill = new Quill('#editor', {
 
 
 $('#add-btn').click((e) => {
-  if(!$('#input-title').val()) {
+  if(!$('#input-title').val() || $('#input-title').val().replace(/\s/g,"").length == 0) {
     $('#input-title').focus();
     $('.titleLabel').addClass('warning');
     M.toast({html: '제목을 입력 해 주세요'})
@@ -69,6 +69,17 @@ $('.ql-editor').click((e) => {
 });
 
 $('#update-btn').click(() => {
+  
+  if(!$('#input-title').val() || $('#input-title').val().replace(/\s/g,"").length == 0) {
+    $('#input-title').focus();
+    $('.titleLabel').addClass('warning');
+    M.toast({html: '제목을 입력 해 주세요'})
+  } else if($('.ql-editor').html() == '<p><br></p>') {
+    $('.ql-editor').focus();
+    M.toast({html: '내용을 입력 해 주세요'})
+  } 
+  
+  else {
   $.post('../../app/json/notice/update?no=' + noticeNo,
       {
       title: $('#input-title').val(),
@@ -81,7 +92,8 @@ $('#update-btn').click(() => {
       } else {
         alert('수정 실패 입니다.\n' + data.message);
       }
-      })
+      });
+  }
 });
 
 

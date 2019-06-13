@@ -8,6 +8,7 @@ h2 {
     color: #4a4a4a;
     margin-top: 120px;
     margin-bottom: 0px;
+    cursor : pointer;
 }
 
 .buttons {
@@ -29,14 +30,18 @@ h2 {
 }
 
 #toast-container {
-	left: 77%;
+/* 	left: 73%; */
 	top: 80%;
 }
 
-.toast {
-	width: 180px;
+/* .toast {
 	background-color: #ffccbc;
 	color: #514859;
 	font-size: 14px;
 	font-weight: 700;
+} */
+
+/*faq-add*/
+#faq-input-title {
+	margin-top: 20px;
 }

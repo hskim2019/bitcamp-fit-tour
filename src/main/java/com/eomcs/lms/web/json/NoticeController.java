@@ -23,20 +23,6 @@ public class NoticeController {
   
   @Autowired NoticeService noticeService;
   
-//  @PostMapping("add")
-//  public Object add(Notice notice) {
-//	  System.out.println(notice);
-//    HashMap<String,Object> content = new HashMap<>();
-//    try {
-//      noticeService.add(notice);
-//      content.put("status", "success");
-//    } catch (Exception e) {
-//      content.put("status", "fail");
-//      content.put("message", e.getMessage());
-//    }
-//    return content;
-//  }
-  
   @GetMapping("delete")
   public Object delete(int no) {
   
@@ -108,14 +94,7 @@ public class NoticeController {
 
 @PostMapping("add")
 public Object add(Notice notice) throws IOException, ServletException {
-//	Notice notice = new Notice();
-//	
-//	Collection<Part> parts = request.getParts();
-//	for(Part part : parts) {
-//	ObjectMapper mapper = new ObjectMapper();
-//	notice = mapper.readValue(URLDecoder.decode(request.getParameter(part.getName()), "UTF-8"), Notice.class);
-//	System.out.println(notice);
-//	}
+
   HashMap<String,Object> content = new HashMap<>();
   try {
     noticeService.add(notice);

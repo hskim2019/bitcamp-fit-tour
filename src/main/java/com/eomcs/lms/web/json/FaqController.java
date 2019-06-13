@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,36 +20,36 @@ public class FaqController {
   
   @Autowired FaqService faqService;
   
-//  @PostMapping("add")
-//  public Object add(Faq faq) {
-//	  System.out.println(faq);
-//    HashMap<String,Object> content = new HashMap<>();
-//    try {
-//      faqService.add(faq);
-//      content.put("status", "success");
-//    } catch (Exception e) {
-//      content.put("status", "fail");
-//      content.put("message", e.getMessage());
-//    }
-//    return content;
-//  }
+  @PostMapping("add")
+  public Object add(Faq faq) {
+	  System.out.println(faq);
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      faqService.add(faq);
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
   
-//  @GetMapping("delete")
-//  public Object delete(int no) {
-//  
-//    HashMap<String,Object> content = new HashMap<>();
-//    try {
-//      if (faqService.delete(no) == 0) 
-//        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-//      content.put("status", "success");
-//      
-//    } catch (Exception e) {
-//      content.put("status", "fail");
-//      content.put("message", e.getMessage());
-//    }
-//    return content;
-//  }
-//  
+  @GetMapping("delete")
+  public Object delete(int no) {
+  
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (faqService.delete(no) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
   @GetMapping("detail")
   public Object detail(int no) {
     Faq faq = faqService.get(no);
@@ -92,20 +93,20 @@ public class FaqController {
     return content;
   }
   
-//  @PostMapping("update")
-//  public Object update(Faq faq) {
-//    HashMap<String,Object> content = new HashMap<>();
-//    try {
-//      if (faqService.update(faq) == 0) 
-//        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
-//      content.put("status", "success");
-//      
-//    } catch (Exception e) {
-//      content.put("status", "fail");
-//      content.put("message", e.getMessage());
-//    }
-//    return content;
-//  }
+  @PostMapping("update")
+  public Object update(Faq faq) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (faqService.update(faq) == 0) 
+        throw new RuntimeException("해당 번호의 게시물이 없습니다.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 
 
 }

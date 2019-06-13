@@ -13,13 +13,13 @@ if(param) {
 var quill = new Quill('#editor', {
   modules: {
     toolbar: [
-      [{ 'font': [] }],
-      [{ 'size': ['small', false, 'large', 'huge'] }], 
+//      [{ 'font': [] }],
+//      [{ 'size': ['small', false, 'large', 'huge'] }], 
       ['bold', 'italic', 'underline'],
       [{ 'color': [] }, { 'background': [] }],  
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'indent': '-1' }, { 'indent': '+1' }],      
-      [{ 'align': [] }],
+//      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+//      [{ 'indent': '-1' }, { 'indent': '+1' }],      
+//      [{ 'align': [] }],
       ['image', 'link']
       ],imageResize: {}, 
   },
@@ -31,7 +31,10 @@ var quill = new Quill('#editor', {
 
 
 $('#add-btn').click((e) => {
-  if(!$('#input-title').val()) {
+  if($('#faq-categories option:selected').html() == '카테고리 선택') {
+    $('faq-categories option:selected').focus();
+    M.toast({html: '카테고리를 선택 해 주세요'})
+  } else if(!$('#input-title').val()) {
     $('#input-title').focus();
     $('.titleLabel').addClass('warning');
     M.toast({html: '제목을 입력 해 주세요'})
@@ -57,6 +60,7 @@ $('#add-btn').click((e) => {
   } 
 });
 
+
 $('.ql-editor').click((e) => {
   $('.titleLabel').removeClass('warning');
 });
@@ -71,7 +75,7 @@ $('#update-btn').click(() => {
       },
   function(data) {
         if(data.status == 'success') {
-        location.href = "index.html";  
+        location.href = "index.html?faq";  
       } else {
         alert('수정 실패 입니다.\n' + data.message);
       }
@@ -84,8 +88,13 @@ $('h2').click(() => {
 });
 
 function loadDate(faqNo) {
-  $.getJSON('../../app/json/notice/detail?no=' + faqNo,
+  $.getJSON('../../app/json/faq/detail?no=' + faqNo,
    function(data) {
+
+    $('option').each(function (index, item) {
+      if($(item).html() == data.category)
+        $(item).attr('selected', '');
+    });
     $('#input-title').val(data.title);
     $('.ql-editor').html(data.content);
   })

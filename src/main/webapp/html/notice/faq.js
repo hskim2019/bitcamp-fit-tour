@@ -6,6 +6,7 @@ var category = '',
     FAQnextPageLi = $('#nextPageFaq'),
     FAQcurrSpan = $('#FAQcurrSpan'),
     FAQtemplateSrc = $('#tr-template-faq').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+var faqNo;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var FAQtrGenerator = Handlebars.compile(FAQtemplateSrc);
@@ -58,7 +59,7 @@ $(document).ready(function(){
 
 $('#faq-categories').change(function () {
   category = $('#faq-categories option:selected').html();
- console.log($('#faq-categories option:selected').html());
+  console.log($('#faq-categories option:selected').html());
  if(category == '전체') {
    category = '';
    FAQList(category, 1);
@@ -81,25 +82,24 @@ $('.FAQnextpageLink').click((e) => {
 });
 
 
-
-// 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
-//$(document.body).bind('loaded-list', () => {
-//  // 제목을 클릭했을 때 view.html로 전환시키기
-//  $('.bit-view-link').click((e) => {
-//    e.preventDefault();
-//    window.location.href = 'view.html?no=' + 
-//      $(e.target).attr('data-no');
-//  });
-//});
-
 $(document.body).bind('FAQ-list', () => {
   $('.bit-faq-link').click((e) => {
     e.preventDefault();
+    faqNo = $(e.target).attr('faq-no');
     if($(e.target).attr('id') == 'fold') {
       $(e.target).attr('id', 'open');
-      $.getJSON('../../app/json/faq/detail?no=' + $(e.target).attr('faq-no'),
+      $.getJSON('../../app/json/faq/detail?no=' + faqNo /*$(e.target).attr('faq-no')*/,
           function(data2) {
-        $(e.target).parent().parent().after('<tr><td></td><td>' + data2.content + '</td></tr>');
+        $(e.target).parent().parent().after(
+            '<tr>' +
+            '<td class="center">' +
+            '<a href=\'#\' class="faq-update-btn" id=' + faqNo + '>[수정] </a>' + 
+            '<a href=\'#\' class="faq-delete-btn" id=' + faqNo + '>[삭제]</a>' + 
+            '</td>' +
+            '<td>' + data2.content + '</td>' +
+            '</tr>');
+        
+             $(document.body).trigger('loaded-faq-view');
       });
       
     } else {
@@ -110,8 +110,59 @@ $(document.body).bind('FAQ-list', () => {
   
 })
 
+$(document.body).bind('loaded-faq-view', () => {
+$('.faq-delete-btn').click((e) => {
+  e.preventDefault();
+  
+  Swal.fire({
+    title: '삭제하시겠습니까?',
+    text: "",
+    type: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonColor: '#3085d6',
+    cancelButtonText: '취소',
+    confirmButtonText: '확인'
+  }).then((result) => {
 
+    if (result.value) {
+      $.getJSON('../../app/json/faq/delete?no=' + faqNo, 
+          function(data) {
+        
+        if(data.status == 'success') {
+          Swal.fire(
+              '삭제완료!',
+              '해당 글을 삭제하였습니다.',
+              'success'
+            )
+            $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              location.href = "index.html";
+            });
+        } else {
+          //alert('삭제 실패 입니다.\n' + data.message);
+          Swal.fire({
+            type: 'error',
+            title: '삭제 실패 입니다',
+            text: data.message,
+          })
+           $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              location.href = "index.html";
+            });
+        }
+      });
 
+    }
+     })
+  });
+});
 
+$(document.body).bind('loaded-faq-view', () => {
+$('.faq-update-btn').click((e) => {
+  e.preventDefault();
+  window.location.href = 'faq-add.html?no=' + faqNo;
+ });
+});
 
 

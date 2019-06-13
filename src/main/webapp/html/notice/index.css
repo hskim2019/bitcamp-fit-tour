@@ -65,8 +65,10 @@
 }
 
 
+
 .checked {
-	background-color: #f7f5f8;
+/* 	background-color: #f7f5f8; */
+ 	background-color: #eee; 
 }
 
 table {

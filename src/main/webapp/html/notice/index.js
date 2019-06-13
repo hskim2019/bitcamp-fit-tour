@@ -1,3 +1,5 @@
+var param = location.href.split('?')[0];
+
 var pageNo = 1,
     pageSize = 3,
     tbody = $('.tbodyNotice'),
@@ -43,10 +45,12 @@ function noticeList(pn) {
       
       // 데이터 로딩이 완료되면 body 태그에 이벤트를 전송한다.
       $(document.body).trigger('notice-list');
-      
+      $(document.body).trigger('faq-ready');
     }); // Bitcamp.getJSON()
   
 } // noticeList()
+
+noticeList(1);
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
@@ -59,8 +63,6 @@ $('#nextPage > a').click((e) => {
 });
 
 
-//페이지를 출력한 후 1페이지 목록을 로딩한다.
-noticeList(1);
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('notice-list', () => {
@@ -90,23 +92,17 @@ $('.collapsible-notice').click((e) => {
 
 	$('.notice').removeClass('bit-invisible');
 	noticeList(1);
-
-
 });
 
 $('.collapsible-faq').click((e) => {
 	$('.collapsible-faq').addClass('checked');
 	$('.collapsible-notice').removeClass('checked');
 	$('.notice').addClass('bit-invisible');
-
 	$('.faq').removeClass('bit-invisible');
 	FAQList('', 1);
-	
 	$('.view').addClass('bit-invisible');
 	
 });
-
-
 
 function loadData(noticeNo) {
   $.getJSON('../../app/json/notice/detail?no=' + noticeNo, 
@@ -122,16 +118,51 @@ function loadData(noticeNo) {
   
 };
 
-$('#delete-btn').click(() => {
-  $.getJSON('../../app/json/notice/delete?no=' + noticeNo, 
-      function(data) {
+$('#delete-btn').click((e) => {
+  e.preventDefault();
+  
+  Swal.fire({
+    title: '게시글을 삭제하시겠습니까?',
+    text: "",
+    type: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonColor: '#3085d6',
+    cancelButtonText: '취소',
+    confirmButtonText: '확인'
+  }).then((result) => {
 
-    if(data.status == 'success') {
-      location.href = "index.html";  
-    } else {
-      alert('삭제 실패 입니다.\n' + data.message);
+    if (result.value) {
+      $.getJSON('../../app/json/notice/delete?no=' + noticeNo, 
+          function(data) {
+        
+        if(data.status == 'success') {
+          Swal.fire(
+              '삭제완료!',
+              '해당 글을 삭제하였습니다.',
+              'success'
+            )
+            $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              location.href = "index.html";
+            });
+        } else {
+          //alert('삭제 실패 입니다.\n' + data.message);
+          Swal.fire({
+            type: 'error',
+            title: '삭제 실패 입니다',
+            text: data.message,
+          })
+           $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              location.href = "index.html";
+            });
+        }
+      });
+
     }
-  });
+  })
+  
 });
 
 

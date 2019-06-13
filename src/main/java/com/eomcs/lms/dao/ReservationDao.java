@@ -1,4 +1,3 @@
-// 프록시 패턴 적용 - MemberDao에서 인터페이스를 추출한다.
 package com.eomcs.lms.dao;
 
 import java.util.List;
@@ -13,6 +12,7 @@ public interface ReservationDao {
   int update(Reservation reservation);
   int delete(int no);
   int countAll(String search);
+  List<Reservation> findByCompletedReservation(Map<String,Object> paramMap);
 }
 
 

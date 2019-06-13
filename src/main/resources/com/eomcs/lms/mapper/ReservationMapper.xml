@@ -26,6 +26,7 @@
  <association property="tour" javaType="tour">
     <id column="tour_id" property="no" />
     <result column="title" property="title" />
+    <result column="price" property="price" />
  </association>
 
   <association property="paymentStatus" javaType="paymentStatus">
@@ -74,13 +75,11 @@ and r.status_id = s.status_id
      r.tour_id = t.tour_id 
      and  
      r.member_id =  #{value}
-
   </select>
 
   <select id="findByNo" resultMap="reservationMap" parameterType="int">
     select
     *
-   
     from reservation r, payment_status s, member m, tour t
     where
     r.reservation_id = #{value}
@@ -89,9 +88,6 @@ and r.status_id = s.status_id
     and r.tour_id = t.tour_id 
     and r.member_id = m.member_id
   </select>
-
-
- 
 
   <insert id="insert" parameterType="reservation">
     insert into reservation(
@@ -143,6 +139,14 @@ and r.status_id = s.status_id
         or r.reservation_date like #{pattern1}
       </if>
     </where>
+  </select>
+  
+  <!-- find reservation by member no and completed reservation status -->
+  <select id="findByCompletedReservation" resultMap="reservationMap" parameterType="map">
+    select * from reservation as r 
+    join tour as t on r.tour_id = t.tour_id
+    join payment_status as p on p.status_id = r.status_id
+    where member_id = #{memberNo} and r.status_id = 1;
   </select>
 </mapper>
 

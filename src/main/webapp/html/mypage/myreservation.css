@@ -4,3 +4,32 @@ h4 {
 	margin-top: 48px;
 }
 
+/* badge */
+.badge {
+    color: white !important;
+    background-color: #e57272;
+    border-radius: 10px;
+    min-width: 14px !important;
+    line-height : normal !important;
+}
+
+/* collapsible */
+.checked {
+  background-color: #eee;
+}
+
+/* reservation */
+#payment-status {
+  color: #e57272;
+  font-size: 18px;
+} 
+
+#tour-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#reservation-info {
+  font-size: 16px;
+  color: #757575;
+}

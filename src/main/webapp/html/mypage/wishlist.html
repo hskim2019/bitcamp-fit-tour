@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
-  <title>FitTour - 내 정보</title>
+  <title>FitTour - 위시리스트</title>
   <!-- materialize -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
     media="screen,projection" />
@@ -50,7 +50,7 @@
 <script id="wish-template" type="text/x-handlebars-template">
 {{#each tours}}
     <div class="col l4 m6">
-      <div class="card" id="{{no}}">
+      <div class="card hoverable" id="{{no}}">
         <div class="card-image">
           <img src="/bitcamp-fit-tour/upload/tourphoto/{{tourPhoto}}">
           <span class="card-title"><i class="material-icons wish-status">favorite</i></span>

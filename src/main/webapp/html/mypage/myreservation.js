@@ -1,5 +1,5 @@
-var wishTemplateSrc = $('#wish-template').html(),
-  wishGenerator = Handlebars.compile(wishTemplateSrc);
+var reservationTemplateSrc = $('#reservation-template').html(),
+reservationGenerator = Handlebars.compile(reservationTemplateSrc);
 
 //load user
 $(document.body).bind('loadHeader', () => {
@@ -14,4 +14,33 @@ $(document.body).bind('loadHeader', () => {
   }
 });
 
+$('.collapsible-header').click(function(e){
+  $('.collapsible-header').removeClass('checked');
+  $(this).addClass('checked');
+  
+  if($(this).hasClass('ready-tour')){
+    $('.rightside').hide();
+    $('#ready-tour-section').show();
+  }
+  
+  if($(this).hasClass('old-tour')){
+    $('.rightside').hide();
+    $('#old-tour-section').show();
+  }
+  
+  if($(this).hasClass('canceled-tour')){
+    $('.rightside').hide();
+    $('#canceled-tour-section').show();
+  }
+});
 
+$.getJSON('../../app/json/reservation/completedreservation',
+    function(obj){
+  for(reservation of obj.reservations){
+    reservation.tour.price = (reservation.personnel * reservation.tour.price).toLocaleString();
+    /*reservation.member.name*/
+  }
+  console.log(obj);
+  
+  $(reservationGenerator(obj)).appendTo($('#ready-tour-section'));
+});

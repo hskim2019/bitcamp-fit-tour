@@ -2,6 +2,7 @@ package com.eomcs.lms.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.ReservationDao;
 import com.eomcs.lms.domain.Reservation;
@@ -63,6 +64,11 @@ public class ReservationServiceImpl implements ReservationService {
   public List<Reservation> getMyReservation(int no) {
     // TODO Auto-generated method stub
     return reservationDao.myReservation(no);
+  }
+
+  @Override
+  public List<Reservation> findByCompletedReservation(Map<String, Object> paramMap) {
+    return reservationDao.findByCompletedReservation(paramMap);
   }
 }
 

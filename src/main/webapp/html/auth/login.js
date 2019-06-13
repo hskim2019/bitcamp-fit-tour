@@ -69,11 +69,10 @@ var naverLogin = new naver.LoginWithNaverId(
   /* 설정정보를 초기화하고 연동을 준비 */
 naverLogin.init();
 $('#naverIdLogin_loginButton').find('img').attr('src','/bitcamp-fit-tour/images/naver.png');
+$('#naverIdLogin_loginButton').find('img').addClass('naver-img');
 $('#naverIdLogin_loginButton').addClass('waves-effect waves-dark btn');
-$('#naverIdLogin_loginButton').html($('#naverIdLogin_loginButton').html() +'네이버 로그인');
-$('#naverIdLogin_loginButton').css('background-color','#1ec800')
-$('#naverIdLogin_loginButton').css('width','280');
-$('#naverIdLogin_loginButton').css('height','35');
+$('#naverIdLogin_loginButton').html($('#naverIdLogin_loginButton').html() + '<span class="naver">네이버 로그인</span>');
+
 function getUserInfo(accessToken) {
   // 자바스크립트에서 페이스북에 서비스를 요청할 때는 
   // accessToken을 따로 지정하지 않아도 된다.

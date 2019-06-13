@@ -62,7 +62,26 @@ cursor:pointer
   cursor:pointer
 }
 
+#naverIdLogin_loginButton {
+  background-color: rgb(30, 200, 0);
+  width: 280px;
+  height: 35px;
+  padding-left: 0px;
+  border: 1px solid #13af00;
+  text-align: start;
+}
 
-border: 1px solid ;
+.naver-img {
+  border: 1px solid #13af00;
+  border-radius: 2px;
+}
+
+.naver {
+  padding-left: 80px;
+  position: absolute;
+}
+}
+
+
 
 

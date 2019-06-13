@@ -212,7 +212,7 @@ $('#fileupload').fileupload({
     $('.card').remove();
     var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
     for(file of data.originalFiles){
-      if (file['type'].length && !acceptFileTypes.test(file['type'])){
+      if (!acceptFileTypes.test(file['type'])){
         if (cnt == data.originalFiles.length){
           $('.file-path').val('');
           M.toast({ html: '여행사진은 gif, png, jpg, jpeg 파일만 업로드 할수 있습니다.' })

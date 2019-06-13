@@ -96,11 +96,11 @@ function someFunction(destroyFeedback) {
 
 $('#pay').click(() => {
 
-   
+  var payType = $('input[name="payType"]:checked').val();
     
     IMP.request_pay({
       pg : 'html5_inicis',
-      pay_method : 'card', 
+      pay_method : payType, 
       merchant_uid :'merchant_' + new Date().getTime(),
       name : $("h6").text(), amount : 1000,
     buyer_email : $('#email').val(),

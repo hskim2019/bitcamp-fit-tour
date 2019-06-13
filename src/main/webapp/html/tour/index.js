@@ -45,7 +45,8 @@ var instance = M.Collapsible.init(elem, {
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby) {
   $.get('../../app/json/tour/list',
     //  ?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby + '&test=' + test, 
-   {
+    // ?pageNo=1&pageSize=3&continentName=&countryName=&cityName=&minPrice=0&maxPrice=300000&minHour=1&maxHour=12&orderby=tourDesc
+      {
     pageNo : pn,
     pageSize : pageSize,
     continentName : continentName,
@@ -56,7 +57,8 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
     minHour : minHour,
     maxHour : maxHour,
     theme : theme,
-    orderby : orderby
+    orderby : orderby,
+    //ctn : ''
    },
   
       function(obj) {

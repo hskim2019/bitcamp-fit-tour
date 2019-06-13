@@ -34,7 +34,7 @@ $('#add-btn').click((e) => {
   if($('#faq-categories option:selected').html() == '카테고리 선택') {
     $('faq-categories option:selected').focus();
     M.toast({html: '카테고리를 선택 해 주세요'})
-  } else if(!$('#input-title').val()) {
+  } else if(!$('#input-title').val() || $('#input-title').val().replace(/\s/g,"").length == 0) {
     $('#input-title').focus();
     $('.titleLabel').addClass('warning');
     M.toast({html: '제목을 입력 해 주세요'})
@@ -66,6 +66,16 @@ $('.ql-editor').click((e) => {
 });
 
 $('#update-btn').click(() => {
+  
+  if(!$('#input-title').val() || $('#input-title').val().replace(/\s/g,"").length == 0) {
+    $('#input-title').focus();
+    $('.titleLabel').addClass('warning');
+    M.toast({html: '제목을 입력 해 주세요'})
+  } else if($('.ql-editor').html() == '<p><br></p>') {
+    $('.ql-editor').focus();
+    M.toast({html: '내용을 입력 해 주세요'})
+  } 
+  
   $.post('../../app/json/faq/update?no=' + faqNo,
       {
       category: $('#faq-categories option:selected').html(),

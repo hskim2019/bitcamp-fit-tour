@@ -31,43 +31,45 @@
 
 
 <div class="bit-list">
-<table class="table table-hover">
+<table>
 <thead>
   <tr> 
-    <th scope="col">후기번호</th>
-    <th scope="col">이름</th>
-    <th scope="col">예약번호</th>
-    <th scope="col">제목</th>
-    <th scope="col">글쓴날짜</th>
+    <th class="center" scope="col">순번</th>
+    <th class="center" scope="col">이름</th>
+    <th class="center" scope="col">예약번호</th>
+    <th class="center" scope="col">제목</th>
+    <th class="center" scope="col">글쓴날짜</th>
   </tr>
 </thead>
 <tbody></tbody>
 </table>
 </div><!-- .bit-list -->
 
-
+<div class="center">
   <ul class="pagination justify-content-center">
     <li id="prevPage" class="waves-effect">
       <a class="page-link" 
         href="?pageNo=0&pageSize=3">이전</a></li>
-    <li id="currPage" class="waves-effect active"><span class="">1</span></li>
+    <li id="currPage" class="waves-effect active"><a class="page-link" >1</a></li>
     <li id="nextPage" class="waves-effect ">
       <a class="page-link" 
          href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
-
+  </div>
+<div class="buttons">
 <p><a href='add.html' class="btn btn-primary btn-sm">새 글</a></p>
+ </div>
 </div><!-- .container -->
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td>{{reservationNo}}</td>
-  <td>{{memberNo}}</td>
-  <td>{{createdDate}}</td>
+  <th class="center" scope='row'>{{no}}</th>
+  <td class="center" ><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td class="center">{{reservationNo}}</td>
+  <td class="center">{{memberNo}}</td>
+  <td class="center">{{createdDate}}</td>
 </tr>
 {{/each}}
 </script>

@@ -3,7 +3,7 @@ var pageNo = 1,
     tbody = $('tbody'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
-    currSpan = $('#currPage > span'),
+    currSpan = $('#currPage > a'),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.

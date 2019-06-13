@@ -1,0 +1,19 @@
+table {
+    border-top: 2px solid teal;
+}
+
+
+thead{
+  width: 80px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #f7f5f8;
+}
+
+#content {
+  padding: 25px;
+}
+
+.buttons {
+  margin: 20px 0px 20px 900px;
+}

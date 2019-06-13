@@ -128,7 +128,7 @@ public class ReservationController {
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
-      content.put("message", loginUser.getNo());
+      content.put("message", e.getMessage());
     }
     return content;
   }

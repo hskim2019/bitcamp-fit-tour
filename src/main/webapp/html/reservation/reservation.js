@@ -134,19 +134,20 @@ $('#pay').click(() => {
 
 
 function addReservation(rsp){
+  var payType = $('input[name="payType"]:checked').val();
   $.post('../../app/json/reservation/reservation', {
-      
+   
       tourNo: tourNo,
       statusNo: 4,
       tourDate: tourYear+'-'+tourMonth+'-'+tourDay,
       personnel: selectPersonnel,
       touristTel: $('#tel').val(),
       requirement: $('#requirement').val(),
-      paymentNo: rsp.imp_uid
+      paymentNo: rsp.imp_uid+','+rsp.receipt_url+','+payType
+      
   },
- 
+
   function(data) {
-    
     if(data.status == 'success') {
       M.toast({html: '예약 성공 입니다',displayLength: '10000'}) 
       

@@ -37,9 +37,8 @@ $('.collapsible-header').click(function(e){
 $.getJSON('../../app/json/reservation/completedreservation',
     function(obj){
   for(reservation of obj.reservations){
-    console.log(reservation.tour.price);
-    console.log(reservation.personnel);
     reservation.tour.price = (reservation.personnel * reservation.tour.price).toLocaleString();
+    /*reservation.member.name*/
   }
   console.log(obj);
   

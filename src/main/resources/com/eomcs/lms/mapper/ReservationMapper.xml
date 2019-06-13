@@ -86,7 +86,8 @@ and r.status_id = s.status_id
     r.reservation_id = #{value}
     and r.member_id = m.member_id
     and r.status_id = s.status_id
-
+    and r.tour_id = t.tour_id 
+    and r.member_id = m.member_id
   </select>
 
 

@@ -61,6 +61,7 @@ $(document).ready(function(){
 
 
 $('#add-btn').click(function () {
+  
 
   if (!$('#title').val()) {
     $('#title').focus();
@@ -73,6 +74,7 @@ $('#add-btn').click(function () {
     return;
     
   }else{
+    $('#add-btn').attr('disabled','disabled');
     $.post('../../app/json/freereview/add', {
       
       reservationNo: $('#reservation').val(),
@@ -85,8 +87,11 @@ $('#add-btn').click(function () {
         location.href = "index.html";  
       } else {
         alert('등록 실패 입니다.\n' + data.message);
+        location.href = "index.html"; 
       }
     });
     
     }
 });
+
+

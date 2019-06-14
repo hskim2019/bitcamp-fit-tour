@@ -13,16 +13,6 @@ var trGenerator = Handlebars.compile(templateSrc);
 
 
 
-$(document.body).bind('loaded-list', () => {
-  // 제목을 클릭했을 때 view.html로 전환시키기
-  $('.bit-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
-  });
-});
-
-
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
   

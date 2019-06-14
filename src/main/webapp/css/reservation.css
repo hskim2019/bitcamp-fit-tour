@@ -1,15 +1,6 @@
 @charset "UTF-8";
 
-/* 회원가입버튼 가운데정렬 */
-h3 {
-  padding: 4% 2% 2%;
-  margin: auto;
-}
 
-h6 {
-  padding: 4% 2% 2%;
-  margin: auto;
-}
 div{
  /*  border: solid red 2px; */
 }
@@ -20,7 +11,7 @@ div{
   position    : relative; 
 }
 ul.stepper.horizontal {
-   min-height: 650px;
+   min-height: 720px;
 }
 
 .dropdown-content {
@@ -34,4 +25,19 @@ ul.stepper.horizontal {
 #sc{
       padding-bottom: 30px;
   
+}
+
+
+#radio{
+margin-bottom: 40px;
+}
+
+.redioBtn{
+}
+
+.stepper linear horizontal{
+
+  overflow-y: hidden; overflow-x: hidden;
+
+
 }

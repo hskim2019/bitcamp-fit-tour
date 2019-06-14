@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>예약</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link type="text/css" rel="stylesheet"
   href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
   media="screen,projection" />
@@ -22,9 +23,13 @@
   <div class="container">
 
     <div id="title" class="row">
+ <div class="row">
+      <blockquote>
+        <h3>여행 후기</h3>
+      </blockquote>
+      • 예약 정보를 정확히 입력해주세요<br>
+    </div>
 
-      <h3></h3>
-      <h6></h6>
       <div class="col s12">
 
         <form>
@@ -104,32 +109,32 @@
                   </div>
                   <div class="col s12 m8 l8">
 
- <div class="row">
+ <div id="radio" class="row">
        <div class="input-field col s10 ">
-    <p>
-      <label>
+  <div class="input-field col s5 ">
+      <label class="redioBtn">
         <input value="card" class="with-gap" name="payType" type="radio" checked />
         <span>신용카드</span>
       </label>
-    </p>
-    <p>
-      <label>
+   </div>
+   <div class="input-field col s5 ">
+      <label class="redioBtn">
         <input value="trans" class="with-gap" name="payType" type="radio" />
         <span>실시간계좌이체</span>
       </label>
-    </p>
-    <p>
-      <label>
+    </div>
+  <div class="input-field col s5 ">
+      <label class="redioBtn">
         <input value="vbank" class="with-gap" name="payType" type="radio"  />
         <span>가상계좌</span>
       </label>
-    </p>
-  <p>
-      <label>
+    </div>
+     <div class="input-field col s5 ">
+      <label class="redioBtn">
         <input value="phone" class="with-gap" name="payType" type="radio"  />
         <span>휴대폰소액결제</span>
       </label>
-    </p>
+   </div>
        </div>
      </div>
 

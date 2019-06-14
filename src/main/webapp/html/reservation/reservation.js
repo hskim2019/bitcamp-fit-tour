@@ -3,7 +3,7 @@ tourNo = param.split('=')[1].split('&')[0],
 tourDate = param.split('=')[2].split('&')[0],
 tourYear = (tourDate/10000).toString().split('.')[0],
 tourMonth = ((tourDate/100).toString().split('.')[0]/100).toString().split('.')[1],
-tourDay = (tourDate/100).toString().split('.')[1],
+tourDay = (tourDate/100).toString().split('.')[1]+1,
 selectPersonnel = param.split('=')[3];
 var IMP = window.IMP; // 생략가능결제
 IMP.init('imp12065647'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용

@@ -29,12 +29,16 @@ table {
 #update-btn{
   display: none;
     float: right;
+    margin-left:10px; 
 }
 #backToList{
    float: right;
+   margin-left:10px;
 }
 #delete-btn{
  display: none;
+   float: right;
+   margin-left:10px;
 }
 
 #content {

@@ -1,10 +1,27 @@
 var param = location.href.split('?')[1],
     reviewNo = param.split('=')[1];
+var user = JSON.parse(sessionStorage.getItem('loginUser'))
 //$('#delete-btn').show();
 loadData(reviewNo);
+
+function loadbtn(no){
+  if(user!=null){
+    if(user.no==no){
+      $('#delete-btn').show();
+      $('#update-btn').show();
+    }
+  }
+  
+}
 function loadData(no) {
+  
+ 
+  
   $.getJSON('../../app/json/freereview/detail?no=' + reviewNo, 
       function(data) {
+    
+     loadbtn(data.memberNo)
+    
     $('#titleTd').html(data.title);
     $('#nameTd').html(data.member.name);
     $('#createdDateTd').html(data.createdDate);
@@ -19,6 +36,7 @@ function loadData(no) {
     
    
   });
+  
 };
 
 $('#delete-btn').click(() => {

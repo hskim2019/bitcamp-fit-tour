@@ -10,8 +10,7 @@ h4{
 
 
 #login-btn{
-  height:40px;
-      width: 291.33px;
+      width: 100%;
   
 }
 #facebook-btn{
@@ -32,14 +31,7 @@ h4{
 
 
 img{
-  height:40px
-}
-
-
-#kakao-btn{
-   background-color: #ffeb01;
-  width: 100%;
-  margin-bottom: 5px;
+  height:36px
 }
 
 .row{
@@ -64,33 +56,40 @@ cursor:pointer
 }
 
 #naverIdLogin_loginButton {
-  background-color: rgb(30, 200, 0);
-  width: 291.34px;
-  height: 40px;
+  background-color: #1ec800;
+  width: 289.84px;
+  height: 36px;
   padding-left: 0px;
   border: 1px solid #13af00;
   text-align: start;
+  margin-bottom: 10px;
 }
 
 .naver-img {
   border: 1px solid #13af00;
   border-radius: 2px;
 }
-
+.facebook-img{
+  border: 1px solid #2f4679;
+  border-radius: 2px;
+}
 .naver {
   padding-left: 80px;
   position: absolute;
 }
-
-#spinner{
-   background: #4267b2;
-        border-radius: 5px;
-        color: white;
-        height: 40px;
-        text-align: center;
-        width: 291.34px;
-        margin-top: 10px;
+.facebook {
+  padding-left: 73px;
+  position: absolute;
 }
 
+#facebook-btn{
+  background-color: #3b5999;
+  width: 289.84px;
+  height: 36px;
+  padding-left: 0px;
+  border: 1px solid #2f4679;
+  text-align: start;
+  margin-bottom: 10px;
+}
 
 

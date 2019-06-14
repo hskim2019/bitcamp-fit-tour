@@ -116,7 +116,6 @@ FB.init({
 });
 
 FB.AppEvents.logPageView();
-FB.Event.subscribe('xfbml.render', finished_rendering);
 };
 
 (function(d, s, id) {
@@ -135,4 +134,11 @@ var finished_rendering = function() {
   spinner.removeChild(spinner.childNodes[0]);
 }
 
-
+$('#facebook-btn').click(() => {
+  FB.login((response) => {
+    if (response.authResponse) {
+      //user just authorized your app
+      checkLoginState();
+    }
+  }, {scope: 'email,public_profile', return_scopes: true});
+})

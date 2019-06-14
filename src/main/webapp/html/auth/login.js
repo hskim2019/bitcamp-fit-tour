@@ -60,7 +60,7 @@ $('#find-password').click(() => {
 var naverLogin = new naver.LoginWithNaverId(
     {
       clientId: "g1zszuM3r0V5AW37KxIg",
-      callbackUrl: "http://localhost:8080/bitcamp-fit-tour/html/auth/callback.html",
+      callbackUrl: "http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/html/auth/callback.html",
       isPopup: false, /* 팝업을 통한 연동처리 여부 */
       loginButton: {color: "green", type: 3, height: 40} /* 로그인 버튼의 타입을 지정 */
     }

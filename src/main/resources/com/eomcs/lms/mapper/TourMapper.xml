@@ -114,24 +114,22 @@
 
 	<!-- find Tour All -->
 	<select id="findAll" resultMap="tourMap" parameterType="map">
-		select distinct
-		t.tour_id, t.title, t.sub_heading, t.content,
-		t.created_date, t.total_hour,
-		t.hash_tag, t.personnel,
-		t.transportation, t.price, t.city_id,
-		t.location,
-		ci.city_id,
-		ci.city_name, co.country_id, co.country_name, co.continent
-		<if test="ctn != null"> , count(mtw.member_id) as cnt </if>
-		from tour as t
-		join city as ci on t.city_id = ci.city_id
-		join country as co on
-		ci.country_id = co.country_id
-		join tour_theme as toth on t.tour_id =
-		toth.tour_id
+        select distinct
+          t.tour_id, t.title, t.sub_heading, t.content,
+          t.created_date, t.total_hour,
+          t.hash_tag, t.personnel,
+          t.transportation, t.price, t.city_id,
+          t.location,
+          ci.city_id, ci.city_name, 
+          co.country_id, co.country_name, co.continent
+		<if test="wishlistDesc != null"> , count(member_id) as cnt </if>
+        from tour as t
+        join city as ci on t.city_id = ci.city_id
+        join country as co on
+        ci.country_id = co.country_id
+        join tour_theme as toth on t.tour_id =toth.tour_id
 		join theme as th on toth.theme_id = th.theme_id
-		<if test="ctn != null"> join member_tour_wishlist as mtw on t.tour_id = mtw.tour_id </if>
-		
+		<if test="wishlistDesc != null"> left outer join member_tour_wishlist as mtw on t.tour_id = mtw.tour_id </if>
 		<where>
 			<if test="continentName != null">or continent = #{continentName}</if>
 			<if test="countryName != null">and country_name = #{countryName}</if>
@@ -139,7 +137,7 @@
 			<if test="minPrice != null">and price between #{minPrice} and #{maxPrice}</if>
 			<if test="minHour != null">and total_hour between #{minHour} and #{maxHour}</if>
 			<if test="theme !=null">
-				and th.theme in
+			     and th.theme in
 				<foreach collection="theme" item="theme" separator=","
 					open="(" close=")">#{theme}</foreach>
 			</if>
@@ -147,7 +145,7 @@
 		<if test="priceAsc != null"> order by price asc</if>
 		<if test="priceDesc != null"> order by price desc</if>
 		<if test="tourDesc != null"> order by tour_id desc</if>
-		<if test="ctn != null"> group by tour_id order by ctn desc</if>
+		<if test="wishlistDesc != null"> group by t.tour_id order by cnt desc</if>
 		<if test="size != null and rowNo != null">
 			limit #{rowNo}, #{size}
 		</if>

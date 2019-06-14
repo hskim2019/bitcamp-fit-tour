@@ -97,9 +97,9 @@ $('#update-btn').click(() => {
 });
 
 
-$('h2').click(() => {
-  location.href = "index.html";
-});
+//$('h2').click(() => {
+//  location.href = "index.html";
+//});
 
 function loadDate(noticeNo) {
   $.getJSON('../../app/json/notice/detail?no=' + noticeNo,

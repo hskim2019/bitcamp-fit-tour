@@ -44,7 +44,6 @@ var instance = M.Collapsible.init(elem, {
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby) {
   $.get('../../app/json/tour/list',
-    //  ?pageNo=' + pn + '&pageSize=' + pageSize + '&continentName=' + continentName + '&countryName=' + countryName + '&cityName=' + cityName + '&minPrice=' + minPrice + '&maxPrice=' + maxPrice +'&orderby=' + orderby + '&test=' + test, 
     // ?pageNo=1&pageSize=3&continentName=&countryName=&cityName=&minPrice=0&maxPrice=300000&minHour=1&maxHour=12&orderby=tourDesc
       {
     pageNo : pn,
@@ -57,8 +56,7 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
     minHour : minHour,
     maxHour : maxHour,
     theme : theme,
-    orderby : orderby,
-    //ctn : ''
+    orderby : orderby
    },
   
       function(obj) {
@@ -143,12 +141,13 @@ $('#orderbyPrice').click((e) => {
   $(e.target).addClass('selected');
 });
 
-$('#orderbyLikes').click((e) => {
+$('#orderbyWishList').click((e) => {
   e.preventDefault();
-  orderby = 'likesDesc';
+  orderby = 'wishlistDesc';
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   initOptionSelected();
   $(e.target).addClass('selected');
-  alert('준비중');
+  //alert('준비중');
 });
 
 $('#orderbyReviews').click((e) => {
@@ -334,7 +333,7 @@ function showBreadCrumb(continentName, countryName, cityName) {
 
 function initOptionSelected() {
   $('#orderbyPrice').removeClass('selected');
-  $('#orderbyLikes').removeClass('selected');
+  $('#orderbyWishList').removeClass('selected');
   $('#orderbyReviews').removeClass('selected');
   theme = [];
   $("input[type=checkbox]").prop("checked",false);

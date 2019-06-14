@@ -56,6 +56,7 @@ public class TourServiceImpl implements TourService {
     case "priceAsc" : params.put("priceAsc", orderby); break;
     case "priceDesc" : params.put("priceDesc", orderby); break;
     case "tourDesc" : params.put("tourDesc", orderby); break;
+    case "wishlistDesc" : params.put("wishlistDesc", orderby); break;
     }
     
     

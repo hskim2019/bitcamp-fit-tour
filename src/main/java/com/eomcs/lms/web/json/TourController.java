@@ -60,7 +60,7 @@ public class TourController {
       defaultValue="자전거 투어, 야경 투어, 맛집 투어, 로컬 투어, 워킹 투어, 버스 투어, 반나절 투어, 종일 투어")List<String> theme,
       String orderby,
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize) {
+      @RequestParam(defaultValue="5") int pageSize) {
 
     String searchContinentName = null;
     String searchCountryName = null;
@@ -87,8 +87,8 @@ public class TourController {
       maxPrice = currMaxPrice;
     }
 
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
+    if (pageSize < 5 || pageSize > 8) 
+      pageSize = 5;
 
     List<Tour> list = tourService.search(
         searchContinentName, searchCountryName, searchCityName, 

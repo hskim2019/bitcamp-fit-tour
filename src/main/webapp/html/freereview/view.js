@@ -30,9 +30,10 @@ function loadData(no) {
     $.getJSON('../../app/json/reservation/detail?no=' + data.reservationNo,
             function(obj) {
       
-      $('#tourTd').html(obj.tour.title);
+      $('#tourAtag').html(obj.tour.title);
+      $('#tourAtag').attr('data-no',obj.tour.no)
     });
-    
+    $(document.body).trigger('loaded-list');
     
    
   });
@@ -51,4 +52,12 @@ $('#delete-btn').click(() => {
   });
 });
 
+$(document.body).bind('loaded-list', () => {
+  // 제목을 클릭했을 때 view.html로 전환시키기
+  $('.bit-view-link').click((e) => {
+    e.preventDefault();
+    window.location.href = '../tour/view.html?no=' + 
+      $(e.target).attr('data-no');
+  });
+});
 

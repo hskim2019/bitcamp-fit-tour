@@ -142,6 +142,7 @@ function addReservation(rsp){
       tourDate: tourYear+'-'+tourMonth+'-'+tourDay,
       personnel: selectPersonnel,
       touristTel: $('#tel').val(),
+      buyerName: $('#name').val(),
       requirement: $('#requirement').val(),
       paymentNo: rsp.imp_uid+','+rsp.receipt_url+','+payType
       

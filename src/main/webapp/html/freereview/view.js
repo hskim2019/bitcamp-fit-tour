@@ -1,7 +1,6 @@
 var param = location.href.split('?')[1],
     reviewNo = param.split('=')[1];
-
-
+//$('#delete-btn').show();
 loadData(reviewNo);
 function loadData(no) {
   $.getJSON('../../app/json/freereview/detail?no=' + reviewNo, 
@@ -18,7 +17,7 @@ function loadData(no) {
     });
     
     
-    $(document.body).trigger('loaded-list');
+   
   });
 };
 
@@ -34,10 +33,4 @@ $('#delete-btn').click(() => {
   });
 });
 
-$(document.body).bind('loaded-list', () => {
-  $('#update-btn').click((e) => {
-    e.preventDefault();
-    window.location.href = 'add.html?no=' + noticeNo;
-  });
-});
 

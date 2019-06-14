@@ -18,7 +18,7 @@
         <result column="status_id" property="statusNo" />
          <result column="member_id" property="memberNo" />
          <result column="tour_id" property="tourNo" />
-         
+         <result column="buyer_name" property="buyerName" />
          
    
   
@@ -98,7 +98,8 @@ and r.status_id = s.status_id
    personnel,
    tourist_tel,
    requirement,
-   payment_id)
+   payment_id,
+    buyer_name)
     values(
     #{tourNo},
     #{memberNo},
@@ -107,7 +108,8 @@ and r.status_id = s.status_id
     #{personnel},
     #{touristTel},
     #{requirement},
-    #{paymentNo})
+    #{paymentNo},
+     #{buyerName})
   </insert>
 
   <update id="update" parameterType="reservation">

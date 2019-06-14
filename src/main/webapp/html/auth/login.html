@@ -40,11 +40,19 @@
                   
     
      <div id="naverIdLogin"></div>
-      <div id="naverIdLogin">
-   <fb:login-button  scope="public_profile,email" 
-                 onlogin="checkLoginState();">
-</fb:login-button>
-    </div>
+
+  <div id="spinner">
+    페이스북으로 로그인
+    <div class="fb-login-button"
+    data-max-rows="1"
+    data-size="large"
+      data-width="40px"
+    data-button-type="continue_with"
+    data-use-continue-as="false"
+    ></div>
+</div>
+  
+  
               </div>
               <div class="row">
                 <div class="input-field col s12">

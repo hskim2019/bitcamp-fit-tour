@@ -73,6 +73,8 @@ $('#naverIdLogin_loginButton').find('img').addClass('naver-img');
 $('#naverIdLogin_loginButton').addClass('waves-effect waves-dark btn');
 $('#naverIdLogin_loginButton').html($('#naverIdLogin_loginButton').html() + '<span class="naver">네이버 로그인</span>');
 
+
+
 function getUserInfo(accessToken) {
   // 자바스크립트에서 페이스북에 서비스를 요청할 때는 
   // accessToken을 따로 지정하지 않아도 된다.
@@ -112,15 +114,25 @@ FB.init({
   xfbml      : true,  
   version    : 'v3.3' 
 });
+
 FB.AppEvents.logPageView();
+FB.Event.subscribe('xfbml.render', finished_rendering);
 };
 
 (function(d, s, id) {
 var js, fjs = d.getElementsByTagName(s)[0];
 if (d.getElementById(id)) return;
 js = d.createElement(s); js.id = id;
-js.src = "https://connect.facebook.net/en_US/sdk.js";
+js.src = "https://connect.facebook.net/ko_KR/sdk.js";
 fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+
+
+var finished_rendering = function() {
+  console.log("finished rendering plugins");
+  var spinner = document.getElementById("spinner");
+  spinner.removeAttribute("style");
+  spinner.removeChild(spinner.childNodes[0]);
+}
 
 

@@ -79,14 +79,16 @@
     select
    *
     from
-    free_review
+    free_review f, member m
     <where>
+      f.member_id = m.member_id
       <if test="search != null">
         <bind name="pattern1" value="'%' + search + '%'" />
-        name like #{pattern1}
+         and name like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>
+      
     </where>
     order by
     created_date desc

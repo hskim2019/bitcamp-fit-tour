@@ -16,6 +16,8 @@ public class Reservation implements Cloneable, Serializable {
   private String touristTel;//예약자 연락처
   private String requirement;//요청사항
   private String paymentNo;//결제번호
+  private String buyerName; // 예약자번호
+
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date paymentDate;//결제일
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
@@ -23,6 +25,13 @@ public class Reservation implements Cloneable, Serializable {
   private PaymentStatus paymentStatus;
   private Member member;
   private Tour tour;
+  
+  public String getBuyerName() {
+    return buyerName;
+  }
+  public void setBuyerName(String buyerName) {
+    this.buyerName = buyerName;
+  }
   public Tour getTour() {
     return tour;
   }
@@ -111,8 +120,8 @@ public class Reservation implements Cloneable, Serializable {
   public String toString() {
     return "Reservation [no=" + no + ", tourNo=" + tourNo + ", memberNo=" + memberNo + ", statusNo="
         + statusNo + ", tourDate=" + tourDate + ", personnel=" + personnel + ", touristTel="
-        + touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo
-        + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
+        + touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo + ", buyerName="
+        + buyerName + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
         + ", paymentStatus=" + paymentStatus + ", member=" + member + ", tour=" + tour + "]";
   }
 

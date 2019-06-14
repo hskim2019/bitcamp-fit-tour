@@ -18,20 +18,34 @@ table {
 #tourTh,#nameTh,#titleTh, #createdDateTh, #countViewTh  {
 	width: 80px;
 	font-size: 14px;
-	font-weight: 600;
 	background-color: #f7f5f8;
 }
 
 #tourTd,#nameTd, #createdDateTd, #countViewTd {
 	font-size: 14px;
 	padding:15px;
+	
+}
+#update-btn{
+  display: none;
+    float: right;
+}
+#backToList{
+   float: right;
+}
+#delete-btn{
+ display: none;
 }
 
-
 #content {
-	padding: 25px;
 }
 
 .buttons {
-	margin: 20px 0px 20px 800px;
+}
+.review{
+  min-height: 487px
+  
+}
+.noe{
+  min-height: 50px
 }

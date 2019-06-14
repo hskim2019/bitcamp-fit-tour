@@ -15,5 +15,28 @@ thead{
 }
 
 .buttons {
-  margin: 20px 0px 20px 900px;
+   float: right;
 }
+
+.review{
+  min-height: 540px
+  
+}
+.reviewNo{
+  width: 150px
+  
+}
+
+.reviewName{
+  width: 250px
+  
+}
+.reviewTitle{
+  width: 400px;
+  text-align: left;
+  
+}
+
+
+.noe{
+  min-height: 50px

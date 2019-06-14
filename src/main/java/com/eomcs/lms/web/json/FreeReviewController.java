@@ -40,10 +40,10 @@ public class FreeReviewController {
 
   @GetMapping("list")
   public Object list(@RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "3") int pageSize, String search) {
+      @RequestParam(defaultValue = "7") int pageSize, String search) {
 
     if (pageSize < 3 || pageSize > 8)
-      pageSize = 3;
+      pageSize = 7;
 
     int rowCount = freeReviewService.size(search);
     int totalPage = rowCount / pageSize;

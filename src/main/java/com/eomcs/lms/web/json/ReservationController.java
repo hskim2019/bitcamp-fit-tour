@@ -125,11 +125,12 @@ public class ReservationController {
     try {
       
       reservationService.add(reservation);
-      content.put("status", "success");
+      
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
     }
+    content.put("status", "success");
     return content;
   }
   @PostMapping("test")

@@ -22,6 +22,7 @@
 
  <header class="bit-main-header"></header>
 <div class="container">
+<div class="review">
  <div class="row">
       <blockquote>
         <h3>여행 후기</h3>
@@ -35,41 +36,44 @@
 <thead>
   <tr> 
     <th class="center" scope="col">순번</th>
-    <th class="center" scope="col">이름</th>
-    <th class="center" scope="col">예약번호</th>
     <th class="center" scope="col">제목</th>
-    <th class="center" scope="col">글쓴날짜</th>
+    <th class="center" scope="col">작성자</th>
+    <th class="center" scope="col">등록일</th>
+    <th class="center" scope="col">조회수</th>
   </tr>
 </thead>
 <tbody></tbody>
 </table>
 </div><!-- .bit-list -->
-
+</div>
 <div class="center">
+
   <ul class="pagination justify-content-center">
     <li id="prevPage" class="waves-effect">
       <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
+        href="?pageNo=0&pageSize=7">이전</a></li>
     <li id="currPage" class="waves-effect active"><a class="page-link" >1</a></li>
     <li id="nextPage" class="waves-effect ">
       <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
+         href="?pageNo=2&pageSize=7">다음</a></li>
   </ul>
   </div>
+  
 <div class="buttons">
-<p><a href='add.html' class="btn btn-primary btn-sm">새 글</a></p>
+<a href='add.html' class="btn btn-primary btn-sm">새 글</a>
  </div>
+ 
 </div><!-- .container -->
-
+<div class="noe"></div>
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <th class="center" scope='row'>{{no}}</th>
-  <td class="center" ><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
-  <td class="center">{{reservationNo}}</td>
-  <td class="center">{{memberNo}}</td>
+  <th class="center reviewNo" scope='row'>{{no}}</th>
+  <td class="center reviewTitle" ><a class='bit-view-link' href='#' data-no='{{no}}'>{{title}}</a></td>
+  <td class="center reviewName">{{member.name}}</td>
   <td class="center">{{createdDate}}</td>
+  <td class="center">{{viewCount}}</td>
 </tr>
 {{/each}}
 </script>

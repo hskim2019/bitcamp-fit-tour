@@ -4,7 +4,7 @@ var token = location.href.split('#')[1].split('=')[1].split('&')[0]
 var naverLogin = new naver.LoginWithNaverId(
 {
   clientId: "g1zszuM3r0V5AW37KxIg",
-  callbackUrl: "http://localhost:8080/bitcamp-fit-tour/html/auth/callback.html",
+  callbackUrl: "http://team1.bitcamp.co.kr:8080/bitcamp-fit-tour/html/auth/callback.html",
   isPopup: false,
   callbackHandle: true
 });

@@ -26,7 +26,7 @@
   <!-- navbar header -->
   <header class="bit-main-header"></header>
   <!-- container -->
-  <div class="container">
+  <div class="container min-height">
   
     <div class="row">
       <blockquote>
@@ -44,7 +44,7 @@
           </li>
           <li>
             <div class="collapsible-header old-tour">지난 여행
-            <span class="badge ml10 p0">0</span>
+            <span id="old-tour-amount" class="badge ml10 p0"></span>
             <i class="material-icons col s1 offset-11">chevron_right</i></div>
           </li>
           <li>
@@ -59,9 +59,6 @@
     </div>
     
     <div id="old-tour-section" class="col s9 rightside bit-invisible">
-      <div class="card-panel">
-       지난 여행
-      </div>
     </div>
       
     <div id="canceled-tour-section" class="col s9 rightside bit-invisible">

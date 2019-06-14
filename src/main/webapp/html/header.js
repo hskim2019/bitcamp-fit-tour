@@ -1,13 +1,9 @@
-//ready
-$(document).ready(function(){
-    var sideNav = $('.sidenav').sidenav({
-    });
-});
 
 //load header
 (function () {
   $('.bit-main-header').load('/bitcamp-fit-tour/html/header.html', function(){
     $(document.body).trigger('loaded.header');
+    $('.sidenav').sidenav({});
   });
 })();
 
@@ -36,6 +32,16 @@ function loadLoginUser() {
       var loginStateTags = $('.bit-login-state');
       for(loginStateTag of loginStateTags){
         $(loginStateTag).removeClass('bit-invisible');
+      }
+      
+      console.log(data.user.loginType.no);
+      
+      if(data.user.rank == 1){
+        $('.user-status').removeClass('bit-invisible');
+      }
+      
+      if(data.user.rank == 2){
+        $('.manager-status').removeClass('bit-invisible');
       }
       
       //set login user name

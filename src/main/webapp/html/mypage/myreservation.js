@@ -14,6 +14,7 @@ $(document.body).bind('loadHeader', () => {
   }
 });
 
+//collapsible click controll
 $('.collapsible-header').click(function(e){
   $('.collapsible-header').removeClass('checked');
   $(this).addClass('checked');
@@ -34,6 +35,7 @@ $('.collapsible-header').click(function(e){
   }
 });
 
+//ready tour list
 $.getJSON('../../app/json/reservation/completedreservation',
     function(obj){
   for(reservation of obj.reservations){
@@ -41,7 +43,7 @@ $.getJSON('../../app/json/reservation/completedreservation',
     reservation.reciptUrl = reservation.paymentNo.split(',')[1];
     var paymentMethod = getPaymentMethod(reservation.paymentNo.split(',')[2]);
     reservation.paymentMethod = paymentMethod;
-    reservation.buyerName = reservation.buyerName + '외' + reservation.personnel + '명';
+    reservation.buyerName = reservation.buyerName + ' 외' + reservation.personnel + '명';
   }
   console.log(obj);
   
@@ -54,7 +56,30 @@ $.getJSON('../../app/json/reservation/completedreservation',
   $('.tour-title').click(function(){
     location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).parent().parent().attr('id'); 
   })
+});
+
+//old tour list
+$.getJSON('../../app/json/reservation/oldreservation',
+    function(obj){
+  for(reservation of obj.reservations){
+    reservation.paymentStatus.status = '여행완료';
+    reservation.tour.price = (reservation.personnel * reservation.tour.price).toLocaleString();
+    reservation.reciptUrl = reservation.paymentNo.split(',')[1];
+    var paymentMethod = getPaymentMethod(reservation.paymentNo.split(',')[2]);
+    reservation.paymentMethod = paymentMethod;
+    reservation.buyerName = reservation.buyerName + ' 외' + reservation.personnel + '명';
+  }
+  console.log(obj);
   
+  $(reservationGenerator(obj)).appendTo($('#old-tour-section'));
+  
+  // add ready tour amount
+  $('#old-tour-amount').html(obj.amount);
+  
+  //add click event tour title
+  $('.tour-title').click(function(){
+    location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).parent().parent().attr('id'); 
+  })
 });
 
 

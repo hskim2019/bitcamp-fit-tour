@@ -64,4 +64,11 @@ nav ul a {
 	background: #eee;
 }
 
+#login-user-name {
+	cursor: pointer;
+}
 
+i {
+	font-size: 20px !important;
+}
+ 

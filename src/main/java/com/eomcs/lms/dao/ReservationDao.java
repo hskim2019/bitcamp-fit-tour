@@ -13,6 +13,7 @@ public interface ReservationDao {
   int delete(int no);
   int countAll(String search);
   List<Reservation> findByCompletedReservation(Map<String,Object> paramMap);
+  List<Reservation> findByOldReservation(Map<String,Object> paramMap);
 }
 
 

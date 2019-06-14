@@ -18,7 +18,7 @@ public class Reservation implements Cloneable, Serializable {
   private String paymentNo;//결제번호
   private String buyerName; // 예약자번호
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-ddz")
   private Date paymentDate;//결제일
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date reservationDate;//예약일

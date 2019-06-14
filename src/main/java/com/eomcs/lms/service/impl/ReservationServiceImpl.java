@@ -70,6 +70,11 @@ public class ReservationServiceImpl implements ReservationService {
   public List<Reservation> findByCompletedReservation(Map<String, Object> paramMap) {
     return reservationDao.findByCompletedReservation(paramMap);
   }
+  
+  @Override
+  public List<Reservation> findByOldReservation(Map<String, Object> paramMap) {
+    return reservationDao.findByOldReservation(paramMap);
+  }
 }
 
 

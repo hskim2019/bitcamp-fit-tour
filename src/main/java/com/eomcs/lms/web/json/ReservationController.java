@@ -168,6 +168,35 @@ public class ReservationController {
    paramMap.put("memberNo", loginUser.getNo());
    try {
      List<Reservation> reservations = reservationService.findByCompletedReservation(paramMap);
+     
+     content.put("status", "success");
+     content.put("reservations", reservations);
+     content.put("amount", reservations.size());
+   } catch (Exception e) {
+     content.put("status", "fail");
+     content.put("message", e.getMessage());
+   }
+   return content;
+ }
+ 
+ // find reservation by member no and completed reservation status
+ @GetMapping("oldreservation")
+ public Object oldReservation(HttpSession session) throws Exception {
+   
+   Member loginUser = (Member) session.getAttribute("loginUser");
+   HashMap<String,Object> content = new HashMap<>();
+   HashMap<String,Object> paramMap = new HashMap<>();
+   
+   if(session.getAttribute("loginUser") == null) {
+     content.put("status", "notlogin");
+     return content;
+   }
+   
+   paramMap.put("memberNo", loginUser.getNo());
+   try {
+
+     List<Reservation> reservations = reservationService.findByOldReservation(paramMap);
+     
      content.put("status", "success");
      content.put("reservations", reservations);
      content.put("amount", reservations.size());

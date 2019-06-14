@@ -10,7 +10,7 @@ h4 {
     background-color: #e57272;
     border-radius: 10px;
     min-width: 14px !important;
-    line-height : normal !important;
+    line-height : 21px !important;
 }
 
 /* collapsible */
@@ -19,17 +19,24 @@ h4 {
 }
 
 /* reservation */
-#payment-status {
+.payment-status {
   color: #e57272;
   font-size: 18px;
 } 
 
-#tour-title {
+.tour-title {
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
 }
 
-#reservation-info {
+.reservation-info {
   font-size: 16px;
   color: #757575;
+}
+
+.recipt {
+  display: initial;
+  padding: 5px 10px;
+  margin-left: 8px;
 }

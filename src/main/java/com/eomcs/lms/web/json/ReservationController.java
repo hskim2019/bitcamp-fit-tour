@@ -170,6 +170,7 @@ public class ReservationController {
      List<Reservation> reservations = reservationService.findByCompletedReservation(paramMap);
      content.put("status", "success");
      content.put("reservations", reservations);
+     content.put("amount", reservations.size());
    } catch (Exception e) {
      content.put("status", "fail");
      content.put("message", e.getMessage());

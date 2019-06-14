@@ -11,7 +11,7 @@ div{
   position    : relative; 
 }
 ul.stepper.horizontal {
-   min-height: 720px;
+   min-height: 750px;
 }
 
 .dropdown-content {

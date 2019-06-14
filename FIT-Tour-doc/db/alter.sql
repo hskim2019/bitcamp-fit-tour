@@ -8,11 +8,11 @@ alter table tour add location varchar(255);
 
 --/리뷰 6월 10일쯤 추가
 alter table free_review modify content MEDIUMTEXT;
-ALTER TABLE free_review ADD viewcount int(11) NOT NULL
+ALTER TABLE free_review ADD viewcount int(11) NOT NULL;
 
 
 --/예약 6월 13일 추가
-alter table reservation modify payment_id  varchar(255)
+alter table reservation modify payment_id  varchar(255);
 
 --/예약 6월 14일 추가
-ALTER TABLE reservation ADD buyer_name varchar(30) NOT NULL
+ALTER TABLE reservation ADD buyer_name varchar(30) NOT NULL;

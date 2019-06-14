@@ -147,15 +147,14 @@ $('#orderbyWishList').click((e) => {
   loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   initOptionSelected();
   $(e.target).addClass('selected');
-  //alert('준비중');
 });
 
 $('#orderbyReviews').click((e) => {
   e.preventDefault();
   orderby = 'reviewDesc';
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
   initOptionSelected();
   $(e.target).addClass('selected');
-  alert('준비중');
 });
 
 $( ".collapsible" ).mouseup(function() {

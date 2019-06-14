@@ -123,6 +123,7 @@
           ci.city_id, ci.city_name, 
           co.country_id, co.country_name, co.continent
 		<if test="wishlistDesc != null"> , count(member_id) as cnt </if>
+		<if test="reviewDesc != null"> , count(fr.reservation_id) as cnt</if>
         from tour as t
         join city as ci on t.city_id = ci.city_id
         join country as co on
@@ -130,6 +131,9 @@
         join tour_theme as toth on t.tour_id =toth.tour_id
 		join theme as th on toth.theme_id = th.theme_id
 		<if test="wishlistDesc != null"> left outer join member_tour_wishlist as mtw on t.tour_id = mtw.tour_id </if>
+		<if test="reviewDesc != null"> 
+		left outer join reservation as r on t.tour_id = r.tour_id
+		left outer join free_review as fr on r.reservation_id = fr.reservation_id </if>
 		<where>
 			<if test="continentName != null">or continent = #{continentName}</if>
 			<if test="countryName != null">and country_name = #{countryName}</if>
@@ -146,6 +150,7 @@
 		<if test="priceDesc != null"> order by price desc</if>
 		<if test="tourDesc != null"> order by tour_id desc</if>
 		<if test="wishlistDesc != null"> group by t.tour_id order by cnt desc</if>
+		<if test="reviewDesc != null"> group by t.tour_id order by cnt desc</if>
 		<if test="size != null and rowNo != null">
 			limit #{rowNo}, #{size}
 		</if>

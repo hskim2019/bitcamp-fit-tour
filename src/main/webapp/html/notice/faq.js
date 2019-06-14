@@ -93,8 +93,8 @@ $(document.body).bind('FAQ-list', () => {
         $(e.target).parent().parent().after(
             '<tr>' +
             '<td class="center">' +
-            '<a href=\'#\' class="faq-update-btn" id=' + faqNo + '>[수정] </a>' + 
-            '<a href=\'#\' class="faq-delete-btn" id=' + faqNo + '>[삭제]</a>' + 
+            '<a href=\'#\' class="faq-update-btn" id=' + faqNo + '>수정 </a>' + 
+            '<a href=\'#\' class="faq-delete-btn" id=' + faqNo + '>/ 삭제</a>' + 
             '</td>' +
             '<td>' + data2.content + '</td>' +
             '</tr>');

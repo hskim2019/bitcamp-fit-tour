@@ -1,7 +1,14 @@
-var param = location.href.split('?')[0];
+if(sessionStorage.getItem('loginUser')) {
+  var user = JSON.parse(sessionStorage.getItem('loginUser'));
+  if(user.rank == 2) {
+    $('.add-notice').removeClass('bit-invisible');
+    $('.add-faq').removeClass('bit-invisible');
+  }
+}
+
 
 var pageNo = 1,
-    pageSize = 5,
+    pageSize = 3,
     tbody = $('.tbodyNotice'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),

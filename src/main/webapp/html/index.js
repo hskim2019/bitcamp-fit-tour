@@ -3,19 +3,19 @@ $(document).ready(function(){
 });
 
 var header = $('#main');
-var range = 200;
+var range = 500;
 
 $(window).on('scroll', function () {
   
   var scrollTop = $(this).scrollTop(),
       height = header.outerHeight(),
       offset = height / 1.1,
-      calc = 0.7 - (scrollTop - offset + range) / range;
+      calc = 0.9 - (scrollTop - offset + range) / range;
       console.log(calc);
   header.css({ 'opacity': calc });
 
-  if (calc > '0.7') {
-    header.css({ 'opacity': 0.7 });
+  if (calc > '0.9') {
+    header.css({ 'opacity': 0.9 });
   } else if ( calc < '0' ) {
     header.css({ 'opacity': 0 });
   }
@@ -23,9 +23,14 @@ $(window).on('scroll', function () {
 });
 
 
-
-
-
+$(document).ready(function(){
+  $('.slider').slider({
+    indicators: false,
+    height: 500,
+    transition: 500,
+    interval: 5000
+  });
+});
 
 
 

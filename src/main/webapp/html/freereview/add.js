@@ -95,3 +95,5 @@ $('#add-btn').click(function () {
 });
 
 
+
+$('#raty').raty();

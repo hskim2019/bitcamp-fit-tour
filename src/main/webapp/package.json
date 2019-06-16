@@ -20,7 +20,8 @@
     "materialize-stepper": "^3.0.1",
     "popper.js": "^1.15.0",
     "quill": "^1.3.6",
-    "quill-image-resize": "^3.0.9"
+    "quill-image-resize": "^3.0.9",
+    "raty-js": "^2.9.0"
   },
   "description": "",
   "devDependencies": {

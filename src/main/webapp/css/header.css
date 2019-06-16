@@ -13,19 +13,19 @@ input[type="search"] {
   box-shadow: 0 10px 20px rgba(0,0,0,0.03) !important;
 }
 
-input[type="search"]::placeholder {
+li > input[type="search"]::placeholder {
   color: white !important;
   font-weight: 200 !important;
 }
-input[type="search"]:focus::placeholder {
+li > input[type="search"]:focus::placeholder {
   color: rgba(59, 61, 77, 0.63) !important;
 }
 
-input[type="search"]:hover {
+li > input[type="search"]:hover {
   background: rgba(255, 255, 255, .27) !important;
 }
 
-input[type="search"]:focus {
+li > input[type="search"]:focus {
   color: #3a3c4c !important;
   background: #fff !important;
 }
@@ -104,7 +104,7 @@ i {
 	font-size: 20px !important;
 }
 
-#login-btn {
+#header-login-btn {
   border: white 2px solid;
   border-radius: 17px;
   padding: 7px 7px;

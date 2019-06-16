@@ -121,7 +121,23 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
 getMaxPrice();
-loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+if(location.href.split('?')[1]){
+  console.log(location.href.split('?')[1].split('=')[1]);
+  var cityName = location.href.split('?')[1].split('=')[1];
+  console.log(cityName)
+  if(cityName == 'rome'){
+    showBreadCrumb('유럽', '이탈리아', '로마');
+    continentName = '유럽',
+    countryName = '이탈리아',
+    window.cityName= '로마';
+    orderby = 'tourDesc';
+    /*initOptionSelected();*/
+    loadList(1, '유럽', '이탈리아', '로마', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  }
+  
+} else{
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+}
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
@@ -410,3 +426,6 @@ function initOptionSelected() {
     $.ajaxSetup({async:true});
     } 
   };
+  
+
+

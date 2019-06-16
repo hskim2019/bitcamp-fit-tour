@@ -18,82 +18,135 @@
   <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
   <!-- fittour -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css"> 
+  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="stylesheet" href="index.css">
   <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
 </head>
 
 <body>
 
-<!-- navbar header -->
-<header class="bit-main-header"></header>
-<div id='nav-bg'></div>
-
-<!--Section: Slider-->
-<div id="main" class="slider">
+  <!-- navbar header -->
+  <header class="bit-main-header"></header>
+  <div id='nav-bg'></div>
+  <!--Section: Slider-->
+  <div id="main" class="slider">
     <ul class="slides">
       <li>
         <img src="/bitcamp-fit-tour/images/main1.jpg">
         <div class="caption center-align">
-          <h2>Take Your Dream Vacation</h2>
-          <h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint accusamus vitae</h5>
+          <h2></h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only"></h5>
         </div>
       </li>
       <li>
         <img src="/bitcamp-fit-tour/images/main2.jpg">
         <div class="caption center-align">
-          <h2>Take Your Dream Vacation</h2>
-          <h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint accusamus vitae</h5>
+          <h2></h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only"></h5>
         </div>
       </li>
       <li>
         <img src="/bitcamp-fit-tour/images/main3.jpg">
         <div class="caption left-align">
-          <h2>We Work With All Buggets</h2>
-          <h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio repudiandae neque enim</h5>
+          <h2></h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only"></h5>
         </div>
       </li>
       <li>
         <img src="/bitcamp-fit-tour/images/main4.jpg">
         <div class="caption right-align">
-          <h2>Group Individual Getaways</h2>
-          <h5 class="light grey-text text-lighten-3 hide-on-small-only">Lorem ipsum dolor sit amet consectetur adipisicing elit</h5>
+          <h2></h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only"></h5>
         </div>
       </li>
     </ul>
-</div>
-
-<!-- img header -->
-<!-- <div id="main" class="white-text">
-  <h1>어디로 떠나세요?</h1>
-  <div class="container">
-  
   </div>
-</div> -->
+
+    <!-- container -->
+    <div class="container" style="min-height : 800px; width: 1300px">
+      <div class="row mt50">
+        <!-- popuer h -->
+        <h5 class="populer-header mb20"><span class="teal-text">인기</span> 여행지</h5>
+        <div class="carousel">
+        
+        <!-- carousel next preve button -->
+        <div class="carousel-fixed-item valign-wrapper mt120">
+        <a onclick="$('.carousel').carousel('prev');" style="margin-right: auto;" class="identifier left left-align btn black hoverable waves-effect"><i class="material-icons">navigate_before</i></a>
+        <a onclick="$('.carousel').carousel('next');" style="margin-left: auto;" class="identifier right right-align btn black hoverable waves-effect"><i class="material-icons">navigate_next</i></a>
+        </div>
+        
+        <!-- rome -->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/rome.jpg">
+            <span class="card-title">로마</span>
+          </div>
+        </div>
+        
+        <!-- london -->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/london.jpg">
+            <span class="card-title">런던</span>
+          </div>
+        </div>
+        
+        <!--paris-->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/paris.jpg">
+            <span class="card-title">파리</span>
+          </div>
+        </div>
+        
+        <!-- tokyo -->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/tokyo.jpg">
+            <span class="card-title">도쿄</span>
+          </div>
+        </div>
+        
+        <!-- barcelona -->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/barcelona.jpg">
+            <span class="card-title">바르셀로나</span>
+          </div>
+        </div>
+        
+        <!-- barcelona -->
+        <div class="card carousel-item">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/world.jpg">
+            <span class="card-title">전체 여행지</span>
+          </div>
+        </div>
+        
+        
+        </div>
+      </div>
+    </div>
 
 
-<section id='about'>
-  <div class='container'>
-  </div> 
-</section>
 
 
-<!-- footer -->
-<footer class="bit-main-footer page-footer grey"></footer>
-  
-  
-<!----- script ----->
-<!-- jquery -->
-<script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
-<!-- materialize -->
-<script type="text/javascript"
-  src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<!-- fittour -->
-<script src="/bitcamp-fit-tour/html/header.js"></script>
-<script src="/bitcamp-fit-tour/html/footer.js"></script>
-<script src="index.js"></script>
+  <!-- footer -->
+  <footer class="bit-main-footer page-footer grey"></footer>
+
+
+  <!----- script ----->
+  <!-- jquery -->
+  <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <!-- materialize -->
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <!-- fittour -->
+  <script src="/bitcamp-fit-tour/html/header.js"></script>
+  <script src="/bitcamp-fit-tour/html/footer.js"></script>
+  <script src="index.js"></script>
 </body>
 
 </html>

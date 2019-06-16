@@ -9,26 +9,57 @@ nav {
 
 /* img header */
 #main {
-  opacity: 0.9;
+  opacity: 1.0;
 }
-
-/* #main h1 {
-    font-size: 2em;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight:800;
-    padding-top: 10vh;
-} */
 
 /* body */
 body {
   background: #eee;
 }
 
-#about {
-  background: #eee;
-  height: 70em;
-  padding: 5em 0;
+/* identifier */
+.identifier{
+    opacity: 0.7;
+    width: auto;
 }
 
+.identifier:hover{
+    opacity: 1;
+    color: whitesmoke;
+    text-indent: 0.5%;
+}
+
+.populer {
+  width: 380px !important;
+  display: block !important;
+  height: 300px !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* carousel */
+.carousel-item {
+  width: 380px !important;
+  margin-left: 18px;
+}
+
+.card-image > img{
+  height: 270px;
+  
+}
+
+.populer-header {
+  font-weight: 700;
+  margin-left: 18px;
+}
+
+.card-title{
+    color: #fafafa !important;
+    background-image: linear-gradient(400deg,rgba(0, 0, 0, 0.54) 8%,hsla(0,0%,100%,0) 40%) !important;
+    width: 380px !important;
+    height: 270px !important;
+    padding-top: 210px !important;
+    font-size: 22px !important;
+}
 

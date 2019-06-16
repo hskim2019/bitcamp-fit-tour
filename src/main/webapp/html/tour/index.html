@@ -8,11 +8,11 @@
     href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
   <!-- range -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <!-- fontawesome --> 
+  <!-- fontawesome -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
-<!-- google font --> 
+  <!-- google font -->
   <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
-  <!-- materizlize font --> 
+  <!-- materizlize font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
@@ -27,7 +27,7 @@
   <div class="container">
 
     <!-- Nav -->
-<!--     <nav id="nav">
+    <!--     <nav id="nav">
       <ul>
         <li class="current"><a href="index.html">전체보기</a></li>
         <li><a href="#" class="continent-list-btn">유럽</a>
@@ -208,32 +208,32 @@
       </ul>
     </nav> nav end -->
 
-<div class="navigation">
-    <ul>
-      <li class="mouseOverLeave"><a href="index.html" class="showAll">전체보기</a></li>
-      
-      <li class="has-menu"><a href="#" class="continent-list-btn">유럽</a>
-       <ul class="sub-menu" id="countryWithContinentforEU"></ul>
-      </li>
-      
-       <li class="has-menu"><a href="#" class="continent-list-btn">아시아</a>
-       <ul class="sub-menu" id="countryWithContinentforAsia"></ul>
-      </li>
-      
-      <li class="has-menu"><a href="#" class="continent-list-btn">아메리카</a>
-       <ul class="sub-menu" id="countryWithContinentAmerica"></ul>
-      </li>
-      
-      <li class="has-menu"><a href="#" class="continent-list-btn">오세아니아</a>
-       <ul class="sub-menu" id="countryWithContinentOceania"></ul>
-      </li>
-      
-      <li class="has-menu"><a href="#" class="continent-list-btn">아프리카</a>
-       <ul class="sub-menu" id="countryWithContinentAfrica"></ul>
-      </li>
-      
-    </ul>
-  </div>
+    <div class="navigation">
+      <ul>
+        <li class="mouseOverLeave"><a href="index.html" class="showAll">전체보기</a></li>
+
+        <li class="has-menu"><a href="#" class="continent-list-btn">유럽</a>
+          <ul class="sub-menu" id="countryWithContinentforEU"></ul>
+        </li>
+
+        <li class="has-menu"><a href="#" class="continent-list-btn">아시아</a>
+          <ul class="sub-menu" id="countryWithContinentforAsia"></ul>
+        </li>
+
+        <li class="has-menu"><a href="#" class="continent-list-btn">아메리카</a>
+          <ul class="sub-menu" id="countryWithContinentAmerica"></ul>
+        </li>
+
+        <li class="has-menu"><a href="#" class="continent-list-btn">오세아니아</a>
+          <ul class="sub-menu" id="countryWithContinentOceania"></ul>
+        </li>
+
+        <li class="has-menu"><a href="#" class="continent-list-btn">아프리카</a>
+          <ul class="sub-menu" id="countryWithContinentAfrica"></ul>
+        </li>
+
+      </ul>
+    </div>
 
 
     <!--나중에 다른 곳으로 옮길 것 -->
@@ -283,128 +283,131 @@
     </div> -->
 
     <!-- collapsible -->
-      <ul class="collapsible expandable">
-    <li>
-      <div class="collapsible-header" id="filter-reset">
-      <i class="material-icons">replay</i><span class="filter-reset">필터 모두 초기화</span></div>
-    </li>
-    <li class="active">
-   <div class="collapsible-header"><i class="fas fa-won-sign" style="font-size:17px"></i>가격</div>
-      <div class="collapsible-body">
-    <!--     <label for="amount">금액:</label> -->
-        <div id="slider-range-price"></div>
-        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-       </div>
-    </li>
-    
-    <li class="active">
-      <div class="collapsible-header"><i class="material-icons">access_time</i>소요시간</div>
-      <div class="collapsible-body">
-        <div id="slider-range-hour"></div>
-        <input type="text" id="tour-hour" readonly style="border:0; color:#f6931f; font-weight:bold;">
-      </div>
-    </li>
-    
-    
-    <li class="active">
-      <div class="collapsible-header"><i class="fas fa-clipboard-list"></i>테마</div>
-      <div class="collapsible-body theme-selection">
-      <form action="#">
-    <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="1" />
-        <span id="theme-name">자전거 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="2" />
-        <span id="theme-name">야경 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="3"/>
-        <span id="theme-name">맛집 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="4"/>
-        <span id="theme-name">로컬 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="5"/>
-        <span id="theme-name">워킹 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="6" />
-        <span id="theme-name">버스 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="7" />
-        <span id="theme-name">반나절 투어</span>
-      </label>
-    </p>
-        <p>
-      <label>
-        <input name="theme" type="checkbox" class="filled-in" value="8" />
-        <span id="theme-name">종일 투어</span>
-      </label>
-    </p>
-  </form>
-      </div>
-    </li>
-    <li><button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button></li>
-  </ul>
-     <!-- collapsible end -->
-    
-    
+    <ul class="collapsible expandable">
+      <li>
+        <div class="collapsible-header" id="filter-reset">
+          <i class="material-icons">replay</i><span class="filter-reset">필터 모두 초기화</span></div>
+      </li>
+      <li class="active">
+        <div class="collapsible-header"><i class="fas fa-won-sign" style="font-size:17px"></i>가격</div>
+        <div class="collapsible-body">
+          <!--     <label for="amount">금액:</label> -->
+          <div id="slider-range-price"></div>
+          <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </div>
+      </li>
+
+      <li class="active">
+        <div class="collapsible-header"><i class="material-icons">access_time</i>소요시간</div>
+        <div class="collapsible-body">
+          <div id="slider-range-hour"></div>
+          <input type="text" id="tour-hour" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </div>
+      </li>
+
+
+      <li class="active">
+        <div class="collapsible-header"><i class="fas fa-clipboard-list"></i>테마</div>
+        <div class="collapsible-body theme-selection">
+          <form action="#">
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="1" />
+                <span id="theme-name">자전거 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="2" />
+                <span id="theme-name">야경 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="3" />
+                <span id="theme-name">맛집 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="4" />
+                <span id="theme-name">로컬 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="5" />
+                <span id="theme-name">워킹 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="6" />
+                <span id="theme-name">버스 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="7" />
+                <span id="theme-name">반나절 투어</span>
+              </label>
+            </p>
+            <p>
+              <label>
+                <input name="theme" type="checkbox" class="filled-in" value="8" />
+                <span id="theme-name">종일 투어</span>
+              </label>
+            </p>
+          </form>
+        </div>
+      </li>
+      <li><button class="waves-effect waves-light btn-small" id="searchwithOptions">검색</button></li>
+    </ul>
+    <!-- collapsible end -->
+
+
 
     <section>
-      
-    <!-- breadcrumb -->
-    <div class="breadcrumb-order-option row">
-    
-    <nav class="clean">
-      <div class="nav-wrapper col s6">
-        <div class="" id="breadcrumb-list">
-          <a href="#" class="breadcrumb bit-invisible" id="firstcrumb">First</a>
-          <a href="#" class="breadcrumb bit-invisible" id="secondcrumb">Second</a>
-          <a href="#" class="breadcrumb bit-invisible" id="thirdcrumb">Third</a>
-        </div>
+
+      <!-- breadcrumb -->
+      <div class="breadcrumb-order-option row">
+
+        <nav class="clean">
+          <div class="nav-wrapper col s6">
+            <div class="" id="breadcrumb-list">
+              <a href="#" class="breadcrumb bit-invisible" id="firstcrumb">First</a>
+              <a href="#" class="breadcrumb bit-invisible" id="secondcrumb">Second</a>
+              <a href="#" class="breadcrumb bit-invisible" id="thirdcrumb">Third</a>
+            </div>
+          </div>
+          <div class="orderOptions col s6">
+            <span class="orderOption1"><a class="grey-text text-darken-3" id="orderbyPrice" href="#">가격낮은순<sub
+                  class="material-icons">arrow_drop_down</sub></a></span>
+            <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyWishList" href="#">인기순<sub
+                  class="material-icons">arrow_drop_down</sub></a></span>
+            <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyReviews" href="#">후기순<sub
+                  class="material-icons">arrow_drop_down</sub></a></span>
+          </div>
+        </nav> <!-- breadcrumb end -->
+
+
       </div>
-      <div class="orderOptions col s6">
-      <span class="orderOption1"><a class="grey-text text-darken-3" id="orderbyPrice" href="#">가격낮은순<sub class="material-icons">arrow_drop_down</sub></a></span>
-      <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyWishList" href="#">인기순<sub class="material-icons">arrow_drop_down</sub></a></span>
-      <span class="orderOption2"><a class="grey-text text-darken-3" id="orderbyReviews" href="#">후기순<sub class="material-icons">arrow_drop_down</sub></a></span>
-      </div>
-    </nav> <!-- breadcrumb end -->
-   
-      
-    </div>
-    
+
       <!-- horizontal card => table로 변경함 -->
       <div class="col s12 m7" id="tourlistcard"></div>
       <!-- horizontal card end -->
-      
-<!-- pagination -->
-       <ul class="pagination justify-content-center">
-          <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
-          <li id="currPage" class="page-item active"><span class="currpage-link">1</span></li>
-          <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
-        </ul> 
+
+      <!-- pagination -->
+      <ul class="pagination justify-content-center">
+        <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
+        <li id="currPage" class="page-item active"><span class="currpage-link">1</span></li>
+        <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
+      </ul>
 
 
 
       <!-- tourlist table -->
-<!--         <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
+      <!--         <table cellpadding="1" cellspacing="1" class="table table-hover" id="myTable">
           <tbody id="tourlistcard">
           </tbody>
         </table>
@@ -419,10 +422,10 @@
   </div>
   <!-- .container end-->
 
-<footer class="bit-main-footer page-footer grey"></footer>
+  <footer class="bit-main-footer page-footer grey"></footer>
 
-<!-- tourlist table 템플릿 -->
-<!--  <tr class="listRow" id='{{no}}'>
+  <!-- tourlist table 템플릿 -->
+  <!--  <tr class="listRow" id='{{no}}'>
       <td class="tour-image"><img src="../../images/london.png"></td>
       <td class="tour-details">
       <p class="tour-country">{{country.countryName}} | {{city.cityName}}</p>
@@ -461,13 +464,13 @@
 {{/each}}
 </script>
 
- <script id="tr-template-for-theme" type="text/x-handlebars-template">
+  <script id="tr-template-for-theme" type="text/x-handlebars-template">
 {{#each tour.theme}}
 <span>{{theme}}&nbsp;&nbsp;</span>
 {{/each}}
 </script>
 
-<script id="tr-template-for-country" type="text/x-handlebars-template">
+  <script id="tr-template-for-country" type="text/x-handlebars-template">
 {{#each registeredCountryList}}
      <li class="has-menu countryRow" id="{{country.countryName}}">
         <a href="#" class="country-list-btn" id="{{country.continentName}}">{{country.countryName}}</a>
@@ -476,22 +479,23 @@
 {{/each}}
 </script>
 
-<script id="tr-template-for-city" type="text/x-handlebars-template">
+  <script id="tr-template-for-city" type="text/x-handlebars-template">
 {{#each registeredCityList}}
   <li><a href="#" class="city-list-btn" id="{{country.continentName}},{{country.countryName}}">{{city.cityName}}</a></li>
 {{/each}}
 </script>
 
-<!-- jquery -->
+  <!-- jquery -->
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<!-- handlebars -->
+  <!-- handlebars -->
   <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-<!-- materialize -->
-  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <!-- materialize -->
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
-<!-- range -->
+  <!-- range -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="../footer.js"></script>
 

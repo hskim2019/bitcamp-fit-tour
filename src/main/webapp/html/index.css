@@ -31,7 +31,11 @@ body {
 
 
 /* card */
-.card-image > img{
+.popular-card .card-image > img{
+  height: 220px;
+}
+
+.recently-card .card-image > img{
   height: 270px;
 }
 
@@ -40,7 +44,22 @@ body {
 }
 
 /* populer */
-.populer {
+
+.popular-card {
+  width: 220px !important;
+  margin-left: 18px;
+}
+
+.popular-card .card-title{
+    color: #fafafa !important;
+    background-image: linear-gradient(400deg,rgba(0, 0, 0, 0.54) 8%,hsla(0,0%,100%,0) 40%) !important;
+    width: 220px !important;
+    height: 220px !important;
+    padding-top: 165px !important;
+    font-size: 21px !important;
+} 
+
+/* .populer {
   width: 380px !important;
   display: block !important;
   height: 300px !important;
@@ -55,20 +74,12 @@ body {
   height: auto !important;
 }
 
+*/
+
 .popular-header {
   font-weight: 700;
   margin-left: 18px;
 }
-
-.popular-card .card-title{
-    color: #fafafa !important;
-    background-image: linear-gradient(400deg,rgba(0, 0, 0, 0.54) 8%,hsla(0,0%,100%,0) 40%) !important;
-    width: 380px !important;
-    height: 270px !important;
-    padding-top: 210px !important;
-    font-size: 22px !important;
-}
-
 
 /* lately product */
 
@@ -90,18 +101,17 @@ body {
 
 .lately-card .card-title i{
     font-weight: 600;
-    font-size: 27px;
+    font-size: 30px !important;
 }
 
 .card-content {
   min-height: 180px;
 }
 
-
-/* wish */
 .lately-title {
   font-size: 18px;
   font-weight: 600;
+  min-height: 50px !important;
 }
 
 .lately-price {
@@ -113,4 +123,9 @@ body {
 .lately-hour-trans {
   color: gray;
 }
+
+.lately-city {
+  color: gray;
+}
+
 

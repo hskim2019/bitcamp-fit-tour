@@ -32,6 +32,7 @@ public interface TourService {
   int countWishlist (Map<String, Object> paramMap);
   List<Tour> findTourByCityname(Map<String, Object> paramMap);
   List<String> findWishlistCityName(int memberNo);
+  List<String> findWishlistByMemberNo (int memberNo);
   List<Tour> findTourLately();
   int deleteWishlist (Map<String, Object> paramMap);
   List<Country> listCountry(String continent);

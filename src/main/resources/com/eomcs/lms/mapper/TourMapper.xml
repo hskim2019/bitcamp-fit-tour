@@ -225,6 +225,11 @@
 		select count(*) from member_tour_wishlist where member_id =
 		#{memberNo} and tour_id = #{tourNo}
 	</select>
+  
+  <!-- find wish list by member no -->
+  <select id="findWishlistByMemberNo" resultType="map" parameterType="int">
+    select tour_id from member_tour_wishlist where member_id = #{memberNo}
+  </select>
 
 	<!-- find wish list city name -->
 	<select id="findWishlistCityName" resultType="map" parameterType="int">

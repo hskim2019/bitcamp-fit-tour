@@ -61,23 +61,25 @@
       </li>
     </ul>
   </div>
-
+  
   <!-- container -->
   <div class="container" style="min-height : 800px; width: 1300px">
-    <div class="row mt50">
+    
+     <div class="row mt50">
+
       <!-- popuer h -->
       <h5 class="popular-header mb20"><span class="teal-text">인기</span> 여행지</h5>
-      <div id="popular-tour" class="carousel">
-
+      
+    <div id="popular-tour" class="carousel">
         <!-- carousel next preve button -->
-        <div class="carousel-fixed-item valign-wrapper mt120">
+        <div class="carousel-fixed-item valign-wrapper mt100">
           <a onclick="$('#popular-tour').carousel('prev');" style="margin-right: auto;"
             class="identifier left left-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_before</i></a>
           <a onclick="$('#popular-tour').carousel('next');" style="margin-left: auto;"
             class="identifier right right-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_next</i></a>
-        </div>
+        </div> 
 
         <!-- rome -->
         <div id="rome" class="popular-card card carousel-item hoverable">
@@ -126,6 +128,39 @@
             <span class="card-title">전체 여행지</span>
           </div>
         </div>
+        
+        <!-- all -->
+        <div id="all" class="popular-card card carousel-item hoverable">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/world.jpg">
+            <span class="card-title">전체 여행지</span>
+          </div>
+        </div>
+        
+        <!-- all -->
+        <div id="all" class="popular-card card carousel-item hoverable">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/world.jpg">
+            <span class="card-title">전체 여행지</span>
+          </div>
+        </div>
+        
+        <!-- all -->
+        <div id="all" class="popular-card card carousel-item hoverable">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/world.jpg">
+            <span class="card-title">전체 여행지</span>
+          </div>
+        </div>
+        
+        <!-- all -->
+        <div id="all" class="popular-card card carousel-item hoverable">
+          <div class="card-image">
+            <img src="/bitcamp-fit-tour/images/world.jpg">
+            <span class="card-title">전체 여행지</span>
+          </div>
+        </div>
+        
       </div>
     </div>
 
@@ -135,11 +170,11 @@
       <div id="lately-tour" class="carousel">
 
         <!-- carousel next preve button -->
-        <div class="carousel-fixed-item valign-wrapper mt120">
-          <a onclick="$('#lately-tour').carousel('prev');" style="margin-right: auto;"
+        <div class="carousel-fixed-item valign-wrapper mt150">
+          <a onclick="$('#lately-tour').carousel('prev', 3);" style="margin-right: auto;"
             class="identifier left left-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_before</i></a>
-          <a onclick="$('#lately-tour').carousel('next');" style="margin-left: auto;"
+          <a onclick="$('#lately-tour').carousel('next', 3);" style="margin-left: auto;"
             class="identifier right right-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_next</i></a>
         </div>
@@ -163,12 +198,18 @@
 
         <div class="card-image">
           <img src="/bitcamp-fit-tour/upload/tourphoto/{{tourPhoto}}">
-          <span class="card-title"><i class="material-icons wish-status">favorite</i></span>
+          <span class="wish card-title"><i class="material-icons">favorite_border</i></span>
         </div>
 
         <div class="card-content">
 
-          <div class="row">
+          <div class="row mb5 lately-city">
+            <div class="col l12">
+              {{city.cityName}}
+            </div>
+          </div>
+
+          <div class="row mb15">
             <div class="col l12 lately-title">
               {{title}}
             </div>

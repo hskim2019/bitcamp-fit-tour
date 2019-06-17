@@ -210,6 +210,11 @@ public class TourServiceImpl implements TourService {
     return tourDao.findTourLately();
   }
 
+  @Override
+  public List<String> findWishlistByMemberNo(int memberNo) {
+    return tourDao.findWishlistByMemberNo(memberNo);
+  }
+
 }
 
 

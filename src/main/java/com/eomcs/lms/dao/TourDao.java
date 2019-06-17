@@ -23,6 +23,7 @@ public interface TourDao {
   int insertWishlist (Map<String, Object> paramMap);
   int countWishlist (Map<String, Object> paramMap);
   List<String> findWishlistCityName (int memberNo);
+  List<String> findWishlistByMemberNo (int memberNo);
   List<Tour> findTourByCityname(Map<String, Object> paramMap);
   List<Tour> findTourLately();
   int deleteWishlist (Map<String, Object> paramMap);

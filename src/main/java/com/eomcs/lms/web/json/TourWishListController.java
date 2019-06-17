@@ -61,7 +61,6 @@ public class TourWishListController {
     return content;
   }
   
-  //add Wish list
   @GetMapping("findcityname")
   public Object findCityname(HttpSession session) {
     
@@ -113,13 +112,13 @@ public class TourWishListController {
     return content;
   }
   
-  //wish list
+  //wish list by city name
   @GetMapping("list")
   public Object list(String cityName, HttpSession session) {
     Member loginUser = (Member) session.getAttribute("loginUser");
     HashMap<String,Object> content = new HashMap<String,Object>();
     HashMap<String,Object> paramMap = new HashMap<String,Object>();
-
+    
     paramMap.put("cityName", cityName);
     paramMap.put("memberNo", loginUser.getNo());
     try {
@@ -133,5 +132,35 @@ public class TourWishListController {
     }
     return content;
   }
+  
+  //wish list by member no
+  @GetMapping("wish")
+  public Object list(HttpSession session) {
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    
+    if(session.getAttribute("loginUser") == null) {
+      content.put("status", "notlogin");
+      content.put("count", 0);
+      return content;
+    }
+    
+    
+    try {
+      List<String> wishlist = tourService.findWishlistByMemberNo(loginUser.getNo());
+      System.out.println(wishlist);
+      content.put("status", "success");
+      content.put("wishlist", wishlist);
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 
 }
+
+
+
+
+

@@ -119,6 +119,11 @@ public class MemberServiceImpl implements MemberService {
   public int updatePhoto(Map<String, Object> paramMap) {
     return memberDao.updatePhoto(paramMap);
   }
+
+  @Override
+  public int tempPassword(Member member) {
+    return memberDao.tempPassWord(member);
+  }
 }
 
 

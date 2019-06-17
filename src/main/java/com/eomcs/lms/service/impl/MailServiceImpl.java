@@ -25,6 +25,18 @@ public class MailServiceImpl implements MailService {
     this.memberDao = memberDao;
   }
   
+  private void passwordTemp(MailUtils sendMail, String email, String temp) throws Exception {
+    sendMail.setSubject("[FIT-TOUR] 안녕하세요 임시 비밀번호입니다.");
+    sendMail.setText(new StringBuffer().append("<h1>[안녕하세요 FIT TOUR입니다]</h1><br><br><br>")
+        .append("<p>아래의 임시 비밀번호를 사용하여 로그인 하신후 비밀변호 변경 하시기 바랍니다.</p><br><br><br>")
+        .append(temp)
+        .append("<br><br> 원하는 여행을 찾기 바랍니다.")
+        .toString());
+    sendMail.setFrom("FIT-TOUR", "FIT TOUR 자유여행");
+    sendMail.setTo(email);
+    sendMail.send();
+    
+  }
   
   private void emailSend(MailUtils sendMail, String email, String certification) throws Exception {
     sendMail.setSubject("[FIT-TOUR] 회원가입 이메일 인증");
@@ -42,6 +54,17 @@ public class MailServiceImpl implements MailService {
     sendMail.send();
     
   }
+  
+  @Async  // 회원가입 이메일 비동기 처리 
+  @Override
+  public void sandTemp(Member member) throws Exception {
+    MailUtils sendMail = new MailUtils(mailSender);
+
+    passwordTemp(sendMail,member.getEmail(),member.getPassword());
+    
+    
+  }
+  
 
   @Async  // 회원가입 이메일 비동기 처리 
   @Override

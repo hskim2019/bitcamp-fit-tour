@@ -77,9 +77,15 @@ public class SignUpController {
 
 
   @GetMapping("emailoverlap")
-
   public Object emailOverlap(String email) {
+    HashMap<String, Object> content = new HashMap<>();
+
     Member member = memberService.get(email);
+    if(member == null) {
+      content.put("status", "fail");
+      content.put("message", "이메일이 없습니다.");
+      return content;
+    }
     return member;
   }
 
@@ -98,16 +104,30 @@ public class SignUpController {
 
     HashMap<String, Object> content = new HashMap<>();
     String email = (String) session.getAttribute("standby");
-
     try {
-
-
       mailService.reEamil(email);
-
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", email);
+    }
+    return content;
+  }
+  @PostMapping("temp")
+  public Object temp(Member member) {
+    HashMap<String, Object> content = new HashMap<>();
+     try {
+      String temp = new TempKey().getKey(12, false);
+      member.setPassword(temp);
+      
+      
+      memberService.tempPassword(member);
+      mailService.sandTemp(member);
+
+      content.put("status", "success");
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
     }
     return content;
   }

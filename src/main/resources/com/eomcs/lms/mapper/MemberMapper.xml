@@ -32,23 +32,40 @@
 
   <sql id="default-columns">
     member_id,
+    rank,
     name,
+    nickname,
+    login_type_id,
     email,
-    registered_date,
     tel,
+    registered_date,
+    sms_check,
+    email_check,
     photo
   </sql>
 
   <select id="findAll" resultMap="memberMap" parameterType="map">
     select
-    <include refid="default-columns" />
-    
-    from
-    member
+    <!-- <include refid="default-columns" /> -->
+    m.member_id,
+    m.rank,
+    m.name,
+    m.nickname,
+    l.type_name,
+    m.email,
+    m.tel,
+    m.registered_date,
+    m.sms_check,
+    m.email_check,
+    m.birth,
+    m.photo
+    from member as m
+    join login_type as l on m.login_type_id = l.login_type_id
     <where>
-      <if test="search != null">
+ <if test="search != null">
         <bind name="pattern1" value="'%' + search + '%'" />
         name like #{pattern1}
+        or nickname like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>
@@ -241,6 +258,7 @@
       <if test="_parameter != null">
         <bind name="pattern1" value="'%' + _parameter + '%'" />
         name like #{pattern1}
+        or nickname like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>

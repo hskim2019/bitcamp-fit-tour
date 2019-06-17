@@ -84,6 +84,7 @@ $('#update-btn').click (() => {
 function loadData(no) {
   $.getJSON('../../app/json/member/detail?no=' + param.split('=')[1], 
       function(data) {
+    console.log(data);
     $('#no').val(data.no);
     $('#email').val(data.email);
     $('#name').val(data.name);

@@ -2,12 +2,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>회원 관리</title>
-   <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+  <title>FitTour - 회원 관리</title>
+  <!-- materialize -->
+ <link type="text/css" rel="stylesheet" href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- fontawesome --> 
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
   
+  <!-- fittour -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
- <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+  <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -15,18 +22,53 @@
 <header class="bit-main-header"></header>
 
 <div class="container">
-<h1>회원 목록 </h1>
-<p><a href='view.html' class="btn btn-primary btn-sm">새 회원</a></p>
+<h2 class="titl">회원 목록</h2>
+<!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 회원</a></p> -->
 
-<div class="bit-list">
-<table class="table table-hover">
+<div class="search-categories row">
+  <select class="browser-default" id="search-categories">
+    <option value="0" selected>전체</option>
+    <option value="1">이름</option>
+    <option value="2">별명</option>
+    <option value="3">이메일</option>
+    <option value="4">전화번호</option>
+  </select>
+<form id="searchthis">
+<input id="search-box" type="text" placeholder="검색" maxlength="25" data-length="25">
+<input id="search-btn" value="검색" type="submit"/>
+</form>
+</div>
+
+<div class="member-list">
+<table class="striped">
 <thead>
   <tr> 
-    <th scope="col">번호</th>
-    <th scope="col">이름</th>
-    <th scope="col">이메일</th>
-    <th scope="col">가입일</th>
-    <th scope="col">휴대폰</th>
+    <th class="center">번호</th>
+    <th class="center">
+<!--     <select class="browser-default" id="search-rank">
+    <option value="0" selected>회원등급</option>
+    <option value="1">일반회원</option>
+    <option value="2">인증회원</option>
+    <option value="3">탈퇴회원</option>
+  </select> -->
+  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>회원등급
+  <sub class="tiny material-icons">expand_more</sub>
+  </a>
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">일반회원</a></li>
+    <li><a href="#!">인증회원</a></li>
+     <li><a href="#!">탈퇴회원</a></li>
+   </ul>
+    </th>
+    <th class="center">이름</th>
+    <th class="center">별명</th>
+    <th class="center">로그인유형</th>
+    <th class="center">이메일</th>
+    <th class="center">전화번호</th>
+    <th class="center">가입일</th>
+    <th class="center">sms수신</th>
+    <th class="center">email수신</th>
+    <th class="center">생년월일</th>
   </tr>
 </thead>
 
@@ -35,40 +77,42 @@
 </table>
 </div><!-- .bit-list -->
 
-<nav aria-label="목록 페이지 이동">
   <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
     <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
+    <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
-</nav>
+
 </div><!-- .container -->
+
+<footer class="bit-main-footer page-footer grey"></footer>
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <th scope='row'>{{no}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{name}}</a></td>
+<tr class="listRow">
+  <td class="center">{{no}}</th>
+  <td class="center" id="{{rank}}">{{rank}}</th>
+  <td class="center"><a class="bit-view-link" href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td class='center'>{{nickname}}</td>
+  <td class='center'>{{loginType.typeName}}</td>
   <td>{{email}}</td>
-  <td>{{registeredDate}}</td>
   <td>{{tel}}</td>
+  <td class='center'>{{registeredDate}}</td>
+  <td class='center' id='smsCheck'>{{smsCheck}}</td>
+  <td class='center' id='emailCheck'>{{emailCheck}}</td>
+  <td class='center'>{{birth}}</td>
 </tr>
 {{/each}}
 </script>
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
-  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-
+<script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../header.js"></script>
 <script src="index.js"></script>
-
+<script src="../footer.js"></script>
 </body>
 </html>
 

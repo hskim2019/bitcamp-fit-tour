@@ -210,6 +210,22 @@ public class TourController {
     content.put("cityList", cityList);
     return content;
   }
+  
+  @GetMapping("latelylist")
+  public Object latelyList() {
+    HashMap<String,Object> content = new HashMap<String,Object>();
+
+    try {
+      List<Tour> tours = tourService.findTourLately();
+      System.out.println(tours);
+      content.put("status", "success");
+      content.put("tours", tours);
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
 
   //  tourUpdate
   //  @PostMapping("update")

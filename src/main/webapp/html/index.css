@@ -29,6 +29,17 @@ body {
     text-indent: 0.5%;
 }
 
+
+/* card */
+.card-image > img{
+  height: 270px;
+}
+
+.card {
+  cursor : pointer;
+}
+
+/* populer */
 .populer {
   width: 380px !important;
   display: block !important;
@@ -38,23 +49,18 @@ body {
   background-position: center center;
 }
 
-/* carousel */
-.carousel-item {
+.popular-card {
   width: 380px !important;
   margin-left: 18px;
+  height: auto !important;
 }
 
-.card-image > img{
-  height: 270px;
-  
-}
-
-.populer-header {
+.popular-header {
   font-weight: 700;
   margin-left: 18px;
 }
 
-.card-title{
+.popular-card .card-title{
     color: #fafafa !important;
     background-image: linear-gradient(400deg,rgba(0, 0, 0, 0.54) 8%,hsla(0,0%,100%,0) 40%) !important;
     width: 380px !important;
@@ -63,7 +69,48 @@ body {
     font-size: 22px !important;
 }
 
-.card {
-  cursor : pointer;
+
+/* lately product */
+
+.lately-card {
+  width: 380px !important;
+  margin-left: 18px;
+  height: auto !important;
+}
+
+#lately-tour{
+  height: 500px !important;
+}
+
+.lately-card .card-title {
+    bottom: 70% !important;
+    left: 80% !important;
+    color: #e57272 !important;
+}
+
+.lately-card .card-title i{
+    font-weight: 600;
+    font-size: 27px;
+}
+
+.card-content {
+  min-height: 180px;
+}
+
+
+/* wish */
+.lately-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.lately-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: gray;
+}
+
+.lately-hour-trans {
+  color: gray;
 }
 

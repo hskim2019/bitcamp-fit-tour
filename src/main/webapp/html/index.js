@@ -1,3 +1,6 @@
+var latetlyProductTemplateSrc = $('#latley-product-template').html(),
+    latetlyProductGenerator = Handlebars.compile(latetlyProductTemplateSrc);
+
 $(document).ready(function(){
   //side nav
   $('.sidenav').sidenav();
@@ -30,7 +33,7 @@ $(document).ready(function(){
   });
 
   //carousel
-  $('.carousel').carousel({
+  $('#popular-tour').carousel({
     fullWidth : true,
     padding : 100,
     numVisible : 10,
@@ -38,10 +41,47 @@ $(document).ready(function(){
 
 });
 
-$('.card').click(function(){
+$('.popular-card').click(function(){
   var cityName = $(this).attr('id');
   location.href = '/bitcamp-fit-tour/html/tour/index.html?city=' + cityName;
 });
 
+$.get('../app/json/tour/latelylist',
+        function (obj){
+  console.log(obj);
+  for (tour of obj.tours) {
+    tour.tourPhoto = tour.tourPhoto[0].name;
+    tour.price = tour.price.toLocaleString();
+  }
+  $(latetlyProductGenerator(obj)).appendTo($('#lately-tour'));
+  
+  var transportations = $('.transportation');
+  for(transportation of transportations){
+    $(transportation).html(getTransportaionIcon($(transportation).html()) + $(transportation).html() + '이동');
+  }
+  
+  $('#lately-tour').carousel({
+    fullWidth : true,
+    padding : 100,
+  });
+  
+});
 
+//get trpansportaionIcon
+function getTransportaionIcon(transportation) {
 
+  switch (transportation) {
+  case '버스' :
+    return '<i id="transportation-icon" class="fas fa-bus-alt"></i>  '
+    break;
+  case '지하철' :
+    return '<i id="transportation-icon" class="fas fa-subway"></i>  '
+    break;
+  case '도보' :
+    return '<i id="transportation-icon" class="fas fa-walking"></i>  '
+    break;
+  case '자전거' :
+    return '<i id="transportation-icon" class="fas fa-bicycle"></i>  '
+    break;
+  }
+}

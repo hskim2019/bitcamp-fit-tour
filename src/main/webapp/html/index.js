@@ -25,12 +25,30 @@ $(document).ready(function(){
   });
 
   //slider
-  $('.slider').slider({
+  var slider = $('.slider').slider({
     indicators: false,
     height: 500,
     transition: 500,
     interval: 5000
   });
+  
+  slider[0].onchange = function(){
+    console.log('a')
+  }
+  console.log(slider);
+  
+  $('li').attrchange({
+    trackValues: true,
+    callback: function(e) {
+      if(e.newValue == 'opacity: 1;' || e.newValue == 'active'){
+        $(e.target).children().css('-webkit-transform', 'scale(1.2)');
+      }
+      if(e.newValue == 'opacity: 0;' || e.newValue == ''){
+        $(e.target).children().css('-webkit-transform', 'scale(1.0)');
+      }
+    }
+  });
+  
 
   //carousel
   $('#popular-tour').carousel({

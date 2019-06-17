@@ -127,4 +127,7 @@ body {
 }
 
 
+li > img {
+  -webkit-transition: all 13s ease-in-out;
+}
 

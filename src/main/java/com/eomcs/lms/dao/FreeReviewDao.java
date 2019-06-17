@@ -20,6 +20,8 @@ public interface FreeReviewDao {
 
   int update(FreeReview freeReview);
 
+  FreeReview get(int no);
+
   
  
 }

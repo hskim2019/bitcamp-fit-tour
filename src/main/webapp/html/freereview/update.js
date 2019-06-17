@@ -58,8 +58,7 @@ $(document).ready(function(){
        if(obj.status == 'fail'){
          $('#selectOption').html('로그인 해주세요');
        } else if(obj.list.length == 0){
-        
-        $('#selectOption').html('다녀온 투어가 없습니다');
+        $('#reservation').append($('<option value="' + 0 + '" selected">' + '다녀온 투어가 없습니다.' + '</option>'));
       }else{
         if(data.reservationNo==0){
         $('#reservation').append($('<option value="' + 0 + '" selected">' + '다녀 온 투어를 선택하세요.' + '</option>'));

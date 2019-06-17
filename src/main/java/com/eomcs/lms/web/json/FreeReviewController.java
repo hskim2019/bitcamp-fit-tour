@@ -67,9 +67,18 @@ public class FreeReviewController {
   }
 
   @GetMapping("delete")
-  public Object delete(int no) {
-
+  public Object delete(int no,HttpSession session) {
+    
+    Member member = (Member) session.getAttribute("loginUser");
     HashMap<String, Object> content = new HashMap<>();
+    if(member.getNo()!=freeReviewService.getMemberId(no).getMemberNo()) {
+      content.put("status", "fail");
+      content.put("message", "잘못된 삭제입니다.");
+      return content;
+    }
+    
+    
+    
     try {
       if (freeReviewService.delete(no) == 0)
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
@@ -88,8 +97,15 @@ public class FreeReviewController {
     return freeReview;
   }
   @PostMapping("update")
-  public Object update(FreeReview freeReview) {
-    HashMap<String,Object> content = new HashMap<>();
+  public Object update(FreeReview freeReview,HttpSession session) {
+    Member member = (Member) session.getAttribute("loginUser");
+    HashMap<String, Object> content = new HashMap<>();
+    if(member.getNo()!=freeReviewService.getMemberId(freeReview.getNo()).getMemberNo()) {
+      content.put("status", "fail");
+      content.put("message", "잘못된 업데이트입니다.");
+      return content;
+    }
+    
     try {
       if (freeReviewService.update(freeReview) == 0) 
         throw new RuntimeException("해당 번호의 리뷰가 없습니다.");

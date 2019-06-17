@@ -18,5 +18,7 @@ public interface FreeReviewService {
 
   int update(FreeReview freeReview);
 
+  FreeReview getMemberId(int no);
+
 	
 }

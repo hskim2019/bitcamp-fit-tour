@@ -75,7 +75,9 @@
   </select>
 
 
-
+<select id="get" resultMap="freeReviewMap" parameterType="int">
+   select member_id from free_review where free_review_id = #{no}
+  </select>
 
  <select id="findAll" resultMap="freeReviewMap" parameterType="map">
     select

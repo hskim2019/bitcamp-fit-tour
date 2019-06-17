@@ -61,6 +61,12 @@ public class FreeReviewServiceImpl implements FreeReviewService {
     return freeReviewDao.update(freeReview);
   }
 
+  @Override
+  public FreeReview getMemberId(int no) {
+    // TODO Auto-generated method stub
+    return freeReviewDao.get(no);
+  }
+
   
   
 }

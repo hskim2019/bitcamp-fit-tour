@@ -86,6 +86,7 @@ $(document.body).bind('FAQ-list', () => {
   $('.bit-faq-link').click((e) => {
     e.preventDefault();
     faqNo = $(e.target).attr('faq-no');
+    
     if($(e.target).attr('id') == 'fold') {
       $(e.target).attr('id', 'open');
       $.getJSON('../../app/json/faq/detail?no=' + faqNo /*$(e.target).attr('faq-no')*/,
@@ -99,6 +100,10 @@ $(document.body).bind('FAQ-list', () => {
             '<td>' + data2.content + '</td>' +
             '</tr>');
         
+             if(rank != 2) {
+               $('.faq-update-btn').addClass('bit-invisible');
+               $('.faq-delete-btn').addClass('bit-invisible');
+             }
              $(document.body).trigger('loaded-faq-view');
       });
       

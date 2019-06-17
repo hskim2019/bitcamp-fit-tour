@@ -1,8 +1,14 @@
+var user;
+var rank;
 if(sessionStorage.getItem('loginUser')) {
-  var user = JSON.parse(sessionStorage.getItem('loginUser'));
+  user = JSON.parse(sessionStorage.getItem('loginUser'));
   if(user.rank == 2) {
+    rank = user.rank;
+    console.log(user.rank);
     $('.add-notice').removeClass('bit-invisible');
     $('.add-faq').removeClass('bit-invisible');
+    $('#update-btn').removeClass('bit-invisible');
+    $('#delete-btn').removeClass('bit-invisible');
   }
 }
 

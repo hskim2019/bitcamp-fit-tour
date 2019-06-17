@@ -26,13 +26,13 @@
 <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 회원</a></p> -->
 
 <div class="search-categories row">
-  <select class="browser-default" id="search-categories">
+<!--   <select class="browser-default" id="search-categories">
     <option value="0" selected>전체</option>
     <option value="1">이름</option>
     <option value="2">별명</option>
     <option value="3">이메일</option>
     <option value="4">전화번호</option>
-  </select>
+  </select> -->
 <form id="searchthis">
 <input id="search-box" type="text" placeholder="검색" maxlength="25" data-length="25">
 <input id="search-btn" value="검색" type="submit"/>
@@ -44,21 +44,15 @@
 <thead>
   <tr> 
     <th class="center">번호</th>
-    <th class="center">
-<!--     <select class="browser-default" id="search-rank">
-    <option value="0" selected>회원등급</option>
-    <option value="1">일반회원</option>
-    <option value="2">인증회원</option>
-    <option value="3">탈퇴회원</option>
-  </select> -->
-  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>회원등급
+    <th class="center">회원등급
+<!--   <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>회원등급
   <sub class="tiny material-icons">expand_more</sub>
   </a>
   <ul id='dropdown1' class='dropdown-content'>
     <li><a href="#!">일반회원</a></li>
     <li><a href="#!">인증회원</a></li>
      <li><a href="#!">탈퇴회원</a></li>
-   </ul>
+   </ul> -->
     </th>
     <th class="center">이름</th>
     <th class="center">별명</th>
@@ -83,6 +77,20 @@
     <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
 
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>회원 사진</h4>
+     <img id="profile-picture" src="">
+     <p class="default-profile bit-invisible"> 사진이 없는 회원입니다 </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
+    </div>
+  </div>
+
+
 </div><!-- .container -->
 
 <footer class="bit-main-footer page-footer grey"></footer>
@@ -93,7 +101,7 @@
 <tr class="listRow">
   <td class="center">{{no}}</th>
   <td class="center" id="{{rank}}">{{rank}}</th>
-  <td class="center"><a class="bit-view-link" href='#' data-no='{{no}}'>{{name}}</a></td>
+  <td class="center"><a class="bit-view-link modal-trigger" href='#modal1' data-no='{{no}}' data-photo='{{photo}}'>{{name}}</a></td>
   <td class='center'>{{nickname}}</td>
   <td class='center'>{{loginType.typeName}}</td>
   <td>{{email}}</td>
@@ -105,6 +113,7 @@
 </tr>
 {{/each}}
 </script>
+
 
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>

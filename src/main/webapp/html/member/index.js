@@ -11,7 +11,11 @@ var search = '';
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
 
-$('.dropdown-trigger').dropdown();
+//$('.dropdown-trigger').dropdown();
+$(document).ready(function(){
+  $('.modal').modal();
+});
+      
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn, search) {
@@ -93,14 +97,14 @@ $('#nextPage > a').click((e) => {
 loadList(1, search);
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
-$(document.body).bind('loaded-list', () => {
-  // 제목을 클릭했을 때 view.html로 전환시키기
-  $('.bit-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = 'view.html?no=' + 
-      $(e.target).attr('data-no');
-  });
-});
+//$(document.body).bind('loaded-list', () => {
+//  // 제목을 클릭했을 때 view.html로 전환시키기
+//  $('.bit-view-link').click((e) => {
+//    e.preventDefault();
+//    window.location.href = 'view.html?no=' + 
+//      $(e.target).attr('data-no');
+//  });
+//});
 
 function    changeIntoText(CheckHtml, check) {
   switch (CheckHtml) {
@@ -119,7 +123,20 @@ $('#search-btn').click((e) => {
   loadList(1, search);
 });
 
+$('.bit-view-link').mouseover(function() {
+  alert('a');
+});
 
 
-
-
+$(document.body).bind('loaded-list', () => {
+$('.bit-view-link').click((e) => {
+e.preventDefault();
+var image = $(e.target).attr('data-photo');
+if(image == 'default.jpg'){
+  $('#profile-picture').addClass('bit-invisible');
+  $('.default-profile').removeClass('bit-invisible');
+} else {
+$('#profile-picture').attr('src', '/bitcamp-fit-tour/upload/member/' + image);
+}
+});
+});

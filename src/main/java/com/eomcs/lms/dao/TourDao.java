@@ -29,6 +29,7 @@ public interface TourDao {
   int deleteWishlist (Map<String, Object> paramMap);
   List<Country> findCountryByContinent(String continent);
   List<City> findCityByCountry(int countryNo);
+  List<City> findCity();
   int findMaxPrice();
   List<Tour> findRegisteredCountry(String continent);
   List<Tour> findRegisteredCity(String country);

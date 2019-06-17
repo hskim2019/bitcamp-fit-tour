@@ -215,6 +215,11 @@ public class TourServiceImpl implements TourService {
     return tourDao.findWishlistByMemberNo(memberNo);
   }
 
+  @Override
+  public List<City> findCity() {
+    return tourDao.findCity();
+  }
+
 }
 
 

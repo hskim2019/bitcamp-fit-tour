@@ -2,6 +2,8 @@
 
 /* searchBar */
 input[type="search"] {
+  display: inline-block !important;
+  width: 230px !important;
   padding: 20px !important;
   border: white 1px solid !important;
   font-size: 1em !important;
@@ -13,21 +15,25 @@ input[type="search"] {
   box-shadow: 0 10px 20px rgba(0,0,0,0.03) !important;
 }
 
-li > input[type="search"]::placeholder {
+li > div > input[type="search"]::placeholder {
   color: white !important;
   font-weight: 200 !important;
 }
-li > input[type="search"]:focus::placeholder {
+li > div > input[type="search"]:focus::placeholder {
   color: rgba(59, 61, 77, 0.63) !important;
 }
 
-li > input[type="search"]:hover {
+li > div > input[type="search"]:hover {
   background: rgba(255, 255, 255, .27) !important;
 }
 
-li > input[type="search"]:focus {
+li > div > input[type="search"]:focus {
   color: #3a3c4c !important;
   background: #fff !important;
+}
+
+.autocomplete-content{
+  max-height: 300px !important;
 }
 
 /* nav */

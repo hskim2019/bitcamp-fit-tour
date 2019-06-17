@@ -37,6 +37,7 @@ public interface TourService {
   int deleteWishlist (Map<String, Object> paramMap);
   List<Country> listCountry(String continent);
   List<City> listCity(int countryNo);
+  List<City> findCity();
   int maxValue();
   List<Tour> search(
       String continentName,

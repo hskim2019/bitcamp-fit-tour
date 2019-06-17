@@ -256,7 +256,8 @@
     join tour_theme as toth on t.tour_id = toth.tour_id
     join theme as th on toth.theme_id = th.theme_id
     where date(created_date) between subdate(curdate(),date_format(curdate(),'%w')-1) 
-    and subdate(curdate(),date_format(curdate(),'%w')-7);
+    and subdate(curdate(),date_format(curdate(),'%w')-7)
+    order by created_date desc
   </select> 
 
 	<!-- delete wish list -->
@@ -271,7 +272,13 @@
 		parameterType="int">
 		select * from city where country_id = #{countryNo}
 	</select>
-
+  
+	<!-- find city -->
+	<select id="findCity" resultMap="cityMap"
+		parameterType="int">
+		select * from city
+	</select>
+  
 	<!-- find MaxPrice -->
 	<select id="findMaxPrice" resultType="int">
 		select price from tour

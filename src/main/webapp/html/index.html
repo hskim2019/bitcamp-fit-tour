@@ -73,12 +73,10 @@
     <div id="popular-tour" class="carousel">
         <!-- carousel next preve button -->
         <div class="carousel-fixed-item valign-wrapper mt100">
-          <a onclick="$('#popular-tour').carousel('prev');" style="margin-right: auto;"
-            class="identifier left left-align btn black hoverable waves-effect"><i
-              class="material-icons">navigate_before</i></a>
-          <a onclick="$('#popular-tour').carousel('next');" style="margin-left: auto;"
-            class="identifier right right-align btn black hoverable waves-effect"><i
-              class="material-icons">navigate_next</i></a>
+          <a id="popular-left-ptn" class="identifier left left-align btn black hoverable waves-effect bit-invisible">
+          <i class="material-icons">navigate_before</i></a>
+          <a id="popular-right-ptn" class="identifier right right-align btn black hoverable waves-effect">
+          <i class="material-icons">navigate_next</i></a>
         </div> 
 
         <!-- rome -->
@@ -171,10 +169,10 @@
 
         <!-- carousel next preve button -->
         <div class="carousel-fixed-item valign-wrapper mt150">
-          <a onclick="$('#lately-tour').carousel('prev', 3);" style="margin-right: auto;"
+          <a onclick="$('#lately-tour').carousel('prev');" style="margin-right: auto;"
             class="identifier left left-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_before</i></a>
-          <a onclick="$('#lately-tour').carousel('next', 3);" style="margin-left: auto;"
+          <a onclick="$('#lately-tour').carousel('next');" style="margin-left: auto;"
             class="identifier right right-align btn black hoverable waves-effect"><i
               class="material-icons">navigate_next</i></a>
         </div>

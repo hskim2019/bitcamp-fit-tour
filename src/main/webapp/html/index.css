@@ -19,13 +19,15 @@ body {
 
 /* identifier */
 .identifier{
-    opacity: 0.7;
+    color: rgba(0,0,0,0.87);
+    background-color: #fafafa !important;
+    opacity: 0.9;
     width: auto;
 }
 
 .identifier:hover{
     opacity: 1;
-    color: whitesmoke;
+    color: black;
     text-indent: 0.5%;
 }
 
@@ -59,26 +61,18 @@ body {
     font-size: 21px !important;
 } 
 
-/* .populer {
-  width: 380px !important;
-  display: block !important;
-  height: 300px !important;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.popular-card {
-  width: 380px !important;
-  margin-left: 18px;
-  height: auto !important;
-}
-
-*/
-
 .popular-header {
   font-weight: 700;
   margin-left: 18px;
+}
+
+
+#popular-left-ptn{
+  margin-right: auto;
+}
+
+#popular-right-ptn{
+  margin-left: auto;
 }
 
 /* lately product */
@@ -127,5 +121,6 @@ body {
 .lately-city {
   color: gray;
 }
+
 
 

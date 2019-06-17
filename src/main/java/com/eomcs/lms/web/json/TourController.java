@@ -211,6 +211,15 @@ public class TourController {
     return content;
   }
   
+  @GetMapping("allcitylist")
+  public Object allCityList() {
+
+    List<City> cityList =tourService.findCity();
+    HashMap<String,Object> content = new HashMap<String,Object>();
+    content.put("cityList", cityList);
+    return content;
+  }
+  
   @GetMapping("latelylist")
   public Object latelyList() {
     HashMap<String,Object> content = new HashMap<String,Object>();

@@ -1,4 +1,3 @@
-
 //load header
 (function () {
   $('.bit-main-header').load('/bitcamp-fit-tour/html/header.html', function(){
@@ -9,7 +8,21 @@
 
 //load
 $(document.body).bind('loaded.header', () => {
+  
+  //init search
+  $.get('/bitcamp-fit-tour/app/json/tour/allcitylist',function(obj){
+    var cityNames = {};
+    for (var city of obj.cityList) {
+      cityNames[city.cityName] = null;
+    }
+    console.log(cityNames);
 
+    $('.autocomplete').autocomplete({
+      data: cityNames
+    })
+  });
+  
+  
   loadLoginUser();
 
   //add click event logout button
@@ -69,7 +82,5 @@ function loadLoginUser() {
     $(document.body).trigger('loadHeader');
   });
 }
-
-
 
 

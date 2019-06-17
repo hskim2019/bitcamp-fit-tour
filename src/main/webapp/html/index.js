@@ -42,6 +42,18 @@ $(document).ready(function(){
 
 });
 
+$('#popular-left-ptn').click(function(){
+  $('#popular-tour').carousel('prev',5);
+  $('#popular-left-ptn').hide();
+  $('#popular-right-ptn').show();
+});
+
+$('#popular-right-ptn').click(function(){
+  $('#popular-tour').carousel('next',5);
+  $('#popular-left-ptn').show();
+  $('#popular-right-ptn').hide();
+});
+
 // add click evnet popular tour
 $('.popular-card').click(function(){
   var cityName = $(this).attr('id');

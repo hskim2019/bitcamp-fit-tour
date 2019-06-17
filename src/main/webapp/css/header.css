@@ -67,7 +67,6 @@ nav {
 
 nav ul a {
   font-weight: 500;
-  font-size: 1.2rem;
 }
 
 /* thumbnail */
@@ -106,8 +105,8 @@ nav ul a {
 	cursor: pointer;
 }
 
-i {
-	font-size: 20px !important;
+li i {
+	font-size: 23px !important;
 }
 
 #header-login-btn {

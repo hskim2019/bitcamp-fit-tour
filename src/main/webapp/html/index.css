@@ -47,6 +47,10 @@ body {
 
 /* populer */
 
+#popular-tour{
+  height: 220px !important;
+}
+
 .popular-card {
   width: 220px !important;
   margin-left: 18px;

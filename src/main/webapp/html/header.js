@@ -15,11 +15,19 @@ $(document.body).bind('loaded.header', () => {
     for (var city of obj.cityList) {
       cityNames[city.cityName] = null;
     }
-    console.log(cityNames);
 
     $('.autocomplete').autocomplete({
       data: cityNames
     })
+    
+    $("#autocomplete-input").keydown(function(e) {
+    if (e.keyCode == 13) {
+      console.log($("#autocomplete-input").val())
+    }
+    
+    });
+
+
   });
   
   

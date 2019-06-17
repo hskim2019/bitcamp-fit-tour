@@ -275,6 +275,16 @@
     member_id = #{no} and password = password(#{password})
   </update>
   
+    <!-- update password -->
+  <update id="tempPassWord" parameterType="map">
+    update member
+    <set>
+      <if test="password != null">password = password(#{password}),</if>
+    </set>
+    where
+    email = #{email}
+  </update>
+  
   <!-- update photo -->
   <update id="updatePhoto" parameterType="map">
     update member

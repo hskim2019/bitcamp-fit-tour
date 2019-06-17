@@ -1,3 +1,10 @@
+if(location.href.split('?')[1]=='ps'){
+  M.toast({html: '이메일로 임시 비밀번호 전송 하였습니다.',displayLength: '10000'})
+  
+}
+  
+  
+
 if (window.localStorage.getItem('email')) {
   // document.querySelector('#email').value = localStorage.getItem('email')
   $('#email').val(localStorage.email)

@@ -205,6 +205,11 @@ public class TourServiceImpl implements TourService {
     return tourDao.findTourByCityname(paramMap);
   }
 
+  @Override
+  public List<Tour> findTourLately() {
+    return tourDao.findTourLately();
+  }
+
 }
 
 

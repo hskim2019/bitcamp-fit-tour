@@ -87,5 +87,20 @@ public class FreeReviewController {
     FreeReview freeReview = freeReviewService.get(no);
     return freeReview;
   }
+  @PostMapping("update")
+  public Object update(FreeReview freeReview) {
+    HashMap<String,Object> content = new HashMap<>();
+    try {
+      if (freeReviewService.update(freeReview) == 0) 
+        throw new RuntimeException("해당 번호의 리뷰가 없습니다.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
 
 }

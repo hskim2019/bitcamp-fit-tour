@@ -75,7 +75,13 @@ $(document.body).bind('loaded-list', () => {
   });
 });
 
-
+$('#add-btn').click(function () {
+  if (!sessionStorage.getItem('loginUser')) {
+     location.href = '/bitcamp-fit-tour/html/auth/login.html'
+       return;
+  }
+  location.href = 'add.html'
+});
 
 
 

@@ -27,6 +27,14 @@ function loadData(no) {
     $('#createdDateTd').html(data.createdDate);
     $('#countViewTd').html(data.viewCount);
     $('#content').html(data.content);
+    $ ( '#raty' ). raty ({
+    score: data.score,
+    readOnly : true, 
+    starOn : '../../images/star-on.png' ,
+    starOff : '../../images/star-off.png'
+  
+  }); 
+    
     $.getJSON('../../app/json/reservation/detail?no=' + data.reservationNo,
             function(obj) {
       
@@ -51,13 +59,9 @@ $('#delete-btn').click(() => {
     }
   });
 });
-
-$(document.body).bind('loaded-list', () => {
-  // 제목을 클릭했을 때 view.html로 전환시키기
-  $('.bit-view-link').click((e) => {
-    e.preventDefault();
-    window.location.href = '../tour/view.html?no=' + 
-      $(e.target).attr('data-no');
-  });
+$('#update-btn').click(() => {
+  window.location.href = 'update.html?no='+reviewNo;
 });
+
+
 

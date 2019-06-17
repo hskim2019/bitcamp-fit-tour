@@ -15,7 +15,7 @@
 		<result column="content" property="content" />
 		<result column="created_date" property="createdDate" />
   <result column="viewcount" property="viewCount" />
-
+  <result column="score" property="score" />
 <association property="member" javaType="member">
     <id column="member_id" property="no" />
     <result column="name" property="name" />
@@ -28,14 +28,16 @@
     <if test="reservationNo != 0">reservation_id,</if>
     viewcount,
     title,
-    content
+    content,
+    score
    )
     values(
     #{memberNo},
      <if test="reservationNo != 0"> #{reservationNo},</if>
    0,
     #{title},
-    #{content})
+    #{content},
+    #{score})
   </insert>
   <delete id="delete" parameterType="int">
     delete from free_review 
@@ -96,6 +98,21 @@
       limit #{rowNo}, #{size}
     </if>
   </select>
+  
+  <update id="update" parameterType="freeReview">
+    update free_review
+    <set>
+      <if test="title != null">title = #{title},</if>
+       <if test="reservationNo != 0">reservation_id = #{reservationNo},</if>
+      <if test="score != null">score = #{score},</if>
+      <if test="content != null">content = #{content}</if>
+
+    </set>
+    where
+    free_review_id = #{no}
+  </update>
+  
+  
 </mapper>
 
 

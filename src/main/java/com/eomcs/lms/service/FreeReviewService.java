@@ -16,5 +16,7 @@ public interface FreeReviewService {
 
   FreeReview get(int no);
 
+  int update(FreeReview freeReview);
+
 	
 }

@@ -55,7 +55,9 @@
    </tr>
     <tr>
      <th class="center" id="tourTh">투어</th>
-     <td colspan="12" id="tourTd"><a id="tourAtag" class='bit-view-link' href='#' ></a></td>
+     <td colspan="" id="tourTd"><a id="tourAtag" class='bit-view-link' href='#' ></a></td>
+   <th class="center" id="ratyTh">평점</th>
+   <td id="ratyTd"><div id="raty"></div></td>
    </tr>
    <tr id="contentRow">
     <td colspan="12" id="content"></td>
@@ -63,7 +65,7 @@
   </tbody>
 </table>
 </div>
-<input id="no" type="hidden"">
+<input id="no" type="hidden">
     <div class="buttons">
       <button type="button" id="delete-btn" class="btn btn-primary bit-view-item">삭제</button> 
       <button type="button" id="update-btn" class="btn btn-primary bit-view-item">변경</button>
@@ -81,8 +83,11 @@
 
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/quill/dist/quill.min.js"></script>
+<!-- raty -->
+<script src="/bitcamp-fit-tour/node_modules/raty-js/lib/jquery.raty.js"></script>
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
+
 <script src="view.js"></script>
 
 </html>

@@ -18,6 +18,8 @@ public interface FreeReviewDao {
 
   void increaseCount(int no);
 
+  int update(FreeReview freeReview);
+
   
  
 }

@@ -4,7 +4,7 @@
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
-<title>FitTour - 후기등록</title>
+<title>FitTour - 후기변경</title>
 <!-- materialize -->
 <link rel="stylesheet"
   href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
@@ -25,7 +25,7 @@
 <!-- fittour css -->
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
-<link rel="stylesheet" href="add.css">
+<link rel="stylesheet" href="update.css">
 </head>
 
 <body>
@@ -36,20 +36,19 @@
 
     <div class="row">
       <blockquote>
-        <h3>여행 후기작성</h3>
+        <h3>여행 후기 변경</h3>
       </blockquote>
-      • 다녀온 여행에 대해 후기를 자유롭게 작성해주세요.<br>
+      • 작성한 후기를 변경해주세요.<br>
     </div>
 <div class="row">
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="title" name="title" type="text" class="form-control" autocomplete=off>
-          <label for="title">제목</label>
+          <input id="title" name="title" type="text" value="title" class="form-control" autocomplete=off>
+          <label for="title" vl>제목</label>
           </div>
           <div class="input-field col s6">
            <select id="reservation"  >
-               <option id="selectOption" value="0" selected>다녀 온 투어를 선택하세요.</option>
               </select>
           </div>
           <div class="input-field col s6">
@@ -68,15 +67,15 @@
     <div class="row"></div>
 
     <div class="row">
-
-  <input id="add-btn" type="button" value="글 쓰기" class="btn-floating btn-large right" >
+ <input id="list-btn" type="button" value="목록" class="btn-floating btn-large " >
+  <input id="update-btn" type="button" value="변경" class="btn-floating btn-large right" >
     </div>
 
 
   </div>
 
   <!-- footer -->
-</body>content
+</body>
 
 <footer class="bit-main-footer page-footer grey"></footer>
 
@@ -91,7 +90,7 @@
 <script src="/bitcamp-fit-tour/node_modules/quill-image-resize/image-resize.min.js"></script>
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
-<script src="add.js"></script>
+<script src="update.js"></script>
 <!-- raty -->
 <script src="/bitcamp-fit-tour/node_modules/raty-js/lib/jquery.raty.js"></script>
 </html>

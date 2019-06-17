@@ -10,7 +10,15 @@ public class FreeReview {
 	private String title;
 	private String content;
 	private int viewCount;
-	public int getViewCount() {
+	private int score;
+	
+	public int getScore() {
+    return score;
+  }
+  public void setScore(int score) {
+    this.score = score;
+  }
+  public int getViewCount() {
     return viewCount;
   }
   public void setViewCount(int viewCount) {
@@ -67,8 +75,8 @@ public class FreeReview {
   @Override
   public String toString() {
     return "FreeReview [no=" + no + ", memberNo=" + memberNo + ", reservationNo=" + reservationNo
-        + ", title=" + title + ", content=" + content + ", viewCount=" + viewCount
-        + ", createdDate=" + createdDate + ", member=" + member + "]";
+        + ", title=" + title + ", content=" + content + ", viewCount=" + viewCount + ", score="
+        + score + ", createdDate=" + createdDate + ", member=" + member + "]";
   }
 	
 	

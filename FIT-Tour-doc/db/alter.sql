@@ -16,3 +16,7 @@ alter table reservation modify payment_id  varchar(255);
 
 --/예약 6월 14일 추가
 ALTER TABLE reservation ADD buyer_name varchar(30) NOT NULL;
+
+
+--/평점 6월 17일 추가
+ALTER TABLE free_review ADD score int(10) NOT NULL;

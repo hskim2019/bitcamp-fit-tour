@@ -56,6 +56,11 @@ public class FreeReviewServiceImpl implements FreeReviewService {
     return freeReview;
   }
 
+  @Override
+  public int update(FreeReview freeReview) {
+    return freeReviewDao.update(freeReview);
+  }
+
   
   
 }

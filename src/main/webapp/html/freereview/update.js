@@ -1,4 +1,5 @@
-
+var param = location.href.split('?')[1],
+    reviewNo = param.split('=')[1];
 
 
 (function quillEditerInit() {
@@ -39,28 +40,66 @@ $(document).ready(function(){
 
 
 (function loadList() {
-  $.getJSON('../../app/json/reservation/myreservation',
-       function (obj) {
-    if(obj.status == 'fail'){
-      $('#selectOption').html('로그인 해주세요');
-    } else if(obj.list.length == 0){
-     
-     $('#selectOption').html('다녀온 투어가 없습니다');
-   }else{
-     for (var i = 0; i < obj.list.length; i++) {
-       $('#reservation').append($('<option value="' + obj.list[i].no + '">' + obj.list[i].tour.title + '</option>'));
-       //alert()
+  
+  
+  
+  
+  $.getJSON('../../app/json/freereview/detail?no=' + reviewNo, 
+          function(data) {
+        
+        
+        $('#title').val(data.title);
+        $('.ql-editor').html(data.content);
+        
+        ratyInit(data.score)
+        
+        $.getJSON('../../app/json/reservation/myreservation',
+          function (obj) {
+       if(obj.status == 'fail'){
+         $('#selectOption').html('로그인 해주세요');
+       } else if(obj.list.length == 0){
+        
+        $('#selectOption').html('다녀온 투어가 없습니다');
+      }else{
+        if(data.reservationNo==0){
+        $('#reservation').append($('<option value="' + 0 + '" selected">' + '다녀 온 투어를 선택하세요.' + '</option>'));
+        }
+        
+        for (var i = 0; i < obj.list.length; i++) {
+          if(obj.list[i].no ==data.reservationNo){
+            $('#reservation').append($('<option value="' + obj.list[i].no + '" selected">' + obj.list[i].tour.title + '</option>'));
+            $('#reservation').append($('<option value="' + 0 + '"">' + '선택 안함' + '</option>'));
+          }
+         }
+        for (var i = 0; i < obj.list.length; i++) {
+          if(obj.list[i].no !=data.reservationNo){
+            $('#reservation').append($('<option value="' + obj.list[i].no + '">' + obj.list[i].tour.title + '</option>'));
+          }
+         }
       }
-   }
-    
-   
-    $('select').formSelect();
-  })
+       
+      
+       $('select').formSelect();
+     })
+       
+     
+  
+  
+  });
+  
+  
+  
+  
+  
  
 })();
 
 
-$('#add-btn').click(function () {
+$('#list-btn').click(function () {
+  location.href = "index.html"; 
+})
+
+$('#update-btn').click(function () {
   
 
   if (!$('#title').val()) {
@@ -74,8 +113,8 @@ $('#add-btn').click(function () {
     return;
     
   }else{
-    $('#add-btn').attr('disabled','disabled');
-    $.post('../../app/json/freereview/add', {
+    $('#update-btn').attr('disabled','disabled');
+    $.post('../../app/json/freereview/update?no='+reviewNo, {
       
       reservationNo: $('#reservation').val(),
       title: $("#title").val(),
@@ -87,7 +126,7 @@ $('#add-btn').click(function () {
       if(data.status == 'success') {
         location.href = "index.html";  
       } else {
-        alert('등록 실패 입니다.\n' + data.message);
+        alert('업데이트 실패 입니다.\n' + data.message);
         location.href = "index.html"; 
       }
     });
@@ -95,12 +134,12 @@ $('#add-btn').click(function () {
     }
 });
 
-$ ( function ()  { 
+function ratyInit(no)  { 
   $ ( '#raty' ). raty ({  
-    score :  5,
+    score : no,
     starOn : '../../images/star-on.png' ,
     starOff : '../../images/star-off.png'
   
   }); 
-});
+}
 

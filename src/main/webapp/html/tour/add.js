@@ -5,7 +5,6 @@ $(document).ready(function () {
   $('input[type="text"]').characterCounter();
   $('select').formSelect();
   $('.tabs').tabs({ duration: 800, /* swipeable: true */});
-  $('.modal').modal({ opacity: 0.3, });
   $('.datepicker').datepicker({
     format: 'yyyy년 mm월 dd일',
   });
@@ -284,9 +283,24 @@ $('#fileupload').fileupload({
       };
       var response = data.submit();
       response.complete(function (result) {
-        $('#tourConfirm').attr('href', 'view.html?no=' + result.tourNo);
-        $('#modal-button').trigger('click');
-      })
+        var tourNo = result.tourNo;
+        Swal.fire({
+          title: '투어 상품이 등록 되었습니다!',
+          text: "등록된 상품을 확인 하시겠습니까?",
+          type: 'success',
+          showCancelButton: true,
+          confirmButtonColor: '#26a69a',
+          cancelButtonColor: '#ee6d73',
+          confirmButtonText: '네',
+          cancelButtonText: '아니오'
+        }).then((result) => {
+          if(result.value) {
+            location.href = 'view.html?no=' + tourNo;
+          } else if(result.dismiss === Swal.DismissReason.cancel){
+            location.href = location.href;
+          }
+        })
+      });
     });
   },
   done: function (e, data) {}

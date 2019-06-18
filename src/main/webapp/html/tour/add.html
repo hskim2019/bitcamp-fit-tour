@@ -469,6 +469,16 @@
               </label>
             </div>
           </div>
+          
+          <!-- place -->
+          <div class="row mb30 mt30">
+            <div class="col l12">
+              <blockquote>
+                <h5>판매 불가 날짜</h5>
+              </blockquote>
+              • 만남을 위한 구체적인 장소를 알려주세요.
+            </div>
+          </div>
 
           <div class="row mt50">
             <div class="col l12">
@@ -487,19 +497,6 @@
     </form>
 
   </div> <!-- container -->
-
-  <!-- addSuccessModal -->
-  <div id="modal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h3>투어상품등록을 완료 하였습니다!</h3>
-      <p>등록된 상품을 확인 하시겠습니까?</p>
-    </div>
-    <div class="modal-footer">
-      <a href="add.html" class="modal-close waves-effect waves-red btn-flat">아니요</a>
-      <a id="tourConfirm" class="modal-close waves-effect waves-green btn-flat">네</a>
-    </div>
-  </div>
-  <button id="modal-button" data-target="modal" class="btn modal-trigger bit-invisible"></button>
 
   <!-- footer -->
   <footer class="bit-main-footer page-footer grey"></footer>
@@ -522,11 +519,13 @@
 <script src="/bitcamp-fit-tour/node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<!-- goglemap api -->
+<!-- swwtalert2 -->
+<script src="/bitcamp-fit-tour/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<!-- fittour -->
 <script src="../header.js"></script>
 <script src="../footer.js"></script>
 <script src="add.js"></script>
+<!-- goglemap api -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8&libraries=places&callback=initMap"></script>
-<!-- fittour -->
 
 </html>

@@ -62,7 +62,8 @@ body {
     width: 220px !important;
     height: 220px !important;
     padding-top: 165px !important;
-    font-size: 21px !important;
+    font-size: 20px !important;
+    font-weight : bold;
 } 
 
 .popular-header {

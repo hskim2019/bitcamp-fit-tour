@@ -28,6 +28,7 @@ firstPage = $('#firstPage');
 var totalpage;
 var orderby = "tourDesc";
 var theme = [];
+var keyword ='';
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var countrytrGenerator = Handlebars.compile(countrytemplateSrc),
@@ -131,8 +132,8 @@ if(location.href.split('?')[1]){
     var city = location.href.split('?')[1].split('=')[1];
     loadList(1, continentName, countryName, decodeURI(city), minPrice, maxPrice, minHour, maxHour, theme, orderby);
   } else if(param == 'keyword'){
-    var keyword = location.href.split('?')[1].split('=')[1];
-    loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, decodeURI(keyword));
+    keyword = decodeURI(location.href.split('?')[1].split('=')[1]);
+    loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
   }
 } else {
   loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
@@ -140,18 +141,18 @@ if(location.href.split('?')[1]){
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  loadList(pageNo - 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  loadList(pageNo + 1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
 });
 
 $('#orderbyPrice').click((e) => {
   e.preventDefault();
   orderby = 'priceAsc';
-  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
   initOptionSelected();
   $(e.target).addClass('selected');
 });
@@ -159,7 +160,7 @@ $('#orderbyPrice').click((e) => {
 $('#orderbyWishList').click((e) => {
   e.preventDefault();
   orderby = 'wishlistDesc';
-  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
   initOptionSelected();
   $(e.target).addClass('selected');
 });
@@ -167,7 +168,7 @@ $('#orderbyWishList').click((e) => {
 $('#orderbyReviews').click((e) => {
   e.preventDefault();
   orderby = 'reviewDesc';
-  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
   initOptionSelected();
   $(e.target).addClass('selected');
 });
@@ -187,10 +188,12 @@ $('.continent-list-btn').click((e) => {
   continentName = $(e.target).html();
   countryName = '';
   cityName = '';
+  keyword = '';
   showBreadCrumb(continentName, '', '');
   orderby = 'tourDesc';
   initOptionSelected();
   loadList(1, continentName, '', '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+  history.pushState(null,null, '/bitcamp-fit-tour/html/tour/index.html');
 });
 
 
@@ -200,10 +203,13 @@ $(document.body).bind('nav-list', () => {
     continentName = $(e.target).attr('id');
     countryName = $(e.target).html();
     cityName = '';
+    keyword = '';
+    console.log(keyword);
     showBreadCrumb(continentName, countryName, '');
     orderby = 'tourDesc';
     initOptionSelected();
     loadList(1, '', countryName, '', minPrice, maxPrice, minHour, maxHour, theme, orderby);
+    history.pushState(null,null, '/bitcamp-fit-tour/html/tour/index.html');
   });
 });
 
@@ -216,7 +222,9 @@ $(document.body).bind('nav-list', () => {
     showBreadCrumb(continentName, countryName, cityName);
     orderby = 'tourDesc';
     initOptionSelected();
+    keyword = '';
     loadList(1, '', '', cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+    history.pushState(null,null, '/bitcamp-fit-tour/html/tour/index.html');
   });
 });
 
@@ -300,7 +308,7 @@ function getMaxPrice() {
     e.preventDefault();
 //  console.log(continentName, countryName, cityName, minPrice, maxPrice);
     console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme);
-    loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+    loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, window.keyword);
   });
 
   $('.mouseOverLeave').hover((e) => {
@@ -388,14 +396,14 @@ function getMaxPrice() {
     if(checked) {
       theme.push(checkedtheme);
       console.log(theme);
-      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
       console.log('checked');
     } else {
       theme = $.grep(theme, function(value) {
         return value != checkedtheme;
       });
       console.log(theme);
-      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby);
+      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
       console.log('unchecked');
     }
   });

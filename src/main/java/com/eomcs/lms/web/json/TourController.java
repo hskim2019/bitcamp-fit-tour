@@ -8,12 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
 import com.eomcs.lms.domain.Theme;
@@ -69,7 +66,6 @@ public class TourController {
     String searchContinentName = null;
     String searchCountryName = null;
     String searchCityName = null;
-
     if (continentName.length() > 0) { 
       searchContinentName = continentName;
     }

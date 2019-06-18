@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* searchBar */
-input[type="search"] {
+li > div > input[type="search"] {
   display: inline-block !important;
   width: 230px !important;
   padding: 20px !important;
@@ -20,7 +20,7 @@ li > div > input[type="search"]::placeholder {
   font-weight: 200 !important;
 }
 li > div > input[type="search"]:focus::placeholder {
-  color: rgba(59, 61, 77, 0.63) !important;
+  color: black !important;;
 }
 
 li > div > input[type="search"]:hover {

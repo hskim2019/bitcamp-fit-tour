@@ -1,3 +1,4 @@
+/* main */
 nav {z-index: 3;}
 #main {z-index: 2;}
 #nav-bg {z-index: 1;}
@@ -5,6 +6,10 @@ nav {z-index: 3;}
 nav {
   background-color: transparent !important;
   position: fixed !important;
+}
+
+li > img {
+  -webkit-transition: all 13s ease-in-out;
 }
 
 /* img header */
@@ -33,13 +38,6 @@ body {
 
 
 /* card */
-.popular-card .card-image > img{
-  height: 220px;
-}
-
-.recently-card .card-image > img{
-  height: 270px;
-}
 
 .card {
   cursor : pointer;
@@ -47,13 +45,17 @@ body {
 
 /* populer */
 
+.popular-card .card-image > img{
+  height: 220px;
+}
+
 #popular-tour{
   height: 220px !important;
 }
 
 .popular-card {
-  width: 220px !important;
-  margin-left: 18px;
+  margin-left : 10px;
+  margin-right : 10px;
 }
 
 .popular-card .card-title{
@@ -61,14 +63,13 @@ body {
     background-image: linear-gradient(400deg,rgba(0, 0, 0, 0.54) 8%,hsla(0,0%,100%,0) 40%) !important;
     width: 220px !important;
     height: 220px !important;
-    padding-top: 165px !important;
+    padding-top: 170px !important;
     font-size: 20px !important;
-    font-weight : bold;
 } 
 
 .popular-header {
   font-weight: 700;
-  margin-left: 18px;
+  margin-left: 10px;
 }
 
 
@@ -83,34 +84,26 @@ body {
 /* lately product */
 
 .lately-card {
-  width: 380px !important;
-  margin-left: 18px;
-  height: auto !important;
+  width : 300px !important;
+  margin-left : 10px;
+  margin-right : 10px;
 }
 
-#lately-tour{
-  height: 500px !important;
-}
-
-.lately-card .card-title {
-    bottom: 70% !important;
-    left: 80% !important;
-    color: #e57272 !important;
-}
-
-.lately-card .card-title i{
-    font-weight: 600;
-    font-size: 30px !important;
-}
-
-.card-content {
-  min-height: 180px;
+.lately-header {
+  font-weight: 700;
+  margin-left: 10px;
 }
 
 .lately-title {
   font-size: 18px;
   font-weight: 600;
   min-height: 50px !important;
+}
+
+.lately-card .card-title {
+    bottom: 70% !important;
+    left: 80% !important;
+    color: #e57272 !important;
 }
 
 .lately-price {
@@ -127,8 +120,21 @@ body {
   color: gray;
 }
 
-
-li > img {
-  -webkit-transition: all 13s ease-in-out;
+#lately-tour{
+  height: 500px !important;
 }
 
+.lately-card .card-title i{
+    font-weight: 600;
+    font-size: 26px !important;
+}
+
+.card-content {
+  min-height: 180px;
+}
+
+/* slick */
+.slick-prev:before, .slick-next:before {
+    font-size: 27px !important;
+    color: #ee6e73 !important;
+}

@@ -1,19 +1,45 @@
 var tlocation = 0 + ',' + 0;
 var fileNames;
-// ready
+var disableListDate = [];
+var datePickerOption = {
+        format : 'yyyy년 mm월 dd일',
+        disableDayFn :function (date) {
+          console.log(disableListDate);
+          if(disableListDate.includes(date.toDateString())) {
+            return true
+          }else{
+            return false
+          }
+        }
+}
+//ready
 $(document).ready(function () {
+  // init characterCounter
   $('input[type="text"]').characterCounter();
+  // init select
   $('select').formSelect();
+  //init tabs
   $('.tabs').tabs({ duration: 800, /* swipeable: true */});
-  $('.datepicker').datepicker({
-    format: 'yyyy년 mm월 dd일',
+  // init date picker
+  var datePicker = $('.datepicker').datepicker(datePickerOption);
+  
+  $('#available-date').change(function(){
+    var availableDate = $('#available-date').val();
+    var year = availableDate.substring(0,4);
+    var month = availableDate.substring(6,8);
+    var day = availableDate.substring(10,12);
+    disableListDate.push(new Date(year + ',' + month + ',' + day).toDateString());
+    $('<div class="chip mb20">'+ availableDate +'<i class="close material-icons">close</i></div>').appendTo($('#available-date-row'));
+    $('.datepicker').datepicker('destroy');
+    $('.datepicker').datepicker(datePickerOption);
   });
 
-
+  //swipe1
   $('#next-swipe-1').click(function () {
     $('.tabs').tabs('select', 'swipe-1');
-  });// swipe1
+  });
 
+  //swipe-2
   $('.next-swipe-2').click(function () {
     if ($('#continent option:selected').val() == "대륙을 선택하세요.") {
       $('#continent').trigger('click');
@@ -53,8 +79,9 @@ $(document).ready(function () {
 
     $('.tabs').tabs('select', 'swipe-2');
 
-  });// swipe-2
-
+  });
+  
+  // swipe3
   $('.next-swipe-3').click(function () {
 
     if (!$('#input-personnel').val()) {
@@ -88,7 +115,8 @@ $(document).ready(function () {
     $('.tabs').tabs('select', 'swipe-3');
 
   });
-
+  
+  // swipe4
   $('.next-swipe-4').click(function () {
 
     if ($('.ql-editor').html() == '<p><br></p>') {
@@ -101,7 +129,7 @@ $(document).ready(function () {
   });
 
 
-}); // ready
+}); 
 
 
 //check noplace
@@ -122,9 +150,7 @@ $("#noplace").change(function () {
 });
 
 
-
-
-// Initialize QuillEditer
+//Initialize QuillEditer
 (function quillEditerInit() {
   var quill = new Quill('#quillEditor', {
     modules: {
@@ -133,7 +159,7 @@ $("#noplace").change(function () {
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
         ['blockquote', 'code-block'],
         [{ 'header': 1 }, { 'header': 2 }],               // custom button
-                                                          // values
+        // values
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
         [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
@@ -141,12 +167,12 @@ $("#noplace").change(function () {
         [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         [{ 'color': [] }, { 'background': [] }],          // dropdown with
-                                                          // defaults from theme
+        // defaults from theme
         [{ 'font': [] }],
         [{ 'align': [] }],
         ['clean']                                         // remove formatting
-                                                          // button
-      ],imageResize: {},
+        // button
+        ],imageResize: {},
     },
     placeholder: 'Compose an epic...',
     theme: 'snow'  // or 'bubble'
@@ -154,39 +180,39 @@ $("#noplace").change(function () {
   $('.ql-picker').next().remove();
 })();
 
-// Load CountryList
+//Load CountryList
 $('#continent').change(function () {
   $('#country').empty();
   $('#country').removeAttr('disabled');
   $('#country').append($('<option disabled selected>국가를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/countrylist?continent=' + $('#continent option:selected').val(),
-    function (obj) {
-      for (var i = 0; i < obj.countryList.length; i++) {
-        $('#country').append($('<option value="' + obj.countryList[i].no + '">' + obj.countryList[i].countryName + '</option>'));
-      }
-      $('select').formSelect();
+          function (obj) {
+    for (var i = 0; i < obj.countryList.length; i++) {
+      $('#country').append($('<option value="' + obj.countryList[i].no + '">' + obj.countryList[i].countryName + '</option>'));
     }
+    $('select').formSelect();
+  }
 
   );
 });
 
-// Load CityList
+//Load CityList
 $('#country').change(function () {
   $('#city').empty();
   $('#city').removeAttr('disabled');
   $('#city').append($('<option disabled selected>도시를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/citylist?countryNo=' + $('#country option:selected').val(),
-    function (obj) {
-      for (var i = 0; i < obj.cityList.length; i++) {
-        $('#city').append($('<option value="' + obj.cityList[i].no + '">' + obj.cityList[i].cityName + '</option>'));
-      }
-      $('select').formSelect();
+          function (obj) {
+    for (var i = 0; i < obj.cityList.length; i++) {
+      $('#city').append($('<option value="' + obj.cityList[i].no + '">' + obj.cityList[i].cityName + '</option>'));
     }
+    $('select').formSelect();
+  }
 
   );
 });
 
-// fileupload
+//fileupload
 var cnt = 0;
 
 $('#fileupload').click(function() {
@@ -201,113 +227,113 @@ $('#fileupload').fileupload({
   autoUpload: false,        // 파일을 추가할 때 자동 업로딩 하지 않도록 설정.
   disableImageResize: /Android(?!.*Chrome)|Opera/
     .test(window.navigator && navigator.userAgent), // 안드로이드와 오페라 브라우저는 크기 조정
-                                                    // 비활성 시키기
-  previewMaxWidth: 170,   // 미리보기 이미지 너비
-  previewMaxHeight: 150,  // 미리보기 이미지 높이
-  previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
+    // 비활성 시키기
+    previewMaxWidth: 170,   // 미리보기 이미지 너비
+    previewMaxHeight: 150,  // 미리보기 이미지 높이
+    previewCrop: true,      // 미리보기 이미지를 출력할 때 원본에서 지정된 크기로 자르기
 
-  processalways : function (e, data) {
-    cnt++;
-    $('.card').remove();
-    var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
-    for(file of data.originalFiles){
-      if (!acceptFileTypes.test(file['type'])){
+    processalways : function (e, data) {
+      cnt++;
+      $('.card').remove();
+      var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+      for(file of data.originalFiles){
+        if (!acceptFileTypes.test(file['type'])){
+          if (cnt == data.originalFiles.length){
+            $('.file-path').val('');
+            M.toast({ html: '여행사진은 gif, png, jpg, jpeg 파일만 업로드 할수 있습니다.' })
+          }
+          return;
+        }
+      }
+
+      if(data.files.length > 5){
         if (cnt == data.originalFiles.length){
+          M.toast({ html: '사진 등록은 최대 5장까지 가능합니다.' })
           $('.file-path').val('');
-          M.toast({ html: '여행사진은 gif, png, jpg, jpeg 파일만 업로드 할수 있습니다.' })
         }
         return;
       }
-    }
-    
-    if(data.files.length > 5){
-      if (cnt == data.originalFiles.length){
-      M.toast({ html: '사진 등록은 최대 5장까지 가능합니다.' })
-      $('.file-path').val('');
-      }
-      return;
-    }
-    console.log(data);
-    var imagesDiv = $('#images-div');
-    imagesDiv.html("");
-    for (var i = 0; i < data.files.length; i++) {
-      try {
-        if (data.files[i].preview.toDataURL) {
-          if (i == 0) {
-            $('<div class="card" ><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">대표사진</span></div></div>').appendTo(imagesDiv);
-          } else {
-            $('<div class="card ml30"><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">&nbsp;' + i + '&nbsp;</span></div></div>').appendTo(imagesDiv);
+      console.log(data);
+      var imagesDiv = $('#images-div');
+      imagesDiv.html("");
+      for (var i = 0; i < data.files.length; i++) {
+        try {
+          if (data.files[i].preview.toDataURL) {
+            if (i == 0) {
+              $('<div class="card" ><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">대표사진</span></div></div>').appendTo(imagesDiv);
+            } else {
+              $('<div class="card ml30"><div class="card-image"><img src="' + data.files[i].preview.toDataURL() + '"><span class="card-title">&nbsp;' + i + '&nbsp;</span></div></div>').appendTo(imagesDiv);
+            }
           }
+        } catch (err) { }
+      }
+
+      $('#fileupload').prev().html('다시 업로드');
+      $('.file-path').css('border-color', '#26a69a');
+      $.each(data.files, function (index, file) {
+        if (index == 0) {
+          fileNames = file.name;
+        } else {
+          fileNames = fileNames + ', ' + file.name;
         }
-      } catch (err) { }
-    }
-    
-    $('#fileupload').prev().html('다시 업로드');
-    $('.file-path').css('border-color', '#26a69a');
-    $.each(data.files, function (index, file) {
-      if (index == 0) {
-        fileNames = file.name;
-      } else {
-        fileNames = fileNames + ', ' + file.name;
-      }
-    });
-    $('.file-path').val(fileNames);
-
-    $('#add-btn').off().click(function () {
-
-      var themeArray = new Array();
-      $('input[name=theme]:checked').each(function () {
-        Theme = new Object();
-        Theme.no = $(this).val()
-        Theme.theme = $(this).next().html();
-        themeArray.push(Theme);
       });
-      
-      if($("input:checkbox[id='noplace']").is(":checked")){
-        tlocation = 0;
-      }
-      
-      data.formData = {
-        data: encodeURIComponent(JSON.stringify({
-          title: $('#input-title').val(),
-          subHeading: $('#input-subtitle').val(),
-          content: $(".ql-editor").html(),
-          totalHour: $('#input-totalHour').val(),
-          personnel: $('#input-personnel').val(),
-          transportation: $('input[name="transportaion"]:checked').next().html(),
-          cityNo: $('#city option:selected').val(),
-          theme: themeArray,
-          price: $('#input-price').val(),
-          location: tlocation
-        }))
-      };
-      var response = data.submit();
-      response.complete(function (result) {
-        var tourNo = result.tourNo;
-        Swal.fire({
-          title: '투어 상품이 등록 되었습니다!',
-          text: "등록된 상품을 확인 하시겠습니까?",
-          type: 'success',
-          showCancelButton: true,
-          confirmButtonColor: '#26a69a',
-          cancelButtonColor: '#ee6d73',
-          confirmButtonText: '네',
-          cancelButtonText: '아니오'
-        }).then((result) => {
-          if(result.value) {
-            location.href = 'view.html?no=' + tourNo;
-          } else if(result.dismiss === Swal.DismissReason.cancel){
-            location.href = location.href;
-          }
-        })
+      $('.file-path').val(fileNames);
+
+      $('#add-btn').off().click(function () {
+
+        var themeArray = new Array();
+        $('input[name=theme]:checked').each(function () {
+          Theme = new Object();
+          Theme.no = $(this).val()
+          Theme.theme = $(this).next().html();
+          themeArray.push(Theme);
+        });
+
+        if($("input:checkbox[id='noplace']").is(":checked")){
+          tlocation = 0;
+        }
+
+        data.formData = {
+                data: encodeURIComponent(JSON.stringify({
+                  title: $('#input-title').val(),
+                  subHeading: $('#input-subtitle').val(),
+                  content: $(".ql-editor").html(),
+                  totalHour: $('#input-totalHour').val(),
+                  personnel: $('#input-personnel').val(),
+                  transportation: $('input[name="transportaion"]:checked').next().html(),
+                  cityNo: $('#city option:selected').val(),
+                  theme: themeArray,
+                  price: $('#input-price').val(),
+                  location: tlocation
+                }))
+        };
+        var response = data.submit();
+        response.complete(function (result) {
+          var tourNo = result.tourNo;
+          Swal.fire({
+            title: '투어 상품이 등록 되었습니다!',
+            text: "등록된 상품을 확인 하시겠습니까?",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#26a69a',
+            cancelButtonColor: '#ee6d73',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+          }).then((result) => {
+            if(result.value) {
+              location.href = 'view.html?no=' + tourNo;
+            } else if(result.dismiss === Swal.DismissReason.cancel){
+              location.href = location.href;
+            }
+          })
+        });
       });
-    });
-  },
-  done: function (e, data) {}
+    },
+    done: function (e, data) {}
 });
 
 
-// googlemap
+//googlemap
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -325,7 +351,7 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.setFields(
-    ['address_components', 'geometry', 'icon', 'name']);
+          ['address_components', 'geometry', 'icon', 'name']);
 
   var infowindow = new google.maps.InfoWindow();
   var infowindowContent = document.getElementById('infowindow-content');
@@ -363,7 +389,7 @@ function initMap() {
         (place.address_components[0] && place.address_components[0].short_name || ''),
         (place.address_components[1] && place.address_components[1].short_name || ''),
         (place.address_components[2] && place.address_components[2].short_name || '')
-      ].join(' ');
+        ].join(' ');
     }
 
     infowindowContent.children['place-icon'].src = place.icon;
@@ -376,14 +402,14 @@ function initMap() {
   google.maps.event.addListener(marker, 'dragend', function (evt) {
     window.tlocation = evt.latLng.lat() + ',' + evt.latLng.lng();
     $('#add-btn').addClass('pulse');
-     document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
-     
+    document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+
   });
 
   google.maps.event.addListener(marker, 'dragstart', function (evt) {
-    
-     document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
-    
+
+    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+
   });
 }
 

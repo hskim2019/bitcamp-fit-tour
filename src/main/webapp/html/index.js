@@ -2,6 +2,7 @@ var latetlyProductTemplateSrc = $('#latley-product-template').html(),
     latetlyProductGenerator = Handlebars.compile(latetlyProductTemplateSrc);
     
 $(document).ready(function(){
+  
   //side nav
   $('.sidenav').sidenav();
 
@@ -49,27 +50,14 @@ $(document).ready(function(){
     }
   });
   
-
-  //carousel
-  $('#popular-tour').carousel({
-    dist : 0,
-    padding: 70,
-    fullWidth : true,
-    numVisible : 5
+  
+  // slick
+  $('#popular-tour').slick({
+    infinite: false,
+    speed: 300,
+    slidesToShow: 5,
+    slidesToScroll: 5
   });
-
-});
-
-$('#popular-left-ptn').click(function(){
-  $('#popular-tour').carousel('prev',5);
-  $('#popular-left-ptn').hide();
-  $('#popular-right-ptn').show();
-});
-
-$('#popular-right-ptn').click(function(){
-  $('#popular-tour').carousel('next',5);
-  $('#popular-left-ptn').show();
-  $('#popular-right-ptn').hide();
 });
 
 // add click evnet popular tour
@@ -93,10 +81,12 @@ $.get('../app/json/tour/latelylist',
   // append lately tour product
   $(latetlyProductGenerator(obj)).appendTo($('#lately-tour'));
   
-  // load carousel
-  $('#lately-tour').carousel({
-    fullWidth : true,
-    padding : 100,
+  //load slick
+  $('#lately-tour').slick({
+    infinite: false,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 4,
   });
   
   // add transportation icon
@@ -113,7 +103,7 @@ $.get('../app/json/tour/latelylist',
     }
     $('.wish').each(function(){
       for(var wishlist of obj.wishlist){
-        if(wishlist.tour_id == $(this).parent().parent().attr('id'))
+        if(wishlist.tour_id == $(this).parent().parent().attr('no'))
           $(this).html('<i class="material-icons wish-status">favorite</i>');
       }
     });
@@ -129,7 +119,7 @@ $.get('../app/json/tour/latelylist',
       }
       
       if($(e.target).hasClass('wish-status')){
-        $.get('../app/json/wishlist/delete?tourNo=' + $(e.target).parents('.card').attr('id'),
+        $.get('../app/json/wishlist/delete?tourNo=' + $(e.target).parents('.card').attr('no'),
             function(obj) {
           if (obj.status == 'success') {
             $(e.target).parent().html('<i class="material-icons">favorite_border</i>');
@@ -139,7 +129,7 @@ $.get('../app/json/tour/latelylist',
           }
         });
       } else {
-        $.get('../app/json/wishlist/add?tourNo=' + $(e.target).parents('.card').attr('id'),
+        $.get('../app/json/wishlist/add?tourNo=' + $(e.target).parents('.card').attr('no'),
             function(obj) {
           if (obj.status == 'success') {
             $(e.target).parent().html('<i class="material-icons wish-status">favorite</i>');
@@ -151,7 +141,7 @@ $.get('../app/json/tour/latelylist',
       }
       return;
     }
-    location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).attr('id'); 
+    location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).attr('no'); 
   })
   
 });

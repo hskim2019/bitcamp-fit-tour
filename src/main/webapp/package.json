@@ -24,6 +24,7 @@
     "raty-js": "^2.9.0",
     "select2": "^4.0.7",
     "select2-materialize": "^0.1.8",
+    "slick-carousel": "^1.8.1",
     "sweetalert2": "^8.12.1"
   },
   "description": "",

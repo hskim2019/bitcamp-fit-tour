@@ -16,6 +16,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- google font -->
   <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
+  <!-- slick -->
+  <link href="/bitcamp-fit-tour/node_modules/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="/bitcamp-fit-tour/node_modules/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- fittour -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
@@ -70,14 +73,7 @@
       <!-- popuer h -->
       <h5 class="popular-header mb20"><span class="teal-text">인기</span> 여행지</h5>
       
-    <div id="popular-tour" class="carousel">
-        <!-- carousel next preve button -->
-        <div class="carousel-fixed-item valign-wrapper mt100">
-          <a id="popular-left-ptn" class="identifier left left-align btn black hoverable waves-effect bit-invisible">
-          <i class="material-icons">navigate_before</i></a>
-          <a id="popular-right-ptn" class="identifier right right-align btn black hoverable waves-effect">
-          <i class="material-icons">navigate_next</i></a>
-        </div> 
+    <div id="popular-tour">
 
         <!-- rome -->
         <div id="rome" class="popular-card card carousel-item hoverable">
@@ -164,23 +160,13 @@
 
     <div class="row mt50">
       <!-- lately-tour h -->
-      <h5 class="popular-header mb20">이 주의 <span class="teal-text">신규</span> 상품</h5>
-      <div id="lately-tour" class="carousel">
-
-        <!-- carousel next preve button -->
-        <div class="carousel-fixed-item valign-wrapper mt150">
-          <a onclick="$('#lately-tour').carousel('prev');" style="margin-right: auto;"
-            class="identifier left left-align btn black hoverable waves-effect"><i
-              class="material-icons">navigate_before</i></a>
-          <a onclick="$('#lately-tour').carousel('next');" style="margin-left: auto;"
-            class="identifier right right-align btn black hoverable waves-effect"><i
-              class="material-icons">navigate_next</i></a>
-        </div>
+      <h5 class="lately-header mb20">이 주의 <span class="teal-text">신규</span> 상품</h5>
+      <div id="lately-tour">
 
         
       </div>
     </div>
-  
+    
   </div>
 
 
@@ -192,7 +178,7 @@
   <!-- product handlebars -->
   <script id="latley-product-template" type="text/x-handlebars-template">
 {{#each tours}}
-      <div class="lately-card card carousel-item hoverable" id="{{no}}">
+      <div class="lately-card card carousel-item hoverable" no="{{no}}">
 
         <div class="card-image">
           <img src="/bitcamp-fit-tour/upload/tourphoto/{{tourPhoto}}">
@@ -242,6 +228,8 @@
     src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
   <!-- handlebars -->
   <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <!-- slick -->
+  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/slick-carousel/slick/slick.min.js"></script>
   <!-- fittour -->
   <script src="/bitcamp-fit-tour/html/header.js"></script>
   <script src="/bitcamp-fit-tour/html/footer.js"></script>

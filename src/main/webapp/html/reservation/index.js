@@ -9,6 +9,12 @@ var pageNo = 1,
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGenerator = Handlebars.compile(templateSrc);
 
+$(document).ready(function(){
+  $('.datepicker').datepicker(
+  {autoClose: true}    
+  );
+});
+
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
   
@@ -23,6 +29,14 @@ function loadList(pn) {
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(trGenerator(obj)).appendTo(tbody);
       
+      for(requirement of $('.requirement')) {
+        $.ajaxSetup({async:false});
+        if($(requirement).attr('data-content').length > 0) {
+         $(requirement).append('<i class="tiny material-icons">check</i>');
+       }
+        $.ajaxSetup({async:true});
+      }
+      
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
       
@@ -35,8 +49,10 @@ function loadList(pn) {
         
       // 마지막 페이지일 경우 버튼을 비활성화 한다.
       if (pageNo == obj.totalPage) {
+        console.log(obj.totalPage);
         nextPageLi.addClass('disabled');
       } else {
+        console.log(obj.totalPage);
         nextPageLi.removeClass('disabled');
       }
       

@@ -21,46 +21,80 @@
 <header class="bit-main-header"></header>
 
 <div class="container">
-<h2>예약 목록 </h2>
+<h2 class="titl">예약 목록</h2>
 <!-- <p><a href='view.html' class="btn btn-primary btn-sm">새 예약</a></p> -->
 
-<div class="bit-list">
-<table class="table table-hover">
+<div class="search-categories row">
+
+ <div class="title-search">
+  <select class="browser-default" id="search-title">
+    <option value="0" selected>상품명</option>
+    <option value="1">상품명</option>
+  </select>
+ </div>
+ 
+ <div class="date-search">
+여행일
+<i class="far fa-calendar-alt"></i>
+<input type="text" class="datepicker" id="search-date" placeholder="날짜 선택">
+</div>
+
+<form id="searchthis">
+<input id="search-box" type="text" placeholder="예약자명" maxlength="25" data-length="25">
+<input id="search-btn" value="검색" type="submit"/>
+</form> 
+
+</div>
+
+<div class="reservation-list">
+<table class="highlight">
 <thead>
   <tr> 
-    <th scope="col">예악일</th>
-    <th scope="col">예약번호</th>
-    <th scope="col">회원이름</th>
-    <th scope="col">상태</th>
-
+    <th class="center">예약번호</th>
+    <th class="center">상품번호</th>
+    <th class="center">상품명</th>
+    <th class="center">여행일</th>
+    <th class="center">예약자명</th>
+    <th class="center">인원</th>
+    <th class="center">연락처</th>
+    <th class="center">요청사항</th>
+    <th class="center">예약일</th>
+    <th class="center">결제번호</th>
+    <th class="center">결제일</th>
+    <th class="center">예약상태</th>
   </tr>
 </thead>
-<tbody></tbody>
-</table>
-</div><!-- .bit-list -->
 
-<nav aria-label="목록 페이지 이동">
+<tbody></tbody>
+
+</table>
+</div><!-- reservation-list -->
+
   <ul class="pagination justify-content-center">
-    <li id="prevPage" class="page-item">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=3">이전</a></li>
+    <li id="prevPage" class="page-item"><a class="page-link" href="?pageNo=0&pageSize=3">이전</a></li>
     <li id="currPage" class="page-item active"><span class="page-link">1</span></li>
-    <li id="nextPage" class="page-item ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=3">다음</a></li>
+    <li id="nextPage" class="page-item "><a class="page-link" href="?pageNo=2&pageSize=3">다음</a></li>
   </ul>
-</nav>
 </div><!-- .container -->
+
+<footer class="bit-main-footer page-footer grey"></footer>
 
 <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
 <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
-<tr>
-  <th scope='row'>{{reservationDate}}</th>
-  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{no}}</a></td>
-  <td>{{member.name}}</td>
-  <td>{{paymentStatus.status}}</td>
-
+<tr class="listRow">
+  <th class="center">{{no}}</th>
+  <th class="center">{{tourNo}}</th>
+  <td><a class='bit-view-link' href='#' data-no='{{no}}'>{{tour.title}}</a></td>
+  <th class="center">{{tourDate}}</th>
+  <th class="center">{{member.name}}</th>
+  <th class="center">{{personnel}}</th>
+  <th class="center">{{touristTel}}</th>
+  <th class="center requirement" data-content="{{requirement}}"></th>
+  <th class="center">{{reservationDate}}</th>
+  <th class="center">{{paymentNo}}</th>
+  <th class="center">{{paymentDate}}</th> 
+  <td class="center">{{paymentStatus.status}}</td>
 </tr>
 {{/each}}
 </script>
@@ -72,7 +106,7 @@
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
 <script src="../header.js"></script>
 <script src="index.js"></script>
-
+<script src="../footer.js"></script>
 </body>
 </html>
 

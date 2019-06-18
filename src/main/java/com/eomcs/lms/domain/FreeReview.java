@@ -11,8 +11,21 @@ public class FreeReview {
 	private String content;
 	private int viewCount;
 	private int score;
-	
-	public int getScore() {
+	private int cityNo;
+	 private City city;
+	public int getCityNo() {
+    return cityNo;
+  }
+  public void setCityNo(int cityNo) {
+    this.cityNo = cityNo;
+  }
+  public City getCity() {
+    return city;
+  }
+  public void setCity(City city) {
+    this.city = city;
+  }
+  public int getScore() {
     return score;
   }
   public void setScore(int score) {
@@ -76,7 +89,8 @@ public class FreeReview {
   public String toString() {
     return "FreeReview [no=" + no + ", memberNo=" + memberNo + ", reservationNo=" + reservationNo
         + ", title=" + title + ", content=" + content + ", viewCount=" + viewCount + ", score="
-        + score + ", createdDate=" + createdDate + ", member=" + member + "]";
+        + score + ", cityNo=" + cityNo + ", city=" + city + ", createdDate=" + createdDate
+        + ", member=" + member + "]";
   }
 	
 	

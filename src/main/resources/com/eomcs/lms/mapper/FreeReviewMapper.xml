@@ -21,6 +21,12 @@
     <result column="name" property="name" />
  </association>
 
+<association property="city" javaType="city">
+      <id column="city_id" property="no" />
+      <result column="country_id" property="countryNo" />
+      <result column="city_name" property="cityName" />
+    </association>
+
 	</resultMap>
  <insert id="insert" parameterType="freereview">
     insert into free_review(
@@ -113,6 +119,19 @@
     where
     free_review_id = #{no}
   </update>
+  
+  
+  <insert id="insertCity" parameterType="map">
+    insert into
+    free_review_city(free_review_id, city_id)
+    values(#{No}, #{cityNo})
+  </insert>
+  
+  <select id="selectReviewCity" resultType="map" parameterType="int">
+    select * from free_review_city
+ where free_review_id =
+    #{freeReviewNo}
+  </select>
   
   
 </mapper>

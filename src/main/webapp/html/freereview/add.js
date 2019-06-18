@@ -31,14 +31,16 @@
   $('.ql-picker').next().remove();
 })();
 
-$(document).ready(function(){
-  $('select').formSelect();
-});
 
 
 
 
 (function loadList() {
+ 
+  
+  
+  
+  
   $.getJSON('../../app/json/reservation/myreservation',
        function (obj) {
     if(obj.status == 'fail'){
@@ -54,7 +56,7 @@ $(document).ready(function(){
    }
     
    
-    $('select').formSelect();
+    $('#reservation').formSelect();
   })
  
 })();
@@ -103,4 +105,42 @@ $ ( function ()  {
   
   }); 
 });
+
+$(document).ready(function() {
+  $.get('/bitcamp-fit-tour/app/json/tour/autocomplete',function(obj){
+    var autoCompleteData = new Array();
+    console.log(obj);
+    for (var city of obj.cityList) {
+      var auto = {};
+      auto['id'] = city.no;
+      auto['text'] = city.cityName;
+      autoCompleteData.push(auto);
+    }
+    $('.selectCity').select2({
+            
+            width: "100%",
+            data :  autoCompleteData,
+            maximumSelectionLength: 3,
+            anguage: "kr"
+    });
+ 
+
+  })
+ 
+  
+  
+  
+  
+  
+});
+
+var data = [{
+  id: 'KOR',
+  text: 'Korea'
+}, {
+  id: 'JPN',
+  text: 'Japan'
+}];
+
+
 

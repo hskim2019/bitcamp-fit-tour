@@ -1,4 +1,5 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -26,6 +27,12 @@
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
 <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
 <link rel="stylesheet" href="add.css">
+<!-- select -->
+
+<link href="/bitcamp-fit-tour/node_modules/select2-materialize/select2-materialize.css"
+  rel="stylesheet" />
+
+
 </head>
 
 <body>
@@ -40,43 +47,51 @@
       </blockquote>
       • 다녀온 여행에 대해 후기를 자유롭게 작성해주세요.<br>
     </div>
-<div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="title" name="title" type="text" class="form-control" autocomplete=off>
-          <label for="title">제목</label>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="title" name="title" type="text" class="form-control" autocomplete=off>
+            <label for="title">제목</label>
           </div>
           <div class="input-field col s6">
-           <select id="reservation"  >
-               <option id="selectOption" value="0" selected>다녀 온 투어를 선택하세요.</option>
-              </select>
+            <select id="reservation">
+              <option id="selectOption" value="0" selected>다녀 온 투어를 선택하세요.</option>
+            </select>
           </div>
           <div class="input-field col s6">
-          <div id="raty"><label id="ratyLabel">평점을 선택해주세요 :  </label> </div>
-           </div>
+             <select id="city" class="selectCity"  name="states[]" multiple="multiple">
           
-      </div>
-    </form>
-  </div>
+          </select>
+          </div>
+
+          <div class="input-field col s6">
+            <div id="raty">
+              <label id="ratyLabel">평점을 선택해주세요 : </label>
+            </div>
+          </div>
+           
+        </div>
+      </form>
+    </div>
 
 
     <div class="form-group">
       <div id="quillEditor"></div>
     </div>
-    
+
     <div class="row"></div>
 
     <div class="row">
 
-  <input id="add-btn" type="button" value="글 쓰기" class="btn-floating btn-large right" >
+      <input id="add-btn" type="button" value="글 쓰기" class="btn-floating btn-large right">
     </div>
 
 
   </div>
 
   <!-- footer -->
-</body>content
+</body>
 
 <footer class="bit-main-footer page-footer grey"></footer>
 
@@ -94,4 +109,6 @@
 <script src="add.js"></script>
 <!-- raty -->
 <script src="/bitcamp-fit-tour/node_modules/raty-js/lib/jquery.raty.js"></script>
+<!-- select -->
+<script src="/bitcamp-fit-tour/node_modules/select2/dist/js/select2.js"></script>
 </html>

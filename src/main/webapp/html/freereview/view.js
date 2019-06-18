@@ -63,5 +63,12 @@ $('#update-btn').click(() => {
   window.location.href = 'update.html?no='+reviewNo;
 });
 
-
+$(document.body).bind('loaded-list', () => {   
+// 제목을 클릭했을 때 view.html로 전환시키기  
+$('.bit-view-link').click((e) => {  
+  e.preventDefault(); 
+  window.location.href = '../tour/view.html?no=' +  
+    $(e.target).attr('data-no');  
+}); 
+});
 

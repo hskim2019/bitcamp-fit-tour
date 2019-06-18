@@ -101,6 +101,8 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
 
         // 마지막 페이지일 경우 버튼을 비활성화 한다.
         if (pageNo == obj.totalPage) {
+          console.log('pageNo:' + pageNo);
+          console.log('totalPage:' + obj.totalPage);
           nextPageLi.addClass('disabled');
         } else {
           nextPageLi.removeClass('disabled');

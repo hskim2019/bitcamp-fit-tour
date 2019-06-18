@@ -99,6 +99,7 @@ public class TourServiceImpl implements TourService {
     params.put("minHour", minHour);
     params.put("maxHour", maxHour);
     params.put("theme", theme);
+    params.put("keyword", keyword);
     
     if (continentName == null && countryName == null && cityName == null) {
     	return tourDao.findAll(params);

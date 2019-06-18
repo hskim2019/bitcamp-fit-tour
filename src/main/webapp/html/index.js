@@ -74,7 +74,7 @@ $('#popular-right-ptn').click(function(){
 
 // add click evnet popular tour
 $('.popular-card').click(function(){
-  var cityName = $(this).attr('id');
+  var cityName = $(this).find('span').html();
   location.href = '/bitcamp-fit-tour/html/tour/index.html?city=' + cityName;
 });
 

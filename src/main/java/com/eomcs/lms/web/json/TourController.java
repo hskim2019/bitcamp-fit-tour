@@ -59,9 +59,10 @@ public class TourController {
       @RequestParam(value="theme[]", required=false, 
       defaultValue="자전거 투어, 야경 투어, 맛집 투어, 로컬 투어, 워킹 투어, 버스 투어, 반나절 투어, 종일 투어")List<String> theme,
       String orderby,
+      String keyword,
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="5") int pageSize) {
-
+    System.out.println(keyword);
     String searchContinentName = null;
     String searchCountryName = null;
     String searchCityName = null;
@@ -94,7 +95,7 @@ public class TourController {
         searchContinentName, searchCountryName, searchCityName, 
         minPrice, maxPrice, 
         minHour, maxHour,
-        theme);
+        theme, keyword);
     int rowCount = list.size();
     //int rowCount = tourService.size();
     System.out.println("rowCount: " + rowCount);
@@ -114,6 +115,7 @@ public class TourController {
         minPrice, maxPrice, 
         minHour, maxHour,
         theme,
+        keyword,
         orderby,
         pageNo, pageSize);
 
@@ -211,12 +213,14 @@ public class TourController {
     return content;
   }
   
-  @GetMapping("allcitylist")
-  public Object allCityList() {
+  @GetMapping("autocomplete")
+  public Object autocomplete() {
 
     List<City> cityList =tourService.findCity();
+    List<Country> countryList = tourService.findCountry();
     HashMap<String,Object> content = new HashMap<String,Object>();
     content.put("cityList", cityList);
+    content.put("countryList", countryList);
     return content;
   }
   

@@ -16,7 +16,6 @@ public class Tour {
 	private int price;
 	private int cityNo;
 	private String location;
-	
 	private City city;
 	private Country country;
 	private List<TourGuidancePhoto> tourPhoto;

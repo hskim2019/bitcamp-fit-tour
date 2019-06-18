@@ -19,6 +19,7 @@ public interface TourService {
       int maxHour,
       List<String> theme,
       String orderby,
+      String keyword,
       int pageNo, int pageSize
       );
   int add(Tour tour);
@@ -38,6 +39,7 @@ public interface TourService {
   List<Country> listCountry(String continent);
   List<City> listCity(int countryNo);
   List<City> findCity();
+  List<Country> findCountry();
   int maxValue();
   List<Tour> search(
       String continentName,
@@ -47,7 +49,8 @@ public interface TourService {
       int maxPrice,
       int minHour,
       int maxHour,
-      List<String> theme
+      List<String> theme,
+      String keyword
       );
   List<Tour> registeredcountry(String continent);
   List<Tour> registeredcity(String country);

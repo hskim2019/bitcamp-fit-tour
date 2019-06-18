@@ -134,7 +134,7 @@
 		<if test="reviewDesc != null"> 
 		left outer join reservation as r on t.tour_id = r.tour_id
 		left outer join free_review as fr on r.reservation_id = fr.reservation_id </if>
-		<where>
+		<where> 
 			<if test="continentName != null">or continent = #{continentName}</if>
 			<if test="countryName != null">and country_name = #{countryName}</if>
 			<if test="cityName != null">and city_name = #{cityName}</if>
@@ -145,6 +145,12 @@
 				<foreach collection="theme" item="theme" separator=","
 					open="(" close=")">#{theme}</foreach>
 			</if>
+			<if test="keyword != null">
+			<bind name="pattern1" value="'%' + keyword + '%'" />
+			and continent like #{pattern1}
+			or country_name like #{pattern1} 
+			or city_name like #{pattern1}
+			or title like #{pattern1}</if>
 		</where>
 		<if test="priceAsc != null"> order by price asc</if>
 		<if test="priceDesc != null"> order by price desc</if>
@@ -274,10 +280,14 @@
 	</select>
   
 	<!-- find city -->
-	<select id="findCity" resultMap="cityMap"
-		parameterType="int">
+	<select id="findCity" resultMap="cityMap">
 		select * from city
 	</select>
+	
+	<!-- find country -->
+  <select id="findCountry" resultMap="countryMap">
+    select * from country
+  </select>
   
 	<!-- find MaxPrice -->
 	<select id="findMaxPrice" resultType="int">

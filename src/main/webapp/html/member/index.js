@@ -132,11 +132,16 @@ $(document.body).bind('loaded-list', () => {
 $('.bit-view-link').click((e) => {
 e.preventDefault();
 var image = $(e.target).attr('data-photo');
-if(image == 'default.jpg'){
+if(image != 'default.jpg'){
+  $('#profile-picture').attr('src', '/bitcamp-fit-tour/upload/member/' + image);
+} else {
   $('#profile-picture').addClass('bit-invisible');
   $('.default-profile').removeClass('bit-invisible');
-} else {
-$('#profile-picture').attr('src', '/bitcamp-fit-tour/upload/member/' + image);
 }
 });
+});
+
+$('.btn-flat').click((e) => {
+  $('#profile-picture').removeClass('bit-invisible');
+  $('.default-profile').addClass('bit-invisible');
 });

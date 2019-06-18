@@ -84,23 +84,16 @@ box-shadow: none;
 .btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus {
     background-color: #f7f5f8;
 }
-/* th:nth-child(1) {
-  width: 50px;
+
+a[data-photo="default.jpg"] {
+	color : #4a4a4a;
 }
 
-th:nth-child(3) {
-  text-align: center;
-  width: 100px;
+/*modal*/
+.modal {
+	width: 270px;
 }
 
-th:nth-child(4) {
-  text-align: center;
-  width: 60px;
-}
-
-td:nth-child(4) {
-  text-align: center;
-} */
 
 /*pagination*/
 .pagination {

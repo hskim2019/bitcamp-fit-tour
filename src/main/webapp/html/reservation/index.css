@@ -79,10 +79,22 @@ height: 17px;
 	cursor: pointer;
 }
 
+
+/*modal*/
 .modal {
 	width: 500px;
 	top: 30% !important;
 }
+
+.modal-titl {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 41px;
+    color: #4a4a4a;
+    margin-top: 120px;
+    margin-bottom: 0px;
+}
+
 /* th:nth-child(1) {
   width: 50px;
 }
@@ -100,3 +112,20 @@ th:nth-child(4) {
 td:nth-child(4) {
   text-align: center;
 } */
+
+/*pagination*/
+.pagination {
+  text-align: center;
+}
+
+.currpage-link, #currPage {
+  background-color: white !important;
+  width: 20px;
+}
+
+.page-link {
+  font-size: 13px !important;
+  color: #514859; 
+  line-height: 18px !important;
+  font-weight: normal;
+}

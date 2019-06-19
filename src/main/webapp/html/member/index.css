@@ -95,8 +95,22 @@ a[data-photo="default.jpg"] {
 /*modal*/
 .modal {
 	width: 270px;
+	top: 30% !important;
 }
 
+.modal-titl {
+	font-weight: 700;
+    font-size: 28px;
+    line-height: 41px;
+    color: #4a4a4a;
+    margin-top: 120px;
+    margin-bottom: 0px;
+}
+
+
+#profile-picture {
+	margin-top: 15px;
+}
 
 /*pagination*/
 .pagination {

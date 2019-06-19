@@ -47,14 +47,14 @@ function loadList(pn, search) {
         var smsCheckHtml = $(listRow).children().eq(8).html();
         var emailCheckHtml = $(listRow).children().eq(9).html();
         if(smsCheckHtml == 'true') {
-          $(listRow).children().eq(8).html('<i class="material-icons">check</i>');
+          $(listRow).children().eq(8).html('<i class="tiny material-icons">check</i>');
         } else {
-          $(listRow).children().eq(8).html('<i class="material-icons">remove</i>');
+          $(listRow).children().eq(8).html('<i class="tiny material-icons">remove</i>');
         }
         if(emailCheckHtml == 'true') {
-          $(listRow).children().eq(9).html('<i class="material-icons">check</i>');
+          $(listRow).children().eq(9).html('<i class="tiny material-icons">check</i>');
         } else {
-          $(listRow).children().eq(9).html('<i class="material-icons">remove</i>');
+          $(listRow).children().eq(9).html('<i class="tiny material-icons">remove</i>');
         }
         $.ajaxSetup({async:true});
       }

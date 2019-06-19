@@ -77,14 +77,20 @@ public class ReservationController {
 	@GetMapping("list")
 	public Object list(
 			@RequestParam(defaultValue="1") int pageNo,
-			@RequestParam(defaultValue="3") int pageSize, String search) {
+			@RequestParam(defaultValue="3") int pageSize, 
+			String search) {
 
+		String searchWord = null;
+		if (search.length() > 0) {
+			searchWord = search;
+		}
+		
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
 
-		int rowCount = reservationService.size(search);
+		int rowCount = reservationService.size(searchWord);
 		int totalPage = rowCount / pageSize;
-		if (rowCount % pageSize > 0)
+		if (totalPage == 0 || rowCount % pageSize > 0)
 			totalPage++;
 
 		if (pageNo < 1) 
@@ -92,7 +98,7 @@ public class ReservationController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Reservation> reservations = reservationService.list(pageNo, pageSize, search);
+		List<Reservation> reservations = reservationService.list(pageNo, pageSize, searchWord);
 
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", reservations);
@@ -216,4 +222,35 @@ public class ReservationController {
 		return content;
 	}
 
+	
+//	@GetMapping("search")
+//	public Object search(
+//			@RequestParam(defaultValue="1") int pageNo,
+//			@RequestParam(defaultValue="3") int pageSize, 
+//			int tourNo,
+//			String tourDate) {
+//
+//		if (pageSize < 3 || pageSize > 8) 
+//			pageSize = 3;
+//
+//		int rowCount = reservationService.size(tourNo, tourDate);
+//		int totalPage = rowCount / pageSize;
+//		if (totalPage == 0 || rowCount % pageSize > 0)
+//			totalPage++;
+//
+//		if (pageNo < 1) 
+//			pageNo = 1;
+//		else if (pageNo > totalPage)
+//			pageNo = totalPage;
+//
+//		List<Reservation> reservations = reservationService.list(pageNo, pageSize, tourNo, tourDate);
+//
+//		HashMap<String,Object> content = new HashMap<>();
+//		content.put("list", reservations);
+//		content.put("pageNo", pageNo);
+//		content.put("pageSize", pageSize);
+//		content.put("totalPage", totalPage);
+//
+//		return content;
+//	}
 }

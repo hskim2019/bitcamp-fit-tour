@@ -179,7 +179,7 @@
 		join theme as th on toth.theme_id = th.theme_id
 		join city as ci on t.city_id = ci.city_id
 		join country as co on ci.country_id = co.country_id
-		join imposibility_date as im on t.tour_id = im.tour_id
+		left outer join imposibility_date as im on t.tour_id = im.tour_id
 		where t.tour_id = #{value};
 	</select>
 

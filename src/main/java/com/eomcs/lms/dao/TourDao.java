@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
+import com.eomcs.lms.domain.ImposibilityDate;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourComment;
 import com.eomcs.lms.domain.TourGuidancePhoto;
@@ -19,6 +20,7 @@ public interface TourDao {
   int countAll();
   TourComment findComment();
   int insertTheme (List<TourTheme> theme);
+  int insertImposibilityDate (List<ImposibilityDate> imposibilityDate);
   int insertPhoto (List<TourGuidancePhoto> photo);
   int insertWishlist (Map<String, Object> paramMap);
   int countWishlist (Map<String, Object> paramMap);

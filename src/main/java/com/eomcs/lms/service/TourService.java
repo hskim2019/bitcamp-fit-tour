@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
+import com.eomcs.lms.domain.ImposibilityDate;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
@@ -28,6 +29,7 @@ public interface TourService {
   int delete(int no);
   int size();
   int addTheme(List<TourTheme> theme);
+  int addImposibilityDate (List<ImposibilityDate> imposibilityDate);
   int addPhoto(List<TourGuidancePhoto> photo);
   int addWishlist (Map<String, Object> paramMap);
   int countWishlist (Map<String, Object> paramMap);

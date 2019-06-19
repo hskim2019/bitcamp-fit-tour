@@ -3,17 +3,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
+import com.eomcs.lms.domain.ImposibilityDate;
 import com.eomcs.lms.domain.Theme;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourGuidancePhoto;
@@ -139,9 +138,10 @@ public class TourController {
   //add tour
   @PostMapping("add")
   public Object add(HttpServletRequest request /*,@RequestBody String json*/) throws IOException, ServletException {
+     
     Tour tour = new Tour();
     List<TourGuidancePhoto> photos = new ArrayList<>();
-
+    
     Collection<Part> parts = request.getParts();
     for(Part part : parts) {
       if (part.getContentType() == null) {
@@ -174,7 +174,10 @@ public class TourController {
     HashMap<String,Object> content = new HashMap<String,Object>();
 
     try {
+      // add tour
       tourService.add(tour);
+      
+      // add tour themes
       List<Theme> themes = tour.getTheme();
       List<TourTheme> TourThemes = new ArrayList<>();
       for(Theme theme : themes ) {
@@ -184,11 +187,23 @@ public class TourController {
         TourThemes.add(tourTheme);
       }
       tourService.addTheme(TourThemes);
-
+      
+      //add tour photo
       for(TourGuidancePhoto tourGuidance : photos) {
         tourGuidance.setTourNo(tour.getNo());
       }
       tourService.addPhoto(photos);
+      
+      // add tour imposibility date
+      List<ImposibilityDate> imposibilityDateList = new ArrayList<>();
+      Date[] imposibiltyDates = tour.getImposibilityDate();
+      for(Date imposibiltyDate : imposibiltyDates) {
+        ImposibilityDate imposibilityDate = new ImposibilityDate();
+        imposibilityDate.setTourNo(tour.getNo());
+        imposibilityDate.setImposibilityDate(imposibiltyDate);
+        imposibilityDateList.add(imposibilityDate);
+      }
+      tourService.addImposibilityDate(imposibilityDateList);
 
       content.put("status", "success");
       content.put("tourNo", tour.getNo());

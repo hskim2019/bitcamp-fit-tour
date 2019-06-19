@@ -7,9 +7,6 @@ commentList(tourNo, pageNo, addDeleteCount, 0);
 
 //ready
 $(document).ready(function(){
-  $('.datepicker').datepicker({
-    format : 'yyyy년 mm월 dd일',
-  });
   $('textarea#comment-add').characterCounter();
   $(".dropdown-trigger").dropdown();
 });
@@ -33,7 +30,7 @@ function tourList(tourNo) {
     $('#secondcrumb').html(obj.tour.country.countryName);
     $('#thirdcrumb').html(obj.tour.city.cityName);
     tlocation = obj.tour.location;
-    
+
     console.log(tlocation);
     if(tlocation != "0"){
       initMap(tlocation);
@@ -47,12 +44,46 @@ function tourList(tourNo) {
     for(var i = 0; i < obj.tour.tourPhoto.length; i++){
       $('#image').append($('<li><img class="img-thumbnail materialboxed" src="../../upload/tourphoto/'+obj.tour.tourPhoto[i].name+'"></li>'));
     }
+
+    // init slider
     $('.slider').slider({
       duration : 1000,
       interval : 3000,
       height : 440
     });
+    // init materialboxed
     $('.materialboxed').materialbox();
+
+    // init datepicker
+    var imposibilityDate = new Array();
+    console.log(obj.tour.imposibilityDates[0].imposibilityDate)
+    console.log(new Date(obj.tour.imposibilityDates[0].imposibilityDate))
+    for(var imposibilityDates of obj.tour.imposibilityDates){
+      imposibilityDate.push(new Date(imposibilityDates.imposibilityDate).toString());
+    }
+    console.log(imposibilityDate);
+    $('.datepicker').datepicker({
+      i18n : {
+        months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthsShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        weekdaysFull: ['일', '월', '화', '수', '목', '금', '토'],
+        weekdaysShort:['일', '월', '화', '수', '목', '금', '토'],
+        cancel:'취소',
+        done: '확인'
+      },
+      format : 'yyyy년 mm월 dd일',
+      
+      disableDayFn :function (date) {
+        console.log(date);
+        if(imposibilityDate.includes(date.toString())) {
+          return true
+        }else{
+          return false
+        }
+      }
+    });
+
+
   });
 }
 
@@ -92,22 +123,22 @@ function getTransportaionIcon(transportation) {
 //add click event reservation button
 $('#reservation-btn').click((e) => {
   e.preventDefault();
-  
+
   if (!sessionStorage.getItem('loginUser')) {
     location.href = '/bitcamp-fit-tour/html/auth/login.html'
-    return;
+      return;
   }
-  
+
   if(!$('#tour-date').val()){
     M.toast({ html: '날짜를 선택하세요.' })
     return;
   }
-  
+
   if($('.selected').children().first().html() == "인원 선택"){
     M.toast({ html: '인원을 선택하세요.' })
     return;
   }
-    
+
   var date = ($('.datepicker').val().replace(/[^0-9]/g,""));
   var personnel = ($('.selected').children().first().html().replace(/[^0-9]/g,""));
   location.href = '/bitcamp-fit-tour/html/reservation/reservation.html?tourNo=' + tourNo + '&date=' + date + '&personnel=' + personnel
@@ -128,13 +159,13 @@ $('#reservation-btn').click((e) => {
   });
 })();
 
-// add event wishlist button
+//add event wishlist button
 $(document.body).bind('addEventWishlistButton', () => {
   $('#wishlist-btn').click((e) => {
     e.preventDefault();
-  
+
     if($(e.target).hasClass('not-login')){
-      
+
       M.toast({ html: '로그인 후 이용 해주세요.' })
     } else if ($(e.target).hasClass('wishlist-status')){
       $.get('../../app/json/wishlist/delete?tourNo=' + tourNo,
@@ -149,7 +180,7 @@ $(document.body).bind('addEventWishlistButton', () => {
         }
       });
     } else {
-      
+
       $(e.target).html('<i class="material-icons left">favorite</i>위시리스트에 추가됨</a>');
       $(e.target).addClass('wishlist-status');
       $.get('../../app/json/wishlist/add?tourNo=' + tourNo,

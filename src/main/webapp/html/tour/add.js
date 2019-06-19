@@ -1,16 +1,24 @@
 var tlocation = 0 + ',' + 0;
 var fileNames;
-var disableListDate = [];
+var imposibilityDate = new Array();
 var datePickerOption = {
-        format : 'yyyy년 mm월 dd일',
-        disableDayFn :function (date) {
-          console.log(disableListDate);
-          if(disableListDate.includes(date.toDateString())) {
-            return true
-          }else{
-            return false
-          }
-        }
+    i18n : {
+      months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      monthsShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      weekdaysFull: ['일', '월', '화', '수', '목', '금', '토'],
+      weekdaysShort:['일', '월', '화', '수', '목', '금', '토'],
+      cancel:'취소',
+      done: '확인'
+},
+    format : 'yyyy년 mm월 dd일',
+    disableDayFn :function (date) {
+      console.log(imposibilityDate);
+      if(imposibilityDate.includes(yyyy_mm_dd_hh_mm(date))) {
+        return true
+      }else{
+        return false
+      }
+    }
 }
 //ready
 $(document).ready(function () {
@@ -22,16 +30,28 @@ $(document).ready(function () {
   $('.tabs').tabs({ duration: 800, /* swipeable: true */});
   // init date picker
   var datePicker = $('.datepicker').datepicker(datePickerOption);
-  
+
   $('#available-date').change(function(){
     var availableDate = $('#available-date').val();
     var year = availableDate.substring(0,4);
     var month = availableDate.substring(6,8);
     var day = availableDate.substring(10,12);
-    disableListDate.push(new Date(year + ',' + month + ',' + day).toDateString());
+    imposibilityDate.push(yyyy_mm_dd_hh_mm(new Date(year + ',' + month + ',' + day)));
     $('<div class="chip mb20">'+ availableDate +'<i class="close material-icons">close</i></div>').appendTo($('#available-date-row'));
     $('.datepicker').datepicker('destroy');
     $('.datepicker').datepicker(datePickerOption);
+    
+    $('.chip i').off().click(function(){
+      var availableDate = $(this).parent().text()
+      var year = availableDate.substring(0,4);
+      var month = availableDate.substring(6,8);
+      var day = availableDate.substring(10,12);
+      console.log(new Date(year + ',' + month + ',' + day).toDateString());
+      var index = imposibilityDate.indexOf(yyyy_mm_dd_hh_mm(new Date(year + ',' + month + ',' + day)));
+      if (index > -1) {
+        imposibilityDate.splice(index, 1);
+    }
+    });
   });
 
   //swipe1
@@ -80,7 +100,7 @@ $(document).ready(function () {
     $('.tabs').tabs('select', 'swipe-2');
 
   });
-  
+
   // swipe3
   $('.next-swipe-3').click(function () {
 
@@ -115,7 +135,7 @@ $(document).ready(function () {
     $('.tabs').tabs('select', 'swipe-3');
 
   });
-  
+
   // swipe4
   $('.next-swipe-4').click(function () {
 
@@ -186,7 +206,7 @@ $('#continent').change(function () {
   $('#country').removeAttr('disabled');
   $('#country').append($('<option disabled selected>국가를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/countrylist?continent=' + $('#continent option:selected').val(),
-          function (obj) {
+      function (obj) {
     for (var i = 0; i < obj.countryList.length; i++) {
       $('#country').append($('<option value="' + obj.countryList[i].no + '">' + obj.countryList[i].countryName + '</option>'));
     }
@@ -202,7 +222,7 @@ $('#country').change(function () {
   $('#city').removeAttr('disabled');
   $('#city').append($('<option disabled selected>도시를 선택하세요.</option>'));
   $.getJSON('../../app/json/tour/citylist?countryNo=' + $('#country option:selected').val(),
-          function (obj) {
+      function (obj) {
     for (var i = 0; i < obj.cityList.length; i++) {
       $('#city').append($('<option value="' + obj.cityList[i].no + '">' + obj.cityList[i].cityName + '</option>'));
     }
@@ -294,18 +314,19 @@ $('#fileupload').fileupload({
         }
 
         data.formData = {
-                data: encodeURIComponent(JSON.stringify({
-                  title: $('#input-title').val(),
-                  subHeading: $('#input-subtitle').val(),
-                  content: $(".ql-editor").html(),
-                  totalHour: $('#input-totalHour').val(),
-                  personnel: $('#input-personnel').val(),
-                  transportation: $('input[name="transportaion"]:checked').next().html(),
-                  cityNo: $('#city option:selected').val(),
-                  theme: themeArray,
-                  price: $('#input-price').val(),
-                  location: tlocation
-                }))
+            data: encodeURIComponent(JSON.stringify({
+              title: $('#input-title').val(),
+              subHeading: $('#input-subtitle').val(),
+              content: $(".ql-editor").html(),
+              totalHour: $('#input-totalHour').val(),
+              personnel: $('#input-personnel').val(),
+              transportation: $('input[name="transportaion"]:checked').next().html(),
+              cityNo: $('#city option:selected').val(),
+              theme: themeArray,
+              price: $('#input-price').val(),
+              location: tlocation,
+              imposibilityDate : imposibilityDate
+            }))
         };
         var response = data.submit();
         response.complete(function (result) {
@@ -351,7 +372,7 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.setFields(
-          ['address_components', 'geometry', 'icon', 'name']);
+      ['address_components', 'geometry', 'icon', 'name']);
 
   var infowindow = new google.maps.InfoWindow();
   var infowindowContent = document.getElementById('infowindow-content');
@@ -411,5 +432,15 @@ function initMap() {
     document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
 
   });
+}
+
+
+function yyyy_mm_dd_hh_mm(now) {
+  year = "" + now.getFullYear();
+  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+  hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+  minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+  return year + "-" + month + "-" + day + " " + hour + ":" + minute;
 }
 

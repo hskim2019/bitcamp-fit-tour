@@ -70,6 +70,12 @@
 			<id column="theme_id" property="no" />
 			<result column="theme" property="theme" />
 		</collection>
+		
+		<collection property="imposibilityDates" ofType="imposibilityDate">
+      <id column="imposibility_date_id" property="no" />
+      <result column="tour_id" property="tourNo" />
+      <result column="imposibility_date" property="imposibilityDate" />
+    </collection>
 
 	</resultMap>
 
@@ -164,22 +170,16 @@
 	</select>
 
 	<!-- find Tour ByNo -->
-	<select id="findByNo" resultMap="tourPhotoMap"
-		parameterType="int">
+	<select id="findByNo" resultMap="tourPhotoMap" parameterType="int">
 		select
 		*
 		from tour as t
-		left outer join tour_guidance_photo
-		p on t.tour_id = p.tour_id
-		join
-		tour_theme as toth on t.tour_id =
-		toth.tour_id
-		join theme as th on
-		toth.theme_id = th.theme_id
-		join city as
-		ci on t.city_id = ci.city_id
-		join country as co on ci.country_id =
-		co.country_id
+		left outer join tour_guidance_photo p on t.tour_id = p.tour_id
+		join tour_theme as toth on t.tour_id = toth.tour_id
+		join theme as th on toth.theme_id = th.theme_id
+		join city as ci on t.city_id = ci.city_id
+		join country as co on ci.country_id = co.country_id
+		join imposibility_date as im on t.tour_id = im.tour_id
 		where t.tour_id = #{value};
 	</select>
 
@@ -197,6 +197,15 @@
 		values
 		<foreach collection="list" item="item" separator=" , ">
 			(#{item.tourNo}, #{item.themeNo})
+		</foreach>
+	</insert>
+	
+	<!-- insert Theme -->
+	<insert id="insertImposibilityDate" parameterType="map">
+		insert into imposibility_date(tour_id, imposibility_date)
+		values
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.tourNo}, #{item.imposibilityDate})
 		</foreach>
 	</insert>
 

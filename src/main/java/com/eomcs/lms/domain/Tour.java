@@ -1,7 +1,9 @@
 package com.eomcs.lms.domain;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Tour {
 	private int no;
@@ -20,15 +22,35 @@ public class Tour {
 	private Country country;
 	private List<TourGuidancePhoto> tourPhoto;
 	private List<Theme> theme;
+	private List<ImposibilityDate> imposibilityDates;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "GMT+9")
+	private Date[] imposibilityDate;
 	
-
+	
   @Override
   public String toString() {
     return "Tour [no=" + no + ", title=" + title + ", subHeading=" + subHeading + ", content="
         + content + ", createdDate=" + createdDate + ", totalHour=" + totalHour + ", hashTag="
         + hashTag + ", personnel=" + personnel + ", transportation=" + transportation + ", price="
         + price + ", cityNo=" + cityNo + ", location=" + location + ", city=" + city + ", country="
-        + country + ", tourPhoto=" + tourPhoto + ", theme=" + theme + "]";
+        + country + ", tourPhoto=" + tourPhoto + ", theme=" + theme + ", imposibilityDates="
+        + imposibilityDates + ", imposibilityDate=" + Arrays.toString(imposibilityDate) + "]";
+  }
+
+  public List<ImposibilityDate> getImposibilityDates() {
+    return imposibilityDates;
+  }
+
+  public void setImposibilityDates(List<ImposibilityDate> imposibilityDates) {
+    this.imposibilityDates = imposibilityDates;
+  }
+
+  public Date[] getImposibilityDate() {
+    return imposibilityDate;
+  }
+
+  public void setImposibilityDate(Date[] imposibilityDate) {
+    this.imposibilityDate = imposibilityDate;
   }
 
   public String getLocation() {

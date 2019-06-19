@@ -102,8 +102,8 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
 
         // 마지막 페이지일 경우 버튼을 비활성화 한다.
         if (pageNo == obj.totalPage) {
-          console.log('pageNo:' + pageNo);
-          console.log('totalPage:' + obj.totalPage);
+//          console.log('pageNo:' + pageNo);
+//          console.log('totalPage:' + obj.totalPage);
           nextPageLi.addClass('disabled');
         } else {
           nextPageLi.removeClass('disabled');
@@ -306,8 +306,7 @@ function getMaxPrice() {
 //floating menu - search with options
   $('#searchwithOptions').click((e) => {
     e.preventDefault();
-//  console.log(continentName, countryName, cityName, minPrice, maxPrice);
-    console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme);
+    console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme + "keyword:" + keyword);
     loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, window.keyword);
   });
 

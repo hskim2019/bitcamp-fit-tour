@@ -148,10 +148,10 @@
 			<if test="keyword != null">
 			<if test="keyword != ''">
 			<bind name="pattern1" value="'%' + keyword + '%'" />
-			and continent like #{pattern1}
+			and (continent like #{pattern1}
 			or country_name like #{pattern1} 
 			or city_name like #{pattern1}
-			or title like #{pattern1}</if></if>
+			or title like #{pattern1})</if></if>
 		</where>
 		<if test="priceAsc != null"> order by price asc</if>
 		<if test="priceDesc != null"> order by price desc</if>

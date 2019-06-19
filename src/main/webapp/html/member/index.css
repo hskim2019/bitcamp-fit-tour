@@ -47,14 +47,11 @@ height: 17px;
  }
 
 tr > th {
-	font-size: 14px;
-	background-color: #f7f5f8;
-	 font-weight: normal;
+	font-size: 12px;
 }
 
 td {
-	font-size: 13px;
-	font-weight: normal;
+	font-size: 12px;
 }
 
 .dropdown-trigger {

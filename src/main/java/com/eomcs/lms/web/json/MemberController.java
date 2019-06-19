@@ -69,15 +69,25 @@ public class MemberController {
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize, 
+      String searchCategory,
       String search) {
     
+	  String searchWord = null;
+	  if (search.length() > 0) {
+		  searchWord = search;
+	  }
+	  
+	  
+	  
+	  System.out.println("searchWord: " + searchWord);
+	  
     if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
     
-    int rowCount = memberService.size(search);
-    System.out.println(rowCount);
+    int rowCount = memberService.size(searchWord);
+    System.out.println("rowCount: " + rowCount);
     int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
+    if (totalPage == 0 || rowCount % pageSize > 0)
       totalPage++;
     
     if (pageNo < 1) 
@@ -85,7 +95,7 @@ public class MemberController {
     else if (pageNo > totalPage)
       pageNo = totalPage;
     
-    List<Member> members = memberService.list(pageNo, pageSize, search);
+    List<Member> members = memberService.list(pageNo, pageSize, searchWord);
     
     HashMap<String,Object> content = new HashMap<>();
     content.put("list", members);

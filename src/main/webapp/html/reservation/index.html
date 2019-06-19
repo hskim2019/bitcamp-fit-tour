@@ -28,8 +28,8 @@
 
  <div class="title-search">
   <select class="browser-default" id="search-title">
-    <option value="0" selected>상품명</option>
-    <option value="1">상품명</option>
+<!--     <option value="0" selected>상품명</option>
+    <option value="1">상품명</option> -->
   </select>
  </div>
  
@@ -113,6 +113,11 @@
 {{/each}}
 </script>
 
+<script id="tr-template-selectOption" type="text/x-handlebars-template">
+{{#each tourlists}}
+<option data-no='{{tourNo}}'>{{tour.title}}</option>
+{{/each}}
+</script>
 <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>

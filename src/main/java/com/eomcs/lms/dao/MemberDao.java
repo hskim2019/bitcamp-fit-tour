@@ -17,7 +17,8 @@ public interface MemberDao {
   Member findByEmail(Map<String,Object> paramMap);
   int update(Member member);
   int delete(int no);
-  int countAll(String search);
+ // int countAll(String search);
+  int countAll(HashMap<String,Object> paramMap);
   int confirm(Map<String,Object> paramMap);
   int updatePassWord(Map<String,Object> paramMap);
   int updatePhoto(Map<String,Object> paramMap);

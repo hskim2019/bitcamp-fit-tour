@@ -1,13 +1,17 @@
 var pageNo = 1,
     pageSize = 3,
     tbody = $('tbody'),
+    selectOption = $('#search-title'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
     currSpan = $('#currPage > span'),
+    templateSrcforTourList = $('#tr-template-selectOption').html(),
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
+var search = '';
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator = Handlebars.compile(templateSrc);
+var trGeneratorForTourList = Handlebars.compile(templateSrcforTourList);
+    trGenerator = Handlebars.compile(templateSrc);
 
 $(document).ready(function(){
   $('.datepicker').datepicker(
@@ -17,9 +21,9 @@ $(document).ready(function(){
 });
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn) {
+function loadList(pn, search) {
   
-  $.getJSON('../../app/json/reservation/list?pageNo=' + pn + '&pageSize=' + pageSize, 
+  $.getJSON('../../app/json/reservation/list?pageNo=' + pn + '&pageSize=' + pageSize + '&search=' +search, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -64,19 +68,29 @@ function loadList(pn) {
   
 } // loadList()
 
+
+function loadTourList() {
+  $.getJSON('../../app/json/reservation/tourlist', 
+    function(data) {
+    $(trGeneratorForTourList(data)).appendTo(selectOption);
+    $('#search-title').prepend('<option selected>전체 상품</option>');
+  });
+}
+
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1);
+  loadList(pageNo - 1, search);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1);
+  loadList(pageNo + 1, search);
 });
 
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1);
+loadList(1, search);
+loadTourList();
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
 $(document.body).bind('loaded-list', () => {
@@ -99,6 +113,12 @@ $(document.body).bind('loaded-list', () => {
 });
 
 
+$('#search-btn').click((e) => {
+  e.preventDefault();
+  search = $('#search-box').val();
+  loadList(1, search);
+});
 
-
+//console.log($('#search-date').val());
+//console.log(typeof($('#search-date').val()));
 

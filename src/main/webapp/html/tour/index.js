@@ -173,9 +173,14 @@ $('#orderbyReviews').click((e) => {
   $(e.target).addClass('selected');
 });
 
-$( ".collapsible" ).mouseup(function() {
-  $('#searchwithOptions').trigger('click');
+//$( ".collapsible" ).mouseup(function() {
+//  $('#searchwithOptions').trigger('click');
+//});
+
+$("#collapsible-body-range, #collapsible-body-hour").mouseup(function() {
+$('#searchwithOptions').trigger('click');
 });
+
 
 $('#filter-reset').click((e) => {
   initOptionSelected();
@@ -306,7 +311,8 @@ function getMaxPrice() {
 //floating menu - search with options
   $('#searchwithOptions').click((e) => {
     e.preventDefault();
-    console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + 'theme:' + theme + "keyword:" + keyword);
+    console.log('minPrice:' + minPrice + 'maxPrice' + maxPrice + 'minHour:' + minHour + 'maxHour:' + maxHour + "keyword:" + keyword);
+    console.log('theme:' + theme);
     loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, window.keyword);
   });
 
@@ -395,16 +401,17 @@ function getMaxPrice() {
     if(checked) {
       theme.push(checkedtheme);
       console.log(theme);
-      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
+    //  loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
       console.log('checked');
     } else {
       theme = $.grep(theme, function(value) {
         return value != checkedtheme;
       });
       console.log(theme);
-      loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
+   //   loadList(1, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword);
       console.log('unchecked');
     }
+    $('#searchwithOptions').trigger('click');
   });
 
   var arrays = ['유럽', '아시아', '아메리카', '오세아니아', '아프리카'];

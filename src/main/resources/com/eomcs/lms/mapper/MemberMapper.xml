@@ -62,13 +62,25 @@
     from member as m
     join login_type as l on m.login_type_id = l.login_type_id
     <where>
- <if test="search != null">
-        <bind name="pattern1" value="'%' + search + '%'" />
+ <if test="searchAll != null">
+        <bind name="pattern1" value="'%' + searchAll + '%'" />
         name like #{pattern1}
         or nickname like #{pattern1}
         or email like #{pattern1}
         or tel like #{pattern1}
       </if>
+       <if test="searchwithName != null">
+      <bind name="pattern1" value="'%' + searchwithName + '%'" />
+      name like #{pattern1}</if>
+       <if test="searchwithNickname != null">
+      <bind name="pattern1" value="'%' + searchwithNickname + '%'" />
+      nickname like #{pattern1}</if>
+       <if test="searchwithEmail != null">
+      <bind name="pattern1" value="'%' + searchwithEmail + '%'" />
+      email like #{pattern1}</if>
+       <if test="searchwithTel != null">
+      <bind name="pattern1" value="'%' + searchwithTel + '%'" />
+      tel like #{pattern1}</if>
     </where>
     order by
     registered_date desc
@@ -251,7 +263,7 @@
     where member_id = #{value}
   </delete>
 
-  <select id="countAll" resultType="int" parameterType="string">
+<!--   <select id="countAll" resultType="int" parameterType="string">
     select count(*)
     from member
     <where>
@@ -263,7 +275,34 @@
         or tel like #{pattern1}
       </if>
     </where>
+  </select> -->
+  
+    <select id="countAll" resultType="int" parameterType="map">
+    select count(*)
+    from member
+    <where>
+      <if test="searchAll != null">
+        <bind name="pattern1" value="'%' + searchAll + '%'" />
+        name like #{pattern1}
+        or nickname like #{pattern1}
+        or email like #{pattern1}
+        or tel like #{pattern1}
+      </if>
+      <if test="searchwithName != null">
+      <bind name="pattern1" value="'%' + searchwithName + '%'" />
+      name like #{pattern1}</if>
+       <if test="searchwithNickname != null">
+      <bind name="pattern1" value="'%' + searchwithNickname + '%'" />
+      nickname like #{pattern1}</if>
+       <if test="searchwithEmail != null">
+      <bind name="pattern1" value="'%' + searchwithEmail + '%'" />
+      email like #{pattern1}</if>
+       <if test="searchwithTel != null">
+      <bind name="pattern1" value="'%' + searchwithTel + '%'" />
+      tel like #{pattern1}</if>
+    </where>
   </select>
+  
   
   <!-- update password -->
   <update id="updatePassWord" parameterType="map">

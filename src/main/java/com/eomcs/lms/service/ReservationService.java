@@ -14,4 +14,5 @@ public interface ReservationService {
   int size(String search);
   List<Reservation> findByCompletedReservation(Map<String,Object> paramMap);
   List<Reservation> findByOldReservation(Map<String,Object> paramMap);
+  List<Reservation> tourlist();
 }

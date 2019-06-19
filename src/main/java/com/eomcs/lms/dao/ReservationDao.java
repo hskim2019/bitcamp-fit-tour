@@ -14,6 +14,7 @@ public interface ReservationDao {
   int countAll(String search);
   List<Reservation> findByCompletedReservation(Map<String,Object> paramMap);
   List<Reservation> findByOldReservation(Map<String,Object> paramMap);
+  List<Reservation> findAllTour();
 }
 
 

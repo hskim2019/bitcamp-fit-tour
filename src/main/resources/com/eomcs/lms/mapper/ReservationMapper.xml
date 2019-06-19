@@ -176,6 +176,13 @@
     where member_id = #{memberNo} and r.status_id = 1 and date(tour_date) <![CDATA[ < ]]> date(now());
   </select> 
   
+  <select id="findAllTour" resultMap="reservationMap">
+  select distinct
+  r.tour_id, t.title
+  from reservation as r
+  left outer join tour as t on r.tour_id = t.tour_id
+  </select>
+  
 </mapper>
 
 

@@ -99,6 +99,11 @@ $(document.body).bind('loaded-list', () => {
 });
 
 
-
+$('#search-btn').click((e) => {
+  e.preventDefault();
+  alert('a');
+  console.log($('#search-date').val());
+  console.log(typeof($('#search-date').val()));
+});
 
 

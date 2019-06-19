@@ -73,6 +73,9 @@
         or s.status like #{pattern1}
         or r.reservation_date like #{pattern1}
       </if>
+       <if test="tourNo != null">
+       and r.tour_id = #{tourNo}
+      </if>
     </where>
     ORDER BY r.reservation_id DESC 
     <if test="#{size != null || rowNo != null}">
@@ -144,7 +147,7 @@
     where reservation_id = #{value}
   </delete>
 
-  <select id="countAll" resultType="int" parameterType="string">
+  <select id="countAll" resultType="int" parameterType="map">
 <!--     select count(*)
     from reservation r, member m, payment_status s -->
     select count(*)
@@ -152,11 +155,14 @@
     left outer join member as m on r.member_id = m.member_id
     left outer join payment_status as s on r.status_id = s.status_id
     <where>
-      <if test="_parameter != null">
-        <bind name="pattern1" value="'%' + _parameter + '%'" />
+      <if test="search != null">
+        <bind name="pattern1" value="'%' + search + '%'" />
           m.name like #{pattern1}
         or s.status like #{pattern1}
         or r.reservation_date like #{pattern1}
+      </if>
+      <if test="tourNo != null">
+      and tour_id = #{tourNo}
       </if>
     </where>
   </select>

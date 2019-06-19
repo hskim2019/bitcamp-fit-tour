@@ -78,7 +78,8 @@ public class ReservationController {
 	public Object list(
 			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="3") int pageSize, 
-			String search) {
+			String search,
+			@RequestParam(defaultValue="0") int tourNo) {
 
 		String searchWord = null;
 		if (search.length() > 0) {
@@ -88,7 +89,8 @@ public class ReservationController {
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
 
-		int rowCount = reservationService.size(searchWord);
+		int rowCount = reservationService.size(searchWord, tourNo);
+		System.out.println("rowCount: " + rowCount);
 		int totalPage = rowCount / pageSize;
 		if (totalPage == 0 || rowCount % pageSize > 0)
 			totalPage++;
@@ -98,7 +100,7 @@ public class ReservationController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Reservation> reservations = reservationService.list(pageNo, pageSize, searchWord);
+		List<Reservation> reservations = reservationService.list(pageNo, pageSize, searchWord, tourNo);
 
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", reservations);

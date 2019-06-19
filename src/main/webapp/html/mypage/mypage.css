@@ -15,6 +15,10 @@ body{
   overflow:hidden;
 }
 
+#photo-delete-btn {
+  width: 100px;
+}
+
 
 .header{
   width:100%;
@@ -227,10 +231,27 @@ input[type=text]:not(.browser-default) {
   max-height: none;
 }
 
+#id-delete-modal {
+  width : 570px;
+  max-height: none;
+}
+
 #photo-update-btn, #photo-update-cancel-btn {
   width: 350px;
   height: 40px;
   margin-left: auto;
   font-size: 1.2rem;
+}
+
+#id-delete-btn, #id-delete-cancel-btn {
+  width: 350px;
+  height: 40px;
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+/* delete id */
+#id-delete{
+  text-decoration: underline;
 }
 

@@ -113,6 +113,13 @@
     </div> -->
     </div>
 </div>
+
+<div class="row">
+  <div class="col12 center-align">
+    <a id="id-delete" href="#">계정 삭제하기</a>
+  </div>
+</div>
+
 </div> <!-- container -->
 
 
@@ -194,7 +201,7 @@
           
           <!-- photo upload button -->
           <div class="file-field input-field mb0 mt20">
-            <div class="btn">
+            <div class="btn ml60">
               <span>사진 업로드</span>
               <input id="fileupload" type="file">
             </div>
@@ -209,6 +216,9 @@
           </div>
         </div>
         
+        
+        
+        
         <!-- update button -->
         <div class="row center-align mb10">
           <a href="#" id="photo-update-btn" class="waves-effect waves-white btn">변경</a>
@@ -220,6 +230,77 @@
     </form>
   </div>
   </div>
+  
+  
+  
+  <!-- profile photo update-->
+  <div id="id-delete-modal" class="modal">
+    <div class="row">
+        <div class="modal-content">
+        <!-- h -->
+        <div class="row">
+            <div class="col l12">
+              <blockquote>
+                <h4>계정 삭제하기</h4>
+              </blockquote>
+              • FitTour 계정을 삭제하시면, 더 이상 회원님의 계정으로 활동할 수 없게 됩니다..<br>
+            </div>
+        </div>
+         
+          <div class="row mt30 mb0">
+            <div class="col l12">
+            <p>
+              <label>
+               <input class="with-gap mt10" name="reason" type="radio"/>
+               <span>여행을 자주 떠나지 않아서요.</span>
+              </label>
+            </p>
+            <p>
+              <label>
+               <input class="with-gap mt10" name="reason" type="radio"/>
+               <span>자주 방문하지 않아서요.</span>
+              </label>
+            </p>
+            <p>
+              <label>
+               <input class="with-gap mt10" name="reason" type="radio"/>
+               <span>개인정보 침해가 우려되어서요.</span>
+              </label>
+            </p>
+            <p>
+              <label>
+               <input class="with-gap mt10" name="reason" type="radio"/>
+               <span>굳이 회원가입을 하지 않아도 사이트를 이용할 수 있어서요.</span>
+              </label>
+            </p>
+            <p>
+              <label>
+               <input class="with-gap mt10 other" name="reason" type="radio"/>
+               <span>다른 이유가 있어요.(아래에 자세히 적어주세요.)</span>
+              </label>
+            </p>
+            <div class="input-field col s12">
+              <textarea id="ohter-reason" class="materialize-textarea"></textarea>
+              <label for="ohter-reason">계정 삭제이유</label>
+            </div>
+            
+          </div>
+          </div>
+          
+          </div>
+        </div>
+        
+        
+        <!-- update button -->
+        <div class="row center-align mb10">
+          <a href="#" id="id-delete-btn" class="waves-effect waves-white btn">계정 삭제하기</a>
+        </div>
+        <!-- cancel button -->
+        <div class="row center-align">
+          <a href="#" id="id-delete-cancel-btn" class="waves-effect waves-white btn red lighten-2">다시 생각해볼게요!</a>
+        </div>
+  </div>
+  
 
 <!-- footer -->
 <footer class="bit-main-footer page-footer grey"></footer>

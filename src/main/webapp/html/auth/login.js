@@ -38,6 +38,8 @@ $('#login-btn').click(() => {
       location.href = "../index.html"
     } else if(data.status == 'stand-by'){
       location.href = 'success.html';
+    } else if(data.status == 'withdrawal'){
+      M.toast({html: '아이디나 비밀번호가 틀렸습니다.',displayLength: '10000'})
     } else {
       M.toast({html: '아이디나 비밀번호가 틀렸습니다.',displayLength: '10000'})
     }

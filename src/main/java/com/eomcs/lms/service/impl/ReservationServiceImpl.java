@@ -75,6 +75,11 @@ public class ReservationServiceImpl implements ReservationService {
   public List<Reservation> findByOldReservation(Map<String, Object> paramMap) {
     return reservationDao.findByOldReservation(paramMap);
   }
+  
+  @Override
+	public List<Reservation> tourlist() {
+		return reservationDao.findAllTour();
+	}
 }
 
 

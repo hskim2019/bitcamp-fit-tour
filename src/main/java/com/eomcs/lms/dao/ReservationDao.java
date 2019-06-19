@@ -11,7 +11,8 @@ public interface ReservationDao {
   List<Reservation> myReservation(int no);
   int update(Reservation reservation);
   int delete(int no);
-  int countAll(String search);
+//  int countAll(String search);
+  int countAll(Map<String,Object> paramMap);
   List<Reservation> findByCompletedReservation(Map<String,Object> paramMap);
   List<Reservation> findByOldReservation(Map<String,Object> paramMap);
   List<Reservation> findAllTour();

@@ -120,6 +120,7 @@ loadList(1, searchCategory, search);
 $('#search-btn').click((e) => {
   e.preventDefault();
   searchCategory = $('#search-categories option:selected').val();
+  console.log(searchCategory);
   search = $('#search-box').val();
   loadList(1, searchCategory, search);
 });

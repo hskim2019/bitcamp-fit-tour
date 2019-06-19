@@ -47,14 +47,14 @@ function loadList(pn, search) {
         var smsCheckHtml = $(listRow).children().eq(8).html();
         var emailCheckHtml = $(listRow).children().eq(9).html();
         if(smsCheckHtml == 'true') {
-          $(listRow).children().eq(8).html('동의');
+          $(listRow).children().eq(8).html('<i class="material-icons">check</i>');
         } else {
-          $(listRow).children().eq(8).html('거부');
+          $(listRow).children().eq(8).html('<i class="material-icons">remove</i>');
         }
         if(emailCheckHtml == 'true') {
-          $(listRow).children().eq(9).html('동의');
+          $(listRow).children().eq(9).html('<i class="material-icons">check</i>');
         } else {
-          $(listRow).children().eq(9).html('거부');
+          $(listRow).children().eq(9).html('<i class="material-icons">remove</i>');
         }
         $.ajaxSetup({async:true});
       }

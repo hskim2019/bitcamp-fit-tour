@@ -75,6 +75,14 @@ height: 17px;
 	font-size: 10px;
 }
 
+.requirement-checked {
+	cursor: pointer;
+}
+
+.modal {
+	width: 500px;
+	top: 30% !important;
+}
 /* th:nth-child(1) {
   width: 50px;
 }

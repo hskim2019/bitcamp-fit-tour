@@ -13,6 +13,7 @@ $(document).ready(function(){
   $('.datepicker').datepicker(
   {autoClose: true}    
   );
+  $('.modal').modal();
 });
 
 // JSON 형식의 데이터 목록 가져오기
@@ -32,7 +33,7 @@ function loadList(pn) {
       for(requirement of $('.requirement')) {
         $.ajaxSetup({async:false});
         if($(requirement).attr('data-content').length > 0) {
-         $(requirement).append('<i class="tiny material-icons">check</i>');
+         $(requirement).append('<i class="tiny material-icons requirement-checked modal-trigger" href="#modal1">check</i>');
        }
         $.ajaxSetup({async:true});
       }
@@ -88,8 +89,14 @@ $(document.body).bind('loaded-list', () => {
 });
 
 
-
-
+$(document.body).bind('loaded-list', () => {
+  // 제목을 클릭했을 때 view.html로 전환시키기
+  $('.requirement-checked').click((e) => {
+    e.preventDefault();
+    var requirement = $(e.target).parents('th').attr('data-content');
+    $('.requirement-text').html(requirement);
+  });
+});
 
 
 

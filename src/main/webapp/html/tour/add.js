@@ -12,7 +12,6 @@ var datePickerOption = {
 },
     format : 'yyyy년 mm월 dd일',
     disableDayFn :function (date) {
-      console.log(imposibilityDate);
       if(imposibilityDate.includes(yyyy_mm_dd_hh_mm(date))) {
         return true
       }else{
@@ -32,6 +31,9 @@ $(document).ready(function () {
   var datePicker = $('.datepicker').datepicker(datePickerOption);
 
   $('#available-date').change(function(){
+    console.log($('#available-date').val());
+    if(!$('#available-date').val())
+      return;
     var availableDate = $('#available-date').val();
     var year = availableDate.substring(0,4);
     var month = availableDate.substring(6,8);

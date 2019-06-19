@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.FreeReview;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.FreeReviewService;
@@ -22,16 +23,34 @@ public class FreeReviewController {
 
   // add tour
   @PostMapping("add")
-  public Object add(FreeReview freeReview, HttpSession session) {
+  public Object add( @RequestParam(value="citys[]", required=false)List<String> citys,
+      FreeReview freeReview, HttpSession session) {
+ 
     HashMap<String, Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<String,Object>();
     try {
       Member member = (Member) session.getAttribute("loginUser");
       freeReview.setMemberNo(member.getNo());
-      freeReviewService.add(freeReview);
+     freeReviewService.add(freeReview);
+     int no = freeReview.getNo();
+    
+     if(citys.size()!=4) {
+       for (int i = 0; i < citys.size();i++) {
+         System.out.println(i);
+         paramMap.put("freeReviewNo", no);
+         paramMap.put("cityNo",citys.get(i));
+         freeReviewService.addFreeReviewCity(paramMap);
+       }
+       
+       
+     }
+     
+     
       content.put("status", "success");
     } catch (Exception e) {
       content.put("status", "fail");
       content.put("message", e.getMessage());
+      System.out.println(e.getMessage());
     }
     return content;
 
@@ -94,12 +113,17 @@ public class FreeReviewController {
   @GetMapping("detail")
   public Object detail(int no) {
     FreeReview freeReview = freeReviewService.get(no);
-    return freeReview;
+    List<City> city  = freeReviewService.getCityName(no);
+    HashMap<String, Object> content = new HashMap<>();
+    content.put("freeReview", freeReview);
+    content.put("city", city);
+    return content;
   }
   @PostMapping("update")
-  public Object update(FreeReview freeReview,HttpSession session) {
+  public Object update( @RequestParam(value="citys[]", required=false)List<String> citys,FreeReview freeReview,HttpSession session) {
     Member member = (Member) session.getAttribute("loginUser");
     HashMap<String, Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<String,Object>();
     if(member.getNo()!=freeReviewService.getMemberId(freeReview.getNo()).getMemberNo()) {
       content.put("status", "fail");
       content.put("message", "잘못된 업데이트입니다.");
@@ -109,6 +133,18 @@ public class FreeReviewController {
     try {
       if (freeReviewService.update(freeReview) == 0) 
         throw new RuntimeException("해당 번호의 리뷰가 없습니다.");
+    
+      freeReviewService.deleteFreeReviewCity(freeReview.getNo());
+      if(citys.size()!=4) {
+        for (int i = 0; i < citys.size();i++) {
+          System.out.println(i);
+          paramMap.put("freeReviewNo", freeReview.getNo());
+          paramMap.put("cityNo",citys.get(i));
+          freeReviewService.addFreeReviewCity(paramMap);
+        }
+      }
+        
+      
       content.put("status", "success");
       
     } catch (Exception e) {

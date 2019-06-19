@@ -1,6 +1,8 @@
 package com.eomcs.lms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.FreeReview;
 
 public interface FreeReviewService {
@@ -19,6 +21,12 @@ public interface FreeReviewService {
   int update(FreeReview freeReview);
 
   FreeReview getMemberId(int no);
+
+  int addFreeReviewCity(HashMap<String, Object> paramMap);
+
+  List<City> getCityName(int no);
+
+  int deleteFreeReviewCity(int no);
 
 	
 }

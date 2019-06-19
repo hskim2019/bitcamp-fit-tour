@@ -28,7 +28,9 @@
     </association>
 
 	</resultMap>
- <insert id="insert" parameterType="freereview">
+  
+  
+ <insert id="insert"   useGeneratedKeys="true" keyProperty="no" parameterType="freereview" >
     insert into free_review(
     member_id,
     <if test="reservationNo != 0">reservation_id,</if>
@@ -44,7 +46,9 @@
     #{title},
     #{content},
     #{score})
+  
   </insert>
+  
   <delete id="delete" parameterType="int">
     delete from free_review 
     where free_review_id = #{no}
@@ -124,15 +128,24 @@
   <insert id="insertCity" parameterType="map">
     insert into
     free_review_city(free_review_id, city_id)
-    values(#{No}, #{cityNo})
+    values(#{freeReviewNo}, #{cityNo})
   </insert>
   
   <select id="selectReviewCity" resultType="map" parameterType="int">
-    select * from free_review_city
- where free_review_id =
-    #{freeReviewNo}
+   select 
+   c.city_id, c.city_name 
+   from 
+   free_review_city fc, city c 
+   where 
+   fc.city_id = c.city_id and 
+   free_review_id =#{no}
+    
+    
+    
   </select>
-  
+  <delete id="deleteReviewCity" parameterType="int">
+    delete from free_review_city where free_review_id =  #{no}
+  </delete>
   
 </mapper>
 

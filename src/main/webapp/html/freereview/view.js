@@ -19,23 +19,27 @@ function loadData(no) {
   
   $.getJSON('../../app/json/freereview/detail?no=' + reviewNo, 
       function(data) {
+    var auto=[];
     
-     loadbtn(data.memberNo)
-    
-    $('#titleTd').html(data.title);
-    $('#nameTd').html(data.member.name);
-    $('#createdDateTd').html(data.createdDate);
-    $('#countViewTd').html(data.viewCount);
-    $('#content').html(data.content);
+     loadbtn(data.freeReview.memberNo)
+    $('#titleTd').html(data.freeReview.title);
+    $('#nameTd').html(data.freeReview.member.name);
+    $('#createdDateTd').html(data.freeReview.createdDate);
+    $('#countViewTd').html(data.freeReview.viewCount);
+    for (var city of data.city) {
+      auto.push(city.city_name)
+    }
+    $('#cityTd').html(auto.toString());
+    $('#content').html(data.freeReview.content);
     $ ( '#raty' ). raty ({
-    score: data.score,
+    score: data.freeReview.score,
     readOnly : true, 
     starOn : '../../images/star-on.png' ,
     starOff : '../../images/star-off.png'
   
   }); 
     
-    $.getJSON('../../app/json/reservation/detail?no=' + data.reservationNo,
+    $.getJSON('../../app/json/reservation/detail?no=' + data.freeReview.reservationNo,
             function(obj) {
       
       $('#tourAtag').html(obj.tour.title);

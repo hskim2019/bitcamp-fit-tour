@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.eomcs.lms.dao.FreeReviewDao;
+import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.FreeReview;
 import com.eomcs.lms.service.FreeReviewService;
 
@@ -63,8 +64,23 @@ public class FreeReviewServiceImpl implements FreeReviewService {
 
   @Override
   public FreeReview getMemberId(int no) {
-    // TODO Auto-generated method stub
     return freeReviewDao.get(no);
+  }
+
+  @Override
+  public int addFreeReviewCity(HashMap<String, Object> paramMap) {
+    return freeReviewDao.insertCity(paramMap);
+  }
+
+  @Override
+  public List<City> getCityName(int no) {
+    
+    return freeReviewDao.selectReviewCity(no);
+  }
+
+  @Override
+  public int deleteFreeReviewCity(int no) {
+    return freeReviewDao.deleteReviewCity(no);
   }
 
   

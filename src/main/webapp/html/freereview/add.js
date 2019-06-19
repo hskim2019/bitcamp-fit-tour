@@ -1,4 +1,28 @@
 
+$(document).ready(function() {
+  $.get('/bitcamp-fit-tour/app/json/tour/autocomplete',function(obj){
+    var autoCompleteData = new Array();
+    for (var city of obj.cityList) {
+      var auto = {};
+      auto['id'] = city.no;
+      auto['text'] = city.cityName;
+      
+     // if(city.no=='5'){
+    //    auto['selected'] = true;
+    //  }
+      autoCompleteData.push(auto);
+    }
+    $('.selectCity').select2({
+            
+            width: "100%",
+            data :  autoCompleteData,
+            maximumSelectionLength: 3,
+            language: "ko",
+            placeholder: '도시를 선택하세요(최대 3개)'
+    });
+  });
+});
+ 
 
 
 (function quillEditerInit() {
@@ -36,11 +60,6 @@
 
 
 (function loadList() {
- 
-  
-  
-  
-  
   $.getJSON('../../app/json/reservation/myreservation',
        function (obj) {
     if(obj.status == 'fail'){
@@ -51,15 +70,18 @@
    }else{
      for (var i = 0; i < obj.list.length; i++) {
        $('#reservation').append($('<option value="' + obj.list[i].no + '">' + obj.list[i].tour.title + '</option>'));
-       //alert()
+      
       }
    }
     
-   
+  
     $('#reservation').formSelect();
   })
  
 })();
+
+
+
 
 
 $('#add-btn').click(function () {
@@ -77,20 +99,27 @@ $('#add-btn').click(function () {
     
   }else{
     $('#add-btn').attr('disabled','disabled');
+    var citys =  Array.apply(null, new Array(4)).map(Number.prototype.valueOf,0);
+   if($('#city').val()!=0){
+    citys = $('#city').val();
+   }
     $.post('../../app/json/freereview/add', {
-      
       reservationNo: $('#reservation').val(),
       title: $("#title").val(),
       content: $(".ql-editor").html(),
-      score : $('#raty').children().last().val()
+      score : $('#raty').children().last().val(),
+      citys : citys
+     /* data : JSON.stringify({
+        citys : $('#city').val()
+      })*/
     },
+    
     function(data) {
-      
       if(data.status == 'success') {
         location.href = "index.html";  
       } else {
         alert('등록 실패 입니다.\n' + data.message);
-        location.href = "index.html"; 
+       location.href = "index.html"; 
       }
     });
     
@@ -106,41 +135,12 @@ $ ( function ()  {
   }); 
 });
 
-$(document).ready(function() {
-  $.get('/bitcamp-fit-tour/app/json/tour/autocomplete',function(obj){
-    var autoCompleteData = new Array();
-    console.log(obj);
-    for (var city of obj.cityList) {
-      var auto = {};
-      auto['id'] = city.no;
-      auto['text'] = city.cityName;
-      autoCompleteData.push(auto);
-    }
-    $('.selectCity').select2({
-            
-            width: "100%",
-            data :  autoCompleteData,
-            maximumSelectionLength: 3,
-            anguage: "kr"
-    });
- 
+$('#list-btn').click(function () {
+  location.href = "index.html"; 
+})
 
-  })
- 
-  
-  
-  
-  
-  
-});
 
-var data = [{
-  id: 'KOR',
-  text: 'Korea'
-}, {
-  id: 'JPN',
-  text: 'Japan'
-}];
+
 
 
 

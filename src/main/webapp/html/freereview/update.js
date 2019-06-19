@@ -1,6 +1,6 @@
 var param = location.href.split('?')[1],
     reviewNo = param.split('=')[1];
-
+var cityArray=[];
 
 (function quillEditerInit() {
   var quill = new Quill('#quillEditor', {
@@ -32,10 +32,6 @@ var param = location.href.split('?')[1],
   $('.ql-picker').next().remove();
 })();
 
-$(document).ready(function(){
-  $('select').formSelect();
-});
-
 
 
 
@@ -46,12 +42,43 @@ $(document).ready(function(){
   
   $.getJSON('../../app/json/freereview/detail?no=' + reviewNo, 
           function(data) {
+   
+        for (var city of data.city) {
+          cityArray.push(city.city_id)
+        }
+        $('#title').val(data.freeReview.title);
+        $('.ql-editor').html(data.freeReview.content);
+        
+        ratyInit(data.freeReview.score)
+        $.get('/bitcamp-fit-tour/app/json/tour/autocomplete',function(obj){
+    var autoCompleteData = new Array();
+    for (var city of obj.cityList) {
+      var auto = {};
+      auto['id'] = city.no;
+      auto['text'] = city.cityName;
+     
+      if(city.no==cityArray[0]){
+        auto['selected'] = true;
+      }
+      if(city.no==cityArray[1]){
+        auto['selected'] = true;
+      }
+      if(city.no==cityArray[2]){
+        auto['selected'] = true;
+      }
+      autoCompleteData.push(auto);
+    }
+    $('.selectCity').select2({
+            
+            width: "100%",
+            data :  autoCompleteData,
+            maximumSelectionLength: 3,
+            language: "ko",
+            placeholder: '도시를 선택하세요(최대 3개)'
+    });
+  });
         
         
-        $('#title').val(data.title);
-        $('.ql-editor').html(data.content);
-        
-        ratyInit(data.score)
         
         $.getJSON('../../app/json/reservation/myreservation',
           function (obj) {
@@ -78,7 +105,7 @@ $(document).ready(function(){
       }
        
       
-       $('select').formSelect();
+       $('#reservation').formSelect();
      })
        
      
@@ -113,12 +140,19 @@ $('#update-btn').click(function () {
     
   }else{
     $('#update-btn').attr('disabled','disabled');
+    
+    var citys =  Array.apply(null, new Array(4)).map(Number.prototype.valueOf,0);
+    if($('#city').val()!=0){
+     citys = $('#city').val();
+    }
     $.post('../../app/json/freereview/update?no='+reviewNo, {
       
       reservationNo: $('#reservation').val(),
       title: $("#title").val(),
       content: $(".ql-editor").html(),
-      score : $('#raty').children().last().val()
+      score : $('#raty').children().last().val(),
+      citys : citys
+      
     },
     function(data) {
       
@@ -141,4 +175,6 @@ function ratyInit(no)  {
   
   }); 
 }
+
+
 

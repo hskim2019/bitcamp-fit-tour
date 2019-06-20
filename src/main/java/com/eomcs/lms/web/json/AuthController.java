@@ -62,7 +62,8 @@ public class AuthController {
     } else if (member.getRank() == 0) {
       session.setAttribute("standby", email);
       content.put("status", "stand-by");
-
+    } else if (member.getRank() == 3) {
+      content.put("status", "withdrawal");
     } else {
       session.setAttribute("loginUser", member);
       System.out.println(member);

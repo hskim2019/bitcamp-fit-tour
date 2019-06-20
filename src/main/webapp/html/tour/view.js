@@ -87,7 +87,8 @@ function tourList(tourNo) {
       reviewSum += freeReview.score; 
     }
     
-    $ ( '#raty' ). raty ({
+    $('#average').html((reviewSum / obj.freeReview.length).toFixed(1));
+    $( '#averageRaty' ).raty ({
       score: reviewSum / obj.freeReview.length,
       readOnly : true, 
       starOn : '../../images/star-on.png' ,

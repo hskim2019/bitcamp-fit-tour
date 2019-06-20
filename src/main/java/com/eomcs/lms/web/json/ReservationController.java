@@ -1,13 +1,17 @@
 package com.eomcs.lms.web.json;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.domain.Reservation;
 import com.eomcs.lms.service.MemberService;
@@ -79,17 +83,24 @@ public class ReservationController {
 			@RequestParam(defaultValue="1") int pageNo,
 			@RequestParam(defaultValue="3") int pageSize, 
 			String search,
-			@RequestParam(defaultValue="0") int tourNo) {
+			@RequestParam(defaultValue="0") int tourNo,
+			@RequestParam(defaultValue="0") int tourDate) {
 
 		String searchWord = null;
+		
 		if (search.length() > 0) {
 			searchWord = search;
 		}
 		
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
-
-		int rowCount = reservationService.size(searchWord, tourNo);
+        
+//		if(tourDate != 0) {
+//			tourDate = tourDate + 1;
+//		}
+//		System.out.println("tourDate: " + tourDate);
+		
+		int rowCount = reservationService.size(searchWord, tourNo, tourDate);
 		System.out.println("rowCount: " + rowCount);
 		int totalPage = rowCount / pageSize;
 		if (totalPage == 0 || rowCount % pageSize > 0)
@@ -100,7 +111,7 @@ public class ReservationController {
 		else if (pageNo > totalPage)
 			pageNo = totalPage;
 
-		List<Reservation> reservations = reservationService.list(pageNo, pageSize, searchWord, tourNo);
+		List<Reservation> reservations = reservationService.list(pageNo, pageSize, searchWord, tourNo, tourDate);
 
 		HashMap<String,Object> content = new HashMap<>();
 		content.put("list", reservations);
@@ -131,7 +142,6 @@ public class ReservationController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		reservation.setMemberNo(loginUser.getNo());
 		try {
-
 			reservationService.add(reservation);
 
 		} catch (Exception e) {

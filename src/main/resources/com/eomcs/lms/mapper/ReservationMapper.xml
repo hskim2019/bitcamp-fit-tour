@@ -76,6 +76,9 @@
        <if test="tourNo != null">
        and r.tour_id = #{tourNo}
       </if>
+      <if test="tourDate != null">
+      and r.tour_date = #{tourDate}
+      </if>
     </where>
     ORDER BY r.reservation_id DESC 
     <if test="#{size != null || rowNo != null}">

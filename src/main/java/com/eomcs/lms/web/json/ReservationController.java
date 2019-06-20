@@ -92,6 +92,11 @@ public class ReservationController {
 			searchWord = search;
 		}
 		
+//		if(tourDate != 0) {
+//			tourDate = tourDate + 1;
+//			System.out.println(tourDate);
+//		}
+		
 		if (pageSize < 3 || pageSize > 8) 
 			pageSize = 3;
         

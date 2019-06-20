@@ -41,11 +41,19 @@ function loadList(pn, search, tourNo, tourDate) {
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
+      
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       tbody.html(''); // 이전에 출력한 내용을 제거한다.
       
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(trGenerator(obj)).appendTo(tbody);
+      
+      for(tourDateT of $('.tourDateT')) {
+        var tourDateK = $(tourDateT).attr('data-content');
+        var newDate = new Date(tourDateK);
+        newDate.setHours(newDate.getHours() + 9)
+        $(tourDateT).append(newDate);
+      }
       
       for(requirement of $('.requirement')) {
         $.ajaxSetup({async:false});

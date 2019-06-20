@@ -125,6 +125,7 @@ public class ReservationController {
 
 	@PostMapping("update")
 	public Object update(Reservation reservation) {
+		System.out.println("no: " + reservation.getNo() + "statusNo: " + reservation.getStatusNo());
 		HashMap<String,Object> content = new HashMap<>();
 		try {
 			if (reservationService.update(reservation) == 0) 

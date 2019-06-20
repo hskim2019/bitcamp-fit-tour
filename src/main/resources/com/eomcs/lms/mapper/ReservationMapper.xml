@@ -138,8 +138,8 @@
       <if test="tourDate != null">tour_date = #{tourDate},</if>
       <if test="personnel != null">personnel = #{personnel},</if>
       <if test="touristTel != null">tourist_tel = #{touristTel},</if>
-      <if test="requirement != null"> requirement = #{requirement}</if>
-    
+      <if test="requirement != null"> requirement = #{requirement},</if>
+      <if test="statusNo != null">status_id = #{statusNo}</if>
     </set>
     where
     reservation_id = #{no}

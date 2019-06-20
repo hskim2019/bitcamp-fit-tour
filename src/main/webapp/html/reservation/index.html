@@ -62,6 +62,7 @@
     <th class="center">결제번호</th>
     <th class="center">결제일</th>
     <th class="center">예약상태</th>
+    <th></th>
   </tr>
 </thead>
 
@@ -108,7 +109,8 @@
   <th class="center">{{reservationDate}}</th>
   <th class="center paymentNo" data-content="{{paymentNo}}"></th>
   <th class="center">{{paymentDate}}</th> 
-  <td class="center">{{paymentStatus.status}}</td>
+  <td class="center paymentStatus">{{paymentStatus.status}}</td>
+  <td class="center edit" data-no="{{no}}"></td>
 </tr>
 {{/each}}
 </script>
@@ -123,7 +125,12 @@
   <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
 
 <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
+
 <script src="../header.js"></script>
+
+<!-- sweatalert2 -->
+<script src="/bitcamp-fit-tour/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 <script src="index.js"></script>
 <script src="../footer.js"></script>
 </body>

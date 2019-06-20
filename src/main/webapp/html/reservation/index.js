@@ -10,7 +10,7 @@ var pageNo = 1,
 var search = '';
 var tourNo = 0;
 var tourDate = 0;
-
+var statusNo = 3;
 var datePickerOption = {
     i18n : {
       months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -69,6 +69,14 @@ function loadList(pn, search, tourNo, tourDate) {
         var paymentNo = $(payment).attr('data-content').split(',')[0].split('_')[1];
        // console.log(paymentNo);
         $(payment).append(paymentNo);
+      }
+      
+      for(paymentStatus of $('.paymentStatus')) {
+        var status = $(paymentStatus).html();
+        if (status == '취소요청') {
+          $(paymentStatus).parent().addClass('alert');
+          $(paymentStatus).next().append('<div class="statusEdit">승인&nbsp;<i class="fas fa-edit"></i></div>');
+        }
       }
       
       // 현재 페이지의 번호를 갱신한다.
@@ -176,6 +184,67 @@ $('.date-reset').click((e) => {
 //console.log($('#search-date').val());
 //console.log(typeof($('#search-date').val()));
 
+$(document.body).bind('loaded-list', () => {
+$('.statusEdit').click((e) => {
+  e.preventDefault();
+  var reservationNo = $(e.target).parent().attr('data-no');
+  console.log(reservationNo);
+  
+  Swal.fire({
+    title: '예약 취소 승인',
+    text: "예약금을 환불하고 예약 취소를 승인합니다",
+    type: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonColor: '#3085d6',
+    cancelButtonText: '취소',
+    confirmButtonText: '확인'
+  }).then((result) => {
+
+    if (result.value) {
+      $.post('../../app/json/reservation/update?no=' + reservationNo, 
+        {
+        statusNo: statusNo
+        },
+     function(data) {
+       if(data.status == 'success') {
+          Swal.fire(
+              '예약 취소 승인!',
+              '예약 취소 요청을 승인하였습니다.',
+              'success'
+            )
+            $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              location.href = "index.html";
+            });
+        } else {
+          alert('승인 실패 입니다.\n' + data.message);
+          Swal.fire({
+            type: 'error',
+            title: '승인 실패 입니다',
+            text: data.message,
+          })
+           $('.swal2-confirm').click((e) => {
+              e.preventDefault();
+              //location.href = "index.html";
+            });
+        }
+      });
+
+    }
+     });
+  
+  
+  
+  
+  
+  
+  
+  
+//  $(e.target).parent().prev().html('');
+//  $(e.target).parent().prev().append('예약취소');
+});
+});
 function yyyy_mm_dd_hh_mm(now) {
   year = "" + now.getFullYear();
   month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }

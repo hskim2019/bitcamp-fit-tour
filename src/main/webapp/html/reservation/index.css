@@ -113,6 +113,19 @@ height: 17px;
     margin-bottom: 0px;
 }
 
+.alert {
+   background-color: #e0f2f1;
+}
+
+.edit {
+	width: 50px;
+	
+}
+
+.statusEdit {
+	cursor: pointer;
+}
+
 /* th:nth-child(1) {
   width: 50px;
 }

@@ -10,6 +10,7 @@ var datePickerOption = {
       cancel:'취소',
       done: '확인'
 },
+    minDate: new Date(),
     format : 'yyyy년 mm월 dd일',
     disableDayFn :function (date) {
       if(imposibilityDate.includes(yyyy_mm_dd_hh_mm(date))) {

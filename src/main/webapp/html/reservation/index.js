@@ -52,7 +52,9 @@ function loadList(pn, search, tourNo, tourDate) {
         var tourDateK = $(tourDateT).attr('data-content');
         var newDate = new Date(tourDateK);
         newDate.setHours(newDate.getHours() + 9)
-        $(tourDateT).append(newDate);
+        var refDate = yyyy_mm_dd_hh_mm(newDate);
+        console.log(refDate);
+        $(tourDateT).append(refDate);
       }
       
       for(requirement of $('.requirement')) {
@@ -174,4 +176,13 @@ $('.date-reset').click((e) => {
 //console.log($('#search-date').val());
 //console.log(typeof($('#search-date').val()));
 
+function yyyy_mm_dd_hh_mm(now) {
+  year = "" + now.getFullYear();
+  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+ // hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+ // minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+// return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+  return year + "-" + month + "-" + day;
 
+}

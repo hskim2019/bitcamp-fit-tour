@@ -167,6 +167,9 @@
       <if test="tourNo != null">
       and tour_id = #{tourNo}
       </if>
+    <if test="tourDate != null">
+      and r.tour_date = #{tourDate}
+      </if>
     </where>
   </select>
   

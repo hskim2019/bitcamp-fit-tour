@@ -58,11 +58,11 @@ function loadList(pn, search, tourNo, tourDate) {
       }
       
       for(requirement of $('.requirement')) {
-        $.ajaxSetup({async:false});
+     //   $.ajaxSetup({async:false});
         if($(requirement).attr('data-content').length > 0) {
          $(requirement).append('<i class="tiny material-icons requirement-checked modal-trigger" href="#modal1">check</i>');
        }
-        $.ajaxSetup({async:true});
+     //   $.ajaxSetup({async:true});
       }
       
       for(payment of $('.paymentNo')) {

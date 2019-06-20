@@ -44,10 +44,8 @@
 <thead>
   <tr> 
     <th class="center">번호</th>
-    <th class="center">회원등급
-    </th>
+    <th class="center">회원등급</th>
     <th class="center">이름</th>
-    <th class="center">별명</th>
     <th class="center">로그인유형</th>
     <th class="center">이메일</th>
     <th class="center">전화번호</th>
@@ -70,12 +68,24 @@
   </ul>
 
 
-  <!-- Modal Structure -->
+  <!-- Modal - profile photo-->
   <div id="modal1" class="modal">
     <div class="modal-content">
       <h4 class="modal-titl">회원 사진</h4>
      <img id="profile-picture" src="">
      <p class="default-profile bit-invisible"> 사진이 없는 회원입니다 </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat-photo">닫기</a>
+    </div>
+  </div>
+  
+  
+    <!-- Modal - reason-->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4 class="modal-titl">탈퇴 사유</h4>
+     <p class="leaveMember-reason"></p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
@@ -92,15 +102,14 @@
 {{#each list}}
 <tr class="listRow">
   <td class="center">{{no}}</th>
-  <td class="center" id="{{rank}}">{{rank}}</th>
+  <td class="center memberRank modal-trigger" href='#modal2' id="{{rank}}" data-content="{{nickname}}"></th>
   <td class="center"><a class="bit-view-link modal-trigger" href='#modal1' data-no='{{no}}' data-photo='{{photo}}'>{{name}}</a></td>
-  <td class='center'>{{nickname}}</td>
   <td class='center'>{{loginType.typeName}}</td>
   <td>{{email}}</td>
   <td>{{tel}}</td>
   <td class='center'>{{registeredDate}}</td>
-  <td class='center' id='smsCheck'>{{smsCheck}}</td>
-  <td class='center' id='emailCheck'>{{emailCheck}}</td>
+  <td class='center smsCheck' id='{{smsCheck}}'></td>
+  <td class='center emailCheck' id='{{emailCheck}}'></td>
   <td class='center'>{{birth}}</td>
 </tr>
 {{/each}}

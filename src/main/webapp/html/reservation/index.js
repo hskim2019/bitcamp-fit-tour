@@ -48,14 +48,14 @@ function loadList(pn, search, tourNo, tourDate) {
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(trGenerator(obj)).appendTo(tbody);
       
-      for(tourDateT of $('.tourDateT')) {
-        var tourDateK = $(tourDateT).attr('data-content');
-        var newDate = new Date(tourDateK);
-        newDate.setHours(newDate.getHours() + 9)
-        var refDate = yyyy_mm_dd_hh_mm(newDate);
-        console.log(refDate);
-        $(tourDateT).append(refDate);
-      }
+//      for(tourDateT of $('.tourDateT')) {
+//        var tourDateK = $(tourDateT).attr('data-content');
+//        var newDate = new Date(tourDateK);
+//        newDate.setHours(newDate.getHours() + 9)
+//        var refDate = yyyy_mm_dd_hh_mm(newDate);
+//        console.log(refDate);
+//        $(tourDateT).append(refDate);
+//      }
       
       for(requirement of $('.requirement')) {
      //   $.ajaxSetup({async:false});

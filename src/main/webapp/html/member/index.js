@@ -14,6 +14,7 @@ var trGenerator = Handlebars.compile(templateSrc);
 //$('.dropdown-trigger').dropdown();
 $(document).ready(function(){
   $('.modal').modal();
+  $('.modal2').modal();
 });
       
 
@@ -31,33 +32,66 @@ function loadList(pn, searchCategory, search) {
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(trGenerator(obj)).appendTo(tbody);
 
-      for(listRow of $('.listRow')) {
-        $.ajaxSetup({async:false});
-        var rank = $(listRow).children().eq(1).html();
-        if (rank == 0) {
-          $(listRow).children().eq(1).html('일반회원');
-        } else if (rank == 1) {
-          $(listRow).children().eq(1).html('인증회원');
-        } else if(rank == 3) {
-          $(listRow).children().eq(1).html('탈퇴');
-        } else {
-          $(listRow).children().eq(1).html('관리자');
+//      for(listRow of $('.listRow')) {
+//        $.ajaxSetup({async:false});
+//        var rank = $(listRow).children().eq(1).html();
+//        if (rank == 0) {
+//          $(listRow).children().eq(1).html('일반회원');
+//        } else if (rank == 1) {
+//          $(listRow).children().eq(1).html('인증회원');
+//        } else if(rank == 3) {
+//          $(listRow).children().eq(1).html('탈퇴');
+//        } else {
+//          $(listRow).children().eq(1).html('관리자');
+//        }
+//        var smsCheckHtml = $(listRow).children().eq(8).html();
+//        var emailCheckHtml = $(listRow).children().eq(9).html();
+//        if(smsCheckHtml == 'true') {
+//          $(listRow).children().eq(8).html('<i class="tiny material-icons">check</i>');
+//        } else {
+//          $(listRow).children().eq(8).html('<i class="tiny material-icons">remove</i>');
+//        }
+//        if(emailCheckHtml == 'true') {
+//          $(listRow).children().eq(9).html('<i class="tiny material-icons">check</i>');
+//        } else {
+//          $(listRow).children().eq(9).html('<i class="tiny material-icons">remove</i>');
+//        }
+//        $.ajaxSetup({async:true});
+ //     }
+        
+        for(memberRank of $('.memberRank')) {
+          var rankId = $(memberRank).attr('id');
+          if (rankId == 0) {
+            $(memberRank).append('일반회원');
+          } else if (rankId == 1) {
+            $(memberRank).append('인증회원');
+          } else if (rankId == 3) {
+            $(memberRank).append('탈퇴');
+            $(memberRank).addClass('reason');
+            $(memberRank).parent().addClass('leaveMember');
+          } else if (rankId == 2) {
+            $(memberRank).append('관리자');
+          }
         }
         
-        var smsCheckHtml = $(listRow).children().eq(8).html();
-        var emailCheckHtml = $(listRow).children().eq(9).html();
-        if(smsCheckHtml == 'true') {
-          $(listRow).children().eq(8).html('<i class="tiny material-icons">check</i>');
-        } else {
-          $(listRow).children().eq(8).html('<i class="tiny material-icons">remove</i>');
+        for(smsCheck of $('.smsCheck')) {
+          var smsCheckStatus = $(smsCheck).attr('id');
+          if(smsCheckStatus == 'true') {
+            $(smsCheck).append('<i class="tiny material-icons">check</i>');
+          } else {
+            $(smsCheck).append('<i class="tiny material-icons">remove</i>');
+          }
         }
-        if(emailCheckHtml == 'true') {
-          $(listRow).children().eq(9).html('<i class="tiny material-icons">check</i>');
-        } else {
-          $(listRow).children().eq(9).html('<i class="tiny material-icons">remove</i>');
+        for(emailCheck of $('.emailCheck')) {
+          var emailCheckStatus = $(emailCheck).attr('id');
+          if(emailCheckStatus == 'true') {
+            $(emailCheck).append('<i class="tiny material-icons">check</i>');
+          } else {
+            $(emailCheck).append('<i class="tiny material-icons">remove</i>');
+          }
         }
-        $.ajaxSetup({async:true});
-      }
+        
+        
       
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
@@ -139,7 +173,16 @@ if(image != 'default.jpg'){
 });
 });
 
-$('.btn-flat').click((e) => {
+$('.btn-flat-photo').click((e) => {
+  e.preventDefault();
   $('#profile-picture').removeClass('bit-invisible');
   $('.default-profile').addClass('bit-invisible');
+});
+
+$(document.body).bind('loaded-list', () => {
+$('.reason').click((e) => {
+  e.preventDefault();
+  $('.leaveMember-reason').html('');
+  $('.leaveMember-reason').append($(e.target).attr('data-content'));
+});
 });

@@ -11,7 +11,7 @@ public class Reservation implements Cloneable, Serializable {
 	private int tourNo;//상품번호
 	private int memberNo;//회원번호
 	private int statusNo;//상태번호
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone = "Asia/Seoul" )
 	//@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date tourDate;//여행일
 	private int personnel;//여행인원

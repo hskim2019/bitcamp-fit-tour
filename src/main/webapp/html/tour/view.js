@@ -1,3 +1,6 @@
+var reviewtemplateSrc = $('#review-template').html(),
+reviewGenerator = Handlebars.compile(reviewtemplateSrc);
+
 var param = location.href.split('?')[1],
 tourNo = param.split('=')[1],
 tlocation;
@@ -68,7 +71,7 @@ function tourList(tourNo) {
         done: '확인'
       },
       format : 'yyyy년 mm월 dd일',
-      
+
       disableDayFn :function (date) {
         console.log(date);
         if(imposibilityDate.includes(date.toString())) {
@@ -78,25 +81,48 @@ function tourList(tourNo) {
         }
       }
     });
-    
-    
+
+
     // review
     $('#reviewAmount').html('후기 ' + obj.freeReview.length + '개');
-    var reviewSum = 0;
-    for (var freeReview of obj.freeReview) {
-      reviewSum += freeReview.score; 
+    if(obj.freeReview.length > 0){
+      var reviewSum = 0;
+      for (var freeReview of obj.freeReview) {
+        reviewSum += freeReview.score; 
+      }
+
+      $('#average').html((reviewSum / obj.freeReview.length).toFixed(1));
+      $( '#averageRaty' ).raty ({
+        score: reviewSum / obj.freeReview.length,
+        readOnly : true, 
+        starOn : '../../images/star_black_lg.png' ,
+        starOff : '../../images/star_border_black_lg.png',
+        starHalf:'../../images/star_half_black_lg.png'
+      });
+      
+      var scores = new Array();
+      for(var freeReview of obj.freeReview){
+       freeReview.content = $(freeReview.content).text();
+       console.log(freeReview.score)
+       scores.push(freeReview.score)
+      }
+      $(reviewGenerator(obj)).appendTo($('#review'));
+      
+      $('.rating').each(function(index, item){ 
+        $(this).raty ({
+          score: scores[index],
+          readOnly : true, 
+          starOn : '../../images/star.png' ,
+          starOff : '../../images/star-border.png',
+          starHalf:'../../images/star-helf.png'
+        });
+      });
+
     }
-    
-    $('#average').html((reviewSum / obj.freeReview.length).toFixed(1));
-    $( '#averageRaty' ).raty ({
-      score: reviewSum / obj.freeReview.length,
-      readOnly : true, 
-      starOn : '../../images/star-on.png' ,
-      starOff : '../../images/star-off.png'
-    });
+
 
   });
-}
+} // tour list
 
 //add personnelOption
 function addPersonnelOption(personnel, price) {

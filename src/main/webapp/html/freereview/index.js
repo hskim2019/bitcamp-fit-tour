@@ -83,5 +83,28 @@ $('#add-btn').click(function () {
   location.href = 'add.html'
 });
 
-
+$(document).ready(function() {
+  $.get('/bitcamp-fit-tour/app/json/tour/autocomplete',function(obj){
+    var autoCompleteData = new Array();
+    for (var city of obj.cityList) {
+      var auto = {};
+      auto['id'] = city.no;
+      auto['text'] = city.cityName;
+      
+     // if(city.no=='5'){
+    //    auto['selected'] = true;
+    //  }
+      autoCompleteData.push(auto);
+    }
+    $('.selectCity').select2({
+            
+            width: "100%",
+            data :  autoCompleteData,
+            maximumSelectionLength: 8,
+            language: "ko",
+            placeholder: '도시를 선택하세요(최대 8개)'
+    });
+  });
+});
+ 
 

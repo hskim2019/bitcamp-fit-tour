@@ -1,78 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>FitTour - 여행 목록</title>
-  <!-- fontawesome -->
+<meta charset="utf-8">
+<title>FitTour - 여행 목록</title>
+<!-- fontawesome -->
 <link rel="stylesheet"
   href="/bitcamp-fit-tour/node_modules/@fortawesome/fontawesome-free/css/all.css">
-  <!-- jquery-ui -->
-  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
-  <!-- materialize -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" rel="stylesheet"
-    href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css" media="screen,projection" />
-  <!-- google font -->
-  <link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap" rel="stylesheet">
-  
-  <!-- fittour -->
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
-  <link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css"> 
-  <link rel="stylesheet" href="index.css">
-  <link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+<!-- jquery-ui -->
+<link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
+<!-- materialize -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet"
+  href="/bitcamp-fit-tour/node_modules/materialize-css/dist/css/materialize.min.css"
+  media="screen,projection" />
+<!-- google font -->
+<link href="https://fonts.googleapis.com/css?family=Meddon|Noto+Sans+KR&display=swap"
+  rel="stylesheet">
+
+<!-- fittour -->
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
+<link rel="stylesheet" href="/bitcamp-fit-tour/css/header.css">
+<link rel="stylesheet" href="index.css">
+<link rel="shortcut icon" href="/bitcamp-fit-tour/images/favicon.ico">
+<!-- select -->
+
+<link href="/bitcamp-fit-tour/node_modules/select2-materialize/select2-materialize.css"
+  rel="stylesheet" />
+
 </head>
 
 <body>
 
- <header class="bit-main-header"></header>
-<div class="container">
-<div class="review">
- <div class="row">
-      <blockquote>
-        <h3>여행 후기</h3>
-      </blockquote>
-      • 다녀온 여행후기<br>
+  <header class="bit-main-header"></header>
+  <div class="container">
+    <div class="review">
+      <div class="row">
+        <blockquote>
+          <h3>여행 후기</h3>
+        </blockquote>
+        • 다녀온 여행후기<br>
+      </div>
+
+
+      <div class="bit-list">
+      <div class="input-field col s6">
+      <select id="city" class="selectCity" name="states[]" multiple="multiple">
+      </select>
+    </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="center" scope="col">글 번호</th>
+              <th class="center" scope="col">제목</th>
+              <th class="center" scope="col">작성자</th>
+              <th class="center" scope="col">등록일</th>
+              <th class="center" scope="col">조회수</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        
+    
+        
+      </div>
+      
+      
+      <!-- .bit-list -->
+    </div>
+    <div class="buttons">
+      <a id="add-btn" href='#' class="btn btn-primary btn-sm">새 글</a>
     </div>
 
 
-<div class="bit-list">
-<table>
-<thead>
-  <tr> 
-    <th class="center" scope="col">글 번호</th>
-    <th class="center" scope="col">제목</th>
-    <th class="center" scope="col">작성자</th>
-    <th class="center" scope="col">등록일</th>
-    <th class="center" scope="col">조회수</th>
-  </tr>
-</thead>
-<tbody></tbody>
-</table>
-</div><!-- .bit-list -->
-</div>
-<div class="buttons">
-<a id="add-btn" href='#' class="btn btn-primary btn-sm">새 글</a>
- </div>
+    <div class="center">
 
-<div class="center">
+      <ul class="pagination justify-content-center">
+        <li id="prevPage" class="waves-effect"><a class="page-link" href="?pageNo=0&pageSize=7">이전</a></li>
+        <li id="currPage" class="waves-effect active"><a class="page-link">1</a></li>
+        <li id="nextPage" class="waves-effect "><a class="page-link"
+          href="?pageNo=2&pageSize=7">다음</a></li>
+      </ul>
+    </div>
 
-  <ul class="pagination justify-content-center">
-    <li id="prevPage" class="waves-effect">
-      <a class="page-link" 
-        href="?pageNo=0&pageSize=7">이전</a></li>
-    <li id="currPage" class="waves-effect active"><a class="page-link" >1</a></li>
-    <li id="nextPage" class="waves-effect ">
-      <a class="page-link" 
-         href="?pageNo=2&pageSize=7">다음</a></li>
-  </ul>
+
+
   </div>
-  
-
- 
-</div><!-- .container -->
-<div class="noe"></div>
-<!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
-<script id="tr-template" type="text/x-handlebars-template">
+  <!-- .container -->
+  <div class="noe"></div>
+  <!-- Handlebars 에서 사용할 HTML 템플릿 데이터를 준비한다. -->
+  <script id="tr-template" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
   <th class="center reviewNo" scope='row'>{{no}}</th>
@@ -85,15 +101,21 @@
 </script>
 
 
-<footer class="bit-main-footer page-footer grey"></footer>
+  <footer class="bit-main-footer page-footer grey"></footer>
 
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
-  <script type="text/javascript" src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script type="text/javascript"
+    src="/bitcamp-fit-tour/node_modules/materialize-css/dist/js/materialize.min.js"></script>
   <script src="../footer.js"></script>
   <script src="../header.js"></script>
   <script src="index.js"></script>
+<!-- select -->
+<script src="/bitcamp-fit-tour/node_modules/select2/dist/js/select2.js"></script>
+<script src="/bitcamp-fit-tour/node_modules/select2/dist/js/i18n/ko.js"></script>
+
+
 </body>
 
 </html>

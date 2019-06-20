@@ -34,7 +34,10 @@
 여행일
 <i class="far fa-calendar-alt"></i>
 <input type="text" class="datepicker" id="search-date" placeholder="날짜 선택">
+<input class="date-reset" id="date-reset-btn" value="초기화" type="submit"/>
+<!-- <span class="date-reset">초기화</span><i class="fas fa-undo-alt"></i> -->
 </div>
+
 
 <form id="searchthis">
 <input id="search-box" type="text" placeholder="예약자명" maxlength="25" data-length="25">
@@ -103,7 +106,7 @@
   <th class="center">{{touristTel}}</th>
   <th class="center requirement" data-content="{{requirement}}"></th>
   <th class="center">{{reservationDate}}</th>
-  <th class="center">{{paymentNo}}</th>
+  <th class="center paymentNo" data-content="{{paymentNo}}"></th>
   <th class="center">{{paymentDate}}</th> 
   <td class="center">{{paymentStatus.status}}</td>
 </tr>

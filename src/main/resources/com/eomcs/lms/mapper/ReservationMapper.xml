@@ -69,9 +69,9 @@
     <where>
       <if test="search != null">
         <bind name="pattern1" value="'%' + search + '%'" />
-        m.name like #{pattern1}
+        (m.name like #{pattern1}
         or s.status like #{pattern1}
-        or r.reservation_date like #{pattern1}
+        or r.reservation_date like #{pattern1})
       </if>
        <if test="tourNo != null">
        and r.tour_id = #{tourNo}
@@ -160,9 +160,9 @@
     <where>
       <if test="search != null">
         <bind name="pattern1" value="'%' + search + '%'" />
-          m.name like #{pattern1}
+          (m.name like #{pattern1}
         or s.status like #{pattern1}
-        or r.reservation_date like #{pattern1}
+        or r.reservation_date like #{pattern1})
       </if>
       <if test="tourNo != null">
       and tour_id = #{tourNo}

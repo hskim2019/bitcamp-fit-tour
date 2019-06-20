@@ -41,7 +41,6 @@ function loadList(pn, search, tourNo, tourDate) {
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
-      
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       tbody.html(''); // 이전에 출력한 내용을 제거한다.
       
@@ -54,6 +53,12 @@ function loadList(pn, search, tourNo, tourDate) {
          $(requirement).append('<i class="tiny material-icons requirement-checked modal-trigger" href="#modal1">check</i>');
        }
         $.ajaxSetup({async:true});
+      }
+      
+      for(payment of $('.paymentNo')) {
+        var paymentNo = $(payment).attr('data-content').split(',')[0].split('_')[1];
+       // console.log(paymentNo);
+        $(payment).append(paymentNo);
       }
       
       // 현재 페이지의 번호를 갱신한다.
@@ -151,6 +156,12 @@ $('#search-date').change((e) => {
     console.log(tourDate);  
     loadList(1, search, tourNo, tourDate);
   }
+});
+
+$('.date-reset').click((e) => {
+  $('#search-date').val('')
+  tourDate = 0;
+  loadList(1, search, tourNo, tourDate);
 });
 //console.log($('#search-date').val());
 //console.log(typeof($('#search-date').val()));

@@ -109,6 +109,7 @@ hr {
 
 h5 {
   display: inline-block;
+  font-weight: 500;
 }
 
 /* floating button */
@@ -154,9 +155,16 @@ h5 {
 
 /*     */
 
-
 input::placeholder {
 	color : black !important;
 	transform:translate(0%, 0%);
+}
+
+/* rating */
+#average{
+    font-size: 48px;
+    margin-left: 92px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.87);
 }
 

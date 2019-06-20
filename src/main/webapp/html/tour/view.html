@@ -219,6 +219,7 @@
             </div>
           </div>
           
+          <!-- review rating -->
           <div class="row mt30">
             <div id="average" class="col l12">
             </div>
@@ -226,6 +227,9 @@
               <div id="averageRaty"></div>
             </div>
           </div>
+          
+          <!-- review -->
+          <div id="review"></div>
 
   </div><!-- .container -->
   <!-- footer -->
@@ -336,6 +340,18 @@
 </div>
 {{/each}}
 </script>
+
+<script id="review-template" type="text/x-handlebars-template">
+{{#each freeReview}}
+<div class="row">
+  <div class="col rating"></div>
+  <div class="col l9">{{member.name}}</div>
+  <div class="col l12">{{createdDate}}</div>
+  <div class="col l12">{{content}}</div>
+</div>
+{{/each}}
+</script>
+
 
   <!-- jquery -->
   <script src="/bitcamp-fit-tour/node_modules/jquery/dist/jquery.min.js"></script>

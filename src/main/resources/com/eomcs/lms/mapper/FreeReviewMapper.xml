@@ -149,9 +149,10 @@
   
   
   <!-- findByTourNo > -->
-  <select id="findByTourNo" resultType="map" parameterType="int">
+  <select id="findByTourNo" resultMap="freeReviewMap" parameterType="int">
     select * from free_review as f
     join reservation as r on r.reservation_id = f.reservation_id
+    join member as m on r.member_id = m.member_id
     join tour as t on r.tour_id = t.tour_id where t.tour_id=#{tourNo};
   </select>
   

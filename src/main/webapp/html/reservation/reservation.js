@@ -5,6 +5,8 @@ tourYear = (tourDate/10000).toString().split('.')[0],
 tourMonth = ((tourDate/100).toString().split('.')[0]/100).toString().split('.')[1],
 tourDay = (tourDate/100).toString().split('.')[1],
 selectPersonnel = param.split('=')[3];
+var date = new Date(tourYear+'-'+tourMonth+'-'+tourDay+'T09:38:51.249+09:00');
+
 var IMP = window.IMP; // 생략가능결제
 IMP.init('imp12065647'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
@@ -136,10 +138,10 @@ $('#pay').click(() => {
 function addReservation(rsp){
   var payType = $('input[name="payType"]:checked').val();
   $.post('../../app/json/reservation/reservation', {
-   
       tourNo: tourNo,
       statusNo: 4,
-      tourDate: tourYear+'-'+tourMonth+'-'+(++tourDay),
+//      tourDate: tourYear+'-'+tourMonth+'-'+(++tourDay),
+      tourDate: date,
       personnel: selectPersonnel,
       touristTel: $('#tel').val(),
       buyerName: $('#name').val(),

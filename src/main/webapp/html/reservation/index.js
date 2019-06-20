@@ -9,21 +9,35 @@ var pageNo = 1,
     templateSrc = $('#tr-template').html(); // script 태그에서 템플릿 데이터를 꺼낸다.
 var search = '';
 var tourNo = 0;
+var tourDate = 0;
+
+var datePickerOption = {
+    i18n : {
+      months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      monthsShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+      weekdaysFull: ['일', '월', '화', '수', '목', '금', '토'],
+      weekdaysShort:['일', '월', '화', '수', '목', '금', '토'],
+      cancel:'취소',
+      done: '확인'
+},
+    format : 'yyyy년 mm월 dd일',
+    autoClose: true
+}
+
+
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var trGeneratorForTourList = Handlebars.compile(templateSrcforTourList);
     trGenerator = Handlebars.compile(templateSrc);
 
 $(document).ready(function(){
-  $('.datepicker').datepicker(
-  {autoClose: true}    
-  );
+  $('.datepicker').datepicker(datePickerOption);
   $('.modal').modal();
 });
 
 // JSON 형식의 데이터 목록 가져오기
-function loadList(pn, search, tourNo) {
+function loadList(pn, search, tourNo, tourDate) {
   
-  $.getJSON('../../app/json/reservation/list?pageNo=' + pn + '&pageSize=' + pageSize + '&search=' +search + '&tourNo=' + tourNo, 
+  $.getJSON('../../app/json/reservation/list?pageNo=' + pn + '&pageSize=' + pageSize + '&search=' +search + '&tourNo=' + tourNo + '&tourDate=' + tourDate, 
     function(obj) {
       // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
       pageNo = obj.pageNo;
@@ -34,12 +48,27 @@ function loadList(pn, search, tourNo) {
       // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 tbody에 붙인다.
       $(trGenerator(obj)).appendTo(tbody);
       
+      for(tourDateT of $('.tourDateT')) {
+        var tourDateK = $(tourDateT).attr('data-content');
+        var newDate = new Date(tourDateK);
+        newDate.setHours(newDate.getHours() + 9)
+        var refDate = yyyy_mm_dd_hh_mm(newDate);
+        console.log(refDate);
+        $(tourDateT).append(refDate);
+      }
+      
       for(requirement of $('.requirement')) {
-        $.ajaxSetup({async:false});
+     //   $.ajaxSetup({async:false});
         if($(requirement).attr('data-content').length > 0) {
          $(requirement).append('<i class="tiny material-icons requirement-checked modal-trigger" href="#modal1">check</i>');
        }
-        $.ajaxSetup({async:true});
+     //   $.ajaxSetup({async:true});
+      }
+      
+      for(payment of $('.paymentNo')) {
+        var paymentNo = $(payment).attr('data-content').split(',')[0].split('_')[1];
+       // console.log(paymentNo);
+        $(payment).append(paymentNo);
       }
       
       // 현재 페이지의 번호를 갱신한다.
@@ -73,23 +102,23 @@ function loadTourList() {
   $.getJSON('../../app/json/reservation/tourlist', 
     function(data) {
     $(trGeneratorForTourList(data)).appendTo(selectOption);
-    $('#search-title').prepend('<option selected>전체 상품</option>');
+    $('#search-title').prepend('<option data-no="0" selected>전체 상품</option>');
   });
 }
 
 $('#prevPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo - 1, search, tourNo);
+  loadList(pageNo - 1, search, tourNo, tourDate);
 });
 
 $('#nextPage > a').click((e) => {
   e.preventDefault();
-  loadList(pageNo + 1, search, tourNo);
+  loadList(pageNo + 1, search, tourNo, tourDate);
 });
 
 
 //페이지를 출력한 후 1페이지 목록을 로딩한다.
-loadList(1, search, tourNo);
+loadList(1, search, tourNo, tourDate);
 loadTourList();
 
 // 테이블 목록 가져오기를 완료했으면 제목 a 태그에 클릭 리스너를 등록한다. 
@@ -116,14 +145,44 @@ $(document.body).bind('loaded-list', () => {
 $('#search-btn').click((e) => {
   e.preventDefault();
   search = $('#search-box').val();
-  loadList(1, search, tourNo);
+  loadList(1, search, tourNo, tourDate);
 });
 
 $('#search-title').change((e) => {
   tourNo = $('#search-title option:selected').attr('data-no');
   console.log(tourNo);
-  loadList(1, search, tourNo);
+  loadList(1, search, tourNo, tourDate);
+});
+
+$('#search-date').change((e) => {
+  console.log($('#search-date').val());
+//  var year = $('#search-date').val().substring(0,4);
+//  var month = $('#search-date').val().substring(6,8);
+//  var day = $('#search-date').val().substring(10,12);
+//  tourDate = year+ '-' + month + '-' + (++day);
+//  var tourDate = ($('#search-date').val().replace(/[^0-9]/g,""));
+  if($('#search-date').val()) {
+    tourDate = ($('#search-date').val().replace(/[^0-9]/g,""));
+    console.log(tourDate);  
+    loadList(1, search, tourNo, tourDate);
+  }
+});
+
+$('.date-reset').click((e) => {
+  $('#search-date').val('')
+  tourDate = 0;
+  loadList(1, search, tourNo, tourDate);
 });
 //console.log($('#search-date').val());
 //console.log(typeof($('#search-date').val()));
 
+function yyyy_mm_dd_hh_mm(now) {
+  year = "" + now.getFullYear();
+  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+ // hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+ // minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+// return year + "-" + month + "-" + day + " " + hour + ":" + minute;
+  return year + "-" + month + "-" + day;
+
+}

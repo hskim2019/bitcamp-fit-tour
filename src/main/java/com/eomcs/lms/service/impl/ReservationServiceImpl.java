@@ -23,7 +23,9 @@ public class ReservationServiceImpl implements ReservationService {
   
   // 비지니스 객체에서 메서드 이름은 가능한 업무 용어를 사용한다.
   @Override
-  public List<Reservation> list(int pageNo, int pageSize, String search, int tourNo) {
+  public List<Reservation> list(
+		  int pageNo, int pageSize, 
+		  String search, int tourNo, int tourDate) {
     
     HashMap<String,Object> params = new HashMap<>();
     params.put("size", pageSize);
@@ -31,6 +33,10 @@ public class ReservationServiceImpl implements ReservationService {
     params.put("search", search);
     if(tourNo != 0) {
     	params.put("tourNo", tourNo);
+    }
+    
+    if(tourDate != 0) {
+    	params.put("tourDate", tourDate);
     }
     
     return reservationDao.findAll(params);
@@ -59,12 +65,16 @@ public class ReservationServiceImpl implements ReservationService {
 
   
   @Override
-  public int size(String search, int tourNo) {
+  public int size(String search, int tourNo, int tourDate) {
 	  HashMap<String, Object> params = new HashMap<>();
 	  params.put("search", search);
 	  
 	  if(tourNo != 0) {
 		  params.put("tourNo", tourNo);
+	  }
+	  
+	  if(tourDate != 0) {
+		  params.put("tourDate", tourDate);
 	  }
 	  return reservationDao.countAll(params);
   //  return reservationDao.countAll(search);

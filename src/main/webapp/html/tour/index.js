@@ -18,10 +18,10 @@ secondcrumb = crumb.children().eq(1),
 thirdcrumb = crumb.children().eq(2);
 var temp;
 var minPrice = 0,
-maxPrice = 300000;
+    maxPrice = 300000;
 var currMaxPrice;
 var minHour = 1,
-maxHour = 12;
+    maxHour = 12;
 var prevPageBtn = $('#prevPageBtn'),
 nextPageBtn = $('#nextPageBtn'),
 firstPage = $('#firstPage');
@@ -41,6 +41,18 @@ var elem = document.querySelector('.collapsible.expandable');
 var instance = M.Collapsible.init(elem, {
   accordion: false
 });
+
+$( document ).ready( function() {
+  var jbOffset = $( '.navigation' ).offset();
+  $( window ).scroll( function() {
+    if ( $( document ).scrollTop() > jbOffset.top ) {
+      $( '.navigation' ).addClass( 'jbFixed z-depth-3' );
+    }
+    else {
+      $( '.navigation' ).removeClass( 'jbFixed z-depth-3' );
+    }
+  });
+} );
 
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword) {

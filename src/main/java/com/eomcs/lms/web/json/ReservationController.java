@@ -93,9 +93,10 @@ public class ReservationController {
 //			System.out.println(tourDate);
 //		}
 		
-		if (pageSize < 3 || pageSize > 8) 
-			pageSize = 3;
-        
+//		if (pageSize < 3 || pageSize > 8) 
+//			pageSize = 3;
+		if (pageSize < 10 || pageSize > 10)
+           pageSize = 10;
 //		if(tourDate != 0) {
 //			tourDate = tourDate + 1;
 //		}

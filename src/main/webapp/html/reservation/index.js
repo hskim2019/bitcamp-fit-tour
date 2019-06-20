@@ -1,5 +1,5 @@
 var pageNo = 1,
-    pageSize = 3,
+    pageSize = 10,
     tbody = $('tbody'),
     selectOption = $('#search-title'),
     prevPageLi = $('#prevPage'),

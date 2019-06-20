@@ -115,9 +115,9 @@
         </div>
 
         <!-- transportation -->
-        <div class="row mt20 mb30">
+        <div class="row mt20 mb30 gray">
           <div id="transportation" class="col3 right"></div>
-          <div id="totalHour" class="col3 right mr30"></div>
+          <div id="totalHour" class="col3 right mr20"></div>
         </div>
 
         <!-- wishlist -->
@@ -178,8 +178,8 @@
           <!-- h comment amount -->
           <div class="row mt50">
             <div class="co l12">
-              <i class="fas fa-comments fa-2x"></i>
-              <h5 class="ml15" id=commentAmount></h5>
+              <i class="fas fa-comments fa-2x"></i><h5 class="ml15">댓글</h5>
+              <h5 class="f-teal" id="commentAmount"></h5>
             </div>
           </div>
          
@@ -214,13 +214,13 @@
         <!-- h -->
           <div class="row mt50">
             <div class="co l12">
-              <i class="fas fa-feather fa-2x"></i>
-              <h5 class="ml15" id=reviewAmount></h5>
+              <i class="fas fa-feather fa-2x"></i><h5 class="ml15">후기</h5>
+              <h5 class="f-teal" id=reviewAmount></h5>
             </div>
           </div>
           
           <!-- review rating -->
-          <div class="row mt30">
+          <div class="row mt30 mb30">
             <div id="average" class="col l12">
             </div>
             <div class="col l12">
@@ -343,12 +343,13 @@
 
 <script id="review-template" type="text/x-handlebars-template">
 {{#each freeReview}}
-<div class="row">
+<div class="row reviewRow">
   <div class="col rating"></div>
-  <div class="col l9">{{member.name}}</div>
-  <div class="col l12">{{createdDate}}</div>
-  <div class="col l12">{{content}}</div>
+  <div class="col l9 reviewName">{{member.name}}</div>
+  <div class="col l12 reviewDate">{{createdDate}}</div>
+  <div class="col l12 reviewContent">{{content}}</div>
 </div>
+</br>
 {{/each}}
 </script>
 

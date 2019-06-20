@@ -147,6 +147,15 @@
     delete from free_review_city where free_review_id =  #{no}
   </delete>
   
+  
+  <!-- findByTourNo > -->
+  <select id="findByTourNo" resultType="map" parameterType="int">
+    select * from free_review as f
+    join reservation as r on r.reservation_id = f.reservation_id
+    join tour as t on r.tour_id = t.tour_id where t.tour_id=#{tourNo};
+  </select>
+  
+  
 </mapper>
 
 

@@ -209,11 +209,29 @@
           </div>
 
 
+<!--*** review section ***-->
+    <hr>
+      <!-- h -->
+          <div class="row mt50">
+            <div class="co l12">
+              <i class="fas fa-feather fa-2x"></i>
+              <h5 class="ml15" id=reviewAmount></h5>
+            </div>
+          </div>
+          
+          <div class="row mt30">
+            <div id="average" class="col l12">
+            </div>
+            <div class="col l12">
+              <div id="averageRaty"></div>
+            </div>
+          </div>
+
   </div><!-- .container -->
   <!-- footer -->
   <footer class="bit-main-footer page-footer grey"></footer>
 
-  <script id="comment-template" type="text/x-handlebars-template">
+<script id="comment-template" type="text/x-handlebars-template">
 {{#each tourComment}}
 
 <div class="comment-row comment-origin row mt50" id="{{no}}">
@@ -330,6 +348,8 @@
   <script src="/bitcamp-fit-tour/node_modules/handlebars/dist/handlebars.min.js"></script>
   <!-- google map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8"></script>
+  <!-- raty -->
+  <script src="/bitcamp-fit-tour/node_modules/raty-js/lib/jquery.raty.js"></script>
   <!-- fittour css -->
   <script src="../header.js"></script>
   <script src="../footer.js"></script>

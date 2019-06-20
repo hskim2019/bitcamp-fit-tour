@@ -8,10 +8,6 @@ import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.FreeReview;
 import com.eomcs.lms.service.FreeReviewService;
 
-// 스프링 IoC 컨테이너가 관리하는 객체 중에서 
-// 비즈니스 로직을 담당하는 객체는 
-// 특별히 그 역할을 표시하기 위해 @Component 대신에 @Service 애노테이션을 붙인다.
-// 이렇게 애노테이션으로 구분해두면 나중에 애노테이션으로 객체를 찾을 수 있다.
 @Service
 public class FreeReviewServiceImpl implements FreeReviewService {
   
@@ -81,6 +77,11 @@ public class FreeReviewServiceImpl implements FreeReviewService {
   @Override
   public int deleteFreeReviewCity(int no) {
     return freeReviewDao.deleteReviewCity(no);
+  }
+
+  @Override
+  public List<FreeReview> findByTourNo(int tourNo) {
+    return freeReviewDao.findByTourNo(tourNo);
   }
 
   

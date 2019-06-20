@@ -31,7 +31,6 @@ function tourList(tourNo) {
     $('#thirdcrumb').html(obj.tour.city.cityName);
     tlocation = obj.tour.location;
 
-    console.log(tlocation);
     if(tlocation != "0"){
       initMap(tlocation);
       $('#place-section').show();
@@ -56,12 +55,9 @@ function tourList(tourNo) {
 
     // init datepicker
     var imposibilityDate = new Array();
-    console.log(obj.tour.imposibilityDates[0].imposibilityDate)
-    console.log(new Date(obj.tour.imposibilityDates[0].imposibilityDate))
     for(var imposibilityDates of obj.tour.imposibilityDates){
       imposibilityDate.push(new Date(imposibilityDates.imposibilityDate).toString());
     }
-    console.log(imposibilityDate);
     $('.datepicker').datepicker({
       i18n : {
         months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -82,7 +78,21 @@ function tourList(tourNo) {
         }
       }
     });
-
+    
+    
+    // review
+    $('#reviewAmount').html('후기 ' + obj.freeReview.length + '개');
+    var reviewSum = 0;
+    for (var freeReview of obj.freeReview) {
+      reviewSum += freeReview.score; 
+    }
+    
+    $ ( '#raty' ). raty ({
+      score: reviewSum / obj.freeReview.length,
+      readOnly : true, 
+      starOn : '../../images/star-on.png' ,
+      starOff : '../../images/star-off.png'
+    });
 
   });
 }
@@ -212,4 +222,5 @@ function initMap(tlocation) {
     title: '여기서 만나요!'
   });
 }
+
 

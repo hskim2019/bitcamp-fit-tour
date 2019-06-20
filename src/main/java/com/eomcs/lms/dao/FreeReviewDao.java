@@ -16,6 +16,8 @@ public interface FreeReviewDao {
   int delete(int no);
 
   FreeReview findByNo(int no);
+  
+ 
 
   void increaseCount(int no);
 
@@ -29,7 +31,7 @@ public interface FreeReviewDao {
 
   int deleteReviewCity(int no);
 
-  
+  List<FreeReview> findByTourNo(int no);
  
 }
 

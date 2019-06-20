@@ -27,6 +27,8 @@ public interface FreeReviewService {
   List<City> getCityName(int no);
 
   int deleteFreeReviewCity(int no);
+  
+  List<FreeReview> findByTourNo(int no);
 
 	
 }

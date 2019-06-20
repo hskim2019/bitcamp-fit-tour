@@ -22,12 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.City;
 import com.eomcs.lms.domain.Country;
+import com.eomcs.lms.domain.FreeReview;
 import com.eomcs.lms.domain.ImposibilityDate;
 import com.eomcs.lms.domain.Theme;
 import com.eomcs.lms.domain.Tour;
 import com.eomcs.lms.domain.TourGuidancePhoto;
 import com.eomcs.lms.domain.TourTheme;
-import com.eomcs.lms.service.TourCommentService;
+import com.eomcs.lms.service.FreeReviewService;
 import com.eomcs.lms.service.TourService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,15 +37,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class TourController {
 
   @Autowired TourService tourService;
-  @Autowired TourCommentService tourCommentService;
+  @Autowired FreeReviewService freeReviewService;
 
   //tour detail
   @GetMapping("detail")
   public Object detail(int no) {
-    HashMap<String, Object> map = new HashMap<>();
+    HashMap<String, Object> content = new HashMap<>();
     Tour tour = tourService.get(no);
-    map.put("tour", tour);
-    return map;
+    List<FreeReview> freeReview = freeReviewService.findByTourNo(no);
+    content.put("tour", tour);
+    content.put("freeReview", freeReview);
+    return content;
   }
 
 

@@ -92,13 +92,14 @@ public class FreeReviewController {
     HashMap<String, Object> content = new HashMap<>();
     if(member.getNo()!=freeReviewService.getMemberId(no).getMemberNo()) {
       content.put("status", "fail");
-      content.put("message", "잘못된 삭제입니다.");
+      content.put("message", "잘못된 로그인정보 입니다.");
       return content;
     }
     
     
     
     try {
+      freeReviewService.deleteFreeReviewCity(no);
       if (freeReviewService.delete(no) == 0)
         throw new RuntimeException("해당 번호의 게시물이 없습니다.");
       content.put("status", "success");
@@ -126,7 +127,7 @@ public class FreeReviewController {
     HashMap<String,Object> paramMap = new HashMap<String,Object>();
     if(member.getNo()!=freeReviewService.getMemberId(freeReview.getNo()).getMemberNo()) {
       content.put("status", "fail");
-      content.put("message", "잘못된 업데이트입니다.");
+      content.put("message", "잘못된 정보 입니다.");
       return content;
     }
     

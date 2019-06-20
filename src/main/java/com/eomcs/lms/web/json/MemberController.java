@@ -119,6 +119,7 @@ public class MemberController {
     return content;
   }
   
+  
   @PostMapping("updatePassword")
   public Object updatePassword(String password, String newPassword, HttpSession session) {
     
@@ -133,6 +134,28 @@ public class MemberController {
     try {
       if (memberService.updatePassWord(paramMap) == 0) 
         throw new RuntimeException("비밀번호를 정확하게 입력해 주세요.");
+      content.put("status", "success");
+      
+    } catch (Exception e) {
+      content.put("status", "fail");
+      content.put("message", e.getMessage());
+    }
+    return content;
+  }
+  
+  @GetMapping("withdrawal")
+  public Object withdrawal(HttpSession session,String reason) {
+    
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    HashMap<String,Object> content = new HashMap<>();
+    HashMap<String,Object> paramMap = new HashMap<>();
+    
+    paramMap.put("reason", reason);
+    paramMap.put("memberNo", loginUser.getNo());
+    
+    try {
+      if (memberService.withdrawal(paramMap) == 0) 
+        throw new RuntimeException("회원 탈퇴중 오류 발생!");
       content.put("status", "success");
       
     } catch (Exception e) {

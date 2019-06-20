@@ -148,6 +148,11 @@ public class MemberServiceImpl implements MemberService {
 	public int tempPassword(Member member) {
 		return memberDao.tempPassWord(member);
 	}
+
+  @Override
+  public int withdrawal(Map<String, Object> paramMap) {
+    return memberDao.withdrawal(paramMap);
+  }
 }
 
 

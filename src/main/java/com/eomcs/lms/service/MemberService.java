@@ -19,5 +19,6 @@ public interface MemberService {
   int confirm(String email,String certification);
   int updatePassWord(Map<String,Object> paramMap);
   int updatePhoto(Map<String,Object> paramMap);
+  int withdrawal(Map<String,Object> paramMap);
   int tempPassword(Member member);
 }

@@ -334,6 +334,15 @@
     member_id = #{no}
   </update>
   
+  <!-- withdrawal -->
+  <update id="withdrawal" parameterType="map">
+    update member
+    set rank = 3,
+    nickname = #{reason}
+    where
+    member_id = #{memberNo}
+  </update>
+  
 </mapper>
 
 

@@ -22,6 +22,7 @@ public interface MemberDao {
   int confirm(Map<String,Object> paramMap);
   int updatePassWord(Map<String,Object> paramMap);
   int updatePhoto(Map<String,Object> paramMap);
+  int withdrawal(Map<String,Object> paramMap);
   int tempPassWord(Member member);
 }
 

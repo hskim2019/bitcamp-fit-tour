@@ -105,7 +105,7 @@ $(document).ready(function(){
 });
 
 
-$("#birth").on("mousemove propertychange change keyup paste input", function() {
+$("#birth").on("propertychange change keyup paste input", function() {
 
   var birth=$("#birth").val();
   // 생일 검증할 정규 표현식

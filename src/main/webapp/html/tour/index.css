@@ -1,4 +1,43 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Open+Sans+Condensed:700");
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
+nav{z-index: 3;}
+#main {z-index: 2;}
+
+nav {
+	background-color: transparent;
+	background-image: url("/bitcamp-fit-tour/images/main0.jpg");
+	height: 250px;
+}
+
+.input-title {
+	margin-top: 50px;
+	margin-bottom: 0px;
+	font-size : 50px;
+	font-weight: 700;
+	color: white;
+	text-align: center;
+	font-family: 'Nanum Myeongjo', serif;
+	height:60px;
+}
+.sub-text {
+	font-size : 12px;
+	font-weight: 600;
+	color: white;
+	text-align: center;
+	font-family: 'Nanum Myeongjo', serif;
+	height: 20px;
+}
+/* .main {
+	max-height: 200px;
+	overflow: hidden;
+	float: center;
+}
+
+.cropping-image{
+	max-height: initial;
+	margin-top: -50%;
+} */
 
 .navigation {
 	margin-bottom: 13px !important;
@@ -354,7 +393,7 @@ border-top: 1px solid rgba(160,160,160,0.2);
 /*collapsible - side menu*/
 .collapsible {
 	/* top: 196px; */
-	top: 210px;
+	top: 415px;
 	position: absolute;
 /* 	        position: fixed;
         top: 210px; */

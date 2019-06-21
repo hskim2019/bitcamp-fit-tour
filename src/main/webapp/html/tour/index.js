@@ -101,6 +101,22 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
         $(trGenerator(obj)).appendTo($('#tourlistcard'));
 
 
+        var inputText;
+        if(continentName) {
+          inputText = continentName;
+        } 
+        if (countryName) {
+          inputText = countryName;
+        } 
+        if (cityName) {
+          inputText = cityName;
+        } 
+        if (!continentName && !countryName && !cityName){
+          inputText = 'Tourism';
+        }
+       $('.temp-text').html('<p class="input-title">' + inputText +'</p>' + '<p class="sub-text">Travel is fatal to prejudice bigotry and narrow-mindedness</p>');
+        
+        
         for(listRow of $('.listRow')) {
           $.ajaxSetup({async:false});
           var tourNo = $(listRow).attr('id');

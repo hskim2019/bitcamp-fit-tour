@@ -353,13 +353,22 @@ border-top: 1px solid rgba(160,160,160,0.2);
 
 /*collapsible - side menu*/
 .collapsible {
-	top: 196px;
+	/* top: 196px; */
+	top: 210px;
 	position: absolute;
+/* 	        position: fixed;
+        top: 210px; */
 	width: 240px;
 /* 	border: 2px solid blue; */
 	border-radius: 4px;
 	padding: 5px !important;
 }
+
+/* .jbFixed2 {
+	    position: fixed !important;
+        top: 50px;
+        bottom: 300px;
+} */
 
 .collapsible-header {
 	padding: 10px !important;

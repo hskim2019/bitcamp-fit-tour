@@ -75,7 +75,13 @@ function loadList(pn, search, tourNo, tourDate) {
         var status = $(paymentStatus).html();
         if (status == '취소요청') {
           $(paymentStatus).parent().addClass('alert');
-          $(paymentStatus).next().append('<div class="statusEdit">승인&nbsp;<i class="fas fa-edit"></i></div>');
+          $(paymentStatus).next().next().append('<div class="statusEdit">승인&nbsp;<i class="fas fa-edit"></i></div>');
+        }
+      }
+      
+      for(cancelReason of $('.cancelReason')) {
+        if ($(cancelReason).attr('data-content').length > 0) {
+          $(cancelReason).append('<i class="tiny material-icons cancelReason-checked modal-trigger" href="#modal2">check</i>');
         }
       }
       
@@ -146,6 +152,17 @@ $(document.body).bind('loaded-list', () => {
     e.preventDefault();
     var requirement = $(e.target).parents('th').attr('data-content');
     $('.requirement-text').html(requirement);
+  });
+});
+
+
+$(document.body).bind('loaded-list', () => {
+  // 제목을 클릭했을 때 view.html로 전환시키기
+  $('.cancelReason-checked').click((e) => {
+    e.preventDefault();
+    var cancelText = $(e.target).parent('th').attr('data-content');
+    console.log(cancelText);
+    $('.cancelReason-text').html(cancelText);
   });
 });
 

@@ -45,15 +45,23 @@ var instance = M.Collapsible.init(elem, {
 
 $( document ).ready( function() {
   var jbOffset = $( '.navigation' ).offset();
+  var jbOffset2 = $('.collapsible').offset();
+  
+  var scrollBottom = $("body").height() - $(window).height() - $(window).scrollTop(); //스크롤바텀값
+  
   $( window ).scroll( function() {
-    if ( $( document ).scrollTop() > jbOffset.top ) {
+    if ( $( document ).scrollTop() > jbOffset.top || $(document).scrollTop() > jbOffset2.top) {
       $( '.navigation' ).addClass( 'jbFixed z-depth-3' );
+   //   $('.collapsible').addClass('jbFixed2');
     }
     else {
       $( '.navigation' ).removeClass( 'jbFixed z-depth-3' );
+   //   $('.collapsible').removeClass('jbFixed2');
     }
   });
 } );
+
+
 
 //JSON 형식의 데이터 목록 가져오기
 function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, minHour, maxHour, theme, orderby, keyword) {

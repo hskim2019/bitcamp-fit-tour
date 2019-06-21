@@ -62,6 +62,7 @@
     <th class="center">결제번호</th>
     <th class="center">결제일</th>
     <th class="center">예약상태</th>
+    <th class="center">취소사유</th>
     <th></th>
   </tr>
 </thead>
@@ -82,6 +83,17 @@
     <div class="modal-content">
       <h4 class="modal-titl">요청사항</h4>
       <p class="requirement-text"></p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
+    </div>
+  </div>
+  
+    <!-- Modal - if cancellation exists -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4 class="modal-titl">취소사유</h4>
+      <p class="cancelReason-text"></p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">닫기</a>
@@ -110,6 +122,7 @@
   <th class="center paymentNo" data-content="{{paymentNo}}"></th>
   <th class="center">{{paymentDate}}</th> 
   <td class="center paymentStatus">{{paymentStatus.status}}</td>
+  <th class="center cancelReason" data-content="{{cancelReason}}"></td>
   <td class="center edit" data-no="{{no}}"></td>
 </tr>
 {{/each}}

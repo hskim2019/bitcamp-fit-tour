@@ -97,6 +97,10 @@ height: 17px;
 	cursor: pointer;
 }
 
+.cancelReason-checked {
+	cursor: pointer;
+}
+
 
 /*modal*/
 .modal {

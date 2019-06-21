@@ -61,6 +61,7 @@
    r.reservation_date,
    r.payment_id,
    r.payment_date,
+   r.cancel_reason,
    m.name,
    s.status
  from reservation as r

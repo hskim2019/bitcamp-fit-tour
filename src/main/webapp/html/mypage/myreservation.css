@@ -40,3 +40,34 @@ h4 {
   padding: 5px 10px;
   margin-left: 8px;
 }
+
+textarea.materialize-textarea{
+	border : 1px solid #9e9e9e !important;
+	height: 6rem !important;
+	border-radius: 10px !important;
+}
+
+textarea.materialize-textarea:focus:not([readonly]) {
+  border : 1px solid #26a69a !important;
+  border-radius: 10px !important;
+}
+
+/* modal */
+#reservation-cancel-modal {
+  width : 480px;
+  max-height: none;
+}
+
+#reservation-comfirm-btn, #reservation-cancel-btn {
+  width: 410px;
+  height: 40px;
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+.reservation-cancel-header {
+    font-size: 2.28rem !important;
+    line-height: 110% !important;
+    margin: 1.52rem 0 .912rem 0 !important;
+    font-weight: normal !important;
+}

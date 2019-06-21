@@ -1,6 +1,8 @@
 var reservationTemplateSrc = $('#reservation-template').html(),
 reservationGenerator = Handlebars.compile(reservationTemplateSrc);
 
+var reservationNo;
+
 //load user
 $(document.body).bind('loadHeader', () => {
   if (!sessionStorage.getItem('loginUser')) {
@@ -12,6 +14,10 @@ $(document.body).bind('loadHeader', () => {
   if (sessionStorage.getItem('loginUser')) {
     var user = JSON.parse(sessionStorage.getItem('loginUser'))
   }
+});
+
+// modal init
+$('#reservation-cancel-modal').modal({
 });
 
 //collapsible click controll
@@ -43,7 +49,8 @@ $.getJSON('../../app/json/reservation/completedreservation',
     reservation.reciptUrl = reservation.paymentNo.split(',')[1];
     var paymentMethod = getPaymentMethod(reservation.paymentNo.split(',')[2]);
     reservation.paymentMethod = paymentMethod;
-    reservation.buyerName = reservation.buyerName + ' 외' + reservation.personnel + '명';
+    if (reservation.personnel > 1)
+    reservation.buyerName = reservation.buyerName + ' 외' + --(reservation.personnel) + '명';
   }
   console.log(obj);
   
@@ -56,9 +63,71 @@ $.getJSON('../../app/json/reservation/completedreservation',
   $('.tour-title').click(function(){
     location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).parent().parent().attr('id'); 
   })
+  
+  $('#ready-tour-section').children().each(function(){
+    console.log($(this).children().first().children().first().text());
+    if($(this).children().first().children().first().text() == '예약완료')
+    $(this).children().first().children().last().append('<a href="#" class="reservation-cancel-btn">예약 취소</a>')
+  })
+  
+  $('.reservation-cancel-btn').click(function(e){
+    e.preventDefault();
+    reservationNo = $(this).parent().attr('id');
+    $('#reservation-cancel-modal').modal('open');
+  });
+  
+  $('#reservation-cancel-btn').click(function(e){
+    e.preventDefault();
+    $('#reservation-cancel-modal').modal('close');
+    $('#reason').val('');
+  });
+  
+  $('#reservation-comfirm-btn').click(function(e){
+    e.preventDefault();
+    $.post('../../app/json/reservation/update',{
+      no : reservationNo,
+      statusNo : 7,
+      cancelReason : $('#reason').val()
+    },function(obj){
+      if(obj.status == 'success'){
+        $('#reservation-cancel-modal').modal('close');
+        M.toast({ html: '예약 취소 요청이 완료되었습니다.' });
+      }
+    })
+
+    
+  });
+
+
+  
 });
 
 //old tour list
+$.getJSON('../../app/json/reservation/oldreservation',
+    function(obj){
+  for(reservation of obj.reservations){
+    reservation.paymentStatus.status = '여행완료';
+    reservation.tour.price = (reservation.personnel * reservation.tour.price).toLocaleString();
+    reservation.reciptUrl = reservation.paymentNo.split(',')[1];
+    var paymentMethod = getPaymentMethod(reservation.paymentNo.split(',')[2]);
+    reservation.paymentMethod = paymentMethod;
+    reservation.buyerName = reservation.buyerName + ' 외' + reservation.personnel + '명';
+  }
+  console.log(obj);
+  
+  $(reservationGenerator(obj)).appendTo($('#old-tour-section'));
+  
+  // add ready tour amount
+  $('#old-tour-amount').html(obj.amount);
+  
+  //add click event tour title
+  $('.tour-title').click(function(){
+    location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).parent().parent().attr('id'); 
+  })
+});
+
+
+//cancel tour list
 $.getJSON('../../app/json/reservation/oldreservation',
     function(obj){
   for(reservation of obj.reservations){

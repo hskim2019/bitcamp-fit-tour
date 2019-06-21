@@ -19,6 +19,7 @@ public class Reservation implements Cloneable, Serializable {
 	private String requirement;//요청사항
 	private String paymentNo;//결제번호
 	private String buyerName; // 예약자번호
+	private String cancelReason;
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date paymentDate;//결제일
@@ -27,8 +28,16 @@ public class Reservation implements Cloneable, Serializable {
 	private PaymentStatus paymentStatus;
 	private Member member;
 	private Tour tour;
+	
+	
 
-	public String getBuyerName() {
+	public String getCancelReason() {
+    return cancelReason;
+  }
+  public void setCancelReason(String cancelReason) {
+    this.cancelReason = cancelReason;
+  }
+  public String getBuyerName() {
 		return buyerName;
 	}
 	public void setBuyerName(String buyerName) {
@@ -118,14 +127,18 @@ public class Reservation implements Cloneable, Serializable {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	@Override
-	public String toString() {
-		return "Reservation [no=" + no + ", tourNo=" + tourNo + ", memberNo=" + memberNo + ", statusNo="
-				+ statusNo + ", tourDate=" + tourDate + ", personnel=" + personnel + ", touristTel="
-				+ touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo + ", buyerName="
-				+ buyerName + ", paymentDate=" + paymentDate + ", reservationDate=" + reservationDate
-				+ ", paymentStatus=" + paymentStatus + ", member=" + member + ", tour=" + tour + "]";
-	}
+  @Override
+  public String toString() {
+    return "Reservation [no=" + no + ", tourNo=" + tourNo + ", memberNo=" + memberNo + ", statusNo="
+        + statusNo + ", tourDate=" + tourDate + ", personnel=" + personnel + ", touristTel="
+        + touristTel + ", requirement=" + requirement + ", paymentNo=" + paymentNo + ", buyerName="
+        + buyerName + ", cancelReason=" + cancelReason + ", paymentDate=" + paymentDate
+        + ", reservationDate=" + reservationDate + ", paymentStatus=" + paymentStatus + ", member="
+        + member + ", tour=" + tour + "]";
+  }
+	
+	
+	
 
 
 

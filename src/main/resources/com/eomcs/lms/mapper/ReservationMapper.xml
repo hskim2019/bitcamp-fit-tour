@@ -19,6 +19,7 @@
          <result column="member_id" property="memberNo" />
          <result column="tour_id" property="tourNo" />
          <result column="buyer_name" property="buyerName" />
+         <result column="cancel_reason" property="cancelReason" />
          
    
   
@@ -136,10 +137,11 @@
     update reservation
     <set>
       <if test="tourDate != null">tour_date = #{tourDate},</if>
-      <if test="personnel != null">personnel = #{personnel},</if>
+      <if test="personnel != 0">personnel = #{personnel},</if>
       <if test="touristTel != null">tourist_tel = #{touristTel},</if>
       <if test="requirement != null"> requirement = #{requirement},</if>
-      <if test="statusNo != null">status_id = #{statusNo}</if>
+      <if test="statusNo != null">status_id = #{statusNo},</if>
+      <if test="cancelReason != null">cancel_reason = #{cancelReason}</if>
     </set>
     where
     reservation_id = #{no}
@@ -178,7 +180,7 @@
     select * from reservation as r 
     join tour as t on r.tour_id = t.tour_id
     join payment_status as p on p.status_id = r.status_id
-    where member_id = #{memberNo} and r.status_id = 1 and date(tour_date) >= date(now());
+    where member_id = #{memberNo} and date(tour_date) >= date(now());
   </select>
   
   <select id="findByOldReservation" resultMap="reservationMap" parameterType="map">

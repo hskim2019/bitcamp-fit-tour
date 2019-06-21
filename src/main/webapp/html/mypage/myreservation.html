@@ -27,51 +27,85 @@
   <header class="bit-main-header"></header>
   <!-- container -->
   <div class="container min-height">
-  
+
     <div class="row">
       <blockquote>
         <h4>내 예약</h4>
       </blockquote>
     </div>
-    
+
     <div class="row">
       <div class="side col s3">
         <ul class="collapsible">
           <li>
             <div class="collapsible-header ready-tour checked">준비중인 여행
-            <span id="ready-tour-amount" class="badge ml10 p0"></span>
-            <i class="material-icons col s1 offset-11">chevron_right</i></div>
+              <span id="ready-tour-amount" class="badge ml10 p0"></span>
+              <i class="material-icons col s1 offset-11">chevron_right</i></div>
           </li>
           <li>
             <div class="collapsible-header old-tour">지난 여행
-            <span id="old-tour-amount" class="badge ml10 p0"></span>
-            <i class="material-icons col s1 offset-11">chevron_right</i></div>
+              <span id="old-tour-amount" class="badge ml10 p0"></span>
+              <i class="material-icons col s1 offset-11">chevron_right</i></div>
           </li>
           <li>
             <div class="collapsible-header canceled-tour">취소된 여행
-            <span class="badge ml10 p0">0</span>
-            <i class="material-icons col s1 offset-11">chevron_right</i></div>
+              <span class="badge ml10 p0">0</span>
+              <i class="material-icons col s1 offset-11">chevron_right</i></div>
           </li>
         </ul>
       </div>
-    
-    <div id="ready-tour-section" class="col s9 rightside">
+
+      <div id="ready-tour-section" class="col s9 rightside">
+      </div>
+
+      <div id="old-tour-section" class="col s9 rightside bit-invisible">
+      </div>
+
+      <div id="canceled-tour-section" class="col s9 rightside bit-invisible">
+        <div class="card-panel">
+          취소된 여행
+        </div>
+      </div>
+
     </div>
-    
-    <div id="old-tour-section" class="col s9 rightside bit-invisible">
-    </div>
-      
-    <div id="canceled-tour-section" class="col s9 rightside bit-invisible">
-      <div class="card-panel">
-       취소된 여행
+
+  </div> <!-- container -->
+
+  <!-- profile photo update-->
+  <div id="reservation-cancel-modal" class="modal">
+    <div class="row">
+      <div class="modal-content">
+        <!-- h -->
+        <div class="row mb0">
+          <div class="col l12">
+            <blockquote>
+              <h4 class="reservation-cancel-header">예약 취소 요청</h4>
+            </blockquote>
+            • 관리자에게 예약을 취소 요청합니다. 평균 약 1~2일 소요됩니다.<br>
+            • 취소 사유를 작성 해 주세요.
+
+            <div class="row mt10 mb0">
+              <div class="input-field col s12">
+                <textarea id="reason" rows="5" class="materialize-textarea"></textarea>
+              </div>
+            </div>
+
+            <!-- update button -->
+            <div class="row center-align mb10">
+              <a href="#" id="reservation-comfirm-btn" class="waves-effect waves-white btn">요청</a>
+            </div>
+            <!-- cancel button -->
+            <div class="row center-align mb0">
+              <a href="#" id="reservation-cancel-btn" class="waves-effect waves-white btn red lighten-2">취소</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    
-    
-    
-    </div>
-    
-    </div>
+  </div>
+
+
 
 </body>
 <!-- footer -->
@@ -83,12 +117,13 @@
 <div id="{{tour.no}}" class="card-panel">
   <div class="row">
 
-    <div class="col s2 payment-status">
-      {{paymentStatus.status}}
-    </div>
+    <div class="col s2 payment-status">{{paymentStatus.status}}</div>
     
-    <div class="col s10 tour-title">
+    <div class="col s8 tour-title">
       {{tour.title}}
+    </div>
+
+    <div id="{{no}}" class="col s2 reservation-cancel">
     </div>
   </div>
 
@@ -122,7 +157,7 @@
     </div>
 
     <div class="col s8 mt5 reservation-price">
-      <i class="fas fa-won-sign"></i> {{tour.price}} 원 <a href="{{reciptUrl}}" class="recipt waves-effect waves-light btn-small" target="_blank">영수증 보기</a>
+      <i class="fas fa-won-sign"></i> {{tour.price}} 원 <a href="{{reciptUrl}}" class="recipt waves-effect waves-light btn-small" target="_blank">영수증</a>
     </div>
 
   </div>

@@ -19,7 +19,7 @@ public class ReservationController {
 
 	@Autowired ReservationService reservationService;
 	@Autowired MemberService memberService;
-
+	
 	@PostMapping("add")
 	public Object add(Reservation reservation) throws Exception {
 		HashMap<String,Object> content = new HashMap<>();
@@ -125,7 +125,7 @@ public class ReservationController {
 
 	@PostMapping("update")
 	public Object update(Reservation reservation) {
-		System.out.println("no: " + reservation.getNo() + "statusNo: " + reservation.getStatusNo());
+	  System.out.println(reservation);
 		HashMap<String,Object> content = new HashMap<>();
 		try {
 			if (reservationService.update(reservation) == 0) 

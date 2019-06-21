@@ -52,12 +52,12 @@ function showUpdateDeleteButton() {
 function commentAmountUpdate(commentAmount, init) {
   
   if(init){
-    $('#commentAmount').html('댓글 ' + commentAmount + '개');
+    $('#commentAmount').html(commentAmount);
     
   }else {    
-    var UpdatedCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,"")) + commentAmount;
+    var UpdatedCommentAmount = Number($('#commentAmount').html()) + commentAmount;
     $('#commentAmount').html
-    ('댓글 ' + UpdatedCommentAmount + '개');
+    (UpdatedCommentAmount);
   }
 }
 
@@ -211,7 +211,7 @@ $(document.body).bind('addEventUpdateDeleteButton', () => {
 function checkMoreComment() {
   
   var currentPageCommentAmount = $('.comment-origin').length,
-      allCommentAmount = Number($('#commentAmount').html().replace(/[^0-9]/g,""));
+      allCommentAmount = Number($('#commentAmount').html());
       
       if(allCommentAmount > currentPageCommentAmount){
         $('#more-comment-btn').show();

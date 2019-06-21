@@ -61,6 +61,11 @@ function tourList(tourNo) {
     for(var imposibilityDates of obj.tour.imposibilityDates){
       imposibilityDate.push(new Date(imposibilityDates.imposibilityDate).toString());
     }
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth()+2;
+    var day = today.getDate();
+    var nextmonth = new Date(year,month,day);
     $('.datepicker').datepicker({
       i18n : {
         months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -68,10 +73,12 @@ function tourList(tourNo) {
         weekdaysFull: ['일', '월', '화', '수', '목', '금', '토'],
         weekdaysShort:['일', '월', '화', '수', '목', '금', '토'],
         cancel:'취소',
-        done: '확인'
+        done: '확인',
+        
       },
       format : 'yyyy년 mm월 dd일',
-
+      minDate: today,
+      maxDate : nextmonth,
       disableDayFn :function (date) {
         console.log(date);
         if(imposibilityDate.includes(date.toString())) {
@@ -84,20 +91,20 @@ function tourList(tourNo) {
 
 
     // review
-    $('#reviewAmount').html('후기 ' + obj.freeReview.length + '개');
+    $('#reviewAmount').html(obj.freeReview.length);
     if(obj.freeReview.length > 0){
       var reviewSum = 0;
       for (var freeReview of obj.freeReview) {
         reviewSum += freeReview.score; 
       }
 
-      $('#average').html((reviewSum / obj.freeReview.length).toFixed(1));
+      $('#average').html('평점 ' + (reviewSum / obj.freeReview.length).toFixed(1));
       $( '#averageRaty' ).raty ({
         score: reviewSum / obj.freeReview.length,
         readOnly : true, 
-        starOn : '../../images/star_black_lg.png' ,
-        starOff : '../../images/star_border_black_lg.png',
-        starHalf:'../../images/star_half_black_lg.png'
+        starOn : '../../images/star-lg.png' ,
+        starOff : '../../images/star-border-lg.png',
+        starHalf:'../../images/star-half-lg.png'
       });
       
       var scores = new Array();

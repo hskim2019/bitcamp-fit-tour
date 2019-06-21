@@ -4,6 +4,13 @@ html {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+.gray {
+  color : #9e9e9e
+}
+
+.f-teal {
+  color : teal;
+}
 /* div {
 	border:1px solid red;
 } */

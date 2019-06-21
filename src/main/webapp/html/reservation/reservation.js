@@ -35,15 +35,7 @@ if (param) {
 }
 
 
-// /달력
-$(document).ready(function(){
-$('.datepicker').datepicker({
-   format : 'yyyy년 mm월 dd일',
-     defaultDate: new Date(tourYear, tourMonth-1, tourDay), // 월에 자동으로 +1이 들어가서
-                                                            // -해줘야한다;
-     setDefaultDate: true
-});
-});
+
 
 
 function addPersonnelOption(personnel, price) {// 인원
@@ -73,6 +65,39 @@ function loadData(no) {
         $('#price').html(obj.tour.price * selectPersonnel +'원');
         $('#perPrice').html('/' + selectPersonnel + '인')
 
+     // init datepicker
+        var imposibilityDate = new Array();
+        for(var imposibilityDates of obj.tour.imposibilityDates){
+          imposibilityDate.push(new Date(imposibilityDates.imposibilityDate).toString());
+        }
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth()+2;
+        var day = today.getDate();
+        var nextmonth = new Date(year,month,day);
+        $('.datepicker').datepicker({
+          i18n : {
+            months : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthsShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            weekdaysFull: ['일', '월', '화', '수', '목', '금', '토'],
+            weekdaysShort:['일', '월', '화', '수', '목', '금', '토'],
+            cancel:'취소',
+            done: '확인',
+            
+          },
+          format : 'yyyy년 mm월 dd일',
+          minDate: today,
+          maxDate : nextmonth,
+          disableDayFn :function (date) {
+            console.log(date);
+            if(imposibilityDate.includes(date.toString())) {
+              return true
+            }else{
+              return false
+            }
+          }
+        });
+        
         
         
       });

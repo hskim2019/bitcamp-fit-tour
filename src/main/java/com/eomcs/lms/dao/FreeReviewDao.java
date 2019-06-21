@@ -11,8 +11,10 @@ public interface FreeReviewDao {
 
   List<FreeReview> findAll(HashMap<String, Object> params);
 
-  int countAll(String search);
+  int countAll(HashMap<String, Object> params);
 
+  int countCity(HashMap<String, Object> params);
+  
   int delete(int no);
 
   FreeReview findByNo(int no);
@@ -32,6 +34,9 @@ public interface FreeReviewDao {
   int deleteReviewCity(int no);
 
   List<FreeReview> findByTourNo(int no);
+
+  List<FreeReview> findCity(HashMap<String, Object> params);
+
  
 }
 

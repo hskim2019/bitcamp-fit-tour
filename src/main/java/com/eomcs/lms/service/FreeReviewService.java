@@ -12,7 +12,6 @@ public interface FreeReviewService {
 
   List<FreeReview> list(int pageNo, int pageSize, String search);
 
-  int size(String search);
 
   int delete(int no);
 
@@ -29,6 +28,12 @@ public interface FreeReviewService {
   int deleteFreeReviewCity(int no);
   
   List<FreeReview> findByTourNo(int no);
+
+  int size(int searchCagetory, String search);
+
+  int citySize(List<String> citys);
+
+  List<FreeReview> cityList(int pageNo, int pageSize, List<String> citys);
 
 	
 }

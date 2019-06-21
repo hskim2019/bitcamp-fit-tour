@@ -224,6 +224,11 @@
 	text-align: right;
 }
 
+.collapsible-header {
+	color: #5B6866;
+	font-size : 13px;
+}
+
 .fa-won-sign {
 	font-size: 17px !important;
 }
@@ -395,10 +400,20 @@ form > p {
 
 .theme-selection {
 	padding: 10px 20px !important;
+
 }
 
 #theme-name {
+    color : #5B6866;
 	font-size: 13px;
+	padding: 0px 25px;
+}
+
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
+  width: 17px !important; 
+  height: 17px !important; 
+  margin: 5px 0px !important;
+  border: 2px solid #5B6866;
 }
 
 #searchwithOptions{

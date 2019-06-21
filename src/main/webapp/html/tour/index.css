@@ -2,21 +2,45 @@
 
 .navigation {
 	margin-bottom: 13px !important;
+	z-index: 3;
+/*     margin-bottom: 50px; */
 }
 
-.navigation ul {
+.navigation > ul {
+	margin-left: 100px;
 	margin: 0px;
-	padding: 0px;
-}
-
-
-.navigation ul, .navigation ul ul, .navigation ul ul ul {
+	padding: 0px 210px;
 	background-color : white !important;
-	}
+	list-style-type: none;
+}
 
 .navigation ul > li {
       width: calc(16.666% - 0.2em);
       text-align: center;
+}
+
+.navigation ul ul, .navigation ul ul ul {
+	background-color : white !important;
+	}
+
+.jbFixed {
+        position: fixed;
+        top: 0px;
+        width: 100%;
+      }
+      
+ .jbFixed ul, .jbFixed ul ul, .jbFixed ul ul ul {
+ 	background-color: #24313C !important;
+	opacity: 0.8;
+	}
+
+ .jbFixed ul a, .jbFixed ul ul a, .jbFixed ul ul ul a, .jbFixed .navigation-ul .mouseOverLeave .showAll {
+ 	color: white;
+	}
+	
+.showinBright {
+	color: #d6e5e3 !important;
+	opacity: 0.8;
 }
 
 .continent-list-btn, .showAll{
@@ -32,11 +56,8 @@
 	font-weight: 500px;
 }
 
-.navigation{
-  margin-bottom: 50px;
-}
 
-.navigation ul, .navigation ul ul, .navigation ul ul ul{
+.navigation ul ul, .navigation ul ul ul{
 	list-style-type: none;
 	padding-left: 0;
 	margin: 0;
@@ -45,7 +66,7 @@
 
 .navigation ul li{
 	display: inline-block;
-	padding: 15px 25px;
+	padding: 15px 15px;
 	z-index: 997;
 }
 
@@ -69,7 +90,7 @@
 	font-weight: 500;
 }
 
-.navigation li.has-menu:hover > ul.sub-menu{
+.navigation li.has-menu:hover > ul.sub-menu {
 	display: block;
 	position: absolute;
 	background-color: #24313C !important;
@@ -137,10 +158,20 @@
 	color: rgba(0,0,0,0.80	);
 }
 
+/*검색결과 0*/
+.nodata {
+	text-align: center;
+	padding: 100px 0px;
+}
+
+.nodata-text {
+	color : grey;
+}
+
 
 /* 상품 list */
 #tourlistcard {
-	min-height: 620px;
+	min-height: 650px;
 }
 
 .card-image {
@@ -190,6 +221,15 @@
 .price {
 	font-size: 20px !important;
 	text-align: right;
+}
+
+.collapsible-header {
+	color: #5B6866;
+	font-size : 13px;
+}
+
+.fa-won-sign {
+	font-size: 17px !important;
 }
 
 /*orderOptions*/
@@ -359,10 +399,20 @@ form > p {
 
 .theme-selection {
 	padding: 10px 20px !important;
+
 }
 
 #theme-name {
+    color : #5B6866;
 	font-size: 13px;
+	padding: 0px 25px;
+}
+
+[type="checkbox"].filled-in:not(:checked)+span:not(.lever):after {
+  width: 17px !important; 
+  height: 17px !important; 
+  margin: 5px 0px !important;
+  border: 2px solid #5B6866;
 }
 
 #searchwithOptions{

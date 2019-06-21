@@ -77,8 +77,11 @@ public class MemberController {
 //		  searchWord = search;
 //	  }
 	  
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
+//    if (pageSize < 3 || pageSize > 8) 
+//      pageSize = 3;
+	  
+    if (pageSize < 10 || pageSize > 10) 
+    pageSize = 10;
     
     int rowCount = memberService.size(searchCategory, search);
     System.out.println("rowCount: " + rowCount);

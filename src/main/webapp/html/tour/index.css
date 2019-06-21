@@ -171,8 +171,7 @@
 
 /* 상품 list */
 #tourlistcard {
-	/* min-height: 620px; */
-	min-height: 400px;
+	min-height: 650px;
 }
 
 .card-image {

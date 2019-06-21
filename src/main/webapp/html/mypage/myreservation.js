@@ -52,7 +52,7 @@ $.getJSON('../../app/json/reservation/completedreservation',
     if (reservation.personnel > 1)
     reservation.buyerName = reservation.buyerName + ' 외' + --(reservation.personnel) + '명';
   }
-  console.log(obj);
+  console.log(obj.reservation);
   
   $(reservationGenerator(obj)).appendTo($('#ready-tour-section'));
   

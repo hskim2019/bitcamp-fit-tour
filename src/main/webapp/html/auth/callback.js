@@ -58,10 +58,11 @@ function login(loginTypeNo){
     if (data.status == 'success') {
       location.href = '../index.html'
     }else if (data.status == 'overlap') {
-      alert(data.message)
+     
+       M.toast({html: data.message,displayLength: '10000'})
       location.href = '../index.html'
     } else if (data.status == 'tokenerr') {
-      alert(data.message)
+      M.toast({html: data.message,displayLength: '10000'})
       location.href = '../index.html'
     }else {
       alert("알수없는 에러")

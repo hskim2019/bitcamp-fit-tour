@@ -10,10 +10,7 @@ if (window.localStorage.getItem('email')) {
   $('#email').val(localStorage.email)
 }
 //$('#naverIdLogin').hide();
-$('#naver-btn').click(() => {
-  alert('hh')
 
-});
 
 $('#login-btn').click(() => {
   if (document.querySelector('#saveEmail:checked') != null) {

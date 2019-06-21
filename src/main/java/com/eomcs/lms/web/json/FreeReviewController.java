@@ -58,15 +58,48 @@ public class FreeReviewController {
 
 
   @GetMapping("list")
-  public Object list(@RequestParam(defaultValue = "1") int pageNo,
-      @RequestParam(defaultValue = "7") int pageSize, String search) {
+  public Object list( @RequestParam(value="citys[]", required=false)List<String> citys,
+      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="7") int pageSize, 
+      @RequestParam(defaultValue="9") int searchCategory,
+      String search) {
+    
+    if(citys.size()!=9) {
+      int rowCount = freeReviewService.citySize(citys);
+      int totalPage = rowCount / pageSize;
+      if (totalPage == 0 || rowCount % pageSize > 0)
+        totalPage++;
 
+      if (pageNo < 1)
+        pageNo = 1;
+      else if (pageNo > totalPage)
+        pageNo = totalPage;
+    
+      List<FreeReview> freeReview = freeReviewService.cityList(pageNo, pageSize, citys);
+
+      HashMap<String, Object> content = new HashMap<>();
+      content.put("list", freeReview);
+      content.put("pageNo", pageNo);
+      content.put("pageSize", pageSize);
+      content.put("totalPage", totalPage);
+
+      return content;
+    
+    }
+    
+    
     if (pageSize < 3 || pageSize > 8)
       pageSize = 7;
 
-    int rowCount = freeReviewService.size(search);
+    int rowCount = freeReviewService.size(searchCategory, search);
+    
+    
+    
+    
+    
+    
     int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
+    if (totalPage == 0 || rowCount % pageSize > 0)
       totalPage++;
 
     if (pageNo < 1)

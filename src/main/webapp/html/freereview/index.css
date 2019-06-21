@@ -19,7 +19,7 @@ thead{
 }
 
 .review{
-   min-height: 570px
+   min-height: 600px
 }
 .reviewNo{
   width: 150px
@@ -39,3 +39,13 @@ thead{
 
 .noe{
   min-height: 250px
+}
+
+
+
+#add-btn{
+  margin-top: 15px;
+  
+}
+
+

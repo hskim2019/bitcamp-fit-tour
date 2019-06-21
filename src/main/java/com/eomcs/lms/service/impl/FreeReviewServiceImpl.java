@@ -35,8 +35,88 @@ public class FreeReviewServiceImpl implements FreeReviewService {
   }
 
   @Override
-  public int size(String search) {
-    return freeReviewDao.countAll(search);
+  public int size(int searchCagetory, String search) {
+    HashMap<String,Object> params = new HashMap<>();
+
+    if(searchCagetory == 0) {
+      params.put("searchAll", search);
+    } else if (searchCagetory == 1) {
+      params.put("searchwithName", search);
+    } else if (searchCagetory == 2) {
+      params.put("searchwithNickname", search);
+    } else if (searchCagetory == 3) {
+      params.put("searchwithEmail", search);
+    } else if (searchCagetory == 4) {
+      params.put("searchwithTel", search);
+    }
+    return freeReviewDao.countAll(params);
+  }
+
+  @Override
+  public List<FreeReview> cityList(int pageNo, int pageSize, List<String> citys) {
+    HashMap<String,Object> params = new HashMap<>();
+    if(citys.size() >= 1) {
+      
+      params.put("searchOne", citys.get(0));
+    }
+    if(citys.size() >= 2) {
+      params.put("searchTwo", citys.get(1));
+    }
+    if(citys.size() >= 3) {
+      params.put("searchThree", citys.get(2));
+    }
+    if(citys.size() >= 4) {
+      params.put("searchFour", citys.get(3));
+    }
+    if(citys.size() >= 5) {
+      params.put("searchFive", citys.get(4));
+    }
+    if(citys.size() >= 6) {
+      params.put("searchSix", citys.get(5));
+    }
+    if(citys.size() >= 7) {
+      params.put("searchSeven", citys.get(6));
+    }
+    if(citys.size() >= 8) {
+      params.put("searchEight", citys.get(7));
+    }
+    params.put("size", pageSize);
+    params.put("rowNo", (pageNo - 1) * pageSize);
+    return freeReviewDao.findCity(params);
+  }
+  
+  
+  
+  @Override
+  public int citySize(List<String> citys) {
+    HashMap<String,Object> params = new HashMap<>();
+    if(citys.size() >= 1) {
+      
+      params.put("searchOne", citys.get(0));
+    }
+    if(citys.size() >= 2) {
+      params.put("searchTwo", citys.get(1));
+    }
+    if(citys.size() >= 3) {
+      params.put("searchThree", citys.get(2));
+    }
+    if(citys.size() >= 4) {
+      params.put("searchFour", citys.get(3));
+    }
+    if(citys.size() >= 5) {
+      params.put("searchFive", citys.get(4));
+    }
+    if(citys.size() >= 6) {
+      params.put("searchSix", citys.get(5));
+    }
+    if(citys.size() >= 7) {
+      params.put("searchSeven", citys.get(6));
+    }
+    if(citys.size() >= 8) {
+      params.put("searchEight", citys.get(7));
+    }
+    
+    return freeReviewDao.countCity(params);
   }
 
   @Override
@@ -83,6 +163,7 @@ public class FreeReviewServiceImpl implements FreeReviewService {
   public List<FreeReview> findByTourNo(int tourNo) {
     return freeReviewDao.findByTourNo(tourNo);
   }
+
 
   
   

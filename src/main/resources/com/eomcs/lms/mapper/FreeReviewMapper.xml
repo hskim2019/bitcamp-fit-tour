@@ -62,16 +62,66 @@
     where free_review_id = #{value}
   </update>
   
- <select id="countAll" resultType="int" parameterType="string">
-    select count(*)
-    from free_review
+  
+  <select id="countCity" resultType="int" parameterType="map">
+  select count(DISTINCT free_review_id) from free_review_city
     <where>
-      <if test="_parameter != null">
-        <bind name="pattern1" value="'%' + _parameter + '%'" />
-        name like #{pattern1}
-        or email like #{pattern1}
-        or tel like #{pattern1}
+    <if test="searchOne != null">
+       <bind name="one" value="searchOne" />
+       or city_id = #{one}
+       </if>
+       <if test="searchTwo != null">
+       <bind name="two" value="searchTwo" />
+       or city_id = #{two}
+       </if>
+       <if test="searchThree != null">
+       <bind name="three" value="searchThree" />
+       or city_id = #{three}
+       </if>
+       <if test="searchFour != null">
+       <bind name="four" value="searchFour" />
+       or city_id = #{four}
+       </if>
+       <if test="searchFive != null">
+       <bind name="five" value="searchFive" />
+       or city_id = #{five}
+       </if>
+       <if test="searchSix != null">
+       <bind name="six" value="searchSix" />
+       or city_id = #{six}
+       </if>
+       <if test="searchSeven != null">
+       <bind name="seven" value="searchSeven" />
+       or city_id = #{seven}
+       </if>
+       <if test="searchEight != null">
+       <bind name="eight" value="searchEight" />
+       or city_id = #{eight}
+       </if>
+       </where>
+  </select>
+ <select id="countAll" resultType="int" parameterType="map">
+    select count(*)
+    from free_review f, member m
+       <where>
+       f.member_id = m.member_id
+    
+ <if test="searchAll != null">
+        <bind name="pattern1" value="'%' + searchAll + '%'" />
+       and m.name like #{pattern1}
+        or f.title like #{pattern1}
+        or f.content like #{pattern1} 
       </if>
+      <if test="searchwithName != null">
+      <bind name="pattern1" value="'%' + searchwithName + '%'" />
+      and m.name like #{pattern1}</if>
+       <if test="searchwithNickname != null">
+      <bind name="pattern1" value="'%' + searchwithTitle + '%'" />
+      and f.title like #{pattern1}</if>
+       <if test="searchwithEmail != null">
+      <bind name="pattern1" value="'%' + searchwithContent + '%'" />
+      and f.content like #{pattern1}</if>
+     
     </where>
   </select>
   
@@ -88,21 +138,75 @@
 <select id="get" resultMap="freeReviewMap" parameterType="int">
    select member_id from free_review where free_review_id = #{no}
   </select>
+  
+  
+  <select id="findCity" resultMap="freeReviewMap" parameterType="map">
+ select DISTINCT f.free_review_id,f.title,m.name,f.created_date,f.viewcount from free_review f, free_review_city fc,member m
+   <where>
+    <if test="searchOne != null">
+       <bind name="one" value="searchOne" />
+       (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{one}) 
+       </if>
+       <if test="searchTwo != null">
+       <bind name="two" value="searchTwo" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{two}) 
+       </if>
+       <if test="searchThree != null">
+       <bind name="three" value="searchThree" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{three}) 
+       </if>
+       <if test="searchFour != null">
+       <bind name="four" value="searchFour" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{four}) 
+       </if>
+       <if test="searchFive != null">
+       <bind name="five" value="searchFive" />
+      or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{five}) 
+       </if>
+       <if test="searchSix != null">
+       <bind name="six" value="searchSix" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{six}) 
+       </if>
+       <if test="searchSeven != null">
+       <bind name="seven" value="searchSeven" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{seven}) 
+       </if>
+       <if test="searchEight != null">
+       <bind name="eight" value="searchEight" />
+       or (f.member_id=m.member_id and fc.free_review_id=f.free_review_id and fc.city_id= #{eight}) 
+       </if>
+       </where>
+           order by
+    f.free_review_id desc
+    <if test="#{size != null || rowNo != null}">
+      limit #{rowNo}, #{size}
+    </if>
+       </select>
+   
 
  <select id="findAll" resultMap="freeReviewMap" parameterType="map">
     select
    *
     from
     free_review f, member m
-    <where>
-      f.member_id = m.member_id
-      <if test="search != null">
-        <bind name="pattern1" value="'%' + search + '%'" />
-         and name like #{pattern1}
-        or email like #{pattern1}
-        or tel like #{pattern1}
+     <where>
+       f.member_id = m.member_id
+ <if test="searchAll != null">
+        <bind name="pattern1" value="'%' + searchAll + '%'" />
+       and m.name like #{pattern1}
+        or f.title like #{pattern1}
+        or f.content like #{pattern1} 
       </if>
-      
+      <if test="searchwithName != null">
+      <bind name="pattern1" value="'%' + searchwithName + '%'" />
+      and m.name like #{pattern1}</if>
+       <if test="searchwithNickname != null">
+      <bind name="pattern1" value="'%' + searchwithTitle + '%'" />
+      and f.title like #{pattern1}</if>
+       <if test="searchwithEmail != null">
+      <bind name="pattern1" value="'%' + searchwithContent + '%'" />
+      and f.content like #{pattern1}</if>
+     
     </where>
     order by
     created_date desc

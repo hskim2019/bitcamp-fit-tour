@@ -90,8 +90,7 @@ $.getJSON('../../app/json/reservation/completedreservation',
       cancelReason : $('#reason').val()
     },function(obj){
       if(obj.status == 'success'){
-        $('#reservation-cancel-modal').modal('close');
-        M.toast({ html: '예약 취소 요청이 완료되었습니다.' });
+      location.href = location.href
       }
     })
 

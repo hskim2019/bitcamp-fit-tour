@@ -24,10 +24,11 @@
 <body>
 
   <header class="bit-main-header"></header>
-  <div class="container">
+  
+<!--   <div class="container"> -->
 
     <div class="navigation">
-      <ul>
+      <ul class="navigation-ul">
         <li class="mouseOverLeave"><a href="index.html" class="showAll">전체보기</a></li>
 
         <li class="has-menu"><a href="#" class="continent-list-btn">유럽</a>
@@ -49,10 +50,12 @@
         <li class="has-menu"><a href="#" class="continent-list-btn">아프리카</a>
           <ul class="sub-menu" id="countryWithContinentAfrica"></ul>
         </li>
-
       </ul>
     </div>
-
+  
+  
+  <div class="container">
+  
     <!-- collapsible -->
     <ul class="collapsible expandable">
       <li>
@@ -60,7 +63,7 @@
           <i class="material-icons">replay</i><span class="filter-reset">필터 모두 초기화</span></div>
       </li>
       <li class="active">
-        <div class="collapsible-header"><i class="fas fa-won-sign" style="font-size:17px"></i>가격</div>
+        <div class="collapsible-header"><i class="fas fa-won-sign"></i>가격</div>
         <div class="collapsible-body" id="collapsible-body-range">
           <!--     <label for="amount">금액:</label> -->
           <div id="slider-range-price"></div>
@@ -161,8 +164,16 @@
           </div>
         </nav> <!-- breadcrumb end -->
 
-
       </div>
+
+<div class="col s12 m7 nodata bit-invisible">
+<img src="/bitcamp-fit-tour/images/nodata.svg">
+  <div class="nodata-text">
+    <span>검색 결과가 없습니다</span><br>
+    <span>나라/도시명, 상품명으로 검색해 보세요</span>
+  </div>
+</div>
+
 
       <!-- horizontal card => table로 변경함 -->
       <div class="col s12 m7" id="tourlistcard"></div>

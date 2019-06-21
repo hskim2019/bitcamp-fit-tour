@@ -11,11 +11,11 @@ themetemplateSrc = $('#tr-template-for-theme').html();
 //script 태그에서 템플릿 데이터를 꺼낸다.
 
 var continentName = '',
-countryName = '',
-cityName= '';
+    countryName = '',
+    cityName= '';
 var firstcrumb = crumb.children().eq(0),
-secondcrumb = crumb.children().eq(1),
-thirdcrumb = crumb.children().eq(2);
+    secondcrumb = crumb.children().eq(1),
+    thirdcrumb = crumb.children().eq(2);
 var temp;
 var minPrice = 0,
     maxPrice = 300000;
@@ -23,12 +23,13 @@ var currMaxPrice;
 var minHour = 1,
     maxHour = 12;
 var prevPageBtn = $('#prevPageBtn'),
-nextPageBtn = $('#nextPageBtn'),
-firstPage = $('#firstPage');
+    nextPageBtn = $('#nextPageBtn'),
+    firstPage = $('#firstPage');
 var totalpage;
 var orderby = "tourDesc";
 var theme = [];
 var keyword ='';
+var rowCount;
 
 //Handlebars를 통해 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
 var countrytrGenerator = Handlebars.compile(countrytemplateSrc),
@@ -76,11 +77,19 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
       function(obj) {
         // 서버에 받은 데이터 중에서 페이지 번호를 글로벌 변수에 저장한다.
         pageNo = obj.pageNo;
+        rowCount = obj.rowCount;
         //currMaxPrice = obj.currMaxPrice;
         // TR 태그를 생성하여 테이블 데이터를 갱신한다.
         // 이전에 출력한 내용을 제거한다.
         $('#tourlistcard').html('');
         // 템플릿 엔진을 실행하여 tr 태그 목록을 생성한다. 그리고 바로 ()안에 붙인다.
+        if(rowCount == 0) {
+          $('.nodata').removeClass('bit-invisible');
+          $('.pagination').addClass('bit-invisible');
+        } else {
+          $('.nodata').addClass('bit-invisible');
+          $('.pagination').removeClass('bit-invisible');
+        }
         $(trGenerator(obj)).appendTo($('#tourlistcard'));
 
 
@@ -329,13 +338,14 @@ function getMaxPrice() {
   });
 
   $('.mouseOverLeave').hover((e) => {
-    $('.showAll').css("color", "#d6e5e3");
+//    $('.showAll').css("color", "#d6e5e3");
+    $('.showAll').addClass('showinBright');
   });
 
   $('.mouseOverLeave').mouseleave((e) => {
-    $('.showAll').css("color", "#24313C");
+//    $('.showAll').css("color", "#24313C");
+    $('.showAll').removeClass('showinBright');
   });
-
 
 //Dropdowns.
 //(function() {

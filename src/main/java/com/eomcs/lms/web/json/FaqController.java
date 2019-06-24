@@ -67,8 +67,8 @@ public class FaqController {
 	  if (category.length() > 0) 
 		  searchCategory = category;
 	  
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
+    if (pageSize < 5 || pageSize > 8) 
+      pageSize = 5;
     
     List<Faq> list = faqService.search(searchCategory);
     int rowCount = list.size();

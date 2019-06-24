@@ -1,12 +1,19 @@
 @charset "UTF-8";
 
+nav {
+	background-color: transparent;
+	background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ),url('/bitcamp-fit-tour/images/emerald.jpg');
+	height: 250px;
+}
+
+
 h2 {
 	padding: 0 0 2px 2px;
     font-weight: 700;
     font-size: 28px;
     line-height: 41px;
     color: #4a4a4a;
-    margin-top: 120px;
+    margin-top: 60px;
     margin-bottom: 0px;
     cursor : pointer;
 }

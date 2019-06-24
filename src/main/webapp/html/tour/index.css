@@ -10,7 +10,7 @@ nav {
 	height: 250px;
 }
 
-.input-title {
+.navtitle {
 	margin-top: 50px;
 	margin-bottom: 0px;
 	font-size : 50px;
@@ -19,14 +19,16 @@ nav {
 	text-align: center;
 	font-family: 'Nanum Myeongjo', serif;
 	height:60px;
+	line-height: 40px;
 }
-.sub-text {
-	font-size : 12px;
+.subText {
+	font-size : 10px;
 	font-weight: 600;
 	color: white;
 	text-align: center;
 	font-family: 'Nanum Myeongjo', serif;
 	height: 20px;
+	font-style: italic;
 }
 /* .main {
 	max-height: 200px;
@@ -210,7 +212,7 @@ nav {
 
 /* 상품 list */
 #tourlistcard {
-	min-height: 650px;
+	min-height: 700px;
 }
 
 .card-image {
@@ -393,7 +395,7 @@ border-top: 1px solid rgba(160,160,160,0.2);
 /*collapsible - side menu*/
 .collapsible {
 	/* top: 196px; */
-	top: 415px;
+	top: 385px;
 	position: absolute;
 /* 	        position: fixed;
         top: 210px; */

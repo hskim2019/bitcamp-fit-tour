@@ -14,7 +14,7 @@ if(sessionStorage.getItem('loginUser')) {
 
 
 var pageNo = 1,
-    pageSize = 3,
+    pageSize = 5,
     tbody = $('.tbodyNotice'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),

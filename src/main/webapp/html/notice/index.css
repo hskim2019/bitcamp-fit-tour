@@ -1,10 +1,16 @@
+nav {
+	background-color: transparent;
+	background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ),url('/bitcamp-fit-tour/images/emerald.jpg');
+	height: 250px;
+}
+
 .titl {
     padding: 0 0 24px 2px;
     font-weight: 700;
     font-size: 28px;
     line-height: 41px;
     color: #4a4a4a;
-    margin-top: 120px;
+    margin-top: 60px;
     margin-bottom: 0px;
 }
 
@@ -29,7 +35,7 @@
     font-size: 24px;
     line-height: 41px;
     color: #4a4a4a;
-    margin-top: 120px;
+    margin-top: 60px;
     margin-bottom: 0px;
 }
 
@@ -39,7 +45,7 @@
     font-size: 24px;
     line-height: 41px;
     color: #4a4a4a;
-    margin-top: 120px;
+    margin-top: 60px;
     margin-bottom: 0px;
     width: 150px !important;
 }
@@ -47,20 +53,20 @@
 
 /*select*/
 .faq-category-select {
-    margin-top: 130px;
+    margin-top: 70px;
     margin-bottom: 0px;
     height: 27px;
     font-size: 13px;
 }
 
 .add-notice {
-	margin-top: 120px;
+	margin-top: 70px;
 	margin-bottom: 0px;
     padding: 0px 0px 0px 50px !important;
 }
 
 .add-faq {
-	margin: 120px 0px 0px 335px !important;
+	margin: 70px 0px 0px 335px !important;
     padding: 0px 0px 0px 50px !important;
 }
 

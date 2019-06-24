@@ -112,9 +112,12 @@ function loadList(pn, continentName, countryName, cityName, minPrice, maxPrice, 
           inputText = cityName;
         } 
         if (!continentName && !countryName && !cityName){
-          inputText = 'Tourism';
+          inputText = 'FIT TOUR';
         }
-       $('.temp-text').html('<p class="input-title">' + inputText +'</p>' + '<p class="sub-text">Travel is fatal to prejudice bigotry and narrow-mindedness</p>');
+       $('.temp-text').html(
+           '<div class="navtitle">' + inputText +
+//           '<br><p class="subText">Travel is fatal to prejudice bigotry and narrow-mindedness</p><div>');
+       '<br><p class="subText">TRAVEL IS FATAL TO PREJUDICE BIGOTRY AND NARROW-MINDEDNESS</p><div>');
         
         
         for(listRow of $('.listRow')) {

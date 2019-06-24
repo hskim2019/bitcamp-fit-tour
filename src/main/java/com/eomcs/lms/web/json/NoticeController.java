@@ -48,10 +48,10 @@ public class NoticeController {
   @GetMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize) {
+      @RequestParam(defaultValue="5") int pageSize) {
     
-    if (pageSize < 3 || pageSize > 8) 
-      pageSize = 3;
+    if (pageSize < 5 || pageSize > 8) 
+      pageSize = 5;
     
     int rowCount = noticeService.size();
     int totalPage = rowCount / pageSize;

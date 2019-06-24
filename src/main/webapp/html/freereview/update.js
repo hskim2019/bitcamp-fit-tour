@@ -87,18 +87,18 @@ var cityArray=[];
        } else if(obj.list.length == 0){
         $('#reservation').append($('<option value="' + 0 + '" selected">' + '다녀온 투어가 없습니다.' + '</option>'));
       }else{
-        if(data.reservationNo==0){
-        $('#reservation').append($('<option value="' + 0 + '" selected">' + '다녀 온 투어를 선택하세요.' + '</option>'));
+        if(data.freeReview.reservationNo==0){
+        $('#reservation').append($('<option value="' + 0 + '" selected">' + '자유 후기' + '</option>'));
         }
         
         for (var i = 0; i < obj.list.length; i++) {
-          if(obj.list[i].no ==data.reservationNo){
+          if(obj.list[i].no ==data.freeReview.reservationNo){
             $('#reservation').append($('<option value="' + obj.list[i].no + '" selected">' + obj.list[i].tour.title + '</option>'));
             $('#reservation').append($('<option value="' + 0 + '"">' + '선택 안함' + '</option>'));
           }
          }
         for (var i = 0; i < obj.list.length; i++) {
-          if(obj.list[i].no !=data.reservationNo){
+          if(obj.list[i].no !=data.freeReview.reservationNo){
             $('#reservation').append($('<option value="' + obj.list[i].no + '">' + obj.list[i].tour.title + '</option>'));
           }
          }
@@ -140,7 +140,6 @@ $('#update-btn').click(function () {
     
   }else{
     $('#update-btn').attr('disabled','disabled');
-    
     var citys =  Array.apply(null, new Array(4)).map(Number.prototype.valueOf,0);
     if($('#city').val()!=0){
      citys = $('#city').val();

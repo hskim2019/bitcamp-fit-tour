@@ -165,6 +165,11 @@ public class FreeReviewController {
     }
     
     try {
+      if (freeReview.getReservationNo()==0) {
+        freeReviewService.reservationNull(freeReview.getNo());
+        }
+      
+      
       if (freeReviewService.update(freeReview) == 0) 
         throw new RuntimeException("해당 번호의 리뷰가 없습니다.");
     

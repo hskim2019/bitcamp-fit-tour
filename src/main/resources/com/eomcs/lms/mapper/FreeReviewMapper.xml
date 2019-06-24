@@ -215,14 +215,19 @@
     </if>
   </select>
   
+  <update id="reservationNull" parameterType="int">
+   UPDATE free_review SET reservation_id = NULL WHERE free_review_id =  #{reservationNo};
+  
+  </update>
+  
   <update id="update" parameterType="freeReview">
     update free_review
     <set>
       <if test="title != null">title = #{title},</if>
-       <if test="reservationNo != 0">reservation_id = #{reservationNo},</if>
+      <if test="reservationNo != 0">reservation_id = #{reservationNo},</if>
       <if test="score != null">score = #{score},</if>
       <if test="content != null">content = #{content}</if>
-
+  
     </set>
     where
     free_review_id = #{no}

@@ -37,6 +37,8 @@ public interface FreeReviewDao {
 
   List<FreeReview> findCity(HashMap<String, Object> params);
 
+  int reservationNull(int no);
+
  
 }
 

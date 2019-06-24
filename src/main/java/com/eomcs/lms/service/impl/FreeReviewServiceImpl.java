@@ -164,6 +164,12 @@ public class FreeReviewServiceImpl implements FreeReviewService {
     return freeReviewDao.findByTourNo(tourNo);
   }
 
+  @Override
+  public int reservationNull(int no) {
+    return freeReviewDao.reservationNull(no);
+    
+  }
+
 
   
   

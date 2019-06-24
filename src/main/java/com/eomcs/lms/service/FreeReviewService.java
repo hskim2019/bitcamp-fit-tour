@@ -35,5 +35,7 @@ public interface FreeReviewService {
 
   List<FreeReview> cityList(int pageNo, int pageSize, List<String> citys);
 
+  int reservationNull(int no);
+
 	
 }

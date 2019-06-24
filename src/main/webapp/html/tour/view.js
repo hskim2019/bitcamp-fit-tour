@@ -1,6 +1,7 @@
 var reviewtemplateSrc = $('#review-template').html(),
 reviewGenerator = Handlebars.compile(reviewtemplateSrc);
 
+
 var param = location.href.split('?')[1],
 tourNo = param.split('=')[1],
 tlocation;
@@ -8,8 +9,12 @@ tlocation;
 tourList(tourNo);
 commentList(tourNo, pageNo, addDeleteCount, 0);
 
+
 //ready
 $(document).ready(function(){
+  lightGallery(document.getElementById('aniimated-thumbnials'), {
+    thumbnail:true
+});
   $('textarea#comment-add').characterCounter();
   $(".dropdown-trigger").dropdown();
 });

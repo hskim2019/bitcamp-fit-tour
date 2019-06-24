@@ -12,6 +12,9 @@
   <!-- jquery-ui -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/jquery-ui-dist/jquery-ui.css">
   <!-- materialize font -->
+  <!-- lightgallery -->
+  <link rel="stylesheet" href="/bitcamp-fit-tour/node_modules/lightgallery.js/dist/css/lightgallery.css">
+  <!-- materialize font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- fittour css -->
   <link rel="stylesheet" href="/bitcamp-fit-tour/css/common.css">
@@ -25,6 +28,15 @@
 <body>
   <!-- header -->
   <header class="bit-main-header"></header>
+  
+<div id="aniimated-thumbnials">
+  <a href="https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg">
+      <img src="https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg" />
+  </a>
+  <a href="https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg">
+      <img src="https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_960_720.jpg" />
+  </a>
+</div>
 
   <div class="container">
 
@@ -69,7 +81,7 @@
       <!-- image -->
       <div class="col l7">
 
-        <div class="slider">
+        <div class="aniimated-thumbnials">
           <ul id="image" class="slides">
           </ul>
         </div>
@@ -367,6 +379,8 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6xJbC_rkTLAZwjakZL0sJZ9UiLYIzzk8"></script>
   <!-- raty -->
   <script src="/bitcamp-fit-tour/node_modules/raty-js/lib/jquery.raty.js"></script>
+  <!-- lightgallery -->
+  <script src="/bitcamp-fit-tour/node_modules/lightgallery.js/dist/js/lightgallery.min.js"></script>
   <!-- fittour css -->
   <script src="../header.js"></script>
   <script src="../footer.js"></script>

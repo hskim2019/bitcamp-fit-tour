@@ -59,8 +59,8 @@ function loadLoginUser() {
       for(loginStateTag of loginStateTags){
         $(loginStateTag).removeClass('bit-invisible');
       }
-
-      console.log(data.user.loginType.no);
+      console.log(data);
+      console.log(data.user.loginTypeNo);
 
       if(data.user.rank == 1){
         $('.user-status').removeClass('bit-invisible');

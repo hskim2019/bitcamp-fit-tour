@@ -1,5 +1,3 @@
-ALTER TABLE country ADD continent VARCHAR(50) NOT NULL;
-
 insert into country(country_id, country_name, continent) values(1, '네덜란드', '유럽');
 insert into country(country_id, country_name, continent) values(2, '독일', '유럽');
 insert into country(country_id, country_name, continent) values(3, '룩셈부르크', '유럽');

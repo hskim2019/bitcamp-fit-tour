@@ -134,7 +134,11 @@ public class AuthController {
       member.setPassword("snspassword");
       member.setLoginTypeNo(loginTypeNo);
       member.setCertification("sns-login");
+     member.setPhoto("default.jpg");
+      member.setRank(1);
+      member.setBirth("0000-00-00");
       memberService.snsSignUp(member);
+        System.out.println(member);
       session.setAttribute("loginUser", member);
       content.put("status", "success");
       content.put("member", member);

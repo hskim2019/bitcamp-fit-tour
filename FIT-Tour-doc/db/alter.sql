@@ -12,7 +12,7 @@ ALTER TABLE free_review ADD viewcount int(11) NOT NULL;
 
 
 --/예약 6월 13일 추가
-alter table reservation modify payment_id  varchar(255);
+alter table reservation modify payment_id  varchar(255) NOT NULL;
 
 --/예약 6월 14일 추가
 ALTER TABLE reservation ADD buyer_name varchar(30) NOT NULL;

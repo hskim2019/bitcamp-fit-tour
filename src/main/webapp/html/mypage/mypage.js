@@ -7,6 +7,7 @@ $(document.body).bind('loadHeader', () => {
 
   if(sessionStorage.getItem('loginUser')){
     var user = JSON.parse(sessionStorage.getItem('loginUser'))
+    console.log(user)
     var birthArray = user.birth.split('-');
     var birth = new Date(birthArray[0],birthArray[1],birthArray[2]);
     console.log(user);

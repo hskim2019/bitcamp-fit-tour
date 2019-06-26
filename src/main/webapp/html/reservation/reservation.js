@@ -88,6 +88,8 @@ function loadData(no) {
           format : 'yyyy년 mm월 dd일',
           minDate: today,
           maxDate : nextmonth,
+          defaultDate: new Date(tourYear, tourMonth-1, tourDay), // 월에 자동으로 +1이 들어가서
+          setDefaultDate: true,
           disableDayFn :function (date) {
             console.log(date);
             if(imposibilityDate.includes(date.toString())) {

@@ -21,7 +21,7 @@ var minPrice = 0,
     maxPrice = 300000;
 var currMaxPrice;
 var minHour = 1,
-    maxHour = 12;
+    maxHour = 14;
 var prevPageBtn = $('#prevPageBtn'),
     nextPageBtn = $('#nextPageBtn'),
     firstPage = $('#firstPage');
@@ -328,9 +328,9 @@ function getMaxPrice() {
     $( "#slider-range-hour" ).slider({
       range: true,
       min: 1,
-      max: 12,
+      max: 14,
       step: 1,
-      values: [ 1, 12 ],
+      values: [ 1, 14 ],
       slide: function( event, ui ) {
         $( "#tour-hour" ).val(ui.values[ 0 ] + "시간" + " - " + ui.values[ 1 ] + "시간" );
         minHour = ui.values[ 0 ];
@@ -344,12 +344,12 @@ function getMaxPrice() {
 
   function resetSlider() {
     minHour = 1;
-    maxHour = 12;
+    maxHour = 14;
     minPrice = 0;
     maxPrice = currMaxPrice;
     $("#slider-range-hour").slider("values", 0, 1);  
-    $("#slider-range-hour").slider("values", 1, 12 ); 
-    $( "#tour-hour" ).val( 1 + "시간" + " -" + 12 + "시간" );
+    $("#slider-range-hour").slider("values", 1, 14 ); 
+    $( "#tour-hour" ).val( 1 + "시간" + " -" + 14 + "시간" );
 
     $("#slider-range-price").slider("values", 0, 0);  
     $("#slider-range-price").slider("values", 1, 250000); 

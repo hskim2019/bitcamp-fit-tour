@@ -21,3 +21,6 @@ use fittourdb;
 
 --fittour_table_ddl.sql 파일로 
 
+--aws database 접속
+ mysql -h bitcamp.cpfrroi1xc59.ap-northeast-2.rds.amazonaws.com -P 3306 -u bitcamp -p
+ 12345678

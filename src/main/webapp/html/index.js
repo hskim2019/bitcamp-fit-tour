@@ -63,7 +63,12 @@ $(document).ready(function(){
 // add click evnet popular tour
 $('.popular-card').click(function(){
   var cityName = $(this).find('span').html();
-  location.href = '/bitcamp-fit-tour/html/tour/index.html?city=' + cityName;
+  if (cityName == '전체 여행지'){
+    location.href = '/bitcamp-fit-tour/html/tour/index.html'
+  } else{
+    location.href = '/bitcamp-fit-tour/html/tour/index.html?city=' + cityName;
+  }
+  
 });
 
 

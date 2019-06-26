@@ -60,6 +60,7 @@ $(document).ready(function () {
   //swipe1
   $('#next-swipe-1').click(function () {
     $('.tabs').tabs('select', 'swipe-1');
+    window.scrollTo (0,0);
   });
 
   //swipe-2
@@ -98,9 +99,8 @@ $(document).ready(function () {
       M.toast({ html: '여행 테마를 선택하세요.' });
       return;
     }
-
-
     $('.tabs').tabs('select', 'swipe-2');
+    window.scrollTo (0,0);
 
   });
 
@@ -136,7 +136,8 @@ $(document).ready(function () {
     }
 
     $('.tabs').tabs('select', 'swipe-3');
-
+    
+    window.scrollTo (0,0);
   });
 
   // swipe4
@@ -149,8 +150,8 @@ $(document).ready(function () {
     }
 
     $('.tabs').tabs('select', 'swipe-4');
+    window.scrollTo (0,0);
   });
-
 
 }); 
 
@@ -426,13 +427,13 @@ function initMap() {
   google.maps.event.addListener(marker, 'dragend', function (evt) {
     window.tlocation = evt.latLng.lat() + ',' + evt.latLng.lng();
     $('#add-btn').addClass('pulse');
-    document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+    /*document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';*/
 
   });
 
   google.maps.event.addListener(marker, 'dragstart', function (evt) {
 
-    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+    /*document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';*/
 
   });
 }

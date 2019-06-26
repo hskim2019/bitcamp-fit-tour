@@ -3,3 +3,14 @@ insert into member(member_id , login_type_id, email,certification,password, name
 sms_check, email_check, tel, phone_check, rank)
 values(101, 1, 'administrator@bitcamp.com', 1, password('qlxmzoavm'), '관리자', '0000-00-00',
 '1', '1', '02-3486-9600', '1', 2);
+
+insert into member(member_id , login_type_id, email,certification,password, name,birth,
+sms_check, email_check, tel, phone_check, rank)
+values(102, 1, 'user1@test.com', 1, password('1111'), '홍길동', '0000-00-00',
+'1', '1', '02-3486-9600', '1', 1);
+
+insert into member(member_id , login_type_id, email,certification,password, name,birth,
+sms_check, email_check, tel, phone_check, rank)
+values(103, 1, 'user2@test.com', 1, password('1111'), '유관순', '0000-00-00',
+'1', '1', '02-3486-9600', '1', 1);
+

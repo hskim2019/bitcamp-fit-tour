@@ -23,3 +23,6 @@ ALTER TABLE free_review ADD score int(10) NOT NULL;
 
 --/ 예약 취소 이유 컬럼 추가
 ALTER TABLE reservation ADD cancel_reason text
+
+--/공지사항 데이터 타입 변경 6월27일
+ALTER TABLE notice CHANGE content content MEDIUMTEXT NOT NULL;

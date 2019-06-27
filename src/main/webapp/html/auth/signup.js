@@ -99,8 +99,8 @@ $("#name").keyup(function(){
 
 $(document).ready(function(){
   $('.datepicker').datepicker({
-     format : 'yyyy-mm-dd'
-       
+     format : 'yyyy-mm-dd',
+     defaultDate: new Date('1990'), // 월에 자동으로 +1이 들어가서
   });
 });
 

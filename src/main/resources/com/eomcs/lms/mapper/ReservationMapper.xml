@@ -188,7 +188,7 @@
     select * from reservation as r 
     join tour as t on r.tour_id = t.tour_id
     join payment_status as p on p.status_id = r.status_id
-    where member_id = #{memberNo} and r.status_id = 1 and date(tour_date) <![CDATA[ < ]]> date(now());
+    where member_id = #{memberNo} and (r.status_id = 1 or r.status_id = 6) and date(tour_date) <![CDATA[ < ]]> date(now());
   </select> 
   
   <select id="findAllTour" resultMap="reservationMap">

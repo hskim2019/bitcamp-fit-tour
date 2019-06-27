@@ -127,7 +127,7 @@ $.getJSON('../../app/json/reservation/oldreservation',
 
 
 //cancel tour list
-$.getJSON('../../app/json/reservation/oldreservation',
+/*$.getJSON('../../app/json/reservation/oldreservation',
     function(obj){
   for(reservation of obj.reservations){
     reservation.paymentStatus.status = '여행완료';
@@ -148,7 +148,7 @@ $.getJSON('../../app/json/reservation/oldreservation',
   $('.tour-title').click(function(){
     location.href = '/bitcamp-fit-tour/html/tour/view.html?no=' + $(this).parent().parent().attr('id'); 
   })
-});
+});*/
 
 
 //get get payment method to korean

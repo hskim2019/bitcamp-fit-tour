@@ -14,16 +14,16 @@ reservation_date,
 buyer_name) 
 values(
 1001, -- reservation_id
-3, -- tour_id
+17, -- tour_id
 102, -- member_id
 6, -- status_id
-'2019-06-14', -- tour_date
+'2019-06-15', -- tour_date
 1, -- personnel
 '01042341231', -- tourlist_tel
 '없습니다.', -- requerment
-'imp_396656035847,https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayHPP_INIpayTest20190626185136531665&noMethod=1,card',
-'2019-06-13', -- payment_date
-'2019-06-13', -- reservation_date
+'imp_396656034345,https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid=StdpayHPP_INIpayTest20190626185136531665&noMethod=1,card',
+'2019-06-11', -- payment_date
+'2019-06-11', -- reservation_date
 '이솔뫼' -- buyer_name
 );
 

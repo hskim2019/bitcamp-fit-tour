@@ -1,7 +1,8 @@
 # Tour review and Travel management System
-여행후기가 있는 현지투어 예약 시스템
-- 프로젝트 기간 : 2019.04 - 2019.06
-
+a travel management website using Java, CSS, HTML, JavaScript, Spring, Mybatis, MariaDB, API, etc
+- Category : web
+- Period  : 3 months (2019.04 - 2019.06)
+- Team size : 3
 <img src="https://github.com/hskim2019/bitcamp-fit-tour/blob/master/readme.PNG" width="700" height="200">
 
 ## Portfolio

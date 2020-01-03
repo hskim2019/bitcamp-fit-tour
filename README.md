@@ -15,6 +15,8 @@ a travel management website using Java, CSS, HTML, JavaScript, Spring, Mybatis, 
 #### Front-end
 
   - javascript
+  - jQuery
+  - Ajax
   - html
   - css
   - API(google, Facebook, Naver)
